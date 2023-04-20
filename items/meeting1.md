@@ -4,7 +4,7 @@ This following is a very simple team meeting template. You should expand it base
 ## Team Meeting [1] - Week [7] - [19/04/23] (1:30pm-2:10pm)
 **Absent: none**
 <br>
-**Scribe: Lana Fraser**
+**Scribe: Lana & Punit**
 
 ## Agreed Procedure
 Meetings: Weekly based on our availability
