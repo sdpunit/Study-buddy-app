@@ -15,9 +15,9 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
-public class UserAdaptor extends ArrayAdapter<User> {
+public class UserAdapter extends ArrayAdapter<User> {
 
-    public UserAdaptor(Context context, int resource, List<User> userList){
+    public UserAdapter(Context context, int resource, List<User> userList){
         super(context, resource, userList);
     }
 

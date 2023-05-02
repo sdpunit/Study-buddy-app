@@ -6,7 +6,4 @@
     android:background="@color/design_default_color_on_secondary"
     >
 
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import java.net.URL;
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
@@ -31,7 +30,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private void setupList(){
         ListView searchList = (ListView) findViewById(R.id.SearchList);
-        UserAdaptor adaptor = new UserAdaptor(getApplicationContext(), R.layout.user_cell, userList);
+        UserAdapter adaptor = new UserAdapter(getApplicationContext(), R.layout.user_cell, userList);
         searchList.setAdapter(adaptor);
 
 
