@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
 
-    public static ArrayList<User> personList = new ArrayList<User>();
+    public static ArrayList<User> userList = new ArrayList<User>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +25,14 @@ public class SearchActivity extends AppCompatActivity {
     private void setupData(){
         //get singleton data structure
         //get data from database
+        userList.add(new User("John"));
 
     }
 
     private void setupList(){
-        ListView SearchList = (ListView) findViewById(R.id.SearchList);
-        UserAdaptor adaptor = new UserAdaptor(getApplicationContext(), R.layout.user_cell, personList);
-
+        ListView searchList = (ListView) findViewById(R.id.SearchList);
+        UserAdaptor adaptor = new UserAdaptor(getApplicationContext(), R.layout.user_cell, userList);
+        searchList.setAdapter(adaptor);
 
 
     }
@@ -40,7 +41,7 @@ public class SearchActivity extends AppCompatActivity {
         //set up on click listener for each cell
         // get key and search through database for that users info
         // display info in new activity
-        
+
 
     }
 
