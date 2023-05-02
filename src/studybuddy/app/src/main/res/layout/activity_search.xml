@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/ListView"
+        android:id="@+id/SearchList"
         android:layout_width="match_parent"
         android:layout_height="664dp"
         android:layout_marginBottom="2dp"
