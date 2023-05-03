@@ -1,27 +1,31 @@
 package com.studybuddy;
 
 public class Course {
-    public User[] members;
-    public int timeStudied;
+    int courseID;
+    private String name;
+    private RBTree courseStudents;
 
-    public Course(User[] members, int timeStudied) {
-        this.members = members;
-        this.timeStudied = timeStudied;
+    public int getCourseID() {
+        return courseID;
     }
 
-    public User[] getMembers() {
-        return members;
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
     }
 
-    public void setMembers(User[] members) {
-        this.members = members;
+    public String getName() {
+        return name;
     }
 
-    public int getTimeStudied() {
-        return timeStudied;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setTimeStudied(int timeStudied) {
-        this.timeStudied = timeStudied;
+    public RBTree getCourseStudents() {
+        return courseStudents;
+    }
+
+    public void setCourseStudents(RBTree courseStudents) {
+        this.courseStudents = courseStudents;
     }
 }
