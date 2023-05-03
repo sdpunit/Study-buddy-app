@@ -24,7 +24,7 @@ public class SearchActivity extends AppCompatActivity {
     private void setupData(){
         //get singleton data structure
         //get data from database
-        userList.add(new User());
+        userList.add(new User(1,""));
 
     }
 
