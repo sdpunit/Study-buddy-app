@@ -26,6 +26,7 @@ public class SearchActivity extends AppCompatActivity {
         //get data from database
         userList.add(new User("John"));
 
+
     }
 
     private void setupList(){
