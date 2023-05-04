@@ -11,6 +11,7 @@ public class SearchActivity extends AppCompatActivity {
 
     public static ArrayList<User> userList = new ArrayList<User>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +25,11 @@ public class SearchActivity extends AppCompatActivity {
     private void setupData(){
         //get singleton data structure
         //get data from database
-        userList.add(new User("John"));
+        //add to userList
+        RBTree rb = new RBTree();
+        //userList.stream().forEach((user) -> rb.insert(user));
+        userList.forEach(rb::insert);
+
 
 
     }
