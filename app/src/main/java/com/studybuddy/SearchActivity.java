@@ -11,7 +11,6 @@ public class SearchActivity extends AppCompatActivity {
 
     public static ArrayList<User> userList = new ArrayList<User>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
