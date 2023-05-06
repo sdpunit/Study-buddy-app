@@ -1,8 +1,9 @@
 package com.studybuddy;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
     private int uid;
     private String name;
     private final Course[] courses;
