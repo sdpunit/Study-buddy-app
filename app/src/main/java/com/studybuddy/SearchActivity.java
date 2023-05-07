@@ -25,9 +25,7 @@ public class SearchActivity extends AppCompatActivity {
         //get singleton data structure
         //get data from database
         //add to userList
-        RBTree rb = new RBTree();
-        //userList.stream().forEach((user) -> rb.insert(user));
-        userList.forEach(rb::insert);
+        userList.add(new User(202312, "Doe"));
 
 
 
