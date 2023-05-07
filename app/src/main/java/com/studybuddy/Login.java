@@ -9,10 +9,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Login extends AppCompatActivity {
     boolean validUser;
@@ -38,6 +45,9 @@ public class Login extends AppCompatActivity {
 
             //displays login message
             showLoginMessage(username);
+
+            //resets boolean
+            validUser=false;
         });
 
         // what happens when the REGISTER button is pressed
@@ -91,5 +101,4 @@ public class Login extends AppCompatActivity {
         toast.show();
 
     }
-
 }
