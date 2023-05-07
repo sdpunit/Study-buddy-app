@@ -5,12 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 
 public class Register extends AppCompatActivity {
 
@@ -23,10 +27,11 @@ public class Register extends AppCompatActivity {
         final ImageButton arrow = findViewById(R.id.arrow);
 
         registerButton2.setOnClickListener(v -> {
-            //TODO: add user to database
-//          String name = ((EditText) findViewById(R.id.et_name)).getText().toString();
-//          String username = ((EditText) findViewById(R.id.et_email)).getText().toString();
-//          String password = ((EditText) findViewById(R.id.et_password)).getText().toString();
+            String username = ((EditText) findViewById(R.id.et_email)).getText().toString();
+            String password = ((EditText) findViewById(R.id.et_password)).getText().toString();
+
+            addUserToDatabase(username, password);
+
             finish();
             Intent intent2 = new Intent(Register.this, MainActivity.class);
             startActivity(intent2);
@@ -39,5 +44,20 @@ public class Register extends AppCompatActivity {
             Intent intent2 = new Intent(Register.this, Login.class);
             startActivity(intent2);
         });
+    }
+
+    private void addUserToDatabase(String username, String password) {
+        String fileName = "loginDetails.csv";
+        int constantId = 1; // Just for the moment it is constant; needs to be changed
+
+        try (FileOutputStream fos = openFileOutput(fileName, Context.MODE_APPEND);
+             OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+             BufferedWriter bw = new BufferedWriter(osw)) {
+            String csvLine = constantId + "," + username + "," + password + "\n";
+            bw.write(csvLine);
+            bw.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
