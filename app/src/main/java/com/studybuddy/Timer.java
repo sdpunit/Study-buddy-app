@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Timer extends AppCompatActivity {
 
@@ -30,6 +33,8 @@ public class Timer extends AppCompatActivity {
             chronometerBtn = findViewById(R.id.BtnChronometer);
             setTime = findViewById(R.id.et_Number);
             dropdown = findViewById(R.id.spinner1);
+            Circle circle = (Circle) findViewById(R.id.circle);
+            Animate animation = new Animate(circle, 0,360);
 
         //create a list of items for the spinner.
         //TODO: change subjects to ones relevant to the user
@@ -46,23 +51,52 @@ public class Timer extends AppCompatActivity {
                     num = Integer.parseInt(setTime.getText().toString());
                 THRESHOLD=num;
                 chronometer.setBase(SystemClock.elapsedRealtime());
-                chronometer.start();chronometerBtn.setText("Stop Chronometer");
+                chronometer.start();
+                chronometerBtn.setText("Stop Chronometer");
                 isRunning = true;
+
+                animation.setDuration(THRESHOLD*1000);
+                circle.startAnimation(animation);
                 return true;
             }
             return false;
         });
 
+        AtomicInteger n = new AtomicInteger();
         //what happens when the START CHRONOMETER button is pressed
         chronometerBtn.setOnClickListener(v -> {
+
+//            Circle circle2 = (Circle) findViewById(R.id.circle);
+//            Animate animation2 = new Animate(circle, 0,360);
+
             if (isRunning) {
-                chronometerBtn.setText("Start Chronometer");
-                isRunning = false;
+                chronometerBtn.setText("Resume Session");
                 chronometer.stop();
+                animation.cancel();
+                //animation2.cancel();
+                n.set(getSecondsFromDurationString(chronometer.getText().toString()));
+                Toast toast = Toast.makeText(this, ""+n, Toast.LENGTH_SHORT);
+                toast.show();
+                isRunning = false;
+
             } else {
-                chronometerBtn.setText("Stop Chronometer");
-                isRunning = true;
+//                Toast toast = Toast.makeText(this, ""+n, Toast.LENGTH_SHORT);
+//                toast.show();
+                chronometerBtn.setText("Pause Session");
+                chronometer.setBase(SystemClock.elapsedRealtime() - n.get()*1000);
                 chronometer.start();
+
+//                int j = n.intValue()/THRESHOLD;
+//                Toast toast3 = Toast.makeText(this, "n is"+n.get()+"threshold is"+THRESHOLD+"old angle is"+(j), Toast.LENGTH_SHORT);
+//                toast3.show();
+//                circle2= (Circle) findViewById(R.id.circle);
+//                animation2=new Animate(circle2,n.get()/THRESHOLD*360,360);
+//                animation.setDuration(THRESHOLD*1000);
+//                circle2.startAnimation(animation2);
+                //circle.setAngle(n.get()/THRESHOLD*360);
+                //animation.start();
+                //circle.startAnimation(animation);
+                isRunning = true;
             }
         });
 
@@ -78,6 +112,7 @@ public class Timer extends AppCompatActivity {
         });
     }
 
+    //Method from: https://stackoverflow.com/questions/526524/android-get-time-of-chronometer-widget
     // converts time presented in chronometer to an int
     // Expects a string in the form MM:SS or HH:MM:SS
     public static int getSecondsFromDurationString(String value){
