@@ -25,4 +25,9 @@
     <string name="register">Register</string>
     <string name="re_type_password">Re-type Password</string>
     <string name="your_name">Full Name</string>
+    <string name="arrow">arrow</string>
+    <string name="please_set_time">Please set time</string>
+    <string name="set_time">set time</string>
+    <string name="start_chronometer">Start Chronometer</string>
+    <string name="please_select_course">Please select course</string>
 </resources>
