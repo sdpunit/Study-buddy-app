@@ -13,10 +13,14 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        user = getIntent().getSerializableExtra("user", User.class);
 
         Button btn_add_courses = (Button) findViewById(R.id.btn_add_courses);
         TextView txt_hello_user = findViewById(R.id.txt_hello_user);
@@ -52,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }private void UpdateCourseGrid(ArrayList<Course> selectedCourses){
+    }
+    private void UpdateCourseGrid(ArrayList<Course> selectedCourses){
         GridLayout grid_courses = findViewById(R.id.grid_courses);
         for (Course course:selectedCourses){
             //Create a button for this course in mainActivity
@@ -72,5 +77,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public void clickStartStudy(View view) {
+        Intent intent = new Intent(this, SetTimeActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
     }
 }
