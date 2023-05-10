@@ -3,16 +3,23 @@ package com.studybuddy;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private User user;
+    private UserTimeState userTimeState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         user = getIntent().getSerializableExtra("user", User.class);
+        userTimeState = getIntent().getSerializableExtra("userTimeState", UserTimeState.class);
         // display the study minutes
         displayStudyMinutes();
 
@@ -49,45 +57,76 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ArrayList<Course> myCourses = new ArrayList<>();
-                myCourses.add(new Course("COMP1100"));
-                myCourses.add(new Course("COMP2100"));
+                myCourses.add(new Course(
+                        "MEAS8127",
+                        "'Sectarianism' in the Middle East: Theology, Politics and Identity",
+                        "Dr. Liz"));
+                myCourses.add(new Course("COMP1720", "Authoritarianism, Democratisation and Protest in the Muslim Middle East", "Dr. Albert"));
+                myCourses.add(new Course("COMP2100", "Software Construction", "Bernardo"));
 
-                UpdateCourseGrid(myCourses);
+                updateCourseGrid(myCourses);
             }
         });
 
     }
-    private void UpdateCourseGrid(ArrayList<Course> selectedCourses){
-        GridLayout grid_courses = findViewById(R.id.grid_courses);
-        for (Course course:selectedCourses){
-            //Create a button for this course in mainActivity
-            Button btn_newCourse = new Button(this);
-            btn_newCourse.setText(course.getCourseName());
+    private void updateCourseGrid(ArrayList<Course> courses) {
+        // Get the GridLayout from the layout
+        GridLayout gridCourses = findViewById(R.id.grid_courses);
 
+        // Create a random number generator
+        Random random = new Random();
 
-            //Add the button to the layout
-            grid_courses.addView(btn_newCourse);
+        for (Course course : courses) {
+            // Linear layout for adding course button and name vertically
+            LinearLayout courseLayout = new LinearLayout(this);
+            courseLayout.setOrientation(LinearLayout.VERTICAL);
 
-            btn_newCourse.setOnClickListener(new View.OnClickListener() {
+            // Create an ImageButton for the course
+            ImageButton courseButton = new ImageButton(this);
+
+            // Choose a random pattern image
+            int patternNumber = random.nextInt(12) + 1;
+            int imageResId = getResources().getIdentifier("pattern" + patternNumber, "drawable", getPackageName());
+            courseButton.setImageResource(imageResId);
+
+            courseButton.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            courseButton.setAdjustViewBounds(true);
+
+            // image_size is in dimensions
+            int imageSize = getResources().getDimensionPixelSize(R.dimen.image_size);
+            LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(imageSize, imageSize);
+            courseButton.setLayoutParams(imageParams);
+
+            courseButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View v) {
                     Intent intent = new Intent(MainActivity.this, AssessmentsActivity.class);
-                    //intent.putExtra("course", course);
+                    intent.putExtra("course", course);
+                    intent.putExtra("user", user);
                     startActivity(intent);
                 }
             });
-        }
-    }
 
-    public void clickStartStudy(View view) {
-        Intent intent = new Intent(this, SetTimeActivity.class);
-        intent.putExtra("user", user);
-        startActivity(intent);
+            // Text View for the course name
+            TextView txt_view_courseName = new TextView(this);
+            txt_view_courseName.setText(course.getCourseCode());
+            txt_view_courseName.setGravity(Gravity.CENTER);
+            txt_view_courseName.setTypeface(null, Typeface.BOLD);
+
+            courseLayout.addView(courseButton);
+            courseLayout.addView(txt_view_courseName);
+            gridCourses.addView(courseLayout);
+
+        }
     }
 
 
     public void displayStudyMinutes() {
         TextView studyMinutes = (TextView) findViewById(R.id.studyMinutes);
-        studyMinutes.setText("You have studied for " + Math.round(user.getStudyMinutes()) + " minutes!");
+        if(userTimeState != null) {
+            studyMinutes.setText("You have studied for " + Math.round(userTimeState.getStudyMinutes()) + " minutes!");
+        } else {
+            studyMinutes.setText("No study time recorded.");
+        }
     }
 }

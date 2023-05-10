@@ -6,11 +6,11 @@ import android.widget.Toast;
 import java.io.Serializable;
 
 public class pauseState implements State, Serializable {
-    private User user;
+    private UserTimeState user;
 
     private Context context;
 
-    public pauseState(User user){
+    public pauseState(UserTimeState user){
         this.user = user;
     }
 

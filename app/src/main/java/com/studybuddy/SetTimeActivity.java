@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class SetTimeActivity extends AppCompatActivity {
+    private UserTimeState userTimeState;
     private User user;
 
     @Override
@@ -16,7 +17,8 @@ public class SetTimeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_time);
 
-        user = (User) getIntent().getSerializableExtra("user", User.class);
+        user = getIntent().getSerializableExtra("user", User.class);
+        userTimeState = getIntent().getSerializableExtra("userTimeState", UserTimeState.class);
     }
 
     public void clickStart(View view) {
@@ -29,6 +31,7 @@ public class SetTimeActivity extends AppCompatActivity {
         else {
             int minutes = Integer.parseInt(studyTimeString);
             Intent intent = new Intent(getApplicationContext(), StudyActivity.class);
+            intent.putExtra("userTimeState", userTimeState);
             intent.putExtra("user", user);
             intent.putExtra("minutes", minutes);
             startActivity(intent);

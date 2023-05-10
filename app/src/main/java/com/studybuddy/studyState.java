@@ -7,9 +7,9 @@ import android.widget.Toast;
 import java.io.Serializable;
 
 public class studyState implements State, Serializable {
-    private User user;
+    private UserTimeState user;
 
-    public studyState(User user){
+    public studyState(UserTimeState user){
         this.user = user;
     }
 

@@ -3,7 +3,6 @@ package com.studybuddy;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -27,14 +26,16 @@ public class Register extends AppCompatActivity {
         final ImageButton arrow = findViewById(R.id.arrow);
 
         registerButton2.setOnClickListener(v -> {
-            String username = ((EditText) findViewById(R.id.et_email)).getText().toString();
+
+            String username = ((EditText) findViewById(R.id.et_username)).getText().toString();
             String password = ((EditText) findViewById(R.id.et_password)).getText().toString();
 
             addUserToDatabase(username, password);
 
-            finish();
-            Intent intent2 = new Intent(Register.this, MainActivity.class);
-            startActivity(intent2);
+            User user = new User(1,username);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
         });
 
         // what happens when the arrow is clicked

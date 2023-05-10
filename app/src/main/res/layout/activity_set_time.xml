@@ -15,6 +15,7 @@
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="453dp"
         android:ems="10"
+        android:gravity="center"
         android:hint="Enter study time in minute"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"

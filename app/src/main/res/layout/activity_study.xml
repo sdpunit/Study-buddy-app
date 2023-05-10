@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".StudyActivity">
 
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
     <TextView
         android:id="@+id/timeTextView"
         android:layout_width="234dp"
@@ -49,4 +58,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeTextView"
         app:layout_constraintVertical_bias="0.333" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

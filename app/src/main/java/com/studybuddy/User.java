@@ -3,23 +3,35 @@ package com.studybuddy;
 import android.content.Context;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class User implements Serializable {
     private int uid;
     private String name;
 
-    private String username;
-
     private String password;
     private boolean isUndergrad;
-    private List<Course> courses;
-    private State pauseState;
-    private State studyState;
-    private State state;
+
+    private Map<Course, Integer> courseTime;
 
     private double studyMinutes = 0.0;
+
+    public Map<Course, Integer> getCourseTime() {
+        return courseTime;
+    }
+
+    public void addCourses(ArrayList<Course> courses){
+        for(Course course:courses){
+            this.courseTime.put(course, 0);
+        }
+    }
+    public void addCourseTime(Course course, Integer time){
+        this.courseTime.put(course, time);
+    }
 
     public double getStudyMinutes() {
         return studyMinutes;
@@ -32,45 +44,28 @@ public class User implements Serializable {
         this.studyMinutes += studyMinutes;
     }
 
-    public State getPauseState() {
-        return pauseState;
-    }
 
-    public void setPauseState(State pauseState) {
-        this.pauseState = pauseState;
-    }
-
-    public State getStudyState() {
-        return studyState;
-    }
-
-    public void setStudyState(State studyState) {
-        this.studyState = studyState;
-    }
-
-    public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
-    }
-
-    public User(int uid, String name, boolean isUndergrad, List<Course> courses) {
+    public User(int uid, String name, boolean isUndergrad, Map<Course, Integer> courses) {
         this.uid = uid;
         this.name = name;
         this.isUndergrad = isUndergrad;
-        this.courses = courses;
-        this.state = new idleState(this);
-    }
+        this.courseTime = courses;
 
+    }
     public User(int uid, String name) {
         this.uid = uid;
         this.name = name;
         this.isUndergrad = false;
-        this.courses = null;
-        this.state = new idleState(this);
+        this.courseTime = new HashMap<>();
     }
+
+//    public User(int uid, String name, String password) {
+//        this.uid = uid;
+//        this.name = name;
+//        this.password = password;
+//        this.isUndergrad = false;
+//        this.courseTime = new HashMap<>();
+//    }
 
     public int getUid() {
         return uid;
@@ -96,25 +91,8 @@ public class User implements Serializable {
         this.isUndergrad = isUndergrad;
     }
 
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-
-    public void startStudy() {
-        this.state.startStudy();
-    }
-
-    public void pause() {
-        this.state.pause();
-    }
-
-    public void resume() {
-        this.state.resume();
-    }
-
-    public void stopStudy() {
-        this.state.stopStudy();
+    public String getPassword() {
+        return password;
     }
 
     @Override

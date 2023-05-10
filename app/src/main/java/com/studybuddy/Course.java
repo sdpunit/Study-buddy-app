@@ -1,13 +1,15 @@
 package com.studybuddy;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Set;
 
-public class Course {
+public class Course implements Serializable {
     private String courseCode;  // key
     private String courseName;
     private String convener;
-
-    private int studyMinutes;
+    private String studentType;
+    private ArrayList<String> assessment;
 
     Course(String courseCode) {
         this.courseCode = courseCode;
@@ -17,6 +19,15 @@ public class Course {
         this.courseName = courseName;
         this.convener = convener;
     }
+
+    public Course(String courseCode, String courseName, String studentType, ArrayList<String> assessment, String convener) {
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+        this.convener = convener;
+        this.studentType = studentType;
+        this.assessment = assessment;
+    }
+
     public String getCourseCode() {
         return courseCode;
     }

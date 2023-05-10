@@ -6,9 +6,9 @@ import android.widget.Toast;
 import java.io.Serializable;
 
 public class idleState implements State, Serializable {
-    private User user;
+    private UserTimeState user;
 
-    public idleState(User user){
+    public idleState(UserTimeState user){
         this.user = user;
     }
 

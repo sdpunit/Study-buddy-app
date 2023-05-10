@@ -5,21 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class Login extends AppCompatActivity {
     boolean validUser;
@@ -37,7 +30,7 @@ public class Login extends AppCompatActivity {
         // what happens when the LOGIN button is pressed
         loginButton.setOnClickListener(v -> {
             // sets email and password to the information entered by the user
-            String username = ((EditText) findViewById(R.id.et_email)).getText().toString();
+            String username = ((EditText) findViewById(R.id.et_username)).getText().toString();
             String password = ((EditText) findViewById(R.id.et_password)).getText().toString();
 
             //checks user details against the database (for now loginDetails.csv)
