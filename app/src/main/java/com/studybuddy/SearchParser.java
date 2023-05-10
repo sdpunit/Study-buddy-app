@@ -1,21 +1,10 @@
 package com.studybuddy;
 
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Stream;
-import java.util.stream.Collectors;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
-
-import javax.security.auth.Subject;
-
-import kotlin.jvm.Throws;
 
 public class SearchParser {
     Tokenizer tokenizer;
 
-    int lb = 0;
-    int rb = 0;
 
 //    public SearchParser(List<String> tokens) {
 //        this.tokens = tokens;
@@ -49,41 +38,75 @@ public class SearchParser {
         }
     }
 
+    //flowing the grammar:
+    /*
+    college: COMP, code: 1110, name: Structured Programming, convener: Patrik Haslum"
+
+        <exp>       ::= "college:" <college> | "college:" <college> "," <term>
+        <term>      ::= <factor> | <factor> "," <factor> | <factor> "," <factor> "," <factor>
+        <factor>    ::= <code> | <name> | <convener>
+        <code>      ::= "code:" four-digit Integer
+        <name>      ::= "name:" String
+        <convener>  ::= "convener:" String
+        <college>   ::= "COMP" | "MATH" | "PHYS" | "STATS" | ...
+
+        There must be a 'college:' first. Otherwise, it should throw an exception saying that the
+        user should specify the college first. If there are no other things in the query, it returns
+        all the results in that tree. If a 'code:' is also provided, search for the exact node of
+        the code. If 'college' and 'name' are provided, use that dictionary. if 'college' and
+        'convener' are provided, use another dictionary. If 'code', 'name' and 'college' all exist
+        or two of them exist, they will be processed separately, which means it search for the code
+        and the name and the convener and returns all the not duplicate results.
+     */
+
+
+    // validates the input and returns the parsed expression.
+    // @return Query object as a result of parsing the input.
     public Query parseQuery() {
-        Query exp = parseExp();
+        Query query = new Query();
+        Token currentToken = tokenizer.current(); //get the current token
+//        if(currentToken.getType() == Token.Type.CODE){
+//            query.setCode(Integer.parseInt(currentToken.getToken())); //set the code
+//            return query;
+//        }
+//        else
+        if (tokenizer.hasNext()) { //if there is a next token
+            if (currentToken.getType() == Token.Type.COLLEGE) { //if the current token is a college, first token must be a college
+                query.setCollege(currentToken.getToken()); //set the college
+                tokenizer.next(); //move to the next token
+                parseTerm(query); //parse the rest, (term)
+            } else {
+                throw new IllegalArgumentException("Expected COLLEGE all caps, found: " + tokenizer.getCurrent().getToken());
+            }
+        }
+        return null;
+    }
+    private Query parseTerm(Query query) {
+
         if (tokenizer.hasNext()) {
             Token currentToken = tokenizer.current();
-            if (currentToken.getType() == Token.Type.CODE) {
+            if (currentToken.getType() == Token.Type.CODE && query.getCode() == 0) {
+                query.setCode(Integer.parseInt(currentToken.getToken()));
                 tokenizer.next();
+                return parseTerm(query);
+
+            } else if (currentToken.getType() == Token.Type.COURSE) {
+                query.setCourse(currentToken.getToken());
+                tokenizer.next();
+                return parseTerm(query);
+
+            } else if (currentToken.getType() == Token.Type.CONVENER) {
+                query.setConvener(currentToken.getToken());
+                tokenizer.next();
+                return parseTerm(query);
+
             } else {
                 throw new IllegalArgumentException("Expected SUBJECT all caps, found: " + tokenizer.getCurrent().getToken());
             }
         }
-        return exp;
-    }
-    private Query parseExp() {
-        Query subject = parseSubject();
-        if (tokenizer.hasNext()){
-            Token currentToken = tokenizer.current();
-            if (currentToken.getType() == Token.Type.SUBJECT) {
-                tokenizer.next();
-            } else {
-                throw new IllegalArgumentException("Expected SUBJECT all caps, found: " + tokenizer.getCurrent().getToken());
-            }
-        }
-
-        return subject;
-    }
-
-    private Query parseSubject() {
         return null;
     }
 
-    private void parseConvener() {
-    }
-
-    private void parseAnd() {
-    }
 }
 
 
