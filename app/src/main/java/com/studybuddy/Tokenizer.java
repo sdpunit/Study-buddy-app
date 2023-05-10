@@ -2,11 +2,6 @@ package com.studybuddy;
 
 import static java.lang.Character.isUpperCase;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
-import java.util.regex.Pattern;
-
 public class Tokenizer {
 
     private String buffer;          // String to be transformed into tokens each time next() is called.
@@ -31,7 +26,7 @@ public class Tokenizer {
             return;
         }
         else if (isAllUpperCase(buffer)) {
-            currentToken = new Token(buffer, Token.Type.SUBJECT);
+            currentToken = new Token(buffer, Token.Type.COLLEGE);
         }
         else if (isInteger(buffer)) {
             currentToken = new Token(buffer, Token.Type.CODE);
