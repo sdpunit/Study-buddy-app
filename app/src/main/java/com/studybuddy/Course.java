@@ -5,6 +5,18 @@ public class Course {
     private String name;
     private RBTree courseStudents;
 
+    public Course(int courseID, String name, RBTree courseStudents) {
+        this.courseID = courseID;
+        this.name = name;
+        this.courseStudents = courseStudents;
+    }
+
+    public Course(int courseID, String name) {
+        this.courseID = courseID;
+        this.name = name;
+        this.courseStudents =null;
+    }
+
     public int getCourseID() {
         return courseID;
     }
