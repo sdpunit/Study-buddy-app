@@ -15,17 +15,17 @@ public class pauseState implements State, Serializable {
     }
 
     @Override
-    public void startStudy(Context context) {
-        Toast.makeText(context, "You are already studying.", Toast.LENGTH_SHORT).show();
+    public void startStudy() {
+
     }
 
     @Override
-    public void pause(Context context) {
-        Toast.makeText(context, "You are already paused.", Toast.LENGTH_SHORT).show();
+    public void pause() {
+
     }
 
     @Override
-    public void resume(Context context) {
+    public void resume() {
         this.user.setState(this.user.getStudyState());
     }
 

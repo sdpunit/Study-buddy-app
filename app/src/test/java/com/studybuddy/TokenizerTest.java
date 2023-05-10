@@ -1,7 +1,7 @@
 package com.studybuddy;
 
 
-import static com.studybuddy.Token.Type.SUBJECT;
+import static com.studybuddy.Token.Type.COLLEGE;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -23,9 +23,9 @@ public class TokenizerTest {
         assertEquals("wrong token type", Token.Type.CODE, tokenizer.getCurrent().getType());
 
         tokenizer = new Tokenizer(B);
-        assertEquals("wrong token type", SUBJECT, tokenizer.getCurrent().getType());
+        assertEquals("wrong token type", COLLEGE, tokenizer.getCurrent().getType());
 
         tokenizer = new Tokenizer(C);
-        assertEquals("wrong token value", SUBJECT, tokenizer.getCurrent().getToken());
+        assertEquals("wrong token value", COLLEGE, tokenizer.getCurrent().getToken());
     }
 }

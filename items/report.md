@@ -1,4 +1,4 @@
-# [Team Name] Report
+# [G48] Report
 
 The following is a report template to help your team successfully provide all the details necessary for your report in a structured and organised manner. Please give a straightforward and concise report that best demonstrates your project. Note that a good report will give a better impression of your project to the reviewers.
 
@@ -31,77 +31,89 @@ The following is a report template to help your team successfully provide all th
 
 | UID | Name | Role |
 | :--- | :----: | ---: |
-| [uid] | [name] | [role] |
-| [uid] | [name] | [role] |
-| [uid] | [name] | [role] |
-| [uid] | [name] | [role] |
+| [u7490701] | [Ahmed Qaisar] | [Firebase] |
+| [u7103031] | [Lana Fraser] | [Login and Report] |
+| [u7432723] | [Punit Deshwal] | [Database Structures and UI Themes] |
+| [u7108792] | [Quoc Nguyen] | [Search, Tokeniser and Parser] |
+| [u7533843] | [Yanghe Dong] | [Tree Structure and Timer] |
 
 ## Summary of Individual Contributions
 
-*[Summarise the contributions made by each member to the project, e.g. code implementation, code design, UI design, report writing, etc.]*
+*u7490701, Ahmed, I contribute 20% of the code. Here are my contributions:*
+* A.Firebase
+*Report Writing: N/A*
+*Slide Preparation: N/A*
 
-*[Code Implementation. Which features did you implement? Which classes or methods was each member involved in? Provide an approximate proportion in pecentage of the contribution of each member to the whole code implementation, e.g. 30%.]*
+*u7103031, Lana, I contribute 20% of the code. Here are my contributions:*
+* A.Login link: app/src/main/java/com/studybuddy/Login.java
+* B.activity_login.xml link: app/src/main/res/layout/activity_login.xml
+*UI Design: Proposed and designed the UI for the Login class*
+*Report Writing: N/A*
+*Slide Preparation: N/A*
 
-*Here is an example:*
+*u7432723, Punit, I contribute 20% of the code. Here are my contributions:*
+* A.MainActivity link:app/src/main/java/com/studybuddy/MainActivity.java
+* B.activity_main.xml link:app/src/main/res/layout/activity_main.xml
+* C.item_course.xml link:app/src/main/res/layout/item_course.xml
+* D.AssessementsActivity link:app/src/main/java/com/studybuddy/AssessmentsActivity.java
+* E.activity_assessements.xml link:app/src/main/res/layout/activity_assessments.xml
+*UI Design: Proposed and designed the UI for the Main class. Created a new colour theme for the app. Developed many of the conceptual ideas for the desgins of each UI screen and how they interact togehter*
+*Report Writing: N/A*
+*Slide Preparation: N/A*
 
-*UID1, Name1, I contribute 30% of the code. Here are my contributions:*
-* A.class
-* B.class: function1(), function2(), ...
-* ....
+*u7108792, Quoc, I contribute 20% of the code. Here are my contributions:*
+* A.SearchActivity link: src/studybuddy/app/src/main/java/com/studybuddy/SearchActivity.java
+* B.activity_search.xml link: src/studybuddy/app/src/main/res/layout/activity_search.xml
+* C.user_cell.xml link: app/src/main/res/layout/user_cell.xml
+* D.SearchParser link:app/src/main/java/com/studybuddy/SearchParser.java
+* E.SearchToken link:app/src/main/java/com/studybuddy/SearchToken.java
+* F.Query link:app/src/main/java/com/studybuddy/Query.java
+* G.Token link:app/src/main/java/com/studybuddy/Token.java
+* H.Tokenizer link: app/src/main/java/com/studybuddy/Tokenizer.java
+* I.TokenizerTest link:app/src/test/java/com/studybuddy/TokenizerTest.java
+*UI Design: Proposed and designed the UI for the SearchActivity class*
+*Report Writing: N/A*
+*Slide Preparation: N/A*
 
-*you should ALSO provide links to the specified classes and/or functions*
+*u7432723, Yanghe, I contribute 20% of the code. Here are my contributions:*
+* A.Course link:app/src/main/java/com/studybuddy/Course.java
+* B.RBTree link:app/src/main/java/com/studybuddy/RBTree.java
+* C.User link:app/src/main/java/com/studybuddy/User.java
+* D.RBTreeTest link:app/src/test/java/com/studybuddy/RBTreeTest.java
+* E.SetTimeActivity link:app/src/main/java/com/studybuddy/SetTimeActivity.java
+* F.StudyActivity link:app/src/main/java/com/studybuddy/StudyActivity.java
+* F.IdleState link:app/src/main/java/com/studybuddy/idleState.java
+* F.MyTimer link:app/src/main/java/com/studybuddy/myTimer.java
+* G.PauseState link:app/src/main/java/com/studybuddy/pauseState.java
+* H.StudyState link:app/src/main/java/com/studybuddy/studyState.java
+* I.activity_set_time.xml link:app/src/main/res/layout/activity_set_time.xml
+* J.activity_study.xml link:app/src/main/res/layout/activity_study.xml
+*Code Design: Proposed and implemented a tree stucture for storing our data. Proposed and implemented a state design pattern for the timer functionality.*
+*UI Design: Proposed and designed the UI for the MyTimer class.*
+*Report Writing: N/A*
+*Slide Preparation: N/A*
 
-*[Code Design. What design patterns, data structures, did the involved member propose?]*
-
-*[UI Design. Specify what design did the involved member propose? What tools were used for the design?]*
-
-*[Report Writing. Which part of the report did the involved member write?]*
-
-*[Slide preparation. Were you responsible for the slides?]*
-
-*[Miscellaneous contributions. You are welcome to provide anything that you consider as a contribution to the project or team.]*
 
 ## Conflict Resolution Protocol
 
-*[Write a well defined protocol your team can use to handle conflicts. That is, if your group has problems, what is the procedure for reaching consensus or solving a problem?
-(If you choose to make this an external document, link to it here)]*
+*Disputes in contributions will be resolved by a team meeting and voting. (needs to be refined)*
 
 
 ## Application Description
 
-*[What is your application, what does it do? Include photos or diagrams if necessary]*
-
-*Here is a pet specific application example*
-
-*PetBook is a social media application specifically targetting pet owners... it provides... certified practitioners, such as veterians are indicated by a label next to their profile...*
+*StudyBuddy is a productivity and educational app that allows its users to keep track of the time that they have spent studying for each subject that they are enrolled in. This app allows the user to add friends and compare study times with your friends. This app includes a login interface, the ability to search for and enroll in courses, a timer functionality, and a graphics summary tab. *
 
 **Application Use Cases and or Examples**
 
-*[Provide use cases and examples of people using your application. Who are the target users of your application? How do the users use your application?]*
+*Targets Users: Students*
 
-*Here is a pet training application example*
+* *Users can search and enroll in courses. The app will provide a breif overview of the course and its assessements.*
+* *Once enrolled users can select one of their courses and set a timer for the time they would like to study*
+* *Users can add another user as a friend if they are enrolled in the same course. 
+* *A user can view a summary of their total time studied.*
 
-*Molly wants to inquiry about her cat, McPurr's recent troublesome behaviour*
-1. *Molly notices that McPurr has been hostile since...*
-2. *She makes a post about... with the tag...*
-3. *Lachlan, a vet, writes a reply to Molly's post...*
-4. ...
-5. *Molly gives Lachlan's reply a 'tick' response*
+* I will add a use case diagram https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-use-case-diagram/ *
 
-*Here is a map navigation application example*
-
-*Targets Users: Drivers*
-
-* *Users can use it to navigate in order to reach the destinations.*
-* *Users can learn the traffic conditions*
-* ...
-
-*Target Users: Those who want to find some good restaurants*
-
-* *Users can find nearby restaurants and the application can give recommendations*
-* ...
-
-*List all the use cases in text descriptions or create use case diagrams. Please refer to https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-use-case-diagram/ for use case diagram.*
 
 ## Application UML
 
@@ -112,17 +124,19 @@ The following is a report template to help your team successfully provide all th
 
 *Please give clear and concise descriptions for each subsections of this part. It would be better to list all the concrete items for each subsection and give no more than `5` concise, crucial reasons of your design. Here is an example for the subsection `Data Structures`:*
 
-*I used the following data structures in my project:*
+**Data Structures**
 
-1. *LinkedList*
+1. *RedBlack Tree*
 
-   * *Objective: It is used for storing xxxx for xxx feature.*
+   * *Objective: It is used for storing Courses and Users which can then be found using the Search feature.*
 
-   * *Locations: line xxx in XXX.java, ..., etc.*
+   * *Locations: lines 6-318 in RBTree.java*
 
    * *Reasons:*
 
-     * *It is more efficient than Arraylist for insertion with a time complexity O(1)*
+     * *This tree is self balancing, meaning that our data will be organised and structured even after multiple insertions*
+     
+     * *Has an O(log n) time intricacy for searching*
 
      * *We don't need to access the item by index for this feature*
 
@@ -130,20 +144,37 @@ The following is a report template to help your team successfully provide all th
 
 3. ...
 
-**Data Structures**
-
-*[What data structures did your team utilise? Where and why?]*
-
 **Design Patterns**
 
-*[What design patterns did your team utilise? Where and why?]*
+1. *State Design Pattern*
+
+   * *Objective: This design pattern uses the startStudy, pause, resume, and stopStudy states to keep track of the current state of the timer implented in the myTimer class.*
+
+   * *Locations: State.java,*
+
+   * *Reasons:*
+
+     * *This will affect the functionlity of the pause, resume and stop buttons according to the current state*
+     
+     * *The design is flexible enough to add or remove states if needed*
+
+2. ...
+
+3. ...
 
 **Grammar(s)**
 
 Production Rules:
     
-    <Non-Terminal> ::= <some output>
-    <Non-Terminal> ::= <some output>
+    college: COMP, code: 1110, name: Structured Programming, convener: Patrik Haslum"
+
+        <exp>       ::= "college:" <college> | "college:" <college> "," <term>
+        <term>      ::= <factor> | <factor> "," <factor> | <factor> "," <factor> "," <factor>
+        <factor>    ::= <code> | <name> | <convener>
+        <code>      ::= "code:" four-digit Integer
+        <name>      ::= "name:" String
+        <convener>  ::= "convener:" String
+        <college>   ::= "COMP" | "MATH" | "PHYS" | "STATS" | ...
 
 *[How do you design the grammar? What are the advantages of your designs?]*
 
@@ -163,17 +194,9 @@ Production Rules:
 
 ## Summary of Known Errors and Bugs
 
-*[Where are the known errors and bugs? What consequences might they lead to?]*
-
-*Here is an example:*
-
 1. *Bug 1:*
 
-- *A space bar (' ') in the sign in email will crash the application.*
 - ...
-
-2. *Bug 2:*
-3. ...
 
 *List all the known errors and bugs here. If we find bugs/errors that your team does not know of, it shows that your testing is not thorough.*
 
@@ -193,31 +216,56 @@ Production Rules:
 
 ## Implemented Features
 
-*[What features have you implemented?]*
-
 ### Basic App
-1. [Login]. Description of the feature and your implementation (easy)
-    * Class X, methods Z, Y, Lines of code: 10-100
-    * Additional description: ...
+1. [Login]. Allows the user to login (easy)
+    * Class Login.java, methods Z, Y, Lines of code: whole file
+    * So far only allows users on the login.csv file login.
       <br>
-2. [Data Visualization]. Description  ... ...
+2. [Data Instances]. There 2500 data instances on FIrebase (easy)
+    * Class xx.java, methods Z, Y, Lines of code: xx
+    * The user is able to click on and view each course and user.
+      <br>
+3. [Firebase Data Visualization]. The user is able to visualise the data that is stored on firebase (medium)
+    * Class xx.java, methods Z, Y, Lines of code: xx
+    * The user is able to click on and view each course and user. 
+    * not fully implemented 
+      <br>
+4. [Search]. Users are able to search for information on the app. (medium)
+    * Clases SearchActivity.java, SearchParser.java, SearchActivity.java, Tokenizer.java, Token.java, methods Z, Y, Lines of code: xx
+    * The user is able to serch for a course by using keywords related to the  subject, code, course, and/or convener.
+      <br>
 <br><br>
 
 ### General Features
-Feature Category: Privacy <br>
-1. [Privacy-Request]. Description of the feature and your implementation (easy)
-   * Class X, methods Z, Y, Lines of code: 10-100
-   * Class Y, methods K, L, M, Lines of code: 35-150
-   * Additional description: ...
-<br>
-2. [Privacy-Block]. Description ... ... (medium)
-    * ... ...
+Feature Category: User Activity <br>
+1. [Interact Follow]. Interact-Follow] The ability to ‘follow’ a course or any specific items. There must be a section specifically dedicated to 'things' followed (e.g., showing all updates from all courses followed in chronological order). (medium)
+   * Class A: methods A, B, C, lines of code: whole file
+   * A user can search for a course and follow it, to add this course to their main screen 
+   * … unimplimeted
+2. [Interact-Noti]. TThe ability to send notifications based on different types of interactions (e.g., new announcement, assignment submissions, etc). A notification must be sent only after a predetermined number of interactions are set (>= 2 interactions [e.g., 2 announcements have been
+made or 2 follow requests have been received). Note: it is not mandatory to use the Android
+Notification classes. (medium)
+   * Class A: methods A, B, C, lines of code: whole file
+   * A user will be notified if their friend is studying 
+   * … unimplimeted
 <br>
 
 Feature Category: Firebase Integration <br>
-3. [FB-Auth] Description of the feature and your implementation (easy)
+3. [FB-Persist] Use Firebase to persist all data used in your app. (medium)
    * Class A: methods A, B, C, lines of code: whole file
-   * …
+   * … unimplimeted
+4. [FB-Syn] Using Firebase or another remote database to store user information and having the app
+updated as the remote database is updated without restarting the application. e.g. User A (a lecturer) posts an announcement, user B on a separate instance of the application sees the
+announcement appear on their app instance without restarting their application. (hard)
+   * Class A: methods A, B, C, lines of code: whole file
+   * … unimplimeted
+
+
+Feature Category: Greater Data Usage, Handling and Sophistication <br>
+5. [Data-Graphical] Graphical report viewer. Provide users with the ability to see a report of interactions with your app (e.g., summary of assessment results for a course or an individual student, etc), in a graphical manner. (medium)
+    * Class A: methods A, B, C, lines of code: whole file
+   * … unimplimeted
+
 
 *List all features you have completed in their separate categories with their difficulty classification. If they are features that are suggested and approved, please state this somewhere as well.*
 
@@ -226,9 +274,9 @@ Feature Category: Firebase Integration <br>
 *Here is an example (you could start numbering your meetings from 1):*
 
 - *[Team Meeting 1](./meeting1.md)*
-- ...
+- *[Team Meeting 2](./meeting2.md)*
+- *[Team Meeting 3](./meeting3.md)*
 
-* Link to the minutes of your meetings as above. There must be at least 4 team meetings. 
-Note that you must commit your minute meetings shortly after your meeting has taken place (e.g., within 24h), otherwise your meeting minute will not be accepted.
-Your meetings (and each member's commits) should also have a reasonable date span across Week 6 to 11.*
+* Link to the minutes of your meetings as above. There must be at least 4 team meetings.*
  
+

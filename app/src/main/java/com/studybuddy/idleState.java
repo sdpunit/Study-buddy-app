@@ -8,24 +8,23 @@ import java.io.Serializable;
 public class idleState implements State, Serializable {
     private User user;
 
-    private Context context;
     public idleState(User user){
         this.user = user;
     }
 
     @Override
-    public void startStudy(Context context) {
+    public void startStudy() {
         this.user.setStudyState(new studyState(this.user));
         this.user.setState(this.user.getStudyState());
     }
 
     @Override
-    public void pause(Context context) {
+    public void pause() {
 
     }
 
     @Override
-    public void resume(Context context) {
+    public void resume() {
     }
 
     @Override

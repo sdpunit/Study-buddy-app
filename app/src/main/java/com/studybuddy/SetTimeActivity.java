@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SetTimeActivity extends AppCompatActivity {
     private User user;
@@ -20,10 +21,26 @@ public class SetTimeActivity extends AppCompatActivity {
 
     public void clickStart(View view) {
         EditText studyTime = (EditText) findViewById(R.id.studyTimeText);
-        int minutes = Integer.parseInt(studyTime.getText().toString());
-        Intent intent = new Intent(getApplicationContext(), StudyActivity.class);
-        intent.putExtra("user", user);
-        intent.putExtra("minutes", minutes);
-        startActivity(intent);
+        String studyTimeString = studyTime.getText().toString();
+        // deal with invalid input
+        if (!isInteger(studyTimeString)) {
+            Toast.makeText(getApplicationContext(), "Please enter a valid integer minute", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            int minutes = Integer.parseInt(studyTimeString);
+            Intent intent = new Intent(getApplicationContext(), StudyActivity.class);
+            intent.putExtra("user", user);
+            intent.putExtra("minutes", minutes);
+            startActivity(intent);
+        }
+    }
+
+    public boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 }

@@ -83,7 +83,7 @@ public class Login extends AppCompatActivity {
             // if user is authenticated, starts a new intent and transfers user data
             if(validUser) {
                 User user = new User(id,username);
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
             }

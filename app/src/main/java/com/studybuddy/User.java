@@ -10,13 +10,28 @@ public class User implements Serializable {
     private int uid;
     private String name;
 
+    private String username;
+
+    private String password;
     private boolean isUndergrad;
-    private final Course[] courses;
-    private Set<User> classmates;
-    private boolean signedUp;
+    private List<Course> courses;
     private State pauseState;
     private State studyState;
     private State state;
+
+    private double studyMinutes = 0.0;
+
+    public double getStudyMinutes() {
+        return studyMinutes;
+    }
+
+    public void setStudyMinutes(double studyMinutes) {
+        this.studyMinutes = studyMinutes;
+    }
+    public void addStudyMinutes(double studyMinutes) {
+        this.studyMinutes += studyMinutes;
+    }
+
     public State getPauseState() {
         return pauseState;
     }
@@ -41,13 +56,11 @@ public class User implements Serializable {
         this.state = state;
     }
 
-    public User(int uid, String name, boolean isUndergrad, Course[] courses, Set<User> friends, boolean signedUp) {
+    public User(int uid, String name, boolean isUndergrad, List<Course> courses) {
         this.uid = uid;
         this.name = name;
         this.isUndergrad = isUndergrad;
         this.courses = courses;
-        this.classmates = friends;
-        this.signedUp = signedUp;
         this.state = new idleState(this);
     }
 
@@ -56,8 +69,6 @@ public class User implements Serializable {
         this.name = name;
         this.isUndergrad = false;
         this.courses = null;
-        this.classmates = null;
-        this.signedUp = false;
         this.state = new idleState(this);
     }
 
@@ -85,37 +96,21 @@ public class User implements Serializable {
         this.isUndergrad = isUndergrad;
     }
 
-    public Course[] getCourses() {
+    public List<Course> getCourses() {
         return courses;
     }
 
 
-    public Set<User> getClassmates() {
-        return classmates;
+    public void startStudy() {
+        this.state.startStudy();
     }
 
-    public void setClassmates(Set<User> classmates) {
-        this.classmates = classmates;
+    public void pause() {
+        this.state.pause();
     }
 
-    public boolean isSignedUp() {
-        return signedUp;
-    }
-
-    public void setSignedUp(boolean signedUp) {
-        this.signedUp = signedUp;
-    }
-
-    public void startStudy(Context context) {
-        this.state.startStudy(context);
-    }
-
-    public void pause(Context context) {
-        this.state.pause(context);
-    }
-
-    public void resume(Context context) {
-        this.state.resume(context);
+    public void resume() {
+        this.state.resume();
     }
 
     public void stopStudy() {

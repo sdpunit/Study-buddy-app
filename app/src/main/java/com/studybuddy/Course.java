@@ -1,43 +1,62 @@
 package com.studybuddy;
 
+import java.util.Set;
+
 public class Course {
-    int courseID;
-    private String name;
-    private RBTree courseStudents;
+    private String courseCode;  // key
+    private String courseName;
+    private String convener;
 
-    public Course(int courseID, String name, RBTree courseStudents) {
-        this.courseID = courseID;
-        this.name = name;
-        this.courseStudents = courseStudents;
+    private int studyMinutes;
+
+    Course(String courseCode) {
+        this.courseCode = courseCode;
+    }
+    Course(String courseCode, String courseName, String convener) {
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+        this.convener = convener;
+    }
+    public String getCourseCode() {
+        return courseCode;
     }
 
-    public Course(int courseID, String name) {
-        this.courseID = courseID;
-        this.name = name;
-        this.courseStudents =null;
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
-    public int getCourseID() {
-        return courseID;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public void setCourseID(int courseID) {
-        this.courseID = courseID;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
-    public String getName() {
-        return name;
+    public String getConvener() {
+        return convener;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setConvener(String convener) {
+        this.convener = convener;
     }
 
-    public RBTree getCourseStudents() {
-        return courseStudents;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Course) {
+            Course course = (Course) obj;
+            return courseCode.equals(course.getCourseCode());
+        }
+        return false;
     }
 
-    public void setCourseStudents(RBTree courseStudents) {
-        this.courseStudents = courseStudents;
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseCode='" + courseCode + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", convener='" + convener +
+                '}';
     }
 }

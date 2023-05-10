@@ -1,10 +1,8 @@
 package com.studybuddy;
 
-import java.util.HashMap;
-
 public class Token {
 
-    public enum Type {SUBJECT, CODE, COURSE, CONVENER, AND, OR}
+    public enum Type {COLLEGE, CODE, COURSE, CONVENER}
 
     private final String token; // Token representation in String form.
     private final Type type;    // Type of the token.

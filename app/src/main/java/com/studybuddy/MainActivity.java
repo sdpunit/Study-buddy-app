@@ -12,7 +12,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
     private User user;
 
     @Override
@@ -21,17 +20,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         user = getIntent().getSerializableExtra("user", User.class);
+        // display the study minutes
+        displayStudyMinutes();
 
         Button btn_add_courses = (Button) findViewById(R.id.btn_add_courses);
         TextView txt_hello_user = findViewById(R.id.txt_hello_user);
         Button btn_graphical_data = findViewById(R.id.btn_graphical_data);
         GridLayout grid_courses = findViewById(R.id.grid_courses);
 
-        User currentUser = (User) getIntent().getSerializableExtra("user");
 
         //Sets the text to Hello, user.
-        if (currentUser != null) {
-            txt_hello_user.setText("Hi, " + currentUser.getName());
+        if (user != null) {
+            txt_hello_user.setText("Hi, " + user.getName());
         } else {
             txt_hello_user.setText("Hi, guest");
         }
@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ArrayList<Course> myCourses = new ArrayList<>();
-                myCourses.add(new Course(1234, "Comp1100"));
-                myCourses.add(new Course(122, "Comp2100"));
+                myCourses.add(new Course("COMP1100"));
+                myCourses.add(new Course("COMP2100"));
 
                 UpdateCourseGrid(myCourses);
             }
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         for (Course course:selectedCourses){
             //Create a button for this course in mainActivity
             Button btn_newCourse = new Button(this);
-            btn_newCourse.setText(course.getName());
+            btn_newCourse.setText(course.getCourseName());
 
 
             //Add the button to the layout
@@ -83,5 +83,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SetTimeActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
+    }
+
+
+    public void displayStudyMinutes() {
+        TextView studyMinutes = (TextView) findViewById(R.id.studyMinutes);
+        studyMinutes.setText("You have studied for " + Math.round(user.getStudyMinutes()) + " minutes!");
     }
 }

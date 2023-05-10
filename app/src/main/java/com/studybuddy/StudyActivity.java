@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -17,7 +18,6 @@ public class StudyActivity extends AppCompatActivity {
     private User user;
     private myTimer timer;
     private TextView timeTextView;
-    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,50 +29,52 @@ public class StudyActivity extends AppCompatActivity {
         timeTextView = (TextView) findViewById(R.id.timeTextView);
         int minutes = getIntent().getIntExtra("minutes", 0);
 
-        handler = new Handler(Looper.getMainLooper()) {
+        Handler handler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message msg) {
                 timeTextView.setText((String) msg.obj);
             }
         };
-        user.startStudy(this);
+        user.startStudy();
         timer = new myTimer(minutes);
         timer.start(handler);
     }
 
-    public void clickPause(View view) {
+    public void clickPauseOrResume(View view) {
+        Button pauseOrResumeButton = (Button) view;
         // if the user is in study state, pause the timer
         if (this.user.getState() instanceof studyState) {
+            pauseOrResumeButton.setBackgroundResource(R.drawable.ic_resume);
             timer.pause();
+            this.user.pause();
         }
-        this.user.pause(StudyActivity.this);
-    }
-
-    public void clickResume(View view) {
-        // if the user is in pause state, resume the timer
-        if (this.user.getState() instanceof pauseState) {
+        else {
             timer.resume();
+            pauseOrResumeButton.setBackgroundResource(R.drawable.ic_pause);
+            this.user.resume();
         }
-        this.user.resume(StudyActivity.this);
     }
 
     public void clickStop(View view) {
-        this.clickPause(view);
+        Button pauseOrResumeButton = (Button) findViewById(R.id.pauseOrResumeButton);
+        this.clickPauseOrResume(pauseOrResumeButton);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation");
         builder.setMessage("Are you sure you want to stop?");
         builder.setPositiveButton("Yes", (dialog, which) -> {
             user.stopStudy();
+            // add study time to user
+            user.addStudyMinutes(timer.getStudyTime());
             timer = null;
 
-            Intent intent = new Intent(StudyActivity.this, SetTimeActivity.class);
+            Intent intent = new Intent(StudyActivity.this, MainActivity.class);
+            intent.putExtra("user", user);
             startActivity(intent);
-            finish();
         });
         builder.setNegativeButton("No", (dialog, which) -> {
             dialog.dismiss();
-            this.clickResume(view);
+            this.clickPauseOrResume(pauseOrResumeButton);
         });
         AlertDialog dialog = builder.create();
         dialog.show();
