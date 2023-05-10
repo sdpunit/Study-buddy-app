@@ -12,25 +12,26 @@ public class RBTree {
     }
 
     /**
-     * Insert a new user into the tree
+     * Insert a new course into the tree
      *
-     * @param user the new user to be inserted
+     * @param course the new course to be inserted
      */
-    public void insert(User user) {
-        Node newNode = new Node(user);
+    public void insert(Course course) {
+        Node newNode = new Node(course);
         // new node is always red
         newNode.setColour(true);
         Node root = this.root;
         Node parentNode = null;
 
-        while (root != null && root.user != null) {
+        while (root != null && root.course != null) {
             parentNode = root;
-
-            if (compareNodes(newNode.getUser(), root.getUser()) < 0) {
+            int compareResult = compareNodes(newNode.getCourse(), root.getCourse());
+            if (compareResult < 0) {
                 root = root.left;
-            } else {
+            } else if (compareResult > 0) {
                 root = root.right;
             }
+            else return;
         }
         if (parentNode != null) {
             newNode.parent = parentNode;
@@ -39,7 +40,7 @@ public class RBTree {
         // empty tree
         if (parentNode == null) {
             this.root = newNode;
-        } else if (compareNodes(newNode.getUser(), parentNode.getUser()) < 0) {
+        } else if (compareNodes(newNode.getCourse(), parentNode.getCourse()) < 0) {
             parentNode.left = newNode;
         } else {
             parentNode.right = newNode;
@@ -156,37 +157,18 @@ public class RBTree {
     }
 
     /**
-     * Search for users by name
-     *
-     * @param name the user's name
-     * @return a list of users with the same name
-     */
-    public List<Node> searchByName(String name) {
-        List<Node> results = new ArrayList<>();
-        Node result = findFirstOccurrence(this.root, name);
-        // since users with same name are inserted to the right of the first occurrence
-        // we can only traverse right children
-        while (result != null && result.getUser() != null && result.getUser().getName().equals(name)) {
-            results.add(result);
-            result = result.right;
-        }
-        return results;
-    }
-
-    /**
-     * Search for a user by name
+     * Search for a course by course code
      *
      * @param root the root of the tree
-     * @param name the user's name
-     * @return the first user with the given name
+     * @param courseCode the code of the course
+     * @return the node containing the course with the given code
      */
-    private Node findFirstOccurrence(Node root, String name) {
+    public Node searchByCourseCode(Node root, String courseCode) {
         Node currentNode = root;
         Node result = null;
 
-        while (currentNode != null && currentNode.user != null) {
-            int comparison = compareNames(name, currentNode.getUser().getName());
-
+        while (currentNode != null && currentNode.course != null) {
+            int comparison = compareCourseCode(courseCode, currentNode.getCourse().getCourseCode());
             if (comparison == 0) {
                 return currentNode;
             } else if (comparison < 0) {
@@ -198,18 +180,16 @@ public class RBTree {
         return result;
     }
 
-    private int compareNodes(User a, User b) {
-        // remove the space in names and convert to lowercase
-        String aName = a.getName().replace(" ", "").toLowerCase();
-        String bName = b.getName().replace(" ", "").toLowerCase();
-        return aName.compareTo(bName);
+    private int compareNodes(Course a, Course b) {
+        String courseCode1 = a.getCourseCode();
+        String courseCode2 = b.getCourseCode();
+        return compareCourseCode(courseCode1, courseCode2);
     }
 
-    private int compareNames(String a, String b) {
-        // remove the space in names and convert to lowercase
-        String aName = a.replace(" ", "").toLowerCase();
-        String bName = b.replace(" ", "").toLowerCase();
-        return aName.compareTo(bName);
+    private int compareCourseCode(String courseCode1, String courseCode2) {
+        int code1 = Integer.parseInt(courseCode1.substring(4));
+        int code2 = Integer.parseInt(courseCode2.substring(4));
+        return code1 - code2;
     }
 
 
@@ -221,13 +201,13 @@ public class RBTree {
     // don't record the leaf nodes
     private List<Node> inOrderTraverseHelper(Node node) {
         List<Node> nodes = new ArrayList<>();
-        if (node.left != null && node.left.user != null) {
+        if (node.left != null && node.left.course != null) {
             nodes.addAll(inOrderTraverseHelper(node.left));
         }
-        if (node.user != null) {
+        if (node.course != null) {
             nodes.add(node);
         }
-        if (node.right != null && node.right.user != null) {
+        if (node.right != null && node.right.course != null) {
             nodes.addAll(inOrderTraverseHelper(node.right));
         }
         return nodes;
@@ -241,13 +221,13 @@ public class RBTree {
     // don't record the leaf nodes
     private List<Node> postOrderTraverseHelper(Node node) {
         List<Node> nodes = new ArrayList<>();
-        if (node.left != null && node.left.user != null) {
+        if (node.left != null && node.left.course != null) {
             nodes.addAll(postOrderTraverseHelper(node.left));
         }
-        if (node.right != null && node.right.user != null) {
+        if (node.right != null && node.right.course != null) {
             nodes.addAll(postOrderTraverseHelper(node.right));
         }
-        if (node.user != null) {
+        if (node.course != null) {
             nodes.add(node);
         }
         return nodes;
@@ -256,12 +236,12 @@ public class RBTree {
     public static class Node {
 
         boolean isRed; // Node colour
-        private User user; // Node value
+        private Course course; // Node value
         Node parent; // Parent node
         Node left, right; // Children nodes
 
-        public Node(User user) {
-            this.user = user;
+        public Node(Course course) {
+            this.course = course;
             this.isRed = false;
             this.parent = null;
 
@@ -274,7 +254,7 @@ public class RBTree {
 
         // Leaf node
         public Node() {
-            this.user = null;
+            this.course = null;
             this.isRed = false;
         }
 
@@ -282,26 +262,26 @@ public class RBTree {
             this.isRed = isRed;
         }
 
-        public User getUser() {
-            return this.user;
+        public Course getCourse() {
+            return this.course;
         }
 
         public String toString() {
-            if (this.user != null) {
+            if (this.course != null) {
                 if (isRed) {
-                    return "Red: " + this.user;
+                    return "Red: " + this.course;
                 }
-                return "Black: " + this.user;
+                return "Black: " + this.course;
             } else {
                 return "Leaf";
             }
         }
 
         // Return a list of all leaves this node leads to
-        public List<Node> childrenLeaves() {
-            List<Node> leaves = new ArrayList<>();
+        public List<RBTree.Node> childrenLeaves() {
+            List<RBTree.Node> leaves = new ArrayList<>();
 
-            if (this.user == null) {
+            if (this.course == null) {
                 leaves.add(this);
             } else {
                 leaves.addAll(this.left.childrenLeaves());
