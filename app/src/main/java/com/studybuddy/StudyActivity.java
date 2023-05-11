@@ -87,7 +87,7 @@ public class StudyActivity extends AppCompatActivity implements myTimer.TimeUp{
             user.addStudyMinutes(timer.getStudyTime());
             user.setStudyNumber(user.getStudyNumber() + 1);
             user.addCourseStudied(course);
-            user.addCourseTime(course, timer.getStudyTime());
+            //user.addCourseTime(course, timer.getStudyTime());
             timer = null;
 
             Intent intent = new Intent(StudyActivity.this, MainActivity.class);
@@ -120,7 +120,7 @@ public class StudyActivity extends AppCompatActivity implements myTimer.TimeUp{
                 user.addStudyMinutes(timer.getInitialMinutes());
                 user.setStudyNumber(user.getStudyNumber() + 1);
                 user.addCourseStudied(course);
-                user.addCourseTime(course, (double)timer.getInitialMinutes());
+                //user.addCourseTime(course, (double)timer.getInitialMinutes());
                 timer = null;
 
                 Intent intent = new Intent(StudyActivity.this, MainActivity.class);
