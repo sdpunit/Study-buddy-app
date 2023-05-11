@@ -12,6 +12,8 @@ public class SetTimeActivity extends AppCompatActivity {
     private UserTimeState userTimeState;
     private User user;
 
+    private Course course;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +21,7 @@ public class SetTimeActivity extends AppCompatActivity {
 
         user = getIntent().getSerializableExtra("user", User.class);
         userTimeState = getIntent().getSerializableExtra("userTimeState", UserTimeState.class);
+        course = getIntent().getSerializableExtra("course", Course.class);
     }
 
     public void clickStart(View view) {
@@ -34,7 +37,9 @@ public class SetTimeActivity extends AppCompatActivity {
             intent.putExtra("userTimeState", userTimeState);
             intent.putExtra("user", user);
             intent.putExtra("minutes", minutes);
+            intent.putExtra("course", course);
             startActivity(intent);
+            finish();
         }
     }
 

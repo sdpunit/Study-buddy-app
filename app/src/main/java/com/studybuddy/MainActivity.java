@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -67,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
                 updateCourseGrid(myCourses);
             }
         });
+
+        // check cases and send notifications
+        sendNotification();
 
     }
     private void updateCourseGrid(ArrayList<Course> courses) {
@@ -124,9 +128,33 @@ public class MainActivity extends AppCompatActivity {
     public void displayStudyMinutes() {
         TextView studyMinutes = (TextView) findViewById(R.id.studyMinutes);
         if(userTimeState != null) {
-            studyMinutes.setText("You have studied for " + Math.round(userTimeState.getStudyMinutes()) + " minutes!");
+            //studyMinutes.setText("You have studied for " + Math.round(userTimeState.getStudyMinutes()) + " minutes!");
+            studyMinutes.setText("You have studied for " + Math.round(user.getStudyMinutes()) + " minutes!");
         } else {
             studyMinutes.setText("No study time recorded.");
+        }
+    }
+
+    public void sendNotification() {
+        // notificationTypes
+        List<String> notificationTypes = new ArrayList<>();
+        // every two study sessions
+        if (user.getStudyNumber() % 2 == 0 && user.getStudyNumber() != 0) {
+            notificationTypes.add("StudyNumber");
+        }
+        // every two hours of study
+        if (((int)user.getStudyMinutes() / 60) % 2 == 0 && user.getStudyMinutes() > 119) {
+            notificationTypes.add("StudyTime");
+        }
+        // every two unique courses
+        if (user.getCourseStudied().size() % 2 == 0 && user.getCourseStudied().size() != 0) {
+            notificationTypes.add("StudyCourse");
+        }
+
+        NotificationFactory notificationFactory = new NotificationFactory();
+        for (String notificationType : notificationTypes) {
+            StudyNotification notification = notificationFactory.createNotification(notificationType);
+            notification.notifyUser(MainActivity.this, user);
         }
     }
 }
