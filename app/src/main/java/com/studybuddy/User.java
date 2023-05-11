@@ -19,6 +19,32 @@ public class User implements Serializable {
     private Map<Course, Integer> courseTime;
 
     private double studyMinutes = 0.0;
+    // Need an empty constructor for firebase
+    public User(){
+
+    }
+
+    public User(int uid, String name, boolean isUndergrad, Map<Course, Integer> courses) {
+        this.uid = uid;
+        this.name = name;
+        this.isUndergrad = isUndergrad;
+        this.courseTime = courses;
+
+    }
+    public User(int uid, String name) {
+        this.uid = uid;
+        this.name = name;
+        this.isUndergrad = false;
+        this.courseTime = new HashMap<>();
+    }
+
+    public User(int uid, String name, String password, boolean isUndergrad) {
+        this.uid = uid;
+        this.name = name;
+        this.password = password;
+        this.isUndergrad = isUndergrad;
+        this.courseTime = new HashMap<>();
+    }
 
     public Map<Course, Integer> getCourseTime() {
         return courseTime;
@@ -43,29 +69,6 @@ public class User implements Serializable {
     public void addStudyMinutes(double studyMinutes) {
         this.studyMinutes += studyMinutes;
     }
-
-
-    public User(int uid, String name, boolean isUndergrad, Map<Course, Integer> courses) {
-        this.uid = uid;
-        this.name = name;
-        this.isUndergrad = isUndergrad;
-        this.courseTime = courses;
-
-    }
-    public User(int uid, String name) {
-        this.uid = uid;
-        this.name = name;
-        this.isUndergrad = false;
-        this.courseTime = new HashMap<>();
-    }
-
-//    public User(int uid, String name, String password) {
-//        this.uid = uid;
-//        this.name = name;
-//        this.password = password;
-//        this.isUndergrad = false;
-//        this.courseTime = new HashMap<>();
-//    }
 
     public int getUid() {
         return uid;
