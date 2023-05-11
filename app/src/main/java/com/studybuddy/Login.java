@@ -1,5 +1,6 @@
 package com.studybuddy;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.NotificationChannel;
@@ -11,6 +12,12 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -44,9 +51,6 @@ public class Login extends AppCompatActivity {
             //checks user details against the database (for now loginDetails.csv)
             authenticateUser(username,password);
 
-            //displays login message
-            showLoginMessage(username);
-
             //resets boolean
             validUser=false;
         });
@@ -60,35 +64,37 @@ public class Login extends AppCompatActivity {
 
     // checks that the information entered by the user matches an instance in the database (loginDetails.csv)
     private void authenticateUser(String username, String password) {
-        int id=-1;
-        //read assets
-        try {
-            InputStreamReader r = new InputStreamReader(getAssets().open("loginDetails.csv"),StandardCharsets.UTF_8);
-            BufferedReader br = new java.io.BufferedReader(r);
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] tokens = line.split(",");
-                // checks against the username and password being validated, and that these belong to the same user
-                if (tokens[1].equals(username) && tokens[2].equals(password)) {
-                    // validates uer if true
-                    validUser=true;
-                    id= Integer.parseInt(tokens[0]);
-                }
-            }
-            br.close();
-        }
-        catch (IOException e) {
-            Log.e("error",e.toString());
+        // Get a reference to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference usersRef = database.getReference("users");
 
-        } finally {
-            // if user is authenticated, starts a new intent and transfers user data
-            if(validUser) {
-                User user = new User(id,username);
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("user", user);
-                startActivity(intent);
+        // Fetch users from the database
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    User user = userSnapshot.getValue(User.class);
+
+                    if (user != null && user.getName().equals(username) && user.getPassword().equals(password)) {
+                        validUser = true;
+
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.putExtra("user", user);
+                        startActivity(intent);
+
+                        break;
+                    }
+                }
+
+                // Show login message after checking all users
+                showLoginMessage(username);
             }
-        }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("Firebase", "Failed to read users", databaseError.toException());
+            }
+        });
     }
 
     // message to be displayed after a user attempts login

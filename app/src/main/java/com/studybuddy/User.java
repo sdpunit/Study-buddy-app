@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.DoublePredicate;
 
 public class User implements Serializable {
     private int uid;
@@ -25,6 +24,32 @@ public class User implements Serializable {
 
     // This set is used to store the unique courses that the user has studied
     private Set<Course> courseStudied = new HashSet<>();  // should I initialize it here?
+    // Need an empty constructor for firebase
+    public User(){
+
+    }
+
+    public User(int uid, String name, boolean isUndergrad, Map<Course, Double> courses) {
+        this.uid = uid;
+        this.name = name;
+        this.isUndergrad = isUndergrad;
+        this.courseTime = courses;
+
+    }
+    public User(int uid, String name) {
+        this.uid = uid;
+        this.name = name;
+        this.isUndergrad = false;
+        this.courseTime = new HashMap<>();
+    }
+
+    public User(int uid, String name, String password, boolean isUndergrad) {
+        this.uid = uid;
+        this.name = name;
+        this.password = password;
+        this.isUndergrad = isUndergrad;
+        this.courseTime = new HashMap<>();
+    }
 
     public Set<Course> getCourseStudied() {
         return courseStudied;
@@ -71,20 +96,6 @@ public class User implements Serializable {
         this.studyMinutes += studyMinutes;
     }
 
-
-    public User(int uid, String name, boolean isUndergrad, Map<Course, Double> courses) {
-        this.uid = uid;
-        this.name = name;
-        this.isUndergrad = isUndergrad;
-        this.courseTime = courses;
-
-    }
-    public User(int uid, String name) {
-        this.uid = uid;
-        this.name = name;
-        this.isUndergrad = false;
-        this.courseTime = new HashMap<>();
-    }
 
 //    public User(int uid, String name, String password) {
 //        this.uid = uid;
