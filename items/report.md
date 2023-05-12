@@ -29,8 +29,9 @@
 * Firebase
 
 *Report Writing: N/A*
+
 *Slide Preparation: N/A*
-<br>
+<br><br>
 
 *u7103031, Lana, I contribute 20% of the code. Here are my contributions:*
 * Login.java: onCreate(), authenticateuser(), showLoginMessage()  link: app/src/main/java/com/studybuddy/Login.java
@@ -38,9 +39,11 @@
 * activity_login.xml link: app/src/main/res/layout/activity_login.xml
 
 *UI Design: Proposed and designed the UI for the Login and Register class*
+
 *Report Writing: N/A*
+
 *Slide Preparation: N/A*
-<br>
+<br><br>
 
 *u7432723, Punit, I contribute 20% of the code. Here are my contributions:*
 * AssessmentsActivity.java link:app/src/main/java/com/studybuddy/AssessmentsActivity.java
@@ -55,9 +58,11 @@
 * activity_assessements.xml link:app/src/main/res/layout/activity_assessments.xml
 
 *UI Design: Proposed and designed the UI for the Main class. Created a new colour theme for the app. Developed many of the conceptual ideas for the desgins of each UI screen and how they interact togehter*
+
 *Report Writing: N/A*
+
 *Slide Preparation: N/A*
-<br>
+<br><br>
 
 *u7108792, Quoc, I contribute 20% of the code. Here are my contributions:*
 * Query.java link:app/src/main/java/com/studybuddy/Query.java
@@ -70,9 +75,11 @@
 * user_cell.xml link: app/src/main/res/layout/user_cell.xml
 
 *UI Design: Proposed and designed the UI for the SearchActivity class*
+
 *Report Writing: N/A*
+
 *Slide Preparation: N/A*
-<br>
+<br><br>
 
 *u7432723, Yanghe, I contribute 20% of the code. Here are my contributions:*
 * Course link:app/src/main/java/com/studybuddy/Course.java
@@ -98,8 +105,11 @@
 * activity_study.xml link:app/src/main/res/layout/activity_study.xml
 
 *Code Design: Proposed and implemented a tree stucture for storing our data. Proposed and implemented a state design pattern for the timer functionality.*
+
 *UI Design: Proposed and designed the UI for the myTimer class.*
+
 *Report Writing: N/A*
+
 *Slide Preparation: N/A*
 
 
@@ -122,6 +132,7 @@
 * *A user can view a summary of their total time studied.*
 
 *TODO I will add a use case diagram https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-use-case-diagram/*
+![UseCaseDiagram](./images/use_case_diagram.pdf) <br>
 
 
 ## Application UML
