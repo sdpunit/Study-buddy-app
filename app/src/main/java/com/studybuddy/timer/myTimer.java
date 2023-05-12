@@ -1,4 +1,4 @@
-package com.studybuddy;
+package com.studybuddy.timer;
 
 import android.os.Handler;
 import android.os.Message;

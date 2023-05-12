@@ -1,4 +1,4 @@
-package com.studybuddy;
+package com.studybuddy.timer;
 
 import android.content.Context;
 

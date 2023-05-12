@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.studybuddy.timer.UserTimeState;
+
 public class SetTimeActivity extends AppCompatActivity {
     private UserTimeState userTimeState;
     private User user;
@@ -33,7 +35,7 @@ public class SetTimeActivity extends AppCompatActivity {
         }
         else {
             int minutes = Integer.parseInt(studyTimeString);
-            Intent intent = new Intent(getApplicationContext(), StudyActivity.class);
+            Intent intent = new Intent(getApplicationContext(), TimerActivity.class);
             intent.putExtra("userTimeState", userTimeState);
             intent.putExtra("user", user);
             intent.putExtra("minutes", minutes);

@@ -1,4 +1,4 @@
-package com.studybuddy;
+package com.studybuddy.lana_timer_notused;
 
 import android.content.Context;
 import android.graphics.Canvas;

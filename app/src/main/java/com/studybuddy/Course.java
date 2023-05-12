@@ -2,7 +2,6 @@ package com.studybuddy;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Set;
 
 public class Course implements Serializable {
     private String courseCode;  // key

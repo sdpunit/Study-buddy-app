@@ -9,6 +9,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.studybuddy.search.CourseAdapter;
+import com.studybuddy.search.Query;
+import com.studybuddy.search.RBTree;
+import com.studybuddy.search.SearchParser;
+import com.studybuddy.search.Tokenizer;
+
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {

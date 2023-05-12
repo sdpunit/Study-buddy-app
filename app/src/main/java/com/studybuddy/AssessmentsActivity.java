@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.studybuddy.timer.UserTimeState;
+
 public class AssessmentsActivity extends AppCompatActivity {
     private Course course;
     private User user;

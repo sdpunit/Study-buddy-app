@@ -1,17 +1,20 @@
-package com.studybuddy;
+package com.studybuddy.lana_timer_notused;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.studybuddy.R;
+import com.studybuddy.lana_timer_notused.Animate;
+import com.studybuddy.lana_timer_notused.Circle;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

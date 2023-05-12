@@ -14,6 +14,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.studybuddy.notification.NotificationFactory;
+import com.studybuddy.notification.StudyNotification;
+import com.studybuddy.timer.UserTimeState;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -123,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
 
     public void displayStudyMinutes() {
         TextView studyMinutes = (TextView) findViewById(R.id.studyMinutes);

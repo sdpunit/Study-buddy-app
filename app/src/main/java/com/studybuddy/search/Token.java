@@ -1,4 +1,4 @@
-package com.studybuddy;
+package com.studybuddy.search;
 
 public class Token {
 

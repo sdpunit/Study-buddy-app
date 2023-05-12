@@ -1,7 +1,4 @@
-package com.studybuddy;
-
-import android.content.Context;
-import android.widget.Toast;
+package com.studybuddy.timer;
 
 import java.io.Serializable;
 
