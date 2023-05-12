@@ -6,17 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".SearchActivity">
 
-    <EditText
-        android:id="@+id/SearchName"
+    <SearchView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/SearchInput"
         android:layout_marginTop="20dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:iconifiedByDefault="false"
+        android:queryHint="College, Code, Course Name, Convener"
+        ></SearchView>
+
+<!--    <EditText-->
+<!--        android:id="@+id/SearchInput"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:ems="10"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:text="Name"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <ListView
         android:id="@+id/SearchList"
@@ -25,6 +34,6 @@
         android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SearchName" />
+        app:layout_constraintStart_toStartOf="parent"/>
+<!--        app:layout_constraintTop_toBottomOf="@+id/SearchInput" -->
 </androidx.constraintlayout.widget.ConstraintLayout>
