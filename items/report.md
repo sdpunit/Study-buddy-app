@@ -27,6 +27,7 @@
 
 *u7490701, Ahmed, I contribute 20% of the code. Here are my contributions:*
 * Firebase
+
 *Report Writing: N/A*
 *Slide Preparation: N/A*
 
@@ -34,6 +35,7 @@
 * Login.java: onCreate(), authenticateuser(), showLoginMessage()  link: app/src/main/java/com/studybuddy/Login.java
 * loginDetails.csv
 * activity_login.xml link: app/src/main/res/layout/activity_login.xml
+
 *UI Design: Proposed and designed the UI for the Login and Register class*
 *Report Writing: N/A*
 *Slide Preparation: N/A*
@@ -49,6 +51,7 @@
 * activity_main.xml link:app/src/main/res/layout/activity_main.xml
 * item_course.xml link:app/src/main/res/layout/item_course.xml
 * activity_assessements.xml link:app/src/main/res/layout/activity_assessments.xml
+
 *UI Design: Proposed and designed the UI for the Main class. Created a new colour theme for the app. Developed many of the conceptual ideas for the desgins of each UI screen and how they interact togehter*
 *Report Writing: N/A*
 *Slide Preparation: N/A*
@@ -62,6 +65,7 @@
 * UserAdapter.java
 * activity_search.xml link: src/studybuddy/app/src/main/res/layout/activity_search.xml
 * user_cell.xml link: app/src/main/res/layout/user_cell.xml
+
 *UI Design: Proposed and designed the UI for the SearchActivity class*
 *Report Writing: N/A*
 *Slide Preparation: N/A*
@@ -88,6 +92,7 @@
 * under_courses_data.json
 * activity_set_time.xml link:app/src/main/res/layout/activity_set_time.xml
 * activity_study.xml link:app/src/main/res/layout/activity_study.xml
+
 *Code Design: Proposed and implemented a tree stucture for storing our data. Proposed and implemented a state design pattern for the timer functionality.*
 *UI Design: Proposed and designed the UI for the myTimer class.*
 *Report Writing: N/A*
@@ -101,7 +106,7 @@
 
 ## Application Description
 
-*StudyBuddy is a productivity and educational app that allows its users to keep track of the time that they have spent studying for each subject that they are enrolled in. This app allows the user to add friends and compare study times with your friends. There is a leaderboard in the app which ranks you aganst each of your friends based to the total time studied. This app includes a login interface, the ability to search for and enroll in courses, a timer functionality, and a graphics summary tab. *
+*StudyBuddy is a productivity and educational app that allows its users to keep track of the time that they have spent studying for each subject that they are enrolled in. This app allows the user to add friends and compare study times with your friends. There is a leaderboard in the app which ranks you aganst each of your friends based to the total time studied. This app includes a login interface, the ability to search for and enroll in courses, a timer functionality, and a graphics summary tab.*
 
 **Application Use Cases and or Examples**
 
@@ -109,14 +114,14 @@
 
 * *Users can search and enroll in courses. The app will provide a breif overview of the course and its assessements.*
 * *Once enrolled users can select one of their courses and set a timer for the time they would like to study*
-* *Users can add another user as a friend if they are enrolled in the same course. 
+* *Users can add another user as a friend if they are enrolled in the same course.*
 * *A user can view a summary of their total time studied.*
 
-* TODO I will add a use case diagram https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-use-case-diagram/ *
+*TODO I will add a use case diagram https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-use-case-diagram/*
 
 
 ## Application UML
-* TODO to implement *
+*TODO to implement*
 
 ## Application Design and Decisions
 
@@ -198,9 +203,9 @@
 
 3. *Singleton Design Pattern TODO*
 
-   * *Objective: .*
+   * *Objective:*
 
-   * *Locations: *
+   * *Locations:*
 
    * *Reasons:*
 
@@ -223,7 +228,7 @@ Production Rules:
         <convener>  ::= "convener:" String
         <college>   ::= "COMP" | "MATH" | "PHYS" | "STATS" | ...
 
-*[The grammar classifies the convener, name and code of the course as factors, and allows these to be separated by commas. The college a course belongs to is claasified as an exp, and must be prepennded by the string 'college:', anda optionally appended by a series of factors seperted by commas. This grammar design is flexible as it allows for the user to search simply by the college, or with more detial by adding the code, name, and/or convenor in any order. Our grammar contains code. name, convener, and college as these are the most relevent key words associated owth a course.*
+*The grammar classifies the convener, name and code of the course as factors, and allows these to be separated by commas. The college a course belongs to is claasified as an exp, and must be prepennded by the string 'college:', and optionally appended by a series of factors seperted by commas. This grammar design is flexible as it allows for the user to search simply by the college, or with more detial by adding the code, name, and/or convenor in any order. Our grammar contains code, name, convener, and college as these are the most relevent key words associated with a course.*
 
 **Tokenizer and Parsers**
 
@@ -289,6 +294,7 @@ Feature Category: User Activity <br>
    * Classes: activity_assessements.xml, activity_main.xml
    * A user can search for a course and follow it, to add this course to their main screen.
    * unimplimeted
+      <br>
 2. [Interact-Noti]. The ability to send notifications based on different types of interactions. A notification must be sent only after a predetermined number of interactions are set. (medium)
    * Classes: NotificationFactory.java, StudyNotification.java, StudyCourseNotification.java, StudyNumberNotification.java, StudyTimeNotification.java
    * A user will be notified if they have studied more than two courses, completed two or more study sessions, or if they have studied for longer than an hour. 
@@ -298,12 +304,12 @@ Feature Category: Firebase Integration <br>
 3. [FB-Persist] Use Firebase to persist all data used in your app. (medium)
    * Class A: methods A, B, C, lines of code: whole file
    * unimplimeted
+      <br>
 4. [FB-Syn] Using Firebase or another remote database to store user information and having the app
-updated as the remote database is updated without restarting the application. e.g. User A (a lecturer) posts an announcement, user B on a separate instance of the application sees the
-announcement appear on their app instance without restarting their application. (hard)
+updated as the remote database is updated without restarting the application. (hard)
    * Class A: methods A, B, C, lines of code: whole file
    * … unimplimeted
-
+      <br>
 
 Feature Category: Greater Data Usage, Handling and Sophistication <br>
 5. [Data-Graphical] Graphical report viewer. Provide users with the ability to see a report of interactions with your app (e.g., summary of assessment results for a course or an individual student, etc), in a graphical manner. (medium)
