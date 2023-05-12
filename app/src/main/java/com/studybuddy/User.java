@@ -5,6 +5,7 @@ import android.content.Context;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,15 +17,19 @@ public class User implements Serializable {
     private String password;
     private boolean isUndergrad;
 
-    private Map<Course, Integer> courseTime;
+    private Map<Course, Double> courseTime;
 
     private double studyMinutes = 0.0;
+    private int studyNumber = 0;
+
+    // This set is used to store the unique courses that the user has studied
+    private Set<Course> courseStudied = new HashSet<>();  // should I initialize it here?
     // Need an empty constructor for firebase
     public User(){
 
     }
 
-    public User(int uid, String name, boolean isUndergrad, Map<Course, Integer> courses) {
+    public User(int uid, String name, boolean isUndergrad, Map<Course, Double> courses) {
         this.uid = uid;
         this.name = name;
         this.isUndergrad = isUndergrad;
@@ -46,17 +51,38 @@ public class User implements Serializable {
         this.courseTime = new HashMap<>();
     }
 
-    public Map<Course, Integer> getCourseTime() {
+    public Set<Course> getCourseStudied() {
+        return courseStudied;
+    }
+    public void addCourseStudied(Course course) {
+        this.courseStudied.add(course);
+    }
+
+    public int getStudyNumber() {
+        return studyNumber;
+    }
+    public void setStudyNumber(int studyNumber) {
+        this.studyNumber = studyNumber;
+    }
+
+    public Map<Course, Double> getCourseTime() {
         return courseTime;
     }
 
     public void addCourses(ArrayList<Course> courses){
         for(Course course:courses){
-            this.courseTime.put(course, 0);
+            this.courseTime.put(course, 0.0);
         }
     }
-    public void addCourseTime(Course course, Integer time){
-        this.courseTime.put(course, time);
+
+    // may be used later
+    public void deleteCourse(Course course){
+        this.courseTime.remove(course);
+    }
+
+    // add additional minutes to a course
+    public void addCourseTime(Course course, Double additionalMinutes){
+        this.courseTime.put(course, courseTime.get(course) + additionalMinutes);
     }
 
     public double getStudyMinutes() {
@@ -69,6 +95,15 @@ public class User implements Serializable {
     public void addStudyMinutes(double studyMinutes) {
         this.studyMinutes += studyMinutes;
     }
+
+
+//    public User(int uid, String name, String password) {
+//        this.uid = uid;
+//        this.name = name;
+//        this.password = password;
+//        this.isUndergrad = false;
+//        this.courseTime = new HashMap<>();
+//    }
 
     public int getUid() {
         return uid;

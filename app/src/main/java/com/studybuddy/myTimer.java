@@ -7,14 +7,24 @@ import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 
 public class myTimer {
+
+    private TimeUp studyActivityWhenTimeUp;
     private final int initialMinutes;
     private double remainingMinutes;
     private CountDownLatch pauseLatch = new CountDownLatch(0);
 
     private Handler handler;
 
-    public myTimer(int initialMinutes) {
+    /**
+     * This interface is used to deal with time-up
+     */
+    public interface TimeUp {
+        void timeUp();
+    }
+
+    public myTimer(int initialMinutes, TimeUp studyActivityWhenTimeUp) {
         this.initialMinutes = initialMinutes;
+        this.remainingMinutes = initialMinutes;
     }
 
     public void start(Handler handler) {
@@ -48,6 +58,8 @@ public class myTimer {
                 e.printStackTrace();
             }
         }
+        // time up
+        studyActivityWhenTimeUp.timeUp();
     }
 
     public void pause() {
@@ -58,6 +70,9 @@ public class myTimer {
         pauseLatch.countDown();
     }
 
+    public int getInitialMinutes() {
+        return this.initialMinutes;
+    }
     public double getStudyTime() {
         return (double) this.initialMinutes - this.remainingMinutes;
     }

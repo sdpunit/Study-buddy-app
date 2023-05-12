@@ -10,15 +10,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-public class StudyActivity extends AppCompatActivity {
+public class StudyActivity extends AppCompatActivity implements myTimer.TimeUp{
     private UserTimeState userTimeState;
     private User user;
     private myTimer timer;
+    private Course course;
     private TextView timeTextView;
 
     @Override
@@ -28,6 +30,7 @@ public class StudyActivity extends AppCompatActivity {
 
         user = getIntent().getSerializableExtra("user", User.class);
         userTimeState = getIntent().getSerializableExtra("userTimeState", UserTimeState.class);
+        course = getIntent().getSerializableExtra("course", Course.class);
 
         VideoView videoView = (VideoView) findViewById(R.id.videoView);
         Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.background);
@@ -51,7 +54,7 @@ public class StudyActivity extends AppCompatActivity {
             }
         };
         userTimeState.startStudy();
-        timer = new myTimer(minutes);
+        timer = new myTimer(minutes, this);
         timer.start(handler);
     }
 
@@ -79,14 +82,19 @@ public class StudyActivity extends AppCompatActivity {
         builder.setMessage("Are you sure you want to stop?");
         builder.setPositiveButton("Yes", (dialog, which) -> {
             userTimeState.stopStudy();
-            // add study time to user
-            userTimeState.addStudyMinutes(timer.getStudyTime());
+
+            //userTimeState.addStudyMinutes(timer.getStudyTime());
+            user.addStudyMinutes(timer.getStudyTime());
+            user.setStudyNumber(user.getStudyNumber() + 1);
+            user.addCourseStudied(course);
+            //user.addCourseTime(course, timer.getStudyTime());
             timer = null;
 
             Intent intent = new Intent(StudyActivity.this, MainActivity.class);
             intent.putExtra("userTimeState", userTimeState);
             intent.putExtra("user", user);
             startActivity(intent);
+            finish();
         });
         builder.setNegativeButton("No", (dialog, which) -> {
             dialog.dismiss();
@@ -94,5 +102,39 @@ public class StudyActivity extends AppCompatActivity {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    /**
+     * This method is called when time up
+     */
+    @Override
+    public void timeUp() {
+        runOnUiThread(() -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(StudyActivity.this);
+            builder.setTitle("TIME UP");
+            builder.setMessage("Have a Rest !");
+            builder.setNeutralButton("OK", (dialog, which) -> {
+                dialog.dismiss();
+                userTimeState.stopStudy();
+                // userTimeState.addStudyMinutes(timer.getStudyTime());
+                user.addStudyMinutes(timer.getInitialMinutes());
+                user.setStudyNumber(user.getStudyNumber() + 1);
+                user.addCourseStudied(course);
+                //user.addCourseTime(course, (double)timer.getInitialMinutes());
+                timer = null;
+
+                Intent intent = new Intent(StudyActivity.this, MainActivity.class);
+                intent.putExtra("userTimeState", userTimeState);
+                intent.putExtra("user", user);
+                startActivity(intent);
+                finish();
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            // center the message
+            TextView messageView = (TextView) dialog.findViewById(android.R.id.message);
+            messageView.setGravity(Gravity.CENTER);
+            messageView.setTextSize(18);
+        });
     }
 }

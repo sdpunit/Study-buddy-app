@@ -7,14 +7,14 @@ public class UserTimeState implements Serializable {
     private State studyState;
     private State state;
 
-    private double studyMinutes = 0.0;
+    //private double studyMinutes = 0.0;
 
 
     public UserTimeState(double studyMinutes) {
-        this.studyMinutes = studyMinutes;
+        //this.studyMinutes = studyMinutes;
         this.state = new idleState(this);
     }
-    public double getStudyMinutes() {
+    /*public double getStudyMinutes() {
         return studyMinutes;
     }
 
@@ -23,7 +23,7 @@ public class UserTimeState implements Serializable {
     }
     public void addStudyMinutes(double studyMinutes) {
         this.studyMinutes += studyMinutes;
-    }
+    }*/
     public State getPauseState() {
         return pauseState;
     }

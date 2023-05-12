@@ -2,6 +2,9 @@ package com.studybuddy;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,10 +27,15 @@ import java.nio.charset.StandardCharsets;
 public class Login extends AppCompatActivity {
     boolean validUser;
 
+    public static final String CHANNEL_ID = "StudyBuddy";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // execute this as soon as the app is opened
+        createNotificationChannel();
 
         final Button loginButton = findViewById(R.id.btn_login);
         final Button registerButton = findViewById(R.id.btn_login2);
@@ -98,6 +106,15 @@ public class Login extends AppCompatActivity {
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+    }
 
+    private void createNotificationChannel() {
+        CharSequence name = getString(R.string.channel_name);
+        String description = getString(R.string.channel_description);
+        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+        channel.setDescription(description);
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
     }
 }

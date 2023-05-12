@@ -32,6 +32,8 @@ public class AssessmentsActivity extends AppCompatActivity {
         UserTimeState userTimeState = new UserTimeState(user.getStudyMinutes());
         intent.putExtra("userTimeState", userTimeState);
         intent.putExtra("user", user);
+        intent.putExtra("course", course);
         startActivity(intent);
+        finish();
     }
 }
