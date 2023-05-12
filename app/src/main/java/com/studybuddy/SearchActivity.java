@@ -15,6 +15,7 @@ public class SearchActivity extends AppCompatActivity {
 
     public static ArrayList<Course> courseList = new ArrayList<Course>();
 
+
     private ListView searchList;
 
     public RBTree courseTree = new RBTree();
