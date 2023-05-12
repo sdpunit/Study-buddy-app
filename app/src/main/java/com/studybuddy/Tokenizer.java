@@ -2,6 +2,8 @@ package com.studybuddy;
 
 import static java.lang.Character.isUpperCase;
 
+import java.util.List;
+
 public class Tokenizer {
 
     private String buffer;          // String to be transformed into tokens each time next() is called.
@@ -18,23 +20,27 @@ public class Tokenizer {
 
 
     public void next() {
-
-        buffer = buffer.trim();     // remove whitespace
-
-        if (buffer.isEmpty()) {
-            currentToken = null;    // if there's no string left, set currentToken null and return
+        if (buffer == null || buffer.isEmpty()) {
+            currentToken = null;
             return;
         }
-        else if (isAllUpperCase(buffer)) {
+
+        buffer.trim();
+
+        if(buffer.charAt(0) == ','){
+            next();
+        }
+
+        else if (isAllUpperCase(buffer) && buffer.contains("college=")) {
             currentToken = new Token(buffer, Token.Type.COLLEGE);
         }
-        else if (isInteger(buffer)) {
-            currentToken = new Token(buffer, Token.Type.CODE);
+        else if (isValidInteger(getIntegerString(buffer))) {
+            currentToken = new Token(getIntegerString(buffer), Token.Type.CODE);
         }
-        else if (!isAllUpperCase(buffer) && !isInteger(buffer)) {
+        else if (buffer.contains("course:")) {
             currentToken = new Token(buffer, Token.Type.COURSE);
         }
-        else if (buffer.contains("convener= ")) {
+        else if (buffer.contains("convener=")) {
             currentToken = new Token(buffer, Token.Type.CONVENER);
         }
         else {
@@ -54,7 +60,41 @@ public class Tokenizer {
         }
         return b;
     }
-    private boolean isInteger(String input) {
+
+    private boolean containsInteger(String input){
+        boolean b = false;
+        char[] ch = input.toCharArray();
+        for (char c : ch) {
+            if (Character.getNumericValue(c) >= 0 && Character.getNumericValue(c) <= 9){
+                b = true;
+                break;
+            }
+        }
+        return b;
+    }
+
+    private String getIntegerString(String input){
+        String s = "";
+        char[] ch = input.toCharArray();
+        for (char c : ch) {
+            if (Character.getNumericValue(c) >= 0 && Character.getNumericValue(c) <= 9){
+                s += c;
+            }
+        }
+        return s;
+    }
+    private boolean isValidInteger(String input) {
+        char[] ch = input.toCharArray();
+        if(ch[0] == '0'){
+            return false;
+        }
+//        if(Character.getNumericValue(ch[0]) < 1 || Character.getNumericValue(ch[0]) > 7){
+//            return false;
+//        }
+        if(ch.length != 4){
+            return false;
+        }
+
         try {
             Integer.parseInt(input);
             return true;
@@ -62,6 +102,8 @@ public class Tokenizer {
         catch (NumberFormatException e) {
             return false;
         }
+
+
     }
 
     public Token current() {

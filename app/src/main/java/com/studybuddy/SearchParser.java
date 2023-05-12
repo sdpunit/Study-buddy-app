@@ -104,7 +104,7 @@ public class SearchParser {
                 throw new IllegalArgumentException("Expected SUBJECT all caps, found: " + tokenizer.getCurrent().getToken());
             }
         }
-        return null;
+        return query;
     }
 
 }
