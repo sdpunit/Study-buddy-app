@@ -30,6 +30,7 @@
 
 *Report Writing: N/A*
 *Slide Preparation: N/A*
+<br>
 
 *u7103031, Lana, I contribute 20% of the code. Here are my contributions:*
 * Login.java: onCreate(), authenticateuser(), showLoginMessage()  link: app/src/main/java/com/studybuddy/Login.java
@@ -39,6 +40,7 @@
 *UI Design: Proposed and designed the UI for the Login and Register class*
 *Report Writing: N/A*
 *Slide Preparation: N/A*
+<br>
 
 *u7432723, Punit, I contribute 20% of the code. Here are my contributions:*
 * AssessmentsActivity.java link:app/src/main/java/com/studybuddy/AssessmentsActivity.java
@@ -55,6 +57,7 @@
 *UI Design: Proposed and designed the UI for the Main class. Created a new colour theme for the app. Developed many of the conceptual ideas for the desgins of each UI screen and how they interact togehter*
 *Report Writing: N/A*
 *Slide Preparation: N/A*
+<br>
 
 *u7108792, Quoc, I contribute 20% of the code. Here are my contributions:*
 * Query.java link:app/src/main/java/com/studybuddy/Query.java
@@ -69,6 +72,7 @@
 *UI Design: Proposed and designed the UI for the SearchActivity class*
 *Report Writing: N/A*
 *Slide Preparation: N/A*
+<br>
 
 *u7432723, Yanghe, I contribute 20% of the code. Here are my contributions:*
 * Course link:app/src/main/java/com/studybuddy/Course.java
@@ -312,9 +316,10 @@ updated as the remote database is updated without restarting the application. (h
       <br>
 
 Feature Category: Greater Data Usage, Handling and Sophistication <br>
-5. [Data-Graphical] Graphical report viewer. Provide users with the ability to see a report of interactions with your app (e.g., summary of assessment results for a course or an individual student, etc), in a graphical manner. (medium)
+5. [Data-Graphical] Graphical report viewer. Provide users with the ability to see a report of interactions with your app in a graphical manner. (medium)
    * Class A: methods A, B, C, lines of code: whole file
    * unimplimeted
+      <br>
 
 
 ## Team Meetings
