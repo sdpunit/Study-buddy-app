@@ -1,10 +1,10 @@
-# [Team Name]
+# [G48]
 This following is a very simple team meeting template. You should expand it based on the scope and nature of your discussion.
 
 ## Team Meeting [number] - Week [8] - [26/04/2023] (1:25pm-3pm)
 **Absent: none**
 <br>
-**Lead/scribe: Punit & Lana**
+**Lead/scribe: Punit**
 
 ## Agreed Procedure
 Meeting tomorrow (27 Apr) to continue where we left.
