@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -14,22 +15,43 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import com.studybuddy.notification.NotificationFactory;
 import com.studybuddy.notification.StudyNotification;
 import com.studybuddy.timer.UserTimeState;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONException;
+
+import java.io.InputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+
 
 public class MainActivity extends AppCompatActivity {
     private User user;
     private UserTimeState userTimeState;
 
+    private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //mDatabase = FirebaseDatabase.getInstance().getReference();
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+      //setContentView(R.layout.activity_main);   // not sure if I need this yet, so I've commented it out for now
+        FirebaseApp.initializeApp(this);
 
         user = getIntent().getSerializableExtra("user", User.class);
         userTimeState = getIntent().getSerializableExtra("userTimeState", UserTimeState.class);
@@ -76,7 +98,40 @@ public class MainActivity extends AppCompatActivity {
         // check cases and send notifications
         sendNotification();
 
+        try {
+            InputStream inputStream = getAssets().open("user_data.json");
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+            String json = new String(buffer, "UTF-8");
+
+            JSONArray jsonArray = new JSONArray(json);
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                // Extract the required values from the JSON object
+                int uid = jsonObject.getInt("uid");
+                String username = jsonObject.getString("username");
+                String password = jsonObject.getString("password");
+                boolean isUndergrad = jsonObject.getBoolean("isUndergrad");
+                int studyMinutes = jsonObject.getInt("studyMinutes");
+
+                // Create an instance of your object and set its properties
+                Person user = new Person(uid,username,password,isUndergrad,studyMinutes);
+
+                // Store the object under a unique ID in the "users" node
+                DatabaseReference userRef = databaseReference.push();
+                userRef.setValue(user);
+            }
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+
     }
+
     private void updateCourseGrid(ArrayList<Course> courses) {
         // Get the GridLayout from the layout
         GridLayout gridCourses = findViewById(R.id.grid_courses);
