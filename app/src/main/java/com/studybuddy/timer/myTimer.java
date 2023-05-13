@@ -25,6 +25,7 @@ public class myTimer {
     public myTimer(int initialMinutes, TimeUp studyActivityWhenTimeUp) {
         this.initialMinutes = initialMinutes;
         this.remainingMinutes = initialMinutes;
+        this.studyActivityWhenTimeUp = studyActivityWhenTimeUp;
     }
 
     public void start(Handler handler) {

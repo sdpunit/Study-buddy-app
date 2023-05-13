@@ -9,6 +9,9 @@ public class Course implements Serializable {
     private String convener;
     private String studentType;
     private ArrayList<String> assessment;
+    // Empty constructer for firebase needed
+    public Course() {
+    }
 
     Course(String courseCode) {
         this.courseCode = courseCode;
