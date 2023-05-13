@@ -26,7 +26,7 @@
 ## Summary of Individual Contributions
 
 *u7490701, Ahmed, I contribute 20% of the code. Here are my contributions:*
-* Firebase
+* Firebase   https://console.firebase.google.com/u/0/project/comp2100-group-assignmen-e7d8d/overview
 
 *Report Writing: N/A*
 
@@ -34,9 +34,10 @@
 <br><br>
 
 *u7103031, Lana, I contribute 20% of the code. Here are my contributions:*
-* Login.java: onCreate(), authenticateuser(), showLoginMessage()  link: app/src/main/java/com/studybuddy/Login.java
-* loginDetails.csv
-* activity_login.xml link: app/src/main/res/layout/activity_login.xml
+* Login.java: onCreate(), authenticateuser(), showLoginMessage()   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/LoginActivity.java
+* loginDetails.csv   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/assets/loginDetails.csv
+* activity_login.xml   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/activity_login.xml
+* activity_register.xml   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/activity_register.xml
 
 *UI Design: Proposed and designed the UI for the Login and Register class*
 
@@ -46,16 +47,16 @@
 <br><br>
 
 *u7432723, Punit, I contribute 20% of the code. Here are my contributions:*
-* AssessmentsActivity.java link:app/src/main/java/com/studybuddy/AssessmentsActivity.java
-* Login.java: authenticateUser()
-* MainActivity.java: onCreate(), updateCourseGrid() link:app/src/main/java/com/studybuddy/MainActivity.java
-* Register.java
+* AssessmentsActivity.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/AssessmentsActivity
+* Login.java: authenticateUser()   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/LoginActivity.java#L61-93
+* MainActivity.java: onCreate(), updateCourseGrid()   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/MainActivity.java#L141-162
+* Register.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/RegisterActivity.java
 * StudyActivity.java: onCreate()
-* User.java
-* UserTimeState.java
-* activity_main.xml link:app/src/main/res/layout/activity_main.xml
-* item_course.xml link:app/src/main/res/layout/item_course.xml
-* activity_assessements.xml link:app/src/main/res/layout/activity_assessments.xml
+* User.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/User.java
+* UserTimeState.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/UserTimeState.java
+* activity_main.xml   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/activity_main.xml
+* item_course.xml   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/item_course.xml
+* activity_assessements.xml   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/activity_assessments.xml
 
 *UI Design: Proposed and designed the UI for the Main class. Created a new colour theme for the app. Developed many of the conceptual ideas for the desgins of each UI screen and how they interact togehter*
 
@@ -65,14 +66,14 @@
 <br><br>
 
 *u7108792, Quoc, I contribute 20% of the code. Here are my contributions:*
-* Query.java link:app/src/main/java/com/studybuddy/Query.java
-* SearchActivity.java link: src/studybuddy/app/src/main/java/com/studybuddy/SearchActivity.java
-* SearchParser.java link:app/src/main/java/com/studybuddy/SearchParser.java
-* Token.java link:app/src/main/java/com/studybuddy/Token.java
-* Tokenizer.java link: app/src/main/java/com/studybuddy/Tokenizer.java
+* Query.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/search/Query.java
+* SearchActivity.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/SearchActivity.java
+* SearchParser.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/search/SearchParser.java
+* Token.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/search/Token.java
+* Tokenizer.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/search/Tokenizer.java
 * UserAdapter.java
-* activity_search.xml link: src/studybuddy/app/src/main/res/layout/activity_search.xml
-* user_cell.xml link: app/src/main/res/layout/user_cell.xml
+* activity_search.xml   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/activity_search.xml
+* user_cell.xml   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/user_cell.xml
 
 *UI Design: Proposed and designed the UI for the SearchActivity class*
 
@@ -82,27 +83,27 @@
 <br><br>
 
 *u7432723, Yanghe, I contribute 20% of the code. Here are my contributions:*
-* Course link:app/src/main/java/com/studybuddy/Course.java
-* idleState.java link:app/src/main/java/com/studybuddy/idleState.java
-* Login.java: createNotificationChannel()
-* MainActivity.java: sendNotification()
-* myTimer.java link:app/src/main/java/com/studybuddy/myTimer.java
-* NotificationFactory.java
-* pauseState.java link:app/src/main/java/com/studybuddy/pauseState.java
-* RBTree.java link:app/src/main/java/com/studybuddy/RBTree.java
-* SetTimeActivity.java link:app/src/main/java/com/studybuddy/SetTimeActivity.java
-* State.java
+* Course   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/Course.java
+* idleState.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/idleState.java
+* Login.java: createNotificationChannel()   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/3349756eb6e33b4fad34925bef726559c86387c3/app/src/main/java/com/studybuddy/LoginActivity.java#L106-114
+* MainActivity.java: sendNotification()   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/3349756eb6e33b4fad34925bef726559c86387c3/app/src/main/java/com/studybuddy/MainActivity.java#L141-162
+* myTimer.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/myTimer.java
+* NotificationFactory.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/notification/NotificationFactory.java
+* pauseState.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/pauseState.java
+* RBTree.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/search/RBTree.java
+* SetTimeActivity.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/SetTimeActivity.java
+* State.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/State.java
 * StudyActivity.java: onCreate(), clickPauseOrResume(), clickStop(), timeUp() link:app/src/main/java/com/studybuddy/StudyActivity.java
-* StudyCourseNotification.java
-* StudyNotification.java
-* StudyNumberNotification.java
-* studyState.java link:app/src/main/java/com/studybuddy/studyState.java
-* StudyTimeNotification
-* User.java link:app/src/main/java/com/studybuddy/User.java
-* post_courses_data.json
-* under_courses_data.json
-* activity_set_time.xml link:app/src/main/res/layout/activity_set_time.xml
-* activity_study.xml link:app/src/main/res/layout/activity_study.xml
+* StudyCourseNotification.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/notification/StudyCourseNotification.java
+* StudyNotification.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/notification/StudyNotification.java
+* StudyNumberNotification.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/notification/StudyNumberNotification.java
+* studyState.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/studyState.java
+* StudyTimeNotification   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/notification/StudyTimeNotification.java
+* User.java   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/User.java
+* post_courses_data.json   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/assets/post_courses_data.json
+* under_courses_data.json   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/assets/under_courses_data.json
+* activity_set_time.xml   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/activity_set_time.xml
+* activity_study.xml   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/activity_study.xml
 
 *Code Design: Proposed and implemented a tree stucture for storing our data. Proposed and implemented a state design pattern for the timer functionality.*
 
@@ -131,12 +132,11 @@
 * *Users can add another user as a friend if they are enrolled in the same course.*
 * *A user can view a summary of their total time studied.*
 
-*TODO I will add a use case diagram https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-use-case-diagram/*
-![UseCaseDiagram](./images/use_case_diagram.pdf) <br>
+![UseCaseDiagram](./images/use_case_diagram.png) <br>
 
 
 ## Application UML
-*TODO to implement*
+![UMLDiagram](./images/UML.png) <br>
 
 ## Application Design and Decisions
 
