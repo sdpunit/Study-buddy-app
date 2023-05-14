@@ -11,7 +11,14 @@ public class Tokenizer {
 
     private Token currentToken;
 
+    public Token getCurrent() {
+        return currentToken;
+    }
+
     public Tokenizer(String text) {
+        if (text == null || text.isEmpty()) {
+            throw new IllegalArgumentException("Text cannot be null");
+        }
         tokenizer = new StringTokenizer(text, ",");
         next();
     }
