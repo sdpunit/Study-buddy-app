@@ -2,10 +2,10 @@ package com.studybuddy.search;
 
 public class Token {
 
-    public enum Type {COLLEGE, CODE, COURSE, CONVENER}
+    public enum Type {COLLEGE, CODE, COURSE, CONVENER, COLLEGECODE}
 
     private final String token; // Token representation in String form.
-    private final Type type;    // Type of the token.
+    private final Type type;   // Type of the token.
 
     public Token(String token, Type type) {
         this.token = token;

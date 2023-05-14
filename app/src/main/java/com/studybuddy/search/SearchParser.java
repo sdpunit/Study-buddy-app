@@ -76,7 +76,7 @@ public class SearchParser {
                 tokenizer.next(); //move to the next token
                 parseTerm(query); //parse the rest, (term)
             } else {
-                throw new IllegalArgumentException("Expected COLLEGE all caps, found: " + tokenizer.getCurrent().getToken());
+                throw new IllegalArgumentException("Expected COLLEGE all caps, found: " + tokenizer.current().getToken());
             }
         }
         return null;
@@ -101,7 +101,7 @@ public class SearchParser {
                 return parseTerm(query);
 
             } else {
-                throw new IllegalArgumentException("Expected SUBJECT all caps, found: " + tokenizer.getCurrent().getToken());
+                throw new IllegalArgumentException("Expected SUBJECT all caps, found: " + tokenizer.current().getToken());
             }
         }
         return query;
