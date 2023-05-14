@@ -21,13 +21,22 @@ public class Tokenizer {
             String delta = tokenizer.nextToken().trim();
 
             if (isValidInteger(delta)) {
-                currentToken = new Token(tokenizer.nextToken(), Token.Type.CODE);
+                currentToken = new Token(delta, Token.Type.CODE);
+            }
+            else if(isAllUpperCase(getCollegeString(delta)) && isValidInteger(getIntegerString(delta))) {
+                currentToken = new Token(delta, Token.Type.COLLEGECODE);
+            }
+            else if(delta.contains("college=") && isAllUpperCase(delta.split(" ")[1])) {
+                currentToken = new Token(delta, Token.Type.COLLEGE);
             }
             else if(isAllUpperCase(delta)) {
-                currentToken = new Token(tokenizer.nextToken(), Token.Type.COLLEGE);
+                currentToken = new Token(delta, Token.Type.COLLEGE);
             }
             else if(delta.contains("CONVENER") || delta.contains("convener") ) {
-                currentToken = new Token(tokenizer.nextToken(), Token.Type.COURSE);
+                currentToken = new Token(delta, Token.Type.CONVENER);
+            }
+            else if(isLetters(delta)) {
+                currentToken = new Token(delta, Token.Type.COURSE);
             }
         } else {
             currentToken = null;
@@ -133,9 +142,20 @@ public class Tokenizer {
         }
         return s;
     }
+
+    private String getCollegeString(String input){
+        String s = "";
+        char[] ch = input.toCharArray();
+        for (char c : ch) {
+            if (Character.isLetter(c)){
+                s += c;
+            }
+        }
+        return s;
+    }
     private boolean isValidInteger(String input) {
         char[] ch = input.toCharArray();
-        if(ch[0] == '0'){
+        if(ch.length>0 && ch[0] == '0'){
             return false;
         }
 //        if(Character.getNumericValue(ch[0]) < 1 || Character.getNumericValue(ch[0]) > 7){
@@ -154,6 +174,16 @@ public class Tokenizer {
         }
 
 
+    }
+
+    public boolean isLetters(String name) {
+        char[] chars = name.toCharArray();
+        for (char c : chars) {
+            if(!Character.isLetter(c) && !Character.isSpaceChar(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public Token current() {
