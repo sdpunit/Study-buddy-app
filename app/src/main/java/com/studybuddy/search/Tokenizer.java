@@ -12,13 +12,13 @@ public class Tokenizer {
     private Token currentToken;
 
     public Tokenizer(String text) {
-        tokenizer = new StringTokenizer(text, " ,");
+        tokenizer = new StringTokenizer(text, ",");
         next();
     }
 
     public void next() {
         if (tokenizer.hasMoreTokens()) {
-            String delta = tokenizer.nextToken();
+            String delta = tokenizer.nextToken().trim();
 
             if (isValidInteger(delta)) {
                 currentToken = new Token(tokenizer.nextToken(), Token.Type.CODE);
