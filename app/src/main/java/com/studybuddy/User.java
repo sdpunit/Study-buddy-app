@@ -3,37 +3,29 @@ package com.studybuddy;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class User implements Serializable {
     private int uid;
     private String name;
-
     private String password;
     private boolean isUndergrad;
-
-    private Map<Course, Double> courseTime;
-
+    // To record the courses enrolled, because Map<Course, Double> is not accepted by firebase
+    // for a hashmap to be stored for user, the key should be String and not object.
+    private ArrayList<Course> coursesEnrolled;
+    // This set is used to store the unique courses that the user has studied
+    // It was initially a set, converted to an arraylist for firebase
+    // Used to notify the user
+    private ArrayList<Course> coursesStudied = new ArrayList<>();
+    private Map<String, Double> courseTime;
     private double studyMinutes = 0.0;
     private int studyNumber = 0;
 
-    // This set is used to store the unique courses that the user has studied
-    // It was initially a set, converted to an arraylist for firebase
-    private ArrayList<Course> courseStudied = new ArrayList<>();
     // Need an empty constructor for firebase
     public User(){
-
+        this.courseTime = new HashMap<>();
     }
 
-    public User(int uid, String name, boolean isUndergrad, Map<Course, Double> courses) {
-        this.uid = uid;
-        this.name = name;
-        this.isUndergrad = isUndergrad;
-        this.courseTime = courses;
-
-    }
     public User(int uid, String name) {
         this.uid = uid;
         this.name = name;
@@ -49,14 +41,36 @@ public class User implements Serializable {
         this.courseTime = new HashMap<>();
     }
 
-    public ArrayList<Course> getCourseStudied() {
-        return courseStudied;
+    public User(int uid, String name, boolean isUndergrad, ArrayList<Course> courses) {
+        this.uid = uid;
+        this.name = name;
+        this.isUndergrad = isUndergrad;
+        this.coursesStudied = courses;
+        addCoursesTime(courses);
     }
-    // To prevent duplicity
+
+    public ArrayList<Course> getCoursesStudied() {
+        return coursesStudied;
+    }
+
     public void addCourseStudied(Course course) {
-        if (!this.getCourseStudied().contains(course)) {
-            this.addCourseStudied(course);
-        }
+        this.coursesStudied.add(course);
+    }
+
+    public void setCoursesStudied(ArrayList<Course> coursesStudied) {
+        this.coursesStudied = coursesStudied;
+        addCoursesTime(coursesStudied);
+    }
+
+    public ArrayList<Course> getCoursesEnrolled() {
+        return coursesEnrolled;
+    }
+    public void addCoursesEnrolled(Course course) {
+        this.coursesEnrolled.add(course);
+        this.courseTime.put(course.getCourseCode(), 0.0);
+    }
+    public void setCoursesEnrolled(ArrayList<Course> coursesEnrolled) {
+        this.coursesEnrolled = coursesEnrolled;
     }
 
     public int getStudyNumber() {
@@ -66,13 +80,13 @@ public class User implements Serializable {
         this.studyNumber = studyNumber;
     }
 
-    public Map<Course, Double> getCourseTime() {
+    public Map<String, Double> getCourseTime() {
         return courseTime;
     }
 
-    public void addCourses(ArrayList<Course> courses){
+    public void addCoursesTime(ArrayList<Course> courses){
         for(Course course:courses){
-            this.courseTime.put(course, 0.0);
+            this.courseTime.put(course.getCourseCode(), 0.0);
         }
     }
 
@@ -83,7 +97,7 @@ public class User implements Serializable {
 
     // add additional minutes to a course
     public void addCourseTime(Course course, Double additionalMinutes){
-        this.courseTime.put(course, courseTime.get(course) + additionalMinutes);
+        this.courseTime.put(course.getCourseCode(), courseTime.get(course) + additionalMinutes);
     }
 
     public double getStudyMinutes() {
@@ -133,6 +147,7 @@ public class User implements Serializable {
     public String getPassword() {
         return password;
     }
+
 
     @Override
     public boolean equals(Object obj) {
