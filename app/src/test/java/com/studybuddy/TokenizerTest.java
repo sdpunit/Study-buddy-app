@@ -24,67 +24,68 @@ public class TokenizerTest {
     private static final String F = "COMP 2100, Software Design Methodologies, convener= bernando";
     private static final String G = "Software Design Methodologies";
     private static final String H = "convener= bernando";
-    private static final String errorToken = "wrong token, current token is ";
-    private static final String errorType = "wrong token type, current token type is ";
+    private static final String errorToken = "wrong token";
+    private static final String errorType = "wrong token type";
 
     @Test(timeout=1000)
     public void testTokenizeCode() {
         tokenizer = new Tokenizer(A);
-        assertEquals(errorType+tokenizer.current().getType(), CODE, tokenizer.current().getType());
-        assertEquals(errorToken+tokenizer.current().getToken(), A, tokenizer.current().getToken());
+        assertEquals(errorType, CODE, tokenizer.current().getType());
+        assertEquals(errorToken, A, tokenizer.current().getToken());
     }
 
     @Test(timeout=1000)
     public void testTokenizeCollege() {
         tokenizer = new Tokenizer(B);
-        assertEquals(errorType+tokenizer.current().getType(), COLLEGE, tokenizer.current().getType());
-        assertEquals(errorToken+tokenizer.current().getToken(), B, tokenizer.current().getToken());
+        assertEquals(errorType, COLLEGE, tokenizer.current().getType());
+        assertEquals(errorToken, B, tokenizer.current().getToken());
 
         tokenizer = new Tokenizer(C);
-        assertEquals(errorType+tokenizer.current().getType(), COLLEGE, tokenizer.current().getType());
-        assertEquals(errorToken+tokenizer.current().getToken(), C, tokenizer.current().getToken());
+        assertEquals(errorType, COLLEGE, tokenizer.current().getType());
+        assertEquals(errorToken, C, tokenizer.current().getToken());
     }
 
+    @Test(timeout=1000)
     public void testTokenizeCollegeCode() {
         tokenizer = new Tokenizer(D);
-        assertEquals(errorType+tokenizer.current().getType(), COLLEGECODE, tokenizer.current().getType());
-        assertEquals(errorToken+tokenizer.current().getToken(), D, tokenizer.current().getToken());
+        assertEquals(errorType, COLLEGECODE, tokenizer.current().getType());
+        assertEquals(errorToken, D, tokenizer.current().getToken());
     }
 
     @Test(timeout=1000)
     public void testTokenizeCourse() {
         tokenizer = new Tokenizer(G);
-        assertEquals(errorType+tokenizer.current().getType(), COURSE, tokenizer.current().getType());
-        assertEquals(errorToken+tokenizer.current().getToken(), G, tokenizer.current().getToken());
+        assertEquals(errorType, COURSE, tokenizer.current().getType());
+        assertEquals(errorToken, G, tokenizer.current().getToken());
     }
 
     @Test(timeout=1000)
     public void testTokenizeConvener() {
         tokenizer = new Tokenizer(H);
-        assertEquals(errorType+tokenizer.current().getType(), CONVENER, tokenizer.current().getType());
-        assertEquals(errorToken+tokenizer.current().getToken(), H, tokenizer.current().getToken());
+        assertEquals(errorType, CONVENER, tokenizer.current().getType());
+        assertEquals(errorToken, H, tokenizer.current().getToken());
     }
 
     @Test(timeout=1000)
     public void testTokenizeMixed() {
         tokenizer = new Tokenizer(E);
-        assertEquals(errorType+tokenizer.current().getType(), CODE, tokenizer.current().getType());
-        assertEquals(errorToken+tokenizer.current().getToken(), "2100", tokenizer.current().getToken());
+        assertEquals(errorType, CODE, tokenizer.current().getType());
+        assertEquals(errorToken, "2100", tokenizer.current().getToken());
         tokenizer.next();
-        assertEquals(errorType+tokenizer.current().getType(), COURSE, tokenizer.current().getType());
-        assertEquals(errorToken+tokenizer.current().getToken(), "Software Design Methodologies", tokenizer.current().getToken());
+        assertEquals(errorType, COURSE, tokenizer.current().getType());
+        assertEquals(errorToken, "Software Design Methodologies", tokenizer.current().getToken());
         tokenizer.next();
-        assertEquals(errorType+tokenizer.current().getType(), COLLEGE, tokenizer.current().getType());
-        assertEquals(errorToken+tokenizer.current().getToken(), "COMP", tokenizer.current().getToken());
+        assertEquals(errorType, COLLEGE, tokenizer.current().getType());
+        assertEquals(errorToken, "COMP", tokenizer.current().getToken());
 
         tokenizer = new Tokenizer(F);
-        assertEquals(errorType+tokenizer.current().getType(), COLLEGECODE, tokenizer.current().getType());
-        assertEquals(errorToken+tokenizer.current().getToken(), "COMP 2100", tokenizer.current().getToken());
+        assertEquals(errorType, COLLEGECODE, tokenizer.current().getType());
+        assertEquals(errorToken, "COMP 2100", tokenizer.current().getToken());
         tokenizer.next();
-        assertEquals(errorType+tokenizer.current().getType(), COURSE, tokenizer.current().getType());
-        assertEquals(errorToken+tokenizer.current().getToken(), "Software Design Methodologies", tokenizer.current().getToken());
+        assertEquals(errorType, COURSE, tokenizer.current().getType());
+        assertEquals(errorToken, "Software Design Methodologies", tokenizer.current().getToken());
         tokenizer.next();
-        assertEquals(errorType+tokenizer.current().getType(), CONVENER, tokenizer.current().getType());
-        assertEquals(errorToken+tokenizer.current().getToken(), "convener= bernando", tokenizer.current().getToken());
+        assertEquals(errorType, CONVENER, tokenizer.current().getType());
+        assertEquals(errorToken, "convener= bernando", tokenizer.current().getToken());
     }
 }
