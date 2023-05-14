@@ -31,10 +31,10 @@ public class Tokenizer {
             next();
         }
 
-        else if (isAllUpperCase(buffer) && buffer.contains("college=")) {
-            currentToken = new Token(buffer, Token.Type.COLLEGE);
+        else if (isAllUpperCase(buffer) || buffer.contains("college=")) { // checks is college is all caps or contains college= if college is not all caps
+            currentToken = new Token(buffer.replace("college=",""), Token.Type.COLLEGE);
         }
-        else if (isValidInteger(getIntegerString(buffer))) {
+        else if (isValidInteger(getIntegerString(buffer))) { // checks if the string contains an integer
             currentToken = new Token(getIntegerString(buffer), Token.Type.CODE);
         }
         else if (buffer.contains("course:")) {
