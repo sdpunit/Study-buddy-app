@@ -1,5 +1,6 @@
 package com.studybuddy.search;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class SearchParser {
@@ -74,12 +75,17 @@ public class SearchParser {
             if (currentToken.getType() == Token.Type.COLLEGE) { //if the current token is a college, first token must be a college
                 query.setCollege(currentToken.getToken()); //set the college
                 tokenizer.next(); //move to the next token
-                parseTerm(query); //parse the rest, (term)
+                return parseTerm(query); //parse the rest, (term)
+            } else if (currentToken.getType() == Token.Type.COLLEGECODE) {
+                query.setCollege(currentToken.getToken().split(" ")[0]); //set the college
+                query.setCode(Integer.parseInt(currentToken.getToken().split(" ")[1])); //set the code
+                tokenizer.next(); //move to the next token
+                return parseTerm(query);
             } else {
-                throw new IllegalArgumentException("Expected COLLEGE all caps, found: " + tokenizer.current().getToken());
+                throw new IllegalArgumentException("Expected COLLEGE, found: " + tokenizer.current().getToken());
             }
         }
-        return null;
+        throw new IllegalArgumentException("You entered a null token: " + tokenizer.current());
     }
     private Query parseTerm(Query query) {
 
@@ -96,16 +102,17 @@ public class SearchParser {
                 return parseTerm(query);
 
             } else if (currentToken.getType() == Token.Type.CONVENER) {
-                query.setConvener(currentToken.getToken());
+                query.setConvener(currentToken.getToken().split(" ")[1]);
                 tokenizer.next();
                 return parseTerm(query);
 
             } else {
-                throw new IllegalArgumentException("Expected SUBJECT all caps, found: " + tokenizer.current().getToken());
+                throw new IllegalArgumentException("Expected CODE, COURSE, or CONVENER" + tokenizer.current().getToken());
             }
         }
         return query;
     }
+
 
 }
 

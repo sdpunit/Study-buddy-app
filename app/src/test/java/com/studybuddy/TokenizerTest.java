@@ -16,76 +16,151 @@ import org.junit.Test;
 public class TokenizerTest {
 
     private static Tokenizer tokenizer;
-    private static final String A = "2100";
-    private static final String B = "COMP";
-    private static final String C = "college= COMP";
-    private static final String D = "COMP 2100";
-    private static final String E = "2100, Software Design Methodologies, COMP";
-    private static final String F = "COMP 2100, Software Design Methodologies, convener= bernando";
-    private static final String G = "Software Design Methodologies";
-    private static final String H = "convener= bernando";
     private static final String errorToken = "wrong token";
     private static final String errorType = "wrong token type";
 
     @Test(timeout=1000)
     public void testTokenizeCode() {
-        tokenizer = new Tokenizer(A);
+        String s = "2100";
+        tokenizer = new Tokenizer(s);
         assertEquals(errorType, CODE, tokenizer.current().getType());
-        assertEquals(errorToken, A, tokenizer.current().getToken());
+        assertEquals(errorToken, s, tokenizer.current().getToken());
+
+        s = "3600";
+        tokenizer = new Tokenizer(s);
+        assertEquals(errorType, CODE, tokenizer.current().getType());
+        assertEquals(errorToken, s, tokenizer.current().getToken());
     }
 
     @Test(timeout=1000)
     public void testTokenizeCollege() {
-        tokenizer = new Tokenizer(B);
-        assertEquals(errorType, COLLEGE, tokenizer.current().getType());
-        assertEquals(errorToken, B, tokenizer.current().getToken());
+        Token.Type t = COLLEGE;
 
-        tokenizer = new Tokenizer(C);
-        assertEquals(errorType, COLLEGE, tokenizer.current().getType());
-        assertEquals(errorToken, C, tokenizer.current().getToken());
+        String s = "COMP";
+        tokenizer = new Tokenizer(s);
+        assertEquals(errorType, t, tokenizer.current().getType());
+        assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
+
+        s = "college= COMP";
+        tokenizer = new Tokenizer(s);
+        assertEquals(errorType, t, tokenizer.current().getType());
+        assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
+
+        s = "college= biOL";
+        tokenizer = new Tokenizer(s);
+        assertEquals(errorType, t, tokenizer.current().getType());
+        assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
+
+        s = "cRim";
+        tokenizer = new Tokenizer(s);
+        assertEquals(errorType, t, tokenizer.current().getType());
+        assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
     }
 
     @Test(timeout=1000)
     public void testTokenizeCollegeCode() {
-        tokenizer = new Tokenizer(D);
-        assertEquals(errorType, COLLEGECODE, tokenizer.current().getType());
-        assertEquals(errorToken, D, tokenizer.current().getToken());
+        Token.Type t = COLLEGECODE;
+
+        String s = "COMP 2100";
+        tokenizer = new Tokenizer(s);
+        assertEquals(errorType, t, tokenizer.current().getType());
+        assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
+
+        s = "MATH 1013";
+        tokenizer = new Tokenizer(s);
+        assertEquals(errorType, t, tokenizer.current().getType());
+        assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
+
+        s = "InTr 1013";
+        tokenizer = new Tokenizer(s);
+        assertEquals(errorType, t, tokenizer.current().getType());
+        assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
+
+        s = "COMP2100";
+        tokenizer = new Tokenizer(s);
+        assertEquals(errorType, t, tokenizer.current().getType());
+        assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
     }
 
     @Test(timeout=1000)
     public void testTokenizeCourse() {
-        tokenizer = new Tokenizer(G);
-        assertEquals(errorType, COURSE, tokenizer.current().getType());
-        assertEquals(errorToken, G, tokenizer.current().getToken());
+        Token.Type t = COURSE;
+
+        String s = "Software Design Methodologies";
+        tokenizer = new Tokenizer(s);
+        assertEquals(errorType, t, tokenizer.current().getType());
+        assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
+
+        s = "ApPLied MatheMatics I";
+        tokenizer = new Tokenizer(s);
+        assertEquals(errorType, t, tokenizer.current().getType());
+        assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
     }
 
     @Test(timeout=1000)
     public void testTokenizeConvener() {
-        tokenizer = new Tokenizer(H);
-        assertEquals(errorType, CONVENER, tokenizer.current().getType());
-        assertEquals(errorToken, H, tokenizer.current().getToken());
+        Token.Type t = CONVENER;
+
+        String s = "convener= bernando";
+        tokenizer = new Tokenizer(s);
+        assertEquals(errorType, t, tokenizer.current().getType());
+        assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
+
+        s = "CONVENER= Alice";
+        tokenizer = new Tokenizer(s);
+        assertEquals(errorType, t, tokenizer.current().getType());
+        assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
+
+        s = "COnVEneR= Brett";
+        tokenizer = new Tokenizer(s);
+        assertEquals(errorType, t, tokenizer.current().getType());
+        assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
     }
 
     @Test(timeout=1000)
     public void testTokenizeMixed() {
-        tokenizer = new Tokenizer(E);
+        String s = "2100, Software Design Methodologies, COMP";
+        tokenizer = new Tokenizer(s);
         assertEquals(errorType, CODE, tokenizer.current().getType());
         assertEquals(errorToken, "2100", tokenizer.current().getToken());
         tokenizer.next();
         assertEquals(errorType, COURSE, tokenizer.current().getType());
-        assertEquals(errorToken, "Software Design Methodologies", tokenizer.current().getToken());
+        assertEquals(errorToken, "software design methodologies", tokenizer.current().getToken());
         tokenizer.next();
         assertEquals(errorType, COLLEGE, tokenizer.current().getType());
-        assertEquals(errorToken, "COMP", tokenizer.current().getToken());
+        assertEquals(errorToken, "comp", tokenizer.current().getToken());
 
-        tokenizer = new Tokenizer(F);
+        s = "COMP 2100, Software Design Methodologies, convener= bernando";
+        tokenizer = new Tokenizer(s);
         assertEquals(errorType, COLLEGECODE, tokenizer.current().getType());
-        assertEquals(errorToken, "COMP 2100", tokenizer.current().getToken());
+        assertEquals(errorToken, "comp 2100", tokenizer.current().getToken());
         tokenizer.next();
         assertEquals(errorType, COURSE, tokenizer.current().getType());
-        assertEquals(errorToken, "Software Design Methodologies", tokenizer.current().getToken());
+        assertEquals(errorToken, "software design methodologies", tokenizer.current().getToken());
         tokenizer.next();
         assertEquals(errorType, CONVENER, tokenizer.current().getType());
         assertEquals(errorToken, "convener= bernando", tokenizer.current().getToken());
     }
+
+    @Test(timeout=1000)
+    public void testNullToken() {
+        tokenizer = new Tokenizer("COMP 2I00");
+        assertEquals(errorType, null, tokenizer.current());
+
+        tokenizer = new Tokenizer("ABCD 2I00");
+        assertEquals(errorType, null, tokenizer.current());
+
+        tokenizer = new Tokenizer("ABCD 3455");
+        assertEquals(errorType, null, tokenizer.current());
+
+        tokenizer = new Tokenizer("Applied Mathematics 1");
+        assertEquals(errorType, null, tokenizer.current());
+
+        tokenizer = new Tokenizer("COMP 2100, Software Design Methodologies, convenner= bernando");
+        tokenizer.next();
+        tokenizer.next();
+        tokenizer.next();
+        assertEquals(errorType, null, tokenizer.current());
+    }
+
 }

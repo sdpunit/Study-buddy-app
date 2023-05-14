@@ -3,6 +3,7 @@ package com.studybuddy.search;
 import static java.lang.Character.isUpperCase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Tokenizer {
@@ -24,22 +25,23 @@ public class Tokenizer {
     }
 
     public void next() {
+        Colleges collegeList = new Colleges();
         if (tokenizer.hasMoreTokens()) {
-            String delta = tokenizer.nextToken().trim();
+            String delta = tokenizer.nextToken().trim().toLowerCase();
 
             if (isValidInteger(delta)) {
                 currentToken = new Token(delta, Token.Type.CODE);
             }
-            else if(isAllUpperCase(getCollegeString(delta)) && isValidInteger(getIntegerString(delta))) {
+            else if(collegeList.contains(getCollegeString(delta)) && isValidInteger(getIntegerString(delta))) { // change uppercase methods to check college list instead
                 currentToken = new Token(delta, Token.Type.COLLEGECODE);
             }
-            else if(delta.contains("college=") && isAllUpperCase(delta.split(" ")[1])) {
+            else if(delta.contains("college=") && collegeList.contains(delta.split(" ")[1])) {
                 currentToken = new Token(delta, Token.Type.COLLEGE);
             }
-            else if(isAllUpperCase(delta)) {
+            else if(collegeList.contains(delta)) {
                 currentToken = new Token(delta, Token.Type.COLLEGE);
             }
-            else if(delta.contains("CONVENER") || delta.contains("convener") ) {
+            else if(delta.contains("convener") ) {
                 currentToken = new Token(delta, Token.Type.CONVENER);
             }
             else if(isLetters(delta)) {
