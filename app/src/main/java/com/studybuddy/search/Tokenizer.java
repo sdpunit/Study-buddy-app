@@ -23,7 +23,10 @@ public class Tokenizer {
             if (isValidInteger(delta)) {
                 currentToken = new Token(tokenizer.nextToken(), Token.Type.CODE);
             }
-            else if(tokenizer.nextToken().charAt(0) == 'C') {
+            else if(isAllUpperCase(delta)) {
+                currentToken = new Token(tokenizer.nextToken(), Token.Type.COLLEGE);
+            }
+            else if(delta.contains("CONVENER") || delta.contains("convener") ) {
                 currentToken = new Token(tokenizer.nextToken(), Token.Type.COURSE);
             }
         } else {
