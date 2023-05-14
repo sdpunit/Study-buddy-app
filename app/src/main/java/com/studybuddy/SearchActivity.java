@@ -51,13 +51,23 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText){
                 // call search function
-                ArrayList<Course> results = new ArrayList<Course>();
-                for (Course course : courseList){
-                    if (course.getCourseName().toLowerCase().contains(newText.toLowerCase())){
-                        results.add(course);
-                    }
+//                ArrayList<Course> results = new ArrayList<Course>();
+//                for (Course course : courseList){
+//                    if (course.getCourseName().toLowerCase().contains(newText.toLowerCase())){
+//                        results.add(course);
+//                    }
+//                }
+                boolean b = false;
+                try {
+                    int code = Integer.parseInt(newText);
+                    ArrayList results = search(courseTree, newText);
+                    b = true;
+                } catch (NumberFormatException e){
+                    // not a number
+                    throw e;
+
                 }
-                return false;
+                return b;
             }
         });
     }
