@@ -2,51 +2,103 @@ package com.studybuddy.search;
 
 import static java.lang.Character.isUpperCase;
 
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
 public class Tokenizer {
 
-    private String buffer;          // String to be transformed into tokens each time next() is called.
-    private Token currentToken;     // The current token. The next token is extracted when next() is called.
+    private StringTokenizer tokenizer;
 
-    public Token getCurrent() {
-        return currentToken;
-    }
+    private Token currentToken;
 
     public Tokenizer(String text) {
-        buffer = text;          // save input text (string)
-        next();                 // extracts the first token.
+        tokenizer = new StringTokenizer(text, ",");
+        next();
     }
-
 
     public void next() {
-        if (buffer == null || buffer.isEmpty()) {
+        if (tokenizer.hasMoreTokens()) {
+            String delta = tokenizer.nextToken().trim();
+
+            if (isValidInteger(delta)) {
+                currentToken = new Token(tokenizer.nextToken(), Token.Type.CODE);
+            }
+            else if(isAllUpperCase(delta)) {
+                currentToken = new Token(tokenizer.nextToken(), Token.Type.COLLEGE);
+            }
+            else if(delta.contains("CONVENER") || delta.contains("convener") ) {
+                currentToken = new Token(tokenizer.nextToken(), Token.Type.COURSE);
+            }
+        } else {
             currentToken = null;
-            return;
         }
-
-        buffer.trim();
-
-        if(buffer.charAt(0) == ','){
-            next();
-        }
-
-        else if (isAllUpperCase(buffer) && buffer.contains("college=")) {
-            currentToken = new Token(buffer, Token.Type.COLLEGE);
-        }
-        else if (isValidInteger(getIntegerString(buffer))) {
-            currentToken = new Token(getIntegerString(buffer), Token.Type.CODE);
-        }
-        else if (buffer.contains("course:")) {
-            currentToken = new Token(buffer, Token.Type.COURSE);
-        }
-        else if (buffer.contains("convener=")) {
-            currentToken = new Token(buffer, Token.Type.CONVENER);
-        }
-        else {
-            throw new IllegalArgumentException(
-                    "Expected SUBJECT all caps || CODE as Integer || COURSE as Course Name || convener:Name , found: " + buffer);
-        }
-
     }
+
+    /*
+    Methods	Description
+        boolean hasMoreTokens()	        It checks if there is more tokens available.
+        String nextToken()	            It returns the next token from the StringTokenizer object.
+        String nextToken(String delim)	It returns the next token based on the delimiter.
+        boolean hasMoreElements()	    It is the same as hasMoreTokens() method.
+        Object nextElement()	        It is the same as nextToken() but its return type is Object.
+        int countTokens()	            It returns the total number of tokens.
+     */
+
+
+
+
+//    private String buffer;          // String to be transformed into tokens each time next() is called.
+//    private String[] tokens;
+//
+//    private int index = 0;          // Index of the current token in the tokens array.
+//
+//    private Token currentToken;     // The current token. The next token is extracted when next() is called.
+//
+//    public Token getCurrent() {
+//        return currentToken;
+//    }
+//
+//    public Tokenizer(String text) {
+//        buffer = text;          // save input text (string)
+//        tokens = buffer.split(","); // split the string into tokens (comma separated
+//
+//        next();                 // extracts the first token.
+//    }
+//
+//
+//    public void next() {
+//        if (buffer == null || buffer.isEmpty()) {
+//            currentToken = null;
+//            return;
+//        }
+//
+////       buffer.trim();
+//        tokens[index] = tokens[index].trim();
+//        buffer = tokens[index];
+//        index++;
+//
+//        if (buffer.isEmpty()) {
+//            next();
+//        }
+//
+//        else if (isAllUpperCase(buffer) || buffer.contains("college=")) { // checks is college is all caps or contains college= if college is not all caps
+//            currentToken = new Token(buffer.replace("college=",""), Token.Type.COLLEGE);
+//        }
+//        else if (isValidInteger(getIntegerString(buffer))) { // checks if the string contains an integer
+//            currentToken = new Token(getIntegerString(buffer), Token.Type.CODE);
+//        }
+//        else if (buffer.contains("course:")) {
+//            currentToken = new Token(buffer, Token.Type.COURSE);
+//        }
+//        else if (buffer.contains("convener=")) {
+//            currentToken = new Token(buffer, Token.Type.CONVENER);
+//        }
+//        else {
+//            throw new IllegalArgumentException(
+//                    "Expected SUBJECT all caps || CODE as Integer || COURSE as Course Name || convener:Name , found: " + buffer);
+//        }
+
+
     private boolean isAllUpperCase(String input) {
         boolean b = true;
         char[] ch = input.toCharArray();

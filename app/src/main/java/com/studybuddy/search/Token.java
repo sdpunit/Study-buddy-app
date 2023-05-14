@@ -5,7 +5,7 @@ public class Token {
     public enum Type {COLLEGE, CODE, COURSE, CONVENER}
 
     private final String token; // Token representation in String form.
-    private final Type type;    // Type of the token.
+    private final Type type;   // Type of the token.
 
     public Token(String token, Type type) {
         this.token = token;
