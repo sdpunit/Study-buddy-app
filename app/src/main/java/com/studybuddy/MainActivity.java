@@ -1,10 +1,12 @@
 package com.studybuddy;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +16,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.studybuddy.notification.NotificationFactory;
+import com.studybuddy.notification.StudyNotification;
+import com.studybuddy.timer.UserTimeState;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -21,6 +34,8 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     private User user;
     private UserTimeState userTimeState;
+    ValueEventListener valueEventListener;
+    DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +59,33 @@ public class MainActivity extends AppCompatActivity {
         } else {
             txt_hello_user.setText("Hi, guest");
         }
+        ArrayList<Course> myCourses = new ArrayList<>();
+        myCourses.add(new Course(
+                "MEAS8127",
+                "'Sectarianism' in the Middle East: Theology, Politics and Identity",
+                "Dr. Liz"));
+        myCourses.add(new Course("COMP1720", "Authoritarianism, Democratisation and Protest in the Muslim Middle East", "Dr. Albert"));
+        myCourses.add(new Course("COMP2100", "Software Construction", "Bernardo"));
+
+        user.setCoursesEnrolled(myCourses);
+
+        userRef = FirebaseDatabase.getInstance().getReference("users").child(String.valueOf(user.getUid()));
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get User object and use the values to update the UI
+                User updatedUser = dataSnapshot.getValue(User.class);
+                if (updatedUser != null) {
+                    user = updatedUser;
+                    updateCourseGrid(user.getCoursesEnrolled());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("Firebase", "loadUser:onCancelled", databaseError.toException());
+            }
+        });
 
         //Go to SearchActivity if clicked
         btn_add_courses.setOnClickListener(new View.OnClickListener() {
@@ -57,15 +99,10 @@ public class MainActivity extends AppCompatActivity {
         btn_graphical_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<Course> myCourses = new ArrayList<>();
-                myCourses.add(new Course(
-                        "MEAS8127",
-                        "'Sectarianism' in the Middle East: Theology, Politics and Identity",
-                        "Dr. Liz"));
-                myCourses.add(new Course("COMP1720", "Authoritarianism, Democratisation and Protest in the Muslim Middle East", "Dr. Albert"));
-                myCourses.add(new Course("COMP2100", "Software Construction", "Bernardo"));
-
-                updateCourseGrid(myCourses);
+                for (Course course:myCourses){
+                    user.addCoursesEnrolled(course);
+                }
+                userRef.setValue(user);
             }
         });
 
@@ -73,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
         sendNotification();
 
     }
+
+
     private void updateCourseGrid(ArrayList<Course> courses) {
         // Get the GridLayout from the layout
         GridLayout gridCourses = findViewById(R.id.grid_courses);
@@ -90,8 +129,8 @@ public class MainActivity extends AppCompatActivity {
 
             // Choose a random pattern image
             int patternNumber = random.nextInt(12) + 1;
-            int imageResId = getResources().getIdentifier("pattern" + patternNumber, "drawable", getPackageName());
-            courseButton.setImageResource(imageResId);
+            int randomImage = getResources().getIdentifier("pattern" + patternNumber, "drawable", getPackageName());
+            courseButton.setImageResource(randomImage);
 
             courseButton.setScaleType(ImageView.ScaleType.FIT_CENTER);
             courseButton.setAdjustViewBounds(true);
@@ -124,12 +163,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public void displayStudyMinutes() {
         TextView studyMinutes = (TextView) findViewById(R.id.studyMinutes);
         if(userTimeState != null) {
             //studyMinutes.setText("You have studied for " + Math.round(userTimeState.getStudyMinutes()) + " minutes!");
             studyMinutes.setText("You have studied for " + Math.round(user.getStudyMinutes()) + " minutes!");
+            user.addStudyMinutes(user.getStudyMinutes());
         } else {
             studyMinutes.setText("No study time recorded.");
         }
@@ -147,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
             notificationTypes.add("StudyTime");
         }
         // every two unique courses
-        if (user.getCourseStudied().size() % 2 == 0 && user.getCourseStudied().size() != 0) {
+        if (user.getCoursesStudied().size() % 2 == 0 && user.getCoursesStudied().size() != 0) {
             notificationTypes.add("StudyCourse");
         }
 

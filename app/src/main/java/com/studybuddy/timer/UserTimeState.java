@@ -1,4 +1,7 @@
-package com.studybuddy;
+package com.studybuddy.timer;
+
+import com.studybuddy.timer.State;
+import com.studybuddy.timer.idleState;
 
 import java.io.Serializable;
 

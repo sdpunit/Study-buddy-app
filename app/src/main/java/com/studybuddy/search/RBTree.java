@@ -1,4 +1,6 @@
-package com.studybuddy;
+package com.studybuddy.search;
+
+import com.studybuddy.Course;
 
 import java.util.ArrayList;
 import java.util.List;

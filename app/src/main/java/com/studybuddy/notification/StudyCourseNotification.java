@@ -1,27 +1,25 @@
-package com.studybuddy;
+package com.studybuddy.notification;
 
-import static android.content.Context.NOTIFICATION_SERVICE;
-import static androidx.core.content.ContextCompat.getSystemService;
-
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
-import android.os.Build;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-public class StudyNumberNotification implements StudyNotification{
+import com.studybuddy.LoginActivity;
+import com.studybuddy.R;
+import com.studybuddy.User;
+
+public class StudyCourseNotification implements StudyNotification {
     @Override
     public void notifyUser(Context context, User user) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, Login.CHANNEL_ID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, LoginActivity.CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("Good Job!")
-                .setContentText("You have completed " + user.getStudyNumber() + " study sessions!");
+                .setContentText("You have studied " + user.getCoursesStudied().size() + " different courses!");
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         try {
-            notificationManager.notify(0, builder.build());
+            notificationManager.notify(2, builder.build());
         }
         catch (SecurityException e) {
             Toast.makeText(context, "Security Exception", Toast.LENGTH_SHORT).show();

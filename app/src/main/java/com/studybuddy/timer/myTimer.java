@@ -1,4 +1,4 @@
-package com.studybuddy;
+package com.studybuddy.timer;
 
 import android.os.Handler;
 import android.os.Message;
@@ -25,6 +25,7 @@ public class myTimer {
     public myTimer(int initialMinutes, TimeUp studyActivityWhenTimeUp) {
         this.initialMinutes = initialMinutes;
         this.remainingMinutes = initialMinutes;
+        this.studyActivityWhenTimeUp = studyActivityWhenTimeUp;
     }
 
     public void start(Handler handler) {

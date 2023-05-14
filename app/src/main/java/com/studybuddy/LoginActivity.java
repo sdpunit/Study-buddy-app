@@ -19,12 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     boolean validUser;
 
     public static final String CHANNEL_ID = "StudyBuddy";
@@ -57,7 +52,7 @@ public class Login extends AppCompatActivity {
 
         // what happens when the REGISTER button is pressed
         registerButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Login.this, Register.class);
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
     }

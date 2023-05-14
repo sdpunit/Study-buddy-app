@@ -2,7 +2,6 @@ package com.studybuddy;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Set;
 
 public class Course implements Serializable {
     private String courseCode;  // key
@@ -10,6 +9,9 @@ public class Course implements Serializable {
     private String convener;
     private String studentType;
     private ArrayList<String> assessment;
+    // Empty constructer for firebase needed
+    public Course() {
+    }
 
     Course(String courseCode) {
         this.courseCode = courseCode;

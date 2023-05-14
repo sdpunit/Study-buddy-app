@@ -16,7 +16,6 @@
         android:layout_height="41dp"
         android:layout_marginStart="24dp"
         android:layout_weight="1"
-        android:background="#transparent"
         android:text="Course Name"
         android:textSize="24dp"
 

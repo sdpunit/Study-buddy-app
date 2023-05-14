@@ -1,8 +1,11 @@
 package com.studybuddy;
 
 
-import static com.studybuddy.Token.Type.COLLEGE;
+import static com.studybuddy.search.Token.Type.COLLEGE;
 import static org.junit.Assert.assertEquals;
+
+import com.studybuddy.search.Token;
+import com.studybuddy.search.Tokenizer;
 
 import org.junit.Test;
 

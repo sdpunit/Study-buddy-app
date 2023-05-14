@@ -16,7 +16,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-public class StudyActivity extends AppCompatActivity implements myTimer.TimeUp{
+import com.studybuddy.timer.UserTimeState;
+import com.studybuddy.timer.myTimer;
+import com.studybuddy.timer.studyState;
+
+public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
     private UserTimeState userTimeState;
     private User user;
     private myTimer timer;
@@ -86,11 +90,13 @@ public class StudyActivity extends AppCompatActivity implements myTimer.TimeUp{
             //userTimeState.addStudyMinutes(timer.getStudyTime());
             user.addStudyMinutes(timer.getStudyTime());
             user.setStudyNumber(user.getStudyNumber() + 1);
-            user.addCourseStudied(course);
+            if (!user.getCoursesStudied().contains(course)) {
+                user.addCourseStudied(course);
+            }
             //user.addCourseTime(course, timer.getStudyTime());
             timer = null;
 
-            Intent intent = new Intent(StudyActivity.this, MainActivity.class);
+            Intent intent = new Intent(TimerActivity.this, MainActivity.class);
             intent.putExtra("userTimeState", userTimeState);
             intent.putExtra("user", user);
             startActivity(intent);
@@ -110,7 +116,7 @@ public class StudyActivity extends AppCompatActivity implements myTimer.TimeUp{
     @Override
     public void timeUp() {
         runOnUiThread(() -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(StudyActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(TimerActivity.this);
             builder.setTitle("TIME UP");
             builder.setMessage("Have a Rest !");
             builder.setNeutralButton("OK", (dialog, which) -> {
@@ -119,11 +125,13 @@ public class StudyActivity extends AppCompatActivity implements myTimer.TimeUp{
                 // userTimeState.addStudyMinutes(timer.getStudyTime());
                 user.addStudyMinutes(timer.getInitialMinutes());
                 user.setStudyNumber(user.getStudyNumber() + 1);
-                user.addCourseStudied(course);
+                if (!user.getCoursesStudied().contains(course)) {
+                    user.addCourseStudied(course);
+                }
                 //user.addCourseTime(course, (double)timer.getInitialMinutes());
                 timer = null;
 
-                Intent intent = new Intent(StudyActivity.this, MainActivity.class);
+                Intent intent = new Intent(TimerActivity.this, MainActivity.class);
                 intent.putExtra("userTimeState", userTimeState);
                 intent.putExtra("user", user);
                 startActivity(intent);

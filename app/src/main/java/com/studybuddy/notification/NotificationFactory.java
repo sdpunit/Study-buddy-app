@@ -1,4 +1,4 @@
-package com.studybuddy;
+package com.studybuddy.notification;
 
 public class NotificationFactory {
     public StudyNotification createNotification(String notificationType) {
