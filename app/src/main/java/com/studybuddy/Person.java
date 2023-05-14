@@ -1,9 +1,6 @@
 package com.studybuddy;
 
 public class Person {
-    public static void main(String[] args) {
-
-    }
 
     public Person(int uid, String username, String password, boolean isUndergrad, int studyMinutes) {
         this.uid = uid;
