@@ -90,7 +90,9 @@ public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
             //userTimeState.addStudyMinutes(timer.getStudyTime());
             user.addStudyMinutes(timer.getStudyTime());
             user.setStudyNumber(user.getStudyNumber() + 1);
-            user.addCourseStudied(course);
+            if (!user.getCoursesStudied().contains(course)) {
+                user.addCourseStudied(course);
+            }
             //user.addCourseTime(course, timer.getStudyTime());
             timer = null;
 
@@ -123,7 +125,9 @@ public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
                 // userTimeState.addStudyMinutes(timer.getStudyTime());
                 user.addStudyMinutes(timer.getInitialMinutes());
                 user.setStudyNumber(user.getStudyNumber() + 1);
-                user.addCourseStudied(course);
+                if (!user.getCoursesStudied().contains(course)) {
+                    user.addCourseStudied(course);
+                }
                 //user.addCourseTime(course, (double)timer.getInitialMinutes());
                 timer = null;
 

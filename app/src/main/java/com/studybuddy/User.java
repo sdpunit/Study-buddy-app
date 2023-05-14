@@ -1,12 +1,9 @@
 package com.studybuddy;
 
-import android.content.Context;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,7 +20,8 @@ public class User implements Serializable {
     private int studyNumber = 0;
 
     // This set is used to store the unique courses that the user has studied
-    private Set<Course> courseStudied = new HashSet<>();  // should I initialize it here?
+    // It was initially a set, converted to an arraylist for firebase
+    private ArrayList<Course> courseStudied = new ArrayList<>();
     // Need an empty constructor for firebase
     public User(){
 
@@ -51,11 +49,14 @@ public class User implements Serializable {
         this.courseTime = new HashMap<>();
     }
 
-    public Set<Course> getCourseStudied() {
+    public ArrayList<Course> getCourseStudied() {
         return courseStudied;
     }
+    // To prevent duplicity
     public void addCourseStudied(Course course) {
-        this.courseStudied.add(course);
+        if (!this.getCourseStudied().contains(course)) {
+            this.addCourseStudied(course);
+        }
     }
 
     public int getStudyNumber() {
