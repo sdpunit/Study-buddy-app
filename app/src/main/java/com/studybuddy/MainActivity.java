@@ -116,8 +116,10 @@ public class MainActivity extends AppCompatActivity {
                 Person user = new Person(uid,username,password,isUndergrad,studyMinutes);
 
                 // Store the object under a unique ID in the "users" node
-                DatabaseReference userRef = databaseReference.push();
-                userRef.setValue(user);
+                String userRef = databaseReference.push().getKey();
+                databaseReference.child(userRef).setValue(user);
+
+
             }
         } catch (IOException | JSONException e) {
             e.printStackTrace();
