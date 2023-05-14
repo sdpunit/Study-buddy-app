@@ -71,12 +71,34 @@ public class Colleges {
                     "arts",
                     "scnc",
                     "demo",
-                    "gend"
+                    "gend",
+                    "hlth",
+                    "phil",
+                    "grek",
+                    "arab",
+                    "fren",
+                    "indn",
+                    "ital",
+                    "jpns",
+                    "kore",
+                    "latn",
+                    "pers",
+                    "span",
+                    "bphb",
+                    "bapa",
+                    "scrn",
+                    "echi",
+                    "vcug",
+                    "burm",
+                    "euro",
+                    "port",
+                    "anth",
+                    "turk",
+                    "hons",
+                    "germ",
+                    "hind",
+                    "medi"
             ));
-
-    public ArrayList<String> getColleges() {
-        return colleges;
-    }
 
     public boolean contains(String stringToCheck) {
         return colleges.contains(stringToCheck);
