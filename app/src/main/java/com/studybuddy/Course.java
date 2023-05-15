@@ -1,5 +1,9 @@
 package com.studybuddy;
 
+import android.view.View;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -9,6 +13,7 @@ public class Course implements Serializable {
     private String convener;
     private String studentType;
     private ArrayList<String> assessment;
+
     // Empty constructer for firebase needed
     public Course() {
     }
@@ -16,6 +21,7 @@ public class Course implements Serializable {
     public Course(String courseCode) {
         this.courseCode = courseCode;
     }
+
     Course(String courseCode, String courseName, String convener) {
         this.courseCode = courseCode;
         this.courseName = courseName;
