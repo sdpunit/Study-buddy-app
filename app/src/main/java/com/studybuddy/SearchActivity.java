@@ -117,15 +117,16 @@ public class SearchActivity extends AppCompatActivity {
 
     private void setupData(){
         // call from tree and add to courseList
-        courseTree.insert(new Course("COMP1010", "Intro to Computer Science 1", "punit"));
-        courseTree.insert(new Course("COMP2160", "Software Engineering", "horatio"));
-        courseTree.insert(new Course("COMP2140", "Data Structures and Algorithms", "bernardo"));
-        courseTree.insert(new Course("COMP2080", "Intro to Computer Science 2", "punit"));
-
-        List<RBTree.Node> tree = courseTree.inOrderTraverse();
-                tree.forEach((n) -> {
-                    courseList.add(n.getCourse());
-                });
+//        courseTree.insert(new Course("COMP1010", "Intro to Computer Science 1", "punit"));
+//        courseTree.insert(new Course("COMP2160", "Software Engineering", "horatio"));
+//        courseTree.insert(new Course("COMP2140", "Data Structures and Algorithms", "bernardo"));
+//        courseTree.insert(new Course("COMP2080", "Intro to Computer Science 2", "punit"));
+//
+//        List<RBTree.Node> tree = courseTree.inOrderTraverse();
+//                tree.forEach((n) -> {
+//                    courseList.add(n.getCourse());
+//                });
+//        courseTree.createCourseTree();
     }
 
     private void setupList(){
