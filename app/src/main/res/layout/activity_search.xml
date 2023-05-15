@@ -30,15 +30,15 @@
 
     <ListView
         android:id="@+id/SearchList"
-        android:layout_width="415dp"
+        android:layout_width="380dp"
         android:layout_height="341dp"
         android:layout_marginBottom="276dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SearchInput"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.048" />
 
     <TextView
         android:id="@+id/textView2"
@@ -47,25 +47,26 @@
         android:layout_marginTop="20dp"
         android:text="Selected Courses"
         android:textSize="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btn_addCourses"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SearchList"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.029" />
 
     <ListView
         android:id="@+id/AddedList"
-        android:layout_width="410dp"
-        android:layout_height="154dp"
-        android:layout_marginTop="488dp"
+        android:layout_width="380dp"
+        android:layout_height="194dp"
+        android:layout_marginTop="500dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/SearchInput" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_addCourses"
         android:layout_width="190dp"
         android:layout_height="51dp"
         android:layout_marginTop="36dp"

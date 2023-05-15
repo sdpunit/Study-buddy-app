@@ -1,9 +1,8 @@
 package com.studybuddy;
 
-import static java.sql.DriverManager.println;
-
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +10,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.studybuddy.search.CourseAdapter;
 import com.studybuddy.search.Query;
 import com.studybuddy.search.RBTree;
@@ -26,7 +27,6 @@ public class SearchActivity extends AppCompatActivity {
 
     public static ArrayList<Course> addedList = new ArrayList<Course>();
 
-
     private ListView searchListView;
 
     private ListView addedListView;
@@ -35,18 +35,34 @@ public class SearchActivity extends AppCompatActivity {
 
     public RBTree courseTree = new RBTree();
 
+    private User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-
+        user = getIntent().getSerializableExtra("user", User.class);
 
         setupData();
         setupList();
         setupOnClickListener();
         setupAdded();
         searchWidgets();
+
+        addCourseButton = findViewById(R.id.btn_addCourses);
+
+        addCourseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                user.setCoursesEnrolled(addedList);
+                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(String.valueOf(user.getUid()));
+                userRef.setValue(user);
+                Intent intent = new Intent(SearchActivity.this, MainActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+            }
+        });
 //        setupOnKeyListener();
     }
 
