@@ -376,21 +376,24 @@ public class RBTree {
         return undergrads;
     }
 
-    public RBTree createUndergradTree(RBTree tree) throws JSONException, IOException {
+    public RBTree createUndergradTree() throws JSONException, IOException {
+        RBTree tree = new RBTree();
         for (Course course:getCourses("undergrad")) {
             tree.insert(course);
         }
         return tree;
     }
 
-    public RBTree createPostgradTree(RBTree tree) throws JSONException, IOException {
+    public RBTree createPostgradTree() throws JSONException, IOException {
+        RBTree tree = new RBTree();
         for (Course course:getCourses("postgrad")) {
             tree.insert(course);
         }
         return tree;
     }
 
-    public RBTree createCourseTree(RBTree tree, String studentType, String course) throws JSONException, IOException {
+    public RBTree createCourseTree(String studentType, String course) throws JSONException, IOException {
+        RBTree tree = new RBTree();
         for (Course c:getCollegeCourses(studentType,course)) {
             tree.insert(c);
         }
