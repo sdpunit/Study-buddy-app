@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         myCourses.add(new Course("COMP1720", "Authoritarianism, Democratisation and Protest in the Muslim Middle East", "Dr. Albert"));
         myCourses.add(new Course("COMP2100", "Software Construction", "Bernardo"));
 
-        user.setCoursesEnrolled(myCourses);
+        //user.setCoursesEnrolled(myCourses);
 
         userRef = FirebaseDatabase.getInstance().getReference("users").child(String.valueOf(user.getUid()));
         userRef.addValueEventListener(new ValueEventListener() {
@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                intent.putExtra("user", user);
                 startActivity(intent);
             }
         });
@@ -99,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
         btn_graphical_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (Course course:myCourses){
+                ArrayList<Course> myCoursesCopy = new ArrayList<>(myCourses);
+                for (Course course:myCoursesCopy){
                     user.addCoursesEnrolled(course);
                 }
                 userRef.setValue(user);

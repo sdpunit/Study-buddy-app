@@ -1,9 +1,8 @@
 package com.studybuddy;
 
-import static java.sql.DriverManager.println;
-
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,16 +10,14 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.studybuddy.search.CourseAdapter;
 import com.studybuddy.search.Query;
 import com.studybuddy.search.RBTree;
 import com.studybuddy.search.SearchParser;
 import com.studybuddy.search.Tokenizer;
-import com.studybuddy.timer.UserTimeState;
 
-import org.json.JSONException;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +27,6 @@ public class SearchActivity extends AppCompatActivity {
 
     public static ArrayList<Course> addedList = new ArrayList<Course>();
 
-    private User user;
     private ListView searchListView;
 
     private ListView addedListView;
@@ -39,23 +35,34 @@ public class SearchActivity extends AppCompatActivity {
 
     public RBTree courseTree = new RBTree();
 
+    private User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        user = (User) getIntent().getSerializableExtra("user", User.class);
 
-        try {
-            setupData();
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        user = getIntent().getSerializableExtra("user", User.class);
+
+        setupData();
         setupList();
         setupOnClickListener();
         setupAdded();
         searchWidgets();
+
+        addCourseButton = findViewById(R.id.btn_addCourses);
+
+        addCourseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                user.setCoursesEnrolled(addedList);
+                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(String.valueOf(user.getUid()));
+                userRef.setValue(user);
+                Intent intent = new Intent(SearchActivity.this, MainActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+            }
+        });
 //        setupOnKeyListener();
     }
 
@@ -108,21 +115,17 @@ public class SearchActivity extends AppCompatActivity {
         return results;
     }
 
-    private void setupData() throws JSONException, IOException {
+    private void setupData(){
         // call from tree and add to courseList
-//        courseTree.insert(new Course("COMP1010", "Intro to Computer Science 1", "punit"));
-//        courseTree.insert(new Course("COMP2160", "Software Engineering", "horatio"));
-//        courseTree.insert(new Course("COMP2140", "Data Structures and Algorithms", "bernardo"));
-//        courseTree.insert(new Course("COMP2080", "Intro to Computer Science 2", "punit"));
-//        List<RBTree.Node> tree = courseTree.inOrderTraverse();
-//                tree.forEach((n) -> {
-//                    courseList.add(n.getCourse());
-//                });
+        courseTree.insert(new Course("COMP1010", "Intro to Computer Science 1", "punit"));
+        courseTree.insert(new Course("COMP2160", "Software Engineering", "horatio"));
+        courseTree.insert(new Course("COMP2140", "Data Structures and Algorithms", "bernardo"));
+        courseTree.insert(new Course("COMP2080", "Intro to Computer Science 2", "punit"));
 
-        if(user.getIsUndergrad()){
-            RBTree undergradTree = new RBTree();
-            undergradTree = undergradTree.createUndergradTree();
-        }
+        List<RBTree.Node> tree = courseTree.inOrderTraverse();
+                tree.forEach((n) -> {
+                    courseList.add(n.getCourse());
+                });
     }
 
     private void setupList(){
