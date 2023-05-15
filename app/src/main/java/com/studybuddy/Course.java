@@ -13,7 +13,7 @@ public class Course implements Serializable {
     public Course() {
     }
 
-    Course(String courseCode) {
+    public Course(String courseCode) {
         this.courseCode = courseCode;
     }
     Course(String courseCode, String courseName, String convener) {
@@ -54,6 +54,13 @@ public class Course implements Serializable {
         this.convener = convener;
     }
 
+    public void setStudentType(String studentType) {
+        this.studentType = studentType;
+    }
+
+    public void setAssessment(ArrayList<String> assessment) {
+        this.assessment = assessment;
+    }
 
     @Override
     public boolean equals(Object obj) {

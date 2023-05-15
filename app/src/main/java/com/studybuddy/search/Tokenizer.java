@@ -3,6 +3,7 @@ package com.studybuddy.search;
 import static java.lang.Character.isUpperCase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Tokenizer {
@@ -24,22 +25,33 @@ public class Tokenizer {
     }
 
     public void next() {
+        Colleges collegeList = new Colleges();
         if (tokenizer.hasMoreTokens()) {
-            String delta = tokenizer.nextToken().trim();
+            String delta = tokenizer.nextToken().trim().toLowerCase();
 
             if (isValidInteger(delta)) {
-                currentToken = new Token(tokenizer.nextToken(), Token.Type.CODE);
+                currentToken = new Token(delta, Token.Type.CODE);
             }
-            else if(isAllUpperCase(delta)) {
-                currentToken = new Token(tokenizer.nextToken(), Token.Type.COLLEGE);
+            else if(collegeList.contains(getCollegeString(delta)) && isValidInteger(getIntegerString(delta))) { // change uppercase methods to check college list instead
+                currentToken = new Token(delta, Token.Type.COLLEGECODE);
             }
-            else if(delta.contains("CONVENER") || delta.contains("convener") ) {
-                currentToken = new Token(tokenizer.nextToken(), Token.Type.CONVENER);
+            else if(delta.contains("college=") && collegeList.contains(delta.split(" ")[1])) {
+                currentToken = new Token(delta, Token.Type.COLLEGE);
+            }
+            else if(collegeList.contains(delta)) {
+                currentToken = new Token(delta, Token.Type.COLLEGE);
+            }
+            else if(delta.contains("convener") ) {
+                currentToken = new Token(delta, Token.Type.CONVENER);
+            }
+            else if(isLetters(delta)) {
+                currentToken = new Token(delta, Token.Type.COURSE);
             }
         } else {
             currentToken = null;
         }
     }
+
     /*
     Methods	Description
         boolean hasMoreTokens()	        It checks if there is more tokens available.
@@ -144,7 +156,7 @@ public class Tokenizer {
         String s = "";
         char[] ch = input.toCharArray();
         for (char c : ch) {
-            if (Character.getNumericValue(c) <= -1){
+            if (Character.isLetter(c)){
                 s += c;
             }
         }
@@ -152,7 +164,7 @@ public class Tokenizer {
     }
     private boolean isValidInteger(String input) {
         char[] ch = input.toCharArray();
-        if(ch[0] == '0'){
+        if(ch.length>0 && ch[0] == '0'){
             return false;
         }
 //        if(Character.getNumericValue(ch[0]) < 1 || Character.getNumericValue(ch[0]) > 7){
@@ -171,6 +183,16 @@ public class Tokenizer {
         }
 
 
+    }
+
+    public boolean isLetters(String name) {
+        char[] chars = name.toCharArray();
+        for (char c : chars) {
+            if(!Character.isLetter(c) && !Character.isSpaceChar(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public Token current() {
