@@ -16,7 +16,11 @@ import com.studybuddy.search.Query;
 import com.studybuddy.search.RBTree;
 import com.studybuddy.search.SearchParser;
 import com.studybuddy.search.Tokenizer;
+import com.studybuddy.timer.UserTimeState;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +30,7 @@ public class SearchActivity extends AppCompatActivity {
 
     public static ArrayList<Course> addedList = new ArrayList<Course>();
 
-
+    private User user;
     private ListView searchListView;
 
     private ListView addedListView;
@@ -39,10 +43,15 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        user = (User) getIntent().getSerializableExtra("user", User.class);
 
-
-
-        setupData();
+        try {
+            setupData();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         setupList();
         setupOnClickListener();
         setupAdded();
@@ -99,17 +108,21 @@ public class SearchActivity extends AppCompatActivity {
         return results;
     }
 
-    private void setupData(){
+    private void setupData() throws JSONException, IOException {
         // call from tree and add to courseList
-        courseTree.insert(new Course("COMP1010", "Intro to Computer Science 1", "punit"));
-        courseTree.insert(new Course("COMP2160", "Software Engineering", "horatio"));
-        courseTree.insert(new Course("COMP2140", "Data Structures and Algorithms", "bernardo"));
-        courseTree.insert(new Course("COMP2080", "Intro to Computer Science 2", "punit"));
+//        courseTree.insert(new Course("COMP1010", "Intro to Computer Science 1", "punit"));
+//        courseTree.insert(new Course("COMP2160", "Software Engineering", "horatio"));
+//        courseTree.insert(new Course("COMP2140", "Data Structures and Algorithms", "bernardo"));
+//        courseTree.insert(new Course("COMP2080", "Intro to Computer Science 2", "punit"));
+//        List<RBTree.Node> tree = courseTree.inOrderTraverse();
+//                tree.forEach((n) -> {
+//                    courseList.add(n.getCourse());
+//                });
 
-        List<RBTree.Node> tree = courseTree.inOrderTraverse();
-                tree.forEach((n) -> {
-                    courseList.add(n.getCourse());
-                });
+        if(user.getIsUndergrad()){
+            RBTree undergradTree = new RBTree();
+            undergradTree = undergradTree.createUndergradTree();
+        }
     }
 
     private void setupList(){
