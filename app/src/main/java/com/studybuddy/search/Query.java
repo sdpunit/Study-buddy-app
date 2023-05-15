@@ -40,6 +40,15 @@ public class Query {
         this.term = term;
     }
 
+    // create hashmap to store course code with key access from convener and course name
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+
+
+
     public String getCollege() {
         return college;
     }

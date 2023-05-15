@@ -34,13 +34,12 @@ public class Tokenizer {
                 currentToken = new Token(tokenizer.nextToken(), Token.Type.COLLEGE);
             }
             else if(delta.contains("CONVENER") || delta.contains("convener") ) {
-                currentToken = new Token(tokenizer.nextToken(), Token.Type.COURSE);
+                currentToken = new Token(tokenizer.nextToken(), Token.Type.CONVENER);
             }
         } else {
             currentToken = null;
         }
     }
-
     /*
     Methods	Description
         boolean hasMoreTokens()	        It checks if there is more tokens available.
@@ -135,6 +134,17 @@ public class Tokenizer {
         char[] ch = input.toCharArray();
         for (char c : ch) {
             if (Character.getNumericValue(c) >= 0 && Character.getNumericValue(c) <= 9){
+                s += c;
+            }
+        }
+        return s;
+    }
+
+    private String getCollegeString(String input){
+        String s = "";
+        char[] ch = input.toCharArray();
+        for (char c : ch) {
+            if (Character.getNumericValue(c) <= -1){
                 s += c;
             }
         }

@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.studybuddy.Course;
 import com.studybuddy.R;
@@ -14,8 +16,8 @@ import java.util.List;
 
 public class CourseAdapter extends ArrayAdapter<Course> {
 
-    public CourseAdapter(Context context, int resource, List<Course> userList){
-        super(context, resource, userList);
+    public CourseAdapter(Context context, int resource, List<Course> coursesList){
+        super(context, resource, coursesList);
     }
 
     @Override
@@ -23,12 +25,21 @@ public class CourseAdapter extends ArrayAdapter<Course> {
         Course course = getItem(position);
 
         if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.user_cell, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.course_cell, parent, false);
         }
-        EditText name = (EditText) convertView.findViewById(R.id.SearchInput);
-        name.setText(course.getCourseName());
+        TextView tv = (TextView) convertView.findViewById(R.id.CellName);
+        TextView tv2 = (TextView) convertView.findViewById(R.id.CellCode);
+        TextView tv3 = (TextView) convertView.findViewById(R.id.CellConvener);
+//        ImageView iv = (ImageView) convertView.findViewById(R.id.CellImage);
+
+        tv.setText(course.getCourseName());
+        tv2.setText(course.getCourseCode());
+        tv3.setText(course.getConvener());
+//        iv.setImageResource(R.drawable.ic_launcher_foreground);
 
 
-        return super.getDropDownView(position, convertView, parent);
+
+
+        return convertView;
     }
 }

@@ -1,11 +1,13 @@
 package com.studybuddy;
 
+import static java.sql.DriverManager.println;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -16,13 +18,20 @@ import com.studybuddy.search.SearchParser;
 import com.studybuddy.search.Tokenizer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
     public static ArrayList<Course> courseList = new ArrayList<Course>();
 
+    public static ArrayList<Course> addedList = new ArrayList<Course>();
 
-    private ListView searchList;
+
+    private ListView searchListView;
+
+    private ListView addedListView;
+
+    private Button addCourseButton;
 
     public RBTree courseTree = new RBTree();
 
@@ -36,82 +45,104 @@ public class SearchActivity extends AppCompatActivity {
         setupData();
         setupList();
         setupOnClickListener();
+        setupAdded();
+        searchWidgets();
 //        setupOnKeyListener();
     }
 
     private void searchWidgets(){
         // search for widgets
-        SearchView searchView = (SearchView) findViewById(R.id.SearchInput);
+        SearchView searchView = findViewById(R.id.SearchInput);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query){
+            public boolean onQueryTextSubmit(String input){
                 // call search function
+                ArrayList<Course> results = search(courseTree, input);
+                CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
+                if(!results.isEmpty()){
+                    searchListView.setAdapter(adapter);
+                }
+
                 return false;
             }
             @Override
-            public boolean onQueryTextChange(String newText){
+            public boolean onQueryTextChange(String input){
                 // call search function
-//                ArrayList<Course> results = new ArrayList<Course>();
-//                for (Course course : courseList){
-//                    if (course.getCourseName().toLowerCase().contains(newText.toLowerCase())){
-//                        results.add(course);
-//                    }
-//                }
-                boolean b = false;
-                try {
-                    int code = Integer.parseInt(newText);
-                    ArrayList results = search(courseTree, newText);
-                    b = true;
-                } catch (NumberFormatException e){
-                    // not a number
-                    throw e;
 
-                }
-                return b;
+                return false;
             }
         });
     }
 
-    private ArrayList search(RBTree tree, String query){
+    private ArrayList search(RBTree tree, String input){
         // search for course
-        Tokenizer tokenizer = new Tokenizer(query);
-        SearchParser parser = new SearchParser(tokenizer);
-        Query queryObj = parser.parseQuery();
+        ArrayList results = new ArrayList(); //new array list
+        Tokenizer tokenizer = new Tokenizer(input); // tokenize input
+        SearchParser parser = new SearchParser(tokenizer); // parse tokens
+        Query queryObj = parser.parseQuery(); // get query object
+        if(queryObj == null){
+            return results;
+        }
+        try {
+            int code = queryObj.getCode();
+            String name = queryObj.getCourse();
+            String codeString = name + code;
 
-        tree.searchByCourseCode(courseTree.root,Integer.toString(queryObj.getCode())); // temporary until we have a tree access
+            RBTree.Node resultCourse = tree.searchByCourseCode(tree.root, codeString); // temporary until we have a tree access
+            if(resultCourse != null){
+                results.add(resultCourse.getCourse());
+            }
 
-        return null;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return results;
     }
 
     private void setupData(){
-        // call from tree and add to
+        // call from tree and add to courseList
+        courseTree.insert(new Course("COMP1010", "Intro to Computer Science 1", "punit"));
+        courseTree.insert(new Course("COMP2160", "Software Engineering", "horatio"));
+        courseTree.insert(new Course("COMP2140", "Data Structures and Algorithms", "bernardo"));
+        courseTree.insert(new Course("COMP2080", "Intro to Computer Science 2", "punit"));
 
+        List<RBTree.Node> tree = courseTree.inOrderTraverse();
+                tree.forEach((n) -> {
+                    courseList.add(n.getCourse());
+                });
+    }
 
-
+    private void setupList(){
+        searchListView = findViewById(R.id.SearchList);
+        CourseAdapter adaptor = new CourseAdapter(getApplicationContext(), 0, courseList);
+        searchListView.setAdapter(adaptor);
 
 
     }
 
-    private void setupList(){
-        searchList = (ListView) findViewById(R.id.SearchList);
-        CourseAdapter adaptor = new CourseAdapter(getApplicationContext(), R.layout.item_course, courseList);
-        searchList.setAdapter(adaptor);
-
-
+    private void setupAdded(){
+        addedListView = findViewById(R.id.AddedList);
+        CourseAdapter adaptor = new CourseAdapter(getApplicationContext(), 0, addedList);
+        addedListView.setAdapter(adaptor);
     }
 
     private void setupOnClickListener()
     {
-        searchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        searchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
             {
-                Course selectCourse = (Course) (searchList.getItemAtPosition(position));
-                Intent showDetail = new Intent(getApplicationContext(), DetailActivity.class);
-                showDetail.putExtra("id",selectCourse.getCourseCode());
-                startActivity(showDetail);
+                Course selectCourse = (Course) (searchListView.getItemAtPosition(position));
+
+                if(!addedList.contains(selectCourse)) {
+                    addedList.add(selectCourse);
+                }
+                CourseAdapter adaptor = new CourseAdapter(getApplicationContext(), 0, addedList);
+                addedListView.setAdapter(adaptor);
             }
         });
+
+
     }
 
 //    private void setupOnKeyListener()
