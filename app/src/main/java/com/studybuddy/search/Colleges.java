@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Colleges {
-    public ArrayList<String> colleges = new ArrayList<String>(
+    public ArrayList<String> colleges = new ArrayList<>(
             Arrays.asList(
                     "meas",
                     "mgmt",

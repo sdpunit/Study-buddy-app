@@ -2,6 +2,17 @@ package com.studybuddy.search;
 
 import com.studybuddy.Course;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -235,12 +246,96 @@ public class RBTree {
         return nodes;
     }
 
+    public ArrayList<Course> getCourses(String studentType) throws IOException, JSONException {
+        String path ="C:\\Users\\lanaa\\StudioProjects\\ga-23s1-comp2100-6442_v15\\app\\src\\main\\assets\\under_courses_data.json";
+        if (studentType=="postgrad") {
+             path = "C:\\Users\\lanaa\\StudioProjects\\ga-23s1-comp2100-6442_v15\\app\\src\\main\\assets\\post_courses_data.json";
+        }
+        String jsonData = new String(Files.readAllBytes(Paths.get(path)));
+        ArrayList undergrads = new ArrayList<Course>();
+                try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+                    String line;
+                    boolean ass = false;
+                    boolean conv = false;
+
+                    ArrayList assessments = new ArrayList<String>();
+                    String conveners = "";
+                    Course c = new Course();
+                    while ((line = reader.readLine()) != null) {
+                        if (line.contains("\"course_code\":")) {
+                            String s = line.substring(22,30);
+                            c.setCourseCode(s);
+                        }
+                        if (line.contains("\"course_name\":")) {
+                            String s = line.substring(22).split("\"")[0];
+                            c.setCourseName(s);
+                        }
+                        if (line.contains("\"student_type\":")) {
+                            String s = line.substring(23).split("\"")[0];
+                            c.setStudentType(s);
+                        }
+                        if (ass && line.contains("],")) {
+                            ass=false;
+                            assessments = new ArrayList<>();
+                            c.setAssessment(assessments);
+                        }
+                        if (ass) {
+                            String[] s = line.split("\"");
+                            if (s.length>1){
+                                assessments.add(s[1]);
+                            }
+                        }
+                        if (line.contains("\"assessment\":")) {  //need to fix
+                            ass=true;
+                            //c.setStudentType(line.split(" ")[1]);
+                        }
+                        if(line.contains("\"convener\": []")) {
+                            c.setConvener(null);
+                            undergrads.add(c);
+                            c= new Course();
+                            conv=false;
+                        }
+                        if(line.contains("\"convener\":") && !line.contains("]")) {
+                            conv=true;
+                        }
+                        if (conv) {
+                            conveners+=(line);
+                            undergrads.add(c);
+                            c= new Course();
+                            conv=false;
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return undergrads;
+            }
+
+    public RBTree createUndergradTree() throws JSONException, IOException {
+        RBTree undergrad = new RBTree();
+        for (Course course:getCourses("undergrad")) {
+            undergrad.insert(course);
+        }
+        return undergrad;
+    }
+
+    public RBTree createPostgradTree() throws JSONException, IOException {
+        RBTree postgrad = new RBTree();
+        for (Course course:getCourses("postgrad")) {
+            postgrad.insert(course);
+        }
+        return postgrad;
+    }
+
+
+
     public static class Node {
 
-        boolean isRed; // Node colour
+        public boolean isRed; // Node colour
         private Course course; // Node value
-        Node parent; // Parent node
-        Node left, right; // Children nodes
+        public Node parent; // Parent node
+        public Node left;
+        public Node right; // Children nodes
 
         public Node(Course course) {
             this.course = course;
