@@ -8,6 +8,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +20,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+
 public class LoginActivity extends AppCompatActivity {
+    private Handler handler;
+    private JSONArray jsonArray;
+    private int currentIndex = 0;
     boolean validUser;
 
     public static final String CHANNEL_ID = "StudyBuddy";
@@ -55,6 +66,21 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
+
+        try {
+            InputStream inputStream = getAssets().open("user_data.json");
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+            String json = new String(buffer, "UTF-8");
+            jsonArray = new JSONArray(json);
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+        // Initialize Handler to schedule data upload
+        handler = new Handler();
+        uploadDataPeriodically();
     }
 
     // checks that the information entered by the user matches an instance in the database (loginDetails.csv)
@@ -111,5 +137,39 @@ public class LoginActivity extends AppCompatActivity {
         channel.setDescription(description);
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(channel);
+    }
+
+    private void uploadDataPeriodically() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (currentIndex < jsonArray.length()) {
+                    try {
+                        JSONObject jsonObject = jsonArray.getJSONObject(currentIndex);
+
+                        // Extract the required values from the JSON object
+                        int uid = jsonObject.getInt("uid");
+                        String name = jsonObject.getString("name");
+                        String password = jsonObject.getString("password");
+                        boolean isUndergrad = jsonObject.getBoolean("isUndergrad");
+                        int studyMinutes = jsonObject.getInt("studyMinutes");
+
+                        // Create an instance of your object and set its properties
+                        User user = new User(uid,name,password,isUndergrad,studyMinutes);
+
+                        DatabaseReference userref = FirebaseDatabase.getInstance().getReference("users");
+                        // Store the object under the generated key in the "users" node
+                        userref.child(String.valueOf(user.getUid())).setValue(user);
+
+                        currentIndex++;
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                // Schedule the next data upload after 10 seconds
+                handler.postDelayed(this, 10000);
+            }
+        }, 10000); // Initial delay of 10 seconds
     }
 }
