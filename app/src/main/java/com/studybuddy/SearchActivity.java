@@ -18,6 +18,15 @@ import com.studybuddy.search.RBTree;
 import com.studybuddy.search.SearchParser;
 import com.studybuddy.search.Tokenizer;
 
+import org.json.JSONException;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +53,13 @@ public class SearchActivity extends AppCompatActivity {
 
         user = getIntent().getSerializableExtra("user", User.class);
 
-        setupData();
+        try {
+            setupData();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         setupList();
         setupOnClickListener();
         setupAdded();
@@ -115,18 +130,22 @@ public class SearchActivity extends AppCompatActivity {
         return results;
     }
 
-    private void setupData(){
+    private void setupData() throws JSONException, IOException {
+        createTree();
+        //createCourseTree("undergrad","comp");
+
         // call from tree and add to courseList
 //        courseTree.insert(new Course("COMP1010", "Intro to Computer Science 1", "punit"));
 //        courseTree.insert(new Course("COMP2160", "Software Engineering", "horatio"));
 //        courseTree.insert(new Course("COMP2140", "Data Structures and Algorithms", "bernardo"));
 //        courseTree.insert(new Course("COMP2080", "Intro to Computer Science 2", "punit"));
 //
-//        List<RBTree.Node> tree = courseTree.inOrderTraverse();
-//                tree.forEach((n) -> {
-//                    courseList.add(n.getCourse());
-//                });
-//        courseTree.createCourseTree();
+
+        //createCourseTree("undergrad","comp");
+        List<RBTree.Node> tree = courseTree.inOrderTraverse();
+        tree.forEach((n) -> {
+            courseList.add(n.getCourse());
+        });
     }
 
     private void setupList(){
@@ -160,6 +179,163 @@ public class SearchActivity extends AppCompatActivity {
         });
 
 
+    }
+
+
+
+
+    ///
+
+    public ArrayList<Course> getCourses(String studentType) throws IOException, JSONException {
+        String path = "post_courses_data.json";
+        if(studentType.equals("undergrad")){
+            path = "under_courses_data.json";
+        }
+
+        ArrayList undergrads = new ArrayList<Course>();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open(path), StandardCharsets.UTF_8))) {
+            String line;
+            boolean ass = false;
+            boolean conv = false;
+
+            ArrayList assessments = new ArrayList<String>();
+            String conveners = "";
+            Course c = new Course();
+            while ((line = reader.readLine()) != null) {
+                if (line.contains("\"course_code\":")) {
+                    String s = line.substring(22,30);
+                    c.setCourseCode(s);
+                }
+                if (line.contains("\"course_name\":")) {
+                    String s = line.substring(22).split("\"")[0];
+                    c.setCourseName(s);
+                }
+                if (line.contains("\"student_type\":")) {
+                    String s = line.substring(23).split("\"")[0];
+                    c.setStudentType(s);
+                }
+                if (ass && line.contains("],")) {
+                    ass=false;
+                    assessments = new ArrayList<>();
+                    c.setAssessment(assessments);
+                }
+                if (ass) {
+                    String[] s = line.split("\"");
+                    if (s.length>1){
+                        assessments.add(s[1]);
+                    }
+                }
+                if (line.contains("\"assessment\":")) {  //need to fix
+                    ass=true;
+                    //c.setStudentType(line.split(" ")[1]);
+                }
+                if(line.contains("\"convener\": []")) {
+                    c.setConvener(null);
+                    if (c.getCourseCode()!=null) {
+                    undergrads.add(c);}
+                    c= new Course();
+                    conv=false;
+                }
+                if(line.contains("\"convener\":") && !line.contains("]")) {
+                    conv=true;
+                }
+                if (conv) {
+                    conveners+=(line);
+
+                    undergrads.add(c);
+                    c= new Course();
+                    conv=false;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return undergrads;
+    }
+
+    public ArrayList<Course> getCollegeCourses(String studentType, String course) throws IOException, JSONException {
+        String path = "post_courses_data.json";
+        if(studentType.equals("undergrad")){
+            path = "under_courses_data.json";
+        }
+
+        ArrayList undergrads = new ArrayList<Course>();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open(path), StandardCharsets.UTF_8))) {
+            String line;
+            boolean ass = false;
+            boolean conv = false;
+
+            ArrayList assessments = new ArrayList<String>();
+            String conveners = "";
+            Course c = new Course();
+            while ((line = reader.readLine()) != null) {
+                if (line.contains("\"course_code\":")) {
+                    String s = line.substring(22,30);
+                    c.setCourseCode(s);
+                }
+                if (line.contains("\"student_type\":")) {
+                    String s = line.substring(23).split("\"")[0];
+                    c.setStudentType(s);
+                }
+                if (ass && line.contains("],")) {
+                    ass=false;
+                    assessments = new ArrayList<>();
+                    c.setAssessment(assessments);
+                }
+                if (ass) {
+                    String[] s = line.split("\"");
+                    if (s.length>1){
+                        assessments.add(s[1]);
+                    }
+                }
+                if (line.contains("\"assessment\":")) {  //need to fix
+                    ass=true;
+                    //c.setStudentType(line.split(" ")[1]);
+                }
+                if(line.contains("\"convener\": []")) {
+                    c.setConvener(null);
+                    if (c.getCourseCode()!=null && c.getCourseCode().contains(course.toUpperCase())) {
+                        undergrads.add(c);
+                        c= new Course();
+                        conv=false;
+                    }
+                }
+                if(line.contains("\"convener\":") && !line.contains("]")) {
+                    conv=true;
+                }
+                if (conv) {
+                    conveners+=(line);
+                    if (c.getCourseCode()!=null && c.getCourseCode().contains(course.toUpperCase())) {
+                        undergrads.add(c);
+                        c= new Course();
+                        conv=false;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return undergrads;
+    }
+
+    public RBTree createTree() throws JSONException, IOException {
+        String studentType = "postgrad";
+        if(user.getIsUndergrad()) {
+            studentType = "undergrad";
+        }
+        RBTree tree = new RBTree();
+        for (Course course:getCourses(studentType)) {
+            tree.insert(course);
+        }
+        return tree;
+    }
+
+    public RBTree createCourseTree(String studentType, String course) throws JSONException, IOException {
+        RBTree tree = new RBTree();
+        for (Course c:getCollegeCourses(studentType,course)) {
+            tree.insert(c);
+        }
+        return tree;
     }
 
 //    private void setupOnKeyListener()
