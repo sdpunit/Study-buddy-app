@@ -155,13 +155,24 @@ public class MainActivity extends AppCompatActivity {
             });
 
             // Text View for the course name
-            TextView txt_view_courseName = new TextView(this);
-            txt_view_courseName.setText(course.getCourseCode());
-            txt_view_courseName.setGravity(Gravity.CENTER);
-            txt_view_courseName.setTypeface(null, Typeface.BOLD);
+            TextView txt_courseName = new TextView(this);
+            txt_courseName.setText(course.getCourseCode());
+            txt_courseName.setGravity(Gravity.CENTER);
+            txt_courseName.setTypeface(null, Typeface.BOLD);
+
+            TextView txt_timeStudied = new TextView(this);
+            Double timeStudied = user.getCourseTime().get(course.getCourseCode());
+            txt_timeStudied.setGravity(Gravity.CENTER);
+            if (timeStudied == null || timeStudied == 0.0) {
+                txt_timeStudied.setText("Not started");
+            } else {
+
+                txt_timeStudied.setText("Studied "+ timeStudied + " minutes");
+            }
 
             courseLayout.addView(courseButton);
-            courseLayout.addView(txt_view_courseName);
+            courseLayout.addView(txt_courseName);
+            courseLayout.addView(txt_timeStudied);
             gridCourses.addView(courseLayout);
 
         }

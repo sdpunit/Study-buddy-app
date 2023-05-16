@@ -88,7 +88,9 @@ public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
             userTimeState.stopStudy();
 
             //userTimeState.addStudyMinutes(timer.getStudyTime());
+
             user.addStudyMinutes(timer.getStudyTime());
+
             user.setStudyNumber(user.getStudyNumber() + 1);
             if (!user.getCoursesStudied().contains(course)) {
                 user.addCourseStudied(course);
@@ -122,7 +124,7 @@ public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
             builder.setNeutralButton("OK", (dialog, which) -> {
                 dialog.dismiss();
                 userTimeState.stopStudy();
-                // userTimeState.addStudyMinutes(timer.getStudyTime());
+
                 user.addStudyMinutes(timer.getInitialMinutes());
                 user.setStudyNumber(user.getStudyNumber() + 1);
                 if (!user.getCoursesStudied().contains(course)) {

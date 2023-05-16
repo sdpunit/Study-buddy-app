@@ -71,6 +71,9 @@ public class User implements Serializable {
     }
     public void setCoursesEnrolled(ArrayList<Course> coursesEnrolled) {
         this.coursesEnrolled = coursesEnrolled;
+        for (Course course : coursesEnrolled){
+            this.courseTime.put(course.getCourseCode(), 0.0);
+        }
     }
 
     public int getStudyNumber() {
@@ -97,7 +100,11 @@ public class User implements Serializable {
 
     // add additional minutes to a course
     public void addCourseTime(Course course, Double additionalMinutes){
-        this.courseTime.put(course.getCourseCode(), courseTime.get(course) + additionalMinutes);
+        Double currentMinutes = courseTime.get(course.getCourseCode());
+        if (currentMinutes == null) {
+            currentMinutes = 0.0;
+        }
+        this.courseTime.put(course.getCourseCode(), currentMinutes + additionalMinutes);
     }
 
     public double getStudyMinutes() {
