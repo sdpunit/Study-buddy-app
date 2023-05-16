@@ -8,6 +8,9 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -76,8 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 // Get User object and use the values to update the UI
                 User updatedUser = dataSnapshot.getValue(User.class);
                 if (updatedUser != null) {
-                    user = updatedUser;
-                    updateCourseGrid(user.getCoursesEnrolled());
+                    updateCourseGrid(updatedUser.getCoursesEnrolled());
                 }
             }
 
@@ -110,8 +112,8 @@ public class MainActivity extends AppCompatActivity {
 
         // check cases and send notifications
         sendNotification();
-
     }
+
 
 
     private void updateCourseGrid(ArrayList<Course> courses) {
@@ -175,6 +177,27 @@ public class MainActivity extends AppCompatActivity {
             studyMinutes.setText("No study time recorded.");
         }
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.logout_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                // Perform logout here
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     public void sendNotification() {
         // notificationTypes
