@@ -131,7 +131,8 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void setupData() throws JSONException, IOException {
-        createTree();
+        RBTree t = createTree();
+        int i =1;
         //createCourseTree("undergrad","comp");
 
         // call from tree and add to courseList
@@ -142,10 +143,10 @@ public class SearchActivity extends AppCompatActivity {
 //
 
         //createCourseTree("undergrad","comp");
-        List<RBTree.Node> tree = courseTree.inOrderTraverse();
-        tree.forEach((n) -> {
-            courseList.add(n.getCourse());
-        });
+//        List<RBTree.Node> tree = courseTree.inOrderTraverse();
+//        tree.forEach((n) -> {
+//            courseList.add(n.getCourse());
+//        });
     }
 
     private void setupList(){
