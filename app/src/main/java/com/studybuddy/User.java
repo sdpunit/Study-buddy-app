@@ -41,6 +41,14 @@ public class User implements Serializable {
         this.courseTime = new HashMap<>();
     }
 
+    public User(int uid, String name, String password,boolean isUndergrad,double studyMinutes) {
+        this.uid = uid;
+        this.name = name;
+        this.password = password;
+        this.isUndergrad = isUndergrad;
+        this.studyMinutes = studyMinutes;
+    }
+
     public User(int uid, String name, boolean isUndergrad, ArrayList<Course> courses) {
         this.uid = uid;
         this.name = name;

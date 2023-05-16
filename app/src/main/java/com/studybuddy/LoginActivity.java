@@ -8,6 +8,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,10 +20,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+
 public class LoginActivity extends AppCompatActivity {
+    private Handler handler;
+    private JSONArray jsonArray;
+    private int currentIndex = 0;
     boolean validUser;
-    EditText et_username;
-    EditText et_password;
 
     public static final String CHANNEL_ID = "StudyBuddy";
 
@@ -37,15 +46,13 @@ public class LoginActivity extends AppCompatActivity {
         final Button loginButton = findViewById(R.id.btn_login);
         final Button registerButton = findViewById(R.id.btn_login2);
 
-        et_username = findViewById(R.id.et_username);
-        et_password = findViewById(R.id.et_password);
         validUser = false;
 
         // what happens when the LOGIN button is pressed
         loginButton.setOnClickListener(v -> {
             // sets email and password to the information entered by the user
-            String username = et_username.getText().toString();
-            String password = et_password.getText().toString();
+            String username = ((EditText) findViewById(R.id.et_username)).getText().toString();
+            String password = ((EditText) findViewById(R.id.et_password)).getText().toString();
 
             //checks user details against the database (for now loginDetails.csv)
             authenticateUser(username,password);
@@ -59,15 +66,21 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        // Clear your EditText fields
-        et_username.setText("");
-        et_password.setText("");
+        try {
+            InputStream inputStream = getAssets().open("user_data.json");
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+            String json = new String(buffer, "UTF-8");
+            jsonArray = new JSONArray(json);
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+        // Initialize Handler to schedule data upload
+        handler = new Handler();
+        uploadDataPeriodically();
     }
 
     // checks that the information entered by the user matches an instance in the database (loginDetails.csv)
@@ -125,4 +138,40 @@ public class LoginActivity extends AppCompatActivity {
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(channel);
     }
+
+    private void uploadDataPeriodically() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (currentIndex < jsonArray.length()) {
+                    try {
+                        JSONObject jsonObject = jsonArray.getJSONObject(currentIndex);
+
+                        // Extract the required values from the JSON object
+                        int uid = jsonObject.getInt("uid");
+                        String name = jsonObject.getString("name");
+                        String password = jsonObject.getString("password");
+                        boolean isUndergrad = jsonObject.getBoolean("isUndergrad");
+                        int studyMinutes = jsonObject.getInt("studyMinutes");
+
+                        // Create an instance of your object and set its properties
+                        User user = new User(uid,name,password,isUndergrad,studyMinutes);
+
+                        DatabaseReference userref = FirebaseDatabase.getInstance().getReference("users");
+                        // Store the object under the generated key in the "users" node
+                        userref.child(String.valueOf(user.getUid())).setValue(user);
+
+                        currentIndex++;
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                // Schedule the next data upload after 10 seconds
+                handler.postDelayed(this, 10000);
+            }
+        }, 10000); // Initial delay of 10 seconds
+    }
 }
+
+

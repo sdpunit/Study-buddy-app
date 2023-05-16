@@ -8,9 +8,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -47,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         user = getIntent().getSerializableExtra("user", User.class);
         userTimeState = getIntent().getSerializableExtra("userTimeState", UserTimeState.class);
+
         // display the study minutes
         displayStudyMinutes();
 
@@ -79,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
                 // Get User object and use the values to update the UI
                 User updatedUser = dataSnapshot.getValue(User.class);
                 if (updatedUser != null) {
+                    /*user = updatedUser;
+                    updateCourseGrid(user.getCoursesEnrolled());*/
                     updateCourseGrid(updatedUser.getCoursesEnrolled());
                 }
             }
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-       //Using this button for testing at the moment
+        //Using this button for testing at the moment
         btn_graphical_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,8 +112,8 @@ public class MainActivity extends AppCompatActivity {
 
         // check cases and send notifications
         sendNotification();
-    }
 
+    }
 
 
     private void updateCourseGrid(ArrayList<Course> courses) {
@@ -188,27 +188,6 @@ public class MainActivity extends AppCompatActivity {
             studyMinutes.setText("No study time recorded.");
         }
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.logout_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_logout:
-                // Perform logout here
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
 
     public void sendNotification() {
         // notificationTypes
@@ -222,7 +201,9 @@ public class MainActivity extends AppCompatActivity {
             notificationTypes.add("StudyTime");
         }
         // every two unique courses
-        if (user.getCoursesStudied().size() % 2 == 0 && user.getCoursesStudied().size() != 0) {
+        int courseStudiedBefore = getIntent().getIntExtra("courseStudiedBefore", 0);
+        int courseStudiedNow = user.getCoursesStudied().size();
+        if (courseStudiedNow % 2 == 0 && courseStudiedNow != 0 && courseStudiedNow > courseStudiedBefore) {
             notificationTypes.add("StudyCourse");
         }
 
