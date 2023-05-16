@@ -1,14 +1,13 @@
 package com.studybuddy;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,12 +20,9 @@ import com.studybuddy.search.Tokenizer;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +58,6 @@ public class SearchActivity extends AppCompatActivity {
         }
         setupList();
         setupOnClickListener();
-        setupAdded();
         searchWidgets();
 
         addCourseButton = findViewById(R.id.btn_addCourses);
@@ -81,6 +76,10 @@ public class SearchActivity extends AppCompatActivity {
 //        setupOnKeyListener();
     }
 
+    public static String subStringBetween(String input, String to, String from)
+    {
+        return input.substring(input.indexOf(to)+1, input.lastIndexOf(from));
+    }
     private void searchWidgets(){
         // search for widgets
         SearchView searchView = findViewById(R.id.SearchInput);
@@ -88,17 +87,36 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String input){
                 // call search function
-                ArrayList<Course> results = search(courseTree, input);
+                ArrayList<Course> results = search(courseTree, input.toLowerCase());
                 CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
                 if(!results.isEmpty()){
                     searchListView.setAdapter(adapter);
                 }
-
                 return false;
             }
             @Override
             public boolean onQueryTextChange(String input){
                 // call search function
+                if(input.contains("(") && input.contains(")") && input.indexOf("(") < input.indexOf(")")){
+                    String s = subStringBetween(input, "(", ")");
+                    ArrayList<Course> results = new ArrayList<Course>();
+                    for(Course course : courseList){
+                        if(course.getCourseName().toLowerCase().contains(s.toLowerCase())){
+                            results.add(course);
+                            CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
+                            searchListView.setAdapter(adapter);
+                        }
+                    }
+                }
+//                String s = subStringBetween(input, "(", ")");
+//                ArrayList<Course> results = new ArrayList<Course>();
+//                for (Course course : courseList) {
+//                    if (course.getCourseName().toLowerCase().contains(s.toLowerCase())) {
+//                        results.add(course);
+//                        CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
+//                        searchListView.setAdapter(adapter);
+//                    }
+//                }
 
                 return false;
             }
@@ -114,24 +132,34 @@ public class SearchActivity extends AppCompatActivity {
         if(queryObj == null){
             return results;
         }
-        try {
-            int code = queryObj.getCode();
-            String name = queryObj.getCourse();
-            String codeString = name + code;
-
-            RBTree.Node resultCourse = tree.searchByCourseCode(tree.root, codeString); // temporary until we have a tree access
-            if(resultCourse != null){
-                results.add(resultCourse.getCourse());
+//        try {
+//            int code = queryObj.getCode();
+//            String name = queryObj.getCourse();
+//            String codeString = name + code;
+//
+//            RBTree.Node resultCourse = tree.searchByCourseCode(tree.root, codeString); // temporary until we have a tree access
+//            if(resultCourse != null){
+//                results.add(resultCourse.getCourse());
+//            }
+//
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+        if (queryObj.getCode() == 0 && queryObj.getCourse() == null && queryObj.getConvener() == null) {
+            try {
+                return getCollegeCourses("undergrad",queryObj.getCollege());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
             }
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
         return results;
     }
 
     private void setupData() throws JSONException, IOException {
-        RBTree t = createTree();
+        courseTree = createTree();
         int i =1;
         //createCourseTree("undergrad","comp");
 
@@ -142,11 +170,11 @@ public class SearchActivity extends AppCompatActivity {
 //        courseTree.insert(new Course("COMP2080", "Intro to Computer Science 2", "punit"));
 //
 
-        //createCourseTree("undergrad","comp");
-//        List<RBTree.Node> tree = courseTree.inOrderTraverse();
-//        tree.forEach((n) -> {
-//            courseList.add(n.getCourse());
-//        });
+//        createCourseTree("undergrad","comp");
+        List<RBTree.Node> tree = courseTree.inOrderTraverse();
+        tree.forEach((n) -> {
+            courseList.add(n.getCourse());
+        });
     }
 
     private void setupList(){
@@ -154,33 +182,37 @@ public class SearchActivity extends AppCompatActivity {
         CourseAdapter adaptor = new CourseAdapter(getApplicationContext(), 0, courseList);
         searchListView.setAdapter(adaptor);
 
-
-    }
-
-    private void setupAdded(){
         addedListView = findViewById(R.id.AddedList);
-        CourseAdapter adaptor = new CourseAdapter(getApplicationContext(), 0, addedList);
-        addedListView.setAdapter(adaptor);
+        CourseAdapter adaptor2 = new CourseAdapter(getApplicationContext(), 0, addedList);
+        addedListView.setAdapter(adaptor2);
     }
 
     private void setupOnClickListener()
     {
-        searchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
-            {
-                Course selectCourse = (Course) (searchListView.getItemAtPosition(position));
+        searchListView.setOnItemClickListener((adapterView, view, position, l) -> {
+            Course selectCourse = (Course) (searchListView.getItemAtPosition(position));
 
-                if(!addedList.contains(selectCourse)) {
-                    addedList.add(selectCourse);
-                }
-                CourseAdapter adaptor = new CourseAdapter(getApplicationContext(), 0, addedList);
-                addedListView.setAdapter(adaptor);
+            if(!addedList.contains(selectCourse)) {
+                addedList.add(selectCourse);
             }
+            CourseAdapter adaptor = new CourseAdapter(getApplicationContext(), 0, addedList);
+            addedListView.setAdapter(adaptor);
+        });
+
+        addedListView.setOnItemClickListener((adapterView, view, position, l) -> {
+            Course selectCourse = (Course) (addedListView.getItemAtPosition(position));
+
+            if (addedList.contains(selectCourse)){
+                addedList.remove(selectCourse);
+            }
+            CourseAdapter adaptor = new CourseAdapter(getApplicationContext(), 0, addedList);
+            addedListView.setAdapter(adaptor);
         });
 
 
     }
+
+
 
 
 
