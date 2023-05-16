@@ -40,6 +40,7 @@ public class SetTimeActivity extends AppCompatActivity {
             intent.putExtra("user", user);
             intent.putExtra("minutes", minutes);
             intent.putExtra("course", course);
+
             startActivity(intent);
             finish();
         }

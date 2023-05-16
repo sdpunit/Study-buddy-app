@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         user = getIntent().getSerializableExtra("user", User.class);
         userTimeState = getIntent().getSerializableExtra("userTimeState", UserTimeState.class);
+
         // display the study minutes
         displayStudyMinutes();
 
@@ -76,8 +77,9 @@ public class MainActivity extends AppCompatActivity {
                 // Get User object and use the values to update the UI
                 User updatedUser = dataSnapshot.getValue(User.class);
                 if (updatedUser != null) {
-                    user = updatedUser;
-                    updateCourseGrid(user.getCoursesEnrolled());
+                    /*user = updatedUser;
+                    updateCourseGrid(user.getCoursesEnrolled());*/
+                    updateCourseGrid(updatedUser.getCoursesEnrolled());
                 }
             }
 
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-       //Using this button for testing at the moment
+        //Using this button for testing at the moment
         btn_graphical_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,13 +155,24 @@ public class MainActivity extends AppCompatActivity {
             });
 
             // Text View for the course name
-            TextView txt_view_courseName = new TextView(this);
-            txt_view_courseName.setText(course.getCourseCode());
-            txt_view_courseName.setGravity(Gravity.CENTER);
-            txt_view_courseName.setTypeface(null, Typeface.BOLD);
+            TextView txt_courseName = new TextView(this);
+            txt_courseName.setText(course.getCourseCode());
+            txt_courseName.setGravity(Gravity.CENTER);
+            txt_courseName.setTypeface(null, Typeface.BOLD);
+
+            TextView txt_timeStudied = new TextView(this);
+            Double timeStudied = user.getCourseTime().get(course.getCourseCode());
+            txt_timeStudied.setGravity(Gravity.CENTER);
+            if (timeStudied == null || timeStudied == 0.0) {
+                txt_timeStudied.setText("Not started");
+            } else {
+
+                txt_timeStudied.setText("Studied "+ timeStudied + " minutes");
+            }
 
             courseLayout.addView(courseButton);
-            courseLayout.addView(txt_view_courseName);
+            courseLayout.addView(txt_courseName);
+            courseLayout.addView(txt_timeStudied);
             gridCourses.addView(courseLayout);
 
         }
@@ -188,7 +201,9 @@ public class MainActivity extends AppCompatActivity {
             notificationTypes.add("StudyTime");
         }
         // every two unique courses
-        if (user.getCoursesStudied().size() % 2 == 0 && user.getCoursesStudied().size() != 0) {
+        int courseStudiedBefore = getIntent().getIntExtra("courseStudiedBefore", 0);
+        int courseStudiedNow = user.getCoursesStudied().size();
+        if (courseStudiedNow % 2 == 0 && courseStudiedNow != 0 && courseStudiedNow > courseStudiedBefore) {
             notificationTypes.add("StudyCourse");
         }
 
