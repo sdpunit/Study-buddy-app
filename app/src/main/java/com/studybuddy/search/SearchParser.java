@@ -16,28 +16,7 @@ public class SearchParser {
         this.tokenizer = tokenizer;
     }
 
-    public static void main(String[] args) {
-        // Create a scanner to get the user's input.
-        Scanner scanner = new Scanner(System.in); //replace with editable text id later
 
-        System.out.println("Provide a mathematical string to be parsed:");
-        while (scanner.hasNext()) {
-            String input = scanner.nextLine();
-
-            // Check if 'quit' is provided.
-            if (input.equals("q"))
-                break;
-
-            // Create an instance of the tokenizer.
-            Tokenizer tokenizer = new Tokenizer(input);
-
-//            // Print out the expression from the parser.
-//            SearchParser parser = new SearchParser(tokenizer);
-//            Exp expression = parser.parseExp();
-//            System.out.println("Parsing: " + expression.show());
-//            System.out.println("Evaluation: " + expression.evaluate());
-        }
-    }
 
     //flowing the grammar:
     /*

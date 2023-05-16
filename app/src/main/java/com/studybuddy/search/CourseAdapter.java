@@ -32,7 +32,7 @@ public class CourseAdapter extends ArrayAdapter<Course> {
         TextView tv3 = (TextView) convertView.findViewById(R.id.CellConvener);
 //        ImageView iv = (ImageView) convertView.findViewById(R.id.CellImage);
 
-        tv.setText(course.getCourseName());
+        tv.setText(course.getCourseName()); // course adapter breaks here even though the method called acts on the query not the course
         tv2.setText(course.getCourseCode());
         tv3.setText(course.getConvener());
 //        iv.setImageResource(R.drawable.ic_launcher_foreground);

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Course implements Serializable {
     private String courseCode;  // key
@@ -84,5 +85,13 @@ public class Course implements Serializable {
                 ", courseName='" + courseName + '\'' +
                 ", convener='" + convener +
                 '}';
+    }
+
+    // create hashmap to store course code with key access from convener and course name
+
+    HashMap<String, String> courseConveners = new HashMap<>();
+
+    public void addCourseConvener(String courseCode, String convener) {
+        courseConveners.put(courseCode, convener);
     }
 }

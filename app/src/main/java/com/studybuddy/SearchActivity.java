@@ -11,19 +11,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.studybuddy.search.Colleges;
 import com.studybuddy.search.CourseAdapter;
 import com.studybuddy.search.Query;
 import com.studybuddy.search.RBTree;
 import com.studybuddy.search.SearchParser;
 import com.studybuddy.search.Tokenizer;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
@@ -42,12 +47,18 @@ public class SearchActivity extends AppCompatActivity {
 
     private User user;
 
+    private HashMap<String, RBTree> collegeTreeMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
         user = getIntent().getSerializableExtra("user", User.class);
+
+        if(collegeTreeMap == null){
+            collegeTreeMap = getCollegeTreeMap();
+        }
 
         try {
             setupData();
@@ -87,37 +98,34 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String input){
                 // call search function
-                ArrayList<Course> results = search(courseTree, input.toLowerCase());
+                ArrayList<Course> results = new ArrayList<Course>();
+                results = search(courseTree, input.toLowerCase());
                 CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
-                if(!results.isEmpty()){
-                    searchListView.setAdapter(adapter);
-                }
+                searchListView.setAdapter(adapter);
+
+
                 return false;
             }
             @Override
             public boolean onQueryTextChange(String input){
-                // call search function
+                // call search function)
+                ArrayList<Course> results = new ArrayList<Course>();
                 if(input.contains("(") && input.contains(")") && input.indexOf("(") < input.indexOf(")")){
                     String s = subStringBetween(input, "(", ")");
-                    ArrayList<Course> results = new ArrayList<Course>();
+//                    if(s == null || s.isEmpty()){
+//                        courseList = getCourses();
+//                    }
+                    String[] strs =s.toLowerCase().split(" ");
                     for(Course course : courseList){
-                        if(course.getCourseName().toLowerCase().contains(s.toLowerCase())){
-                            results.add(course);
-                            CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
-                            searchListView.setAdapter(adapter);
+                        for (String str : strs) {
+                            if (course.getCourseName().toLowerCase().contains(str)) {
+                                results.add(course);
+                                CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
+                                searchListView.setAdapter(adapter);
+                            }
                         }
                     }
                 }
-//                String s = subStringBetween(input, "(", ")");
-//                ArrayList<Course> results = new ArrayList<Course>();
-//                for (Course course : courseList) {
-//                    if (course.getCourseName().toLowerCase().contains(s.toLowerCase())) {
-//                        results.add(course);
-//                        CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
-//                        searchListView.setAdapter(adapter);
-//                    }
-//                }
-
                 return false;
             }
         });
@@ -129,10 +137,26 @@ public class SearchActivity extends AppCompatActivity {
         Tokenizer tokenizer = new Tokenizer(input); // tokenize input
         SearchParser parser = new SearchParser(tokenizer); // parse tokens
         Query queryObj = parser.parseQuery(); // get query object
+
         if(queryObj == null){
             return results;
         }
-//        try {
+
+        RBTree collegeTree = collegeTreeMap.get(queryObj.getCollege());
+
+        if (queryObj.getCode() == 0 && queryObj.getCourse() == null && queryObj.getConvener() == null) {
+            collegeTree.inOrderTraverse().forEach((n) -> {
+                results.add(n.getCourse());
+            });
+        } else if (queryObj.getCourse() == null && queryObj.getConvener() == null) {
+            results.add(collegeTree.searchByCourseCode(collegeTree.root, queryObj.getCollege() + queryObj.getCode()));
+            }
+
+
+        return results;
+    }
+
+    //        try {
 //            int code = queryObj.getCode();
 //            String name = queryObj.getCourse();
 //            String codeString = name + code;
@@ -145,22 +169,11 @@ public class SearchActivity extends AppCompatActivity {
 //        } catch (Exception e) {
 //            throw new RuntimeException(e);
 //        }
-        if (queryObj.getCode() == 0 && queryObj.getCourse() == null && queryObj.getConvener() == null) {
-            try {
-                return getCollegeCourses("undergrad",queryObj.getCollege());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (JSONException e) {
-                throw new RuntimeException(e);
-            }
 
-        }
-        return results;
-    }
 
     private void setupData() throws JSONException, IOException {
-        courseTree = createTree();
-        int i =1;
+//        courseTree = createTree();
+//        int i =1;
         //createCourseTree("undergrad","comp");
 
         // call from tree and add to courseList
@@ -171,10 +184,16 @@ public class SearchActivity extends AppCompatActivity {
 //
 
 //        createCourseTree("undergrad","comp");
-        List<RBTree.Node> tree = courseTree.inOrderTraverse();
-        tree.forEach((n) -> {
-            courseList.add(n.getCourse());
-        });
+//        List<RBTree.Node> tree = courseTree.inOrderTraverse();
+//        tree.forEach((n) -> {
+//            courseList.add(n.getCourse());
+//        });
+        if(user.getIsUndergrad()){
+            courseList = getCourses("undergrad");
+        }
+        else{
+            courseList = getCourses("grad");
+        }
     }
 
     private void setupList(){
@@ -265,7 +284,7 @@ public class SearchActivity extends AppCompatActivity {
                 if(line.contains("\"convener\": []")) {
                     c.setConvener(null);
                     if (c.getCourseCode()!=null) {
-                    undergrads.add(c);}
+                        undergrads.add(c);}
                     c= new Course();
                     conv=false;
                 }
@@ -286,19 +305,61 @@ public class SearchActivity extends AppCompatActivity {
         return undergrads;
     }
 
-    public ArrayList<Course> getCollegeCourses(String studentType, String course) throws IOException, JSONException {
+    public List<Course> getCollegeCourses(String studentType, String college) throws IOException, JSONException {
         String path = "post_courses_data.json";
         if(studentType.equals("undergrad")){
             path = "under_courses_data.json";
         }
+        List<Course> undergrads = new ArrayList<>();
+        try {
+            InputStream inputStream = getAssets().open("under_courses_data.json");
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
 
-        ArrayList undergrads = new ArrayList<Course>();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open(path), StandardCharsets.UTF_8))) {
+            // Convert the contents to a string
+            String jsonString = new String(buffer, "UTF-8");
+            JSONObject jsonObject = new JSONObject(jsonString);
+            JSONArray collegeArray = jsonObject.getJSONArray(college.toUpperCase());
+
+            for (int i = 0; i < collegeArray.length(); i++) {
+                JSONObject courseJson = collegeArray.getJSONObject(i);
+
+                String courseCode = courseJson.getString("course_code");
+                String courseName = courseJson.getString("course_name");
+                String studentTypeOfCourse = courseJson.getString("student_type");
+
+                ArrayList<String> assessment = new ArrayList<>();
+                JSONArray assessmentArray = courseJson.getJSONArray("assessment");
+                for (int j = 0; j < assessmentArray.length(); j++) {
+                    assessment.add(assessmentArray.getString(j));
+                }
+
+                ArrayList<String> convener = new ArrayList<>();
+                JSONArray convenerArray = courseJson.getJSONArray("convener");
+                for (int j = 0; j < convenerArray.length(); j++) {
+                    convener.add(convenerArray.getString(j));
+                }
+                if (convener.size() == 0) {
+                    convener.add("No convener");
+                }
+                // convener things need to be modified
+                Course newCourse = new Course(courseCode, courseName, studentTypeOfCourse, assessment, convener.get(0));
+
+                undergrads.add(newCourse);
+            }
+            return undergrads;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        /*try (BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open(path), StandardCharsets.UTF_8))) {
             String line;
             boolean ass = false;
             boolean conv = false;
 
             ArrayList assessments = new ArrayList<String>();
+
             String conveners = "";
             Course c = new Course();
             while ((line = reader.readLine()) != null) {
@@ -327,7 +388,7 @@ public class SearchActivity extends AppCompatActivity {
                 }
                 if(line.contains("\"convener\": []")) {
                     c.setConvener(null);
-                    if (c.getCourseCode()!=null && c.getCourseCode().contains(course.toUpperCase())) {
+                    if (c.getCourseCode()!=null && c.getCourseCode().startsWith(college.toUpperCase())) {
                         undergrads.add(c);
                         c= new Course();
                         conv=false;
@@ -338,7 +399,7 @@ public class SearchActivity extends AppCompatActivity {
                 }
                 if (conv) {
                     conveners+=(line);
-                    if (c.getCourseCode()!=null && c.getCourseCode().contains(course.toUpperCase())) {
+                    if (c.getCourseCode()!=null && c.getCourseCode().startsWith(college.toUpperCase())) {
                         undergrads.add(c);
                         c= new Course();
                         conv=false;
@@ -347,7 +408,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
         return undergrads;
     }
 
@@ -378,4 +439,28 @@ public class SearchActivity extends AppCompatActivity {
 //        });
 //    }
 
+    public HashMap<String, RBTree> getCollegeTreeMap () {
+        HashMap<String, RBTree> collegeTreeMap = new HashMap<>();
+        String studentType = "postgrad";
+        if(user.getIsUndergrad()) {
+            studentType = "undergrad";
+        }
+        Colleges colleges = new Colleges();
+        for (String college:colleges.colleges) {
+            try {
+                collegeTreeMap.put(college, createCourseTree(studentType, college));
+            } catch (JSONException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return collegeTreeMap;
+    }
 }
+
+//    private void setupOnKeyListener()
+//    {
+//        searchList.setOnKeyListener((view, i, keyEvent) -> {
+//            return false;
+//        });
+//    }
+

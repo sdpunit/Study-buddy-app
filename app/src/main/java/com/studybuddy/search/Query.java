@@ -1,5 +1,7 @@
 package com.studybuddy.search;
 
+import java.util.HashMap;
+
 public class Query {
 
     private String college;
@@ -40,11 +42,7 @@ public class Query {
         this.term = term;
     }
 
-    // create hashmap to store course code with key access from convener and course name
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
+
 
 
 
