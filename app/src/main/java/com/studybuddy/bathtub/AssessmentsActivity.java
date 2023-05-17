@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
@@ -39,10 +40,11 @@ public class AssessmentsActivity extends AppCompatActivity {
             for (String assessment : assessments){
                 stringBuilder.append("\u2022 ");
                 stringBuilder.append(assessment);
-                stringBuilder.append("\n");
+                stringBuilder.append("\n\n");
             }
             txt_assessments.setText(stringBuilder);
-            //txt_assessments.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        } else {
+            txt_assessments.setText("No assessments information available yet, please contact your convenor.");
         }
     }
     public void clickStartStudy(View view) {
