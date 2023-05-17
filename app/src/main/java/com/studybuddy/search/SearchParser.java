@@ -57,8 +57,8 @@ public class SearchParser {
                 return parseTerm(query); //parse the rest, (term)
             } else if (currentToken.getType() == Token.Type.COLLEGECODE) {
                 if (currentToken.getToken().split(" ").length==1) {
-                    query.setCollege(currentToken.getToken().split(" ")[0].substring(0,3));
-                    query.setCode(Integer.parseInt(currentToken.getToken().split(" ")[0].substring(3)));
+                    query.setCollege(currentToken.getToken().split(" ")[0].substring(0,4));
+                    query.setCode(Integer.parseInt(currentToken.getToken().split(" ")[0].substring(4)));
                 }
                 else {
                     query.setCollege(currentToken.getToken().split(" ")[0]); //set the college
