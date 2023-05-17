@@ -68,7 +68,7 @@ public class SearchParser {
                 tokenizer.next(); //move to the next token
                 return parseTerm(query);
             } else {
-                return null;
+                return parseTerm(query);
 //                throw new IllegalArgumentException("Expected COLLEGE, found: " + tokenizer.current().getToken());
             }
         }
