@@ -1,5 +1,9 @@
 package com.studybuddy.notification;
 
+/**
+ * Factory class for creating notifications. There are three types of notifications.
+ * @author Yanghe Dong
+ */
 public class NotificationFactory {
     public StudyNotification createNotification(String notificationType) {
         switch (notificationType) {

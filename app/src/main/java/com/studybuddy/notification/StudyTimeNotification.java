@@ -9,7 +9,10 @@ import androidx.core.app.NotificationManagerCompat;
 import com.studybuddy.LoginActivity;
 import com.studybuddy.R;
 import com.studybuddy.User;
-
+/**
+ * This class is to create a notification when the user has studied two more hours.
+ * @author Yanghe Dong
+ */
 public class StudyTimeNotification implements StudyNotification {
 
     @Override

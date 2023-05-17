@@ -50,7 +50,7 @@ public class SearchParser {
 //            return query;
 //        }
 //        else
-        if (tokenizer.hasNext()) { //if there is a next token
+        if (tokenizer.hasNext() && (currentToken != null)) { //if there is a next token
             if (currentToken.getType() == Token.Type.COLLEGE) { //if the current token is a college, first token must be a college
                 query.setCollege(currentToken.getToken()); //set the college
                 tokenizer.next(); //move to the next token
@@ -68,9 +68,11 @@ public class SearchParser {
                 tokenizer.next(); //move to the next token
                 return parseTerm(query);
             } else {
-                throw new IllegalArgumentException("Expected COLLEGE, found: " + tokenizer.current().getToken());
+                return null;
+//                throw new IllegalArgumentException("Expected COLLEGE, found: " + tokenizer.current().getToken());
             }
         }
+
         throw new IllegalArgumentException("You entered a null token: " + tokenizer.current());
     }
     private Query parseTerm(Query query) {
@@ -93,7 +95,8 @@ public class SearchParser {
                 return parseTerm(query);
 
             } else {
-                throw new IllegalArgumentException("Expected CODE, COURSE, or CONVENER" + tokenizer.current().getToken());
+                return query;
+//                throw new IllegalArgumentException("Expected CODE, COURSE, or CONVENER got: " + tokenizer.current().getToken());
             }
         }
         return query;

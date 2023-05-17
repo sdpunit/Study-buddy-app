@@ -8,6 +8,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Course class to store information for one course
+ */
 public class Course implements Serializable {
     private String courseCode;  // key
     private String courseName;

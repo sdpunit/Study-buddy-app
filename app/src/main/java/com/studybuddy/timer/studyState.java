@@ -2,6 +2,9 @@ package com.studybuddy.timer;
 
 import java.io.Serializable;
 
+/**
+ * Study state is the state when the user is studying. He can only pause or stop studying in this state.
+ */
 public class studyState implements State, Serializable {
     private UserTimeState user;
 
