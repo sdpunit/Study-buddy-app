@@ -98,15 +98,10 @@ public class SearchActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String input){
                 // call search function
                 ArrayList<Course> results = new ArrayList<Course>();
-                try {
                     results = search(courseTree, input.toLowerCase());
                     CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
                     searchListView.setAdapter(adapter);
-                }
-                catch (IllegalArgumentException e) {
-                    CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, new ArrayList<>());
-                    searchListView.setAdapter(adapter); //TODO: add an error message
-                }
+
                 return false;
             }
             @Override
