@@ -408,7 +408,7 @@ public class SearchActivity extends AppCompatActivity {
                 }
                 else if (ass && line.contains("],")) {
                     ass=false;
-                    c.setAssessment(null);
+                    c.setAssessment(assessments);
                     assessments = new ArrayList<>();
                 }
                 else if (ass) {
