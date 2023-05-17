@@ -4,4 +4,9 @@
         android:title="Logout"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    <item
+        android:id="@+id/action_reset_study_time"
+        android:title="Reset study Time"
+        android:orderInCategory="200"
+        android:showAsAction="never" />
 </menu>

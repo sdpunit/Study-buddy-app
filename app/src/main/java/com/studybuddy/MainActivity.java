@@ -8,6 +8,9 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -34,7 +37,6 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     private User user;
     private UserTimeState userTimeState;
-    ValueEventListener valueEventListener;
     DatabaseReference userRef;
 
     @Override
@@ -59,15 +61,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             txt_hello_user.setText("Hi, guest");
         }
-        ArrayList<Course> myCourses = new ArrayList<>();
-        myCourses.add(new Course(
-                "MEAS8127",
-                "'Sectarianism' in the Middle East: Theology, Politics and Identity",
-                "Dr. Liz"));
-        myCourses.add(new Course("COMP1720", "Authoritarianism, Democratisation and Protest in the Muslim Middle East", "Dr. Albert"));
-        myCourses.add(new Course("COMP2100", "Software Construction", "Bernardo"));
 
-        //user.setCoursesEnrolled(myCourses);
 
         userRef = FirebaseDatabase.getInstance().getReference("users").child(String.valueOf(user.getUid()));
         userRef.addValueEventListener(new ValueEventListener() {
@@ -77,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 User updatedUser = dataSnapshot.getValue(User.class);
                 if (updatedUser != null) {
                     user = updatedUser;
-                    updateCourseGrid(user.getCoursesEnrolled());
+                    updateCourseGrid(user);
                     displayStudyMinutes(user);
                 }
             }
@@ -101,28 +95,52 @@ public class MainActivity extends AppCompatActivity {
         btn_graphical_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<Course> myCoursesCopy = new ArrayList<>(myCourses);
-                for (Course course:myCoursesCopy){
-                    user.addCoursesEnrolled(course);
-                }
-                userRef.setValue(user);
+//                ArrayList<Course> myCoursesCopy = new ArrayList<>(myCourses);
+//                for (Course course:myCoursesCopy){
+//                    user.addCoursesEnrolled(course);
+//                }
+//                userRef.setValue(user);
             }
         });
 
         // check cases and send notifications
         sendNotification();
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.logout_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                // Perform logout here
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.action_reset_study_time:
+                // Reset the study time here
+                user.setStudyMinutes(0);
+                userRef.setValue(user);
+                displayStudyMinutes(user);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 
-    private void updateCourseGrid(ArrayList<Course> courses) {
-        // ignores if the user has no courses
-        if(courses == null) {
-            return;
-        }
-        // Get the GridLayout from the layout
-        GridLayout gridCourses = findViewById(R.id.grid_courses);
 
+    private void updateCourseGrid(User user) {
+        // Get the GridLayout from the layout
+        ArrayList<Course> courses = user.getCoursesEnrolled();
+        GridLayout gridCourses = findViewById(R.id.grid_courses);
+        gridCourses.removeAllViews();
         // Create a random number generator
         Random random = new Random();
 
