@@ -72,6 +72,8 @@ public class Course implements Serializable {
         this.assessment = assessment;
     }
 
+    public ArrayList<String> getAssessment() { return assessment; }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Course) {
