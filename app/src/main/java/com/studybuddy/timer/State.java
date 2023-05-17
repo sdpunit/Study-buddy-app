@@ -1,7 +1,10 @@
 package com.studybuddy.timer;
 
-import android.content.Context;
 
+/**
+ * Interface for the state pattern
+ * @author Yanghe Dong
+ */
 public interface State{
     public void startStudy();
     public void pause();

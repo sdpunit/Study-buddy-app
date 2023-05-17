@@ -4,6 +4,9 @@ import android.content.Context;
 
 import java.io.Serializable;
 
+/**
+ * Pause state is the state when the user pauses the timer. He can only resume or stop studying in this state.
+ */
 public class pauseState implements State, Serializable {
     private UserTimeState user;
 

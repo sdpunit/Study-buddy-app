@@ -212,11 +212,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sends notifications to the user based on different cases.
+     */
     public void sendNotification() {
         // notificationTypes
         List<String> notificationTypes = new ArrayList<>();
         // every two study sessions
-        if (user.getStudyNumber() % 2 == 0 && user.getStudyNumber() != 0) {
+        int studyNumberNow = user.getStudyNumber();
+        int studyNumberBefore = getIntent().getIntExtra("studyNumberBefore", studyNumberNow);
+        if (user.getStudyNumber() % 2 == 0 && user.getStudyNumber() != 0 && studyNumberNow > studyNumberBefore) {
             notificationTypes.add("StudyNumber");
         }
         // every two hours of study
@@ -224,8 +229,8 @@ public class MainActivity extends AppCompatActivity {
             notificationTypes.add("StudyTime");
         }
         // every two unique courses
-        int courseStudiedBefore = getIntent().getIntExtra("courseStudiedBefore", 0);
         int courseStudiedNow = user.getCoursesStudied().size();
+        int courseStudiedBefore = getIntent().getIntExtra("courseStudiedBefore", courseStudiedNow);
         if (courseStudiedNow % 2 == 0 && courseStudiedNow != 0 && courseStudiedNow > courseStudiedBefore) {
             notificationTypes.add("StudyCourse");
         }

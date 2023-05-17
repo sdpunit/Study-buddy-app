@@ -21,17 +21,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.studybuddy.timer.UserTimeState;
-import com.studybuddy.timer.myTimer;
+import com.studybuddy.timer.MyTimer;
 import com.studybuddy.timer.studyState;
 
-public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
+public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
     private UserTimeState userTimeState;
     private User user;
-    private myTimer timer;
+    private MyTimer timer;
     private Course course;
     private TextView timeTextView;
 
     private int courseStudiedBefore;
+    private int studyNumberBefore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
         userTimeState = getIntent().getSerializableExtra("userTimeState", UserTimeState.class);
         course = getIntent().getSerializableExtra("course", Course.class);
         courseStudiedBefore = user.getCoursesStudied().size();
+        studyNumberBefore = user.getStudyNumber();
 
         VideoView videoView = (VideoView) findViewById(R.id.videoView);
         Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.background);
@@ -65,10 +67,13 @@ public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
             }
         };
         userTimeState.startStudy();
-        timer = new myTimer(minutes, this);
+        timer = new MyTimer(minutes, this);
         timer.start(handler);
     }
 
+    /**
+     * This method is called when the user clicks pause or resume button.
+     */
     public void clickPauseOrResume(View view) {
         Button pauseOrResumeButton = (Button) view;
         // if the user is in study state, pause the timer
@@ -84,6 +89,9 @@ public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
         }
     }
 
+    /**
+     * This method is called when the user clicks stop button.
+     */
     public void clickStop(View view) {
         Button pauseOrResumeButton = (Button) findViewById(R.id.pauseOrResumeButton);
         this.clickPauseOrResume(pauseOrResumeButton);
@@ -116,6 +124,7 @@ public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
                         intent.putExtra("userTimeState", userTimeState);
                         intent.putExtra("user", user);
                         intent.putExtra("courseStudiedBefore", courseStudiedBefore);
+                        intent.putExtra("studyNumberBefore", studyNumberBefore);
                         startActivity(intent);
                         finish();
                     }
@@ -131,7 +140,7 @@ public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
     }
 
     /**
-     * This method is called when time up
+     * This method is called when time up.
      */
     @Override
     public void timeUp() {
@@ -161,6 +170,8 @@ public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
                             Intent intent = new Intent(TimerActivity.this, MainActivity.class);
                             intent.putExtra("userTimeState", userTimeState);
                             intent.putExtra("user", user);
+                            intent.putExtra("courseStudiedBefore", courseStudiedBefore);
+                            intent.putExtra("studyNumberBefore", studyNumberBefore);
                             startActivity(intent);
                             finish();
                         }

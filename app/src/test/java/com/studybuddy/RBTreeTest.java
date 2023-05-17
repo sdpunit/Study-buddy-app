@@ -11,6 +11,10 @@ import com.studybuddy.search.RBTree;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is a test class for RB Tree.
+ * @author Yanghe Dong
+ */
 public class RBTreeTest {
     private final Course[] courses = {new Course("COMP2300"), new Course("COMP3600"),
             new Course("COMP2100"), new Course("COMP2100"), new Course("COMP4600"),
@@ -18,6 +22,7 @@ public class RBTreeTest {
             new Course("COMP4528"), new Course("COMP1110"), new Course("COMP2620"),
             new Course("COMP4691"), new Course("COMP3630"), new Course("COMP3425")};
 
+    // check if two lists contain the same elements
     private boolean compareLists(List<RBTree.Node> expected, List<RBTree.Node> actual) {
         if (expected.size() != actual.size()) {
             return false;
@@ -187,11 +192,18 @@ public class RBTreeTest {
     }
 
     @Test(timeout = 1000)
+    public void testSearchNonExist() {
+        for (int i = 0; i < 14; i++) {
+            this.tree.insert(courses[i]);
+        }
+        assertNull(this.tree.searchByCourseCode(this.tree.root,"COMP8600"));
+    }
+
+    @Test(timeout = 1000)
     public void testSearchByCourseCode() {
         for (int i = 0; i < 14; i++) {
             this.tree.insert(courses[i]);
         }
         assertEquals(this.tree.searchByCourseCode(this.tree.root,"COMP4600").getCourse(), courses[4]);
     }
-
 }
