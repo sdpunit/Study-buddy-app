@@ -137,8 +137,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void updateCourseGrid(User user) {
+
         // Get the GridLayout from the layout
         ArrayList<Course> courses = user.getCoursesEnrolled();
+        if (courses == null) {
+            return;
+        }
         GridLayout gridCourses = findViewById(R.id.grid_courses);
         gridCourses.removeAllViews();
         // Create a random number generator

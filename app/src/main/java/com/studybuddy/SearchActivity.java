@@ -94,25 +94,27 @@ public class SearchActivity extends AppCompatActivity {
         // search for widgets
         SearchView searchView = findViewById(R.id.SearchInput);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            ArrayList<Course> results = new ArrayList<Course>();
             @Override
             public boolean onQueryTextSubmit(String input){
                 // call search function
-                List<Course> results;
-                    results = search(input.toLowerCase());
-                    CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
-                    searchListView.setAdapter(adapter);
+                results = search(courseTree, input.toLowerCase());
+                CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
+                searchListView.setAdapter(adapter);
 
                 return false;
             }
             @Override
             public boolean onQueryTextChange(String input){
                 // call search function)
-                ArrayList<Course> results = new ArrayList<Course>();
+//                if(input.isEmpty()){
+//                    results.clear();
+//                    CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
+//                    searchListView.setAdapter(adapter);
+//                }
+                results.clear();
                 if(input.contains("(") && input.contains(")") && input.indexOf("(") < input.indexOf(")")){
                     String s = subStringBetween(input, "(", ")");
-//                    if(s == null || s.isEmpty()){
-//                        courseList = getCourses();
-//                    }
                     String[] strs =s.toLowerCase().split(" ");
                     for(Course course : courseList){
                         for (String str : strs) {
@@ -129,9 +131,9 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    private List<Course> search(String input){
+    private ArrayList search(RBTree tree, String input){
         // search for course
-        List<Course> results = new ArrayList<>(); //new array list
+        ArrayList results = new ArrayList(); //new array list
         Tokenizer tokenizer = new Tokenizer(input); // tokenize input
         SearchParser parser = new SearchParser(tokenizer); // parse tokens
         Query queryObj = parser.parseQuery(); // get query object
@@ -139,57 +141,48 @@ public class SearchActivity extends AppCompatActivity {
         if(queryObj == null){
             return results;
         }
-
         RBTree collegeTree = collegeTreeMap.get(queryObj.getCollege());
 
-        if (queryObj.getCode() == 0 && queryObj.getCourse() == null && queryObj.getConvener() == null) {
+        boolean college = queryObj.getCollege()!=null;
+        boolean code = queryObj.getCode()!=0;
+        boolean course = queryObj.getCourse()!=null;
+        boolean convener = queryObj.getConvener()!=null;
+
+
+        RBTree.Node courseResult = collegeTree.searchByCourseCode(collegeTree.root, queryObj.getCollege() + queryObj.getCode());
+
+        if (courseResult != null) { // runs the search if exact conditions are matched
+            results.add(courseResult.getCourse());
+        }
+
+        else if (queryObj.getCode() == 0 && queryObj.getCourse() == null && queryObj.getConvener() == null) { // if only college is specified
             collegeTree.inOrderTraverse().forEach((n) -> {
                 results.add(n.getCourse());
             });
-        } else if (queryObj.getCourse() == null && queryObj.getConvener() == null) {
-            results.add(collegeTree.searchByCourseCode(collegeTree.root, queryObj.getCollege() + queryObj.getCode()).getCourse());
-            }
-        else if (queryObj.getConvener() == null) {
-            results.add(collegeTree.searchByCourseCode(collegeTree.root, queryObj.getCollege() + queryObj.getCode()).getCourse());
         }
-        else {
-            results.add(collegeTree.searchByCourseCode(collegeTree.root, queryObj.getCollege() + queryObj.getCode()).getCourse());
+
+        else if ((college && course) || (college && convener)) { // if course or convener is specified
+            courseList.clear();
+            for (RBTree.Node n :collegeTree.inOrderTraverse()) {
+                courseList.add(n.getCourse());
+            }
+                if (course){
+                    for(Course c : courseList){
+                        String[] strs =input.toLowerCase().split(" ");
+                        for (String str : strs) {
+                            if (c.getCourseName().toLowerCase().contains(str) && !results.contains(c)) {
+                                results.add(c);
+                            }
+                        }
+                }
+            }
         }
         return results;
     }
 
-    //        try {
-//            int code = queryObj.getCode();
-//            String name = queryObj.getCourse();
-//            String codeString = name + code;
-//
-//            RBTree.Node resultCourse = tree.searchByCourseCode(tree.root, codeString); // temporary until we have a tree access
-//            if(resultCourse != null){
-//                results.add(resultCourse.getCourse());
-//            }
-//
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
 
 
     private void setupData() throws JSONException, IOException {
-//        courseTree = createTree();
-//        int i =1;
-        //createCourseTree("undergrad","comp");
-
-        // call from tree and add to courseList
-//        courseTree.insert(new Course("COMP1010", "Intro to Computer Science 1", "punit"));
-//        courseTree.insert(new Course("COMP2160", "Software Engineering", "horatio"));
-//        courseTree.insert(new Course("COMP2140", "Data Structures and Algorithms", "bernardo"));
-//        courseTree.insert(new Course("COMP2080", "Intro to Computer Science 2", "punit"));
-//
-
-//        createCourseTree("undergrad","comp");
-//        List<RBTree.Node> tree = courseTree.inOrderTraverse();
-//        tree.forEach((n) -> {
-//            courseList.add(n.getCourse());
-//        });
         courseList = getCourses();
 
     }
@@ -406,11 +399,4 @@ public class SearchActivity extends AppCompatActivity {
 
 
 }
-
-//    private void setupOnKeyListener()
-//    {
-//        searchList.setOnKeyListener((view, i, keyEvent) -> {
-//            return false;
-//        });
-//    }
 
