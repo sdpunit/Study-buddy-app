@@ -164,7 +164,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
         if (college) {
-            if (code) {
+            if (code) { //works
                 if (found != null) {
                     results.add(found.getCourse());
                     return results;
@@ -177,7 +177,7 @@ public class SearchActivity extends AppCompatActivity {
                 for (RBTree.Node n :collegeTree.inOrderTraverse()) {
                     courseList.add(n.getCourse());
                 }
-                if (course) {
+                if (course) { //works
                     for(Course c : courseList){
                         if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) && !results.contains(c)) {
                             results.add(c);
@@ -185,11 +185,9 @@ public class SearchActivity extends AppCompatActivity {
                     }
                     return results;
                 }
-                else {
+                else { // works
                     for(Course c : courseList){
-                        String s = c.getConvener().toLowerCase();
-                        boolean b = c.getConvener().toLowerCase().contains(input.split("=")[1]); // very specific, need to edit to cathc incorrect input
-                        if (c.getConvener().toLowerCase().contains(input.split("=")[1])) {
+                        if (c.getConvener().toLowerCase().contains(input.split("=")[1].trim())) {
                             results.add(c);
                         }
                     }
