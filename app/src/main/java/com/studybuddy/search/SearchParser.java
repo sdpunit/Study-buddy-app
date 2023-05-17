@@ -52,6 +52,7 @@ public class SearchParser {
                 query.setCollege(currentToken.getToken()); //set the college
                 tokenizer.next(); //move to the next token
                 return parseTerm(query); //parse the rest, (term)
+
             } else if (currentToken.getType() == Token.Type.COLLEGECODE) {
                 if (currentToken.getToken().split(" ").length==1) {
                     query.setCollege(currentToken.getToken().split(" ")[0].substring(0,4));
@@ -64,9 +65,6 @@ public class SearchParser {
                 }
                 tokenizer.next(); //move to the next token
                 return parseTerm(query);
-            } else {
-                return null;
-//                throw new IllegalArgumentException("Expected COLLEGE, found: " + tokenizer.current().getToken());
             }
         }
         return null;
@@ -77,9 +75,14 @@ public class SearchParser {
         if (tokenizer.hasNext()) {
             Token currentToken = tokenizer.current();
             if (currentToken.getType() == Token.Type.CODE && query.getCode() == 0) {
-                query.setCode(Integer.parseInt(currentToken.getToken()));
-                tokenizer.next();
-                return parseTerm(query);
+                if(query.getCode() == 0) {
+                    query.setCode(Integer.parseInt(currentToken.getToken()));
+                    tokenizer.next();
+                    return parseTerm(query);
+                }
+                else {
+                    return query;
+                }
 
             } else if (currentToken.getType() == Token.Type.COURSE) {
                 query.setCourse(currentToken.getToken());

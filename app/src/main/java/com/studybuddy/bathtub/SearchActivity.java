@@ -147,6 +147,11 @@ public class SearchActivity extends AppCompatActivity {
         SearchParser parser = new SearchParser(tokenizer); // parse tokens
         Query queryObj = parser.parseQuery(); // get query object
 
+        boolean college = queryObj.getCollege()!=null;
+        boolean code = queryObj.getCode()!=0;
+        boolean course = queryObj.getCourse()!=null;
+        boolean convener = queryObj.getConvener()!=null;
+
 
         if(queryObj == null){
             Toaster.showToast(getApplicationContext(), "Invalid search query");
@@ -156,20 +161,16 @@ public class SearchActivity extends AppCompatActivity {
         RBTree.Node found = collegeTree.searchByCourseCode(collegeTree.root,queryObj.getCollege() + queryObj.getCode());
 
 
-        boolean college = queryObj.getCollege()!=null;
-        boolean code = queryObj.getCode()!=0;
-        boolean course = queryObj.getCourse()!=null;
-        boolean convener = queryObj.getConvener()!=null;
-
 
         if (college) {
             if (code) {
-                if (found == null) {
-                    Toaster.showToast(getApplicationContext(), "Course not found");
+                if (found != null) {
+                    results.add(found.getCourse());
+                    return results;
+                } else {
+                    Toaster.showToast(getApplicationContext(), "Course not found" + " college= " + queryObj.getCollege() + " code= " +queryObj.getCode());
                     return results;
                 }
-                results.add(found.getCourse());
-                return results;
             }
             else if (course || convener) {
                 for (RBTree.Node n :collegeTree.inOrderTraverse()) {

@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         // Initialize Handler to schedule data upload
         handler = new Handler();
-        uploadDataPeriodically();
+//        uploadDataPeriodically();
     }
     // The Edit texts are cleared everytime we come back to this activity
     @Override
