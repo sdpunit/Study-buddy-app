@@ -30,7 +30,7 @@ import java.io.InputStream;
 public class LoginActivity extends AppCompatActivity {
     private Handler handler;
     private JSONArray jsonArray;
-    private int currentIndex = 0;
+    private int currentIndex;
     boolean validUser;
     EditText et_username;
     EditText et_password;
@@ -73,6 +73,18 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
+        // read the current index from the firebase
+        DatabaseReference currentIndexRef = FirebaseDatabase.getInstance().getReference("currentIndex");
+        currentIndexRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    currentIndex = dataSnapshot.getValue(Integer.class);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+        }});
 
         try {
             InputStream inputStream = getAssets().open("user_data.json");
@@ -178,6 +190,9 @@ public class LoginActivity extends AppCompatActivity {
                         userref.child(String.valueOf(user.getUid())).setValue(user);
 
                         currentIndex++;
+                        // Save the updated current index to firebase
+                        DatabaseReference indexRef = FirebaseDatabase.getInstance().getReference("currentIndex");
+                        indexRef.setValue(currentIndex);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
