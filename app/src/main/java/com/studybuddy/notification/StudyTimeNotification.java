@@ -6,9 +6,9 @@ import android.widget.Toast;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.studybuddy.LoginActivity;
+import com.studybuddy.bathtub.LoginActivity;
 import com.studybuddy.R;
-import com.studybuddy.User;
+import com.studybuddy.bathtub.User;
 /**
  * This class is to create a notification when the user has studied two more hours.
  * @author Yanghe Dong

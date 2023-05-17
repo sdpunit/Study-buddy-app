@@ -1,10 +1,9 @@
-package com.studybuddy;
+package com.studybuddy.bathtub;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -12,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.studybuddy.R;
 import com.studybuddy.search.Colleges;
 import com.studybuddy.search.CourseAdapter;
 import com.studybuddy.search.Query;
@@ -148,47 +148,79 @@ public class SearchActivity extends AppCompatActivity {
         Query queryObj = parser.parseQuery(); // get query object
 
         if(queryObj == null){
+            Toaster.showToast(getApplicationContext(), "Invalid search query");
             return results;
         }
+
         RBTree collegeTree = collegeTreeMap.get(queryObj.getCollege());
 
-        //booleans
         boolean college = queryObj.getCollege()!=null;
         boolean code = queryObj.getCode()!=0;
         boolean course = queryObj.getCourse()!=null;
         boolean convener = queryObj.getConvener()!=null;
 
 
-        RBTree.Node courseResult = collegeTree.searchByCourseCode(collegeTree.root, queryObj.getCollege() + queryObj.getCode()); // search the tree for node
-
-        if (courseResult != null) { // if exact conditions are matched then add to results
-            results.add(courseResult.getCourse());
-        }
-
-        else if (queryObj.getCode() == 0 && queryObj.getCourse() == null && queryObj.getConvener() == null) { // if only the college is specified
-            collegeTree.inOrderTraverse().forEach((n) -> {
-                results.add(n.getCourse()); // add all courses in the college to results
-            });
-        }
-
-        else if ((college && course) || (college && convener)) { // if course or convener is specified
-            courseList.clear();
-            for (RBTree.Node n :collegeTree.inOrderTraverse()) {
-                courseList.add(n.getCourse());
+        if (college) {
+            if (code) {
+                results.add(collegeTree.searchByCourseCode(collegeTree.root,queryObj.getCollege() + queryObj.getCode()).getCourse());
+                return results;
             }
-                if (course){ // if course is specifiedd
+            else if (course || convener) {
+                for (RBTree.Node n :collegeTree.inOrderTraverse()) {
+                    courseList.add(n.getCourse());
+                }
+                if (course) {
                     for(Course c : courseList){
-                        String[] strs =input.toLowerCase().split(" ");
-                        for (String str : strs) {
-                            if (c.getCourseName().toLowerCase().contains(str) && !results.contains(c)) {
-                                results.add(c);
-                            }
+                        if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) && !results.contains(c)) {
+                            results.add(c);
                         }
+                    }
+                    return results;
+                }
+                else {  // dosent work rn
+                    for(Course c : courseList){
+                        if (c.getCourseName().toLowerCase().contains(input)) {
+                            results.add(c);
+                        }
+                    }
+                    return results;
+                }
+            }
+            else {
+                collegeTree.inOrderTraverse().forEach((n) -> {
+                    results.add(n.getCourse());
+                });
+            }
+        }
+        if (code) {
+
+        }
+        if (course) {
+            if (convener) {
+                for(Course c : courseList){
+                    if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) || c.getConvener().toLowerCase().contains(queryObj.getConvener()) ) {
+                        results.add(c);
+                    }
+                }
+                return results;
+            }
+            for(Course c : courseList){
+                if (c.getCourseName().toLowerCase().contains(queryObj.getCourse())) {
+                    results.add(c);
+                }
+            }
+        }
+        if (convener) {
+            for(Course c : courseList){
+                if (c.getCourseName().toLowerCase().contains(queryObj.getConvener())) {
+                    results.add(c);
                 }
             }
         }
         return results;
     }
+
+
 
 
 

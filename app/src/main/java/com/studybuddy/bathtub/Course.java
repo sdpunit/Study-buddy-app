@@ -1,12 +1,7 @@
-package com.studybuddy;
+package com.studybuddy.bathtub;
 
-import android.view.View;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Course class to store information for one course

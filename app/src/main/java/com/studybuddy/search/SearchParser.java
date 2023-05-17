@@ -1,8 +1,5 @@
 package com.studybuddy.search;
 
-import java.util.Objects;
-import java.util.Scanner;
-
 public class SearchParser {
     Tokenizer tokenizer;
 
@@ -72,8 +69,8 @@ public class SearchParser {
 //                throw new IllegalArgumentException("Expected COLLEGE, found: " + tokenizer.current().getToken());
             }
         }
-
-        throw new IllegalArgumentException("You entered a null token: " + tokenizer.current());
+        return null;
+//        throw new IllegalArgumentException("You entered a null token: " + tokenizer.current());
     }
     private Query parseTerm(Query query) {
 

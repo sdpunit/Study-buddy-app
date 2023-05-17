@@ -1,4 +1,4 @@
-package com.studybuddy;
+package com.studybuddy.bathtub;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +20,7 @@ import android.widget.VideoView;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.studybuddy.R;
 import com.studybuddy.timer.UserTimeState;
 import com.studybuddy.timer.MyTimer;
 import com.studybuddy.timer.studyState;
