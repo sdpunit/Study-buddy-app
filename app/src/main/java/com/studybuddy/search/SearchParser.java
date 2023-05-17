@@ -16,28 +16,7 @@ public class SearchParser {
         this.tokenizer = tokenizer;
     }
 
-    public static void main(String[] args) {
-        // Create a scanner to get the user's input.
-        Scanner scanner = new Scanner(System.in); //replace with editable text id later
 
-        System.out.println("Provide a mathematical string to be parsed:");
-        while (scanner.hasNext()) {
-            String input = scanner.nextLine();
-
-            // Check if 'quit' is provided.
-            if (input.equals("q"))
-                break;
-
-            // Create an instance of the tokenizer.
-            Tokenizer tokenizer = new Tokenizer(input);
-
-//            // Print out the expression from the parser.
-//            SearchParser parser = new SearchParser(tokenizer);
-//            Exp expression = parser.parseExp();
-//            System.out.println("Parsing: " + expression.show());
-//            System.out.println("Evaluation: " + expression.evaluate());
-        }
-    }
 
     //flowing the grammar:
     /*
@@ -77,8 +56,15 @@ public class SearchParser {
                 tokenizer.next(); //move to the next token
                 return parseTerm(query); //parse the rest, (term)
             } else if (currentToken.getType() == Token.Type.COLLEGECODE) {
-                query.setCollege(currentToken.getToken().split(" ")[0]); //set the college
-                query.setCode(Integer.parseInt(currentToken.getToken().split(" ")[1])); //set the code
+                if (currentToken.getToken().split(" ").length==1) {
+                    query.setCollege(currentToken.getToken().split(" ")[0].substring(0,4));
+                    query.setCode(Integer.parseInt(currentToken.getToken().split(" ")[0].substring(4)));
+                }
+                else {
+                    query.setCollege(currentToken.getToken().split(" ")[0]); //set the college
+                    query.setCode(Integer.parseInt(currentToken.getToken().split(" ")[1])); //set the code
+
+                }
                 tokenizer.next(); //move to the next token
                 return parseTerm(query);
             } else {

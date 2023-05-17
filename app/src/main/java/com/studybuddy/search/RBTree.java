@@ -309,4 +309,5 @@ public class RBTree {
             return this.parent == null ? 1 : ((this.isRed ? 0 : 1) + this.parent.blackParentCount());
         }
     }
+
 }
