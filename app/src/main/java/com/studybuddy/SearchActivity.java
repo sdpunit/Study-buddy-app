@@ -176,7 +176,7 @@ public class SearchActivity extends AppCompatActivity {
             for (RBTree.Node n :collegeTree.inOrderTraverse()) {
                 courseList.add(n.getCourse());
             }
-                if (course){ // if course is specified
+                if (course){ // if course is specifiedd
                     for(Course c : courseList){
                         String[] strs =input.toLowerCase().split(" ");
                         for (String str : strs) {

@@ -72,6 +72,8 @@ public class Course implements Serializable {
         this.assessment = assessment;
     }
 
+    public ArrayList<String> getAssessment() { return assessment; }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Course) {
@@ -88,13 +90,5 @@ public class Course implements Serializable {
                 ", courseName='" + courseName + '\'' +
                 ", convener='" + convener +
                 '}';
-    }
-
-    // create hashmap to store course code with key access from convener and course name
-
-    HashMap<String, String> courseConveners = new HashMap<>();
-
-    public void addCourseConvener(String courseCode, String convener) {
-        courseConveners.put(courseCode, convener);
     }
 }
