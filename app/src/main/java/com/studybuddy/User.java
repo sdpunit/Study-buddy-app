@@ -80,7 +80,7 @@ public class User implements Serializable {
     public void setCoursesEnrolled(ArrayList<Course> coursesEnrolled) {
         this.coursesEnrolled = coursesEnrolled;
         for (Course course : coursesEnrolled){
-            this.courseTime.put(course.getCourseCode(), 0.0);
+            this.courseTime.putIfAbsent(course.getCourseCode(), 0.0);
         }
     }
 
