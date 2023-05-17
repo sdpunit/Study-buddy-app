@@ -50,19 +50,18 @@ public class RegisterActivity extends AppCompatActivity {
             String password2 = ((EditText) findViewById(R.id.et_repassword)).getText().toString();
             Integer uid = Integer.parseInt(((EditText) findViewById(R.id.et_uid)).getText().toString());
 
-            if (password1!=password2) {checkPassword.setError("passwords do not match");}
-            if (password1.length()<5) {password.setError("passwords should be 6 characters or greater");}
+            if (!password1.equals(password2)) {
+                checkPassword.setError("passwords do not match");}
+            else if (password1.length()<5) {
+                password.setError("passwords should be 6 characters or greater");}
             else {
-
-                addUserToDatabase(uid, username, password1);
+                //addUserToDatabase(uid, username, password1);
                 user = new User(uid, username);
 
                 finish();
                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
-
-
             }
 
         });

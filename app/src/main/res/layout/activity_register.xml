@@ -156,9 +156,11 @@
 
             <ImageButton
                 android:id="@+id/arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="57dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
+                android:background="#619E67"
                 android:contentDescription="@string/arrow"
                 app:srcCompat="@drawable/ic_arrow_left" />
         </LinearLayout>
