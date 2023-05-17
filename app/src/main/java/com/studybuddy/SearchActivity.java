@@ -154,6 +154,12 @@ public class SearchActivity extends AppCompatActivity {
         } else if (queryObj.getCourse() == null && queryObj.getConvener() == null) {
             results.add(collegeTree.searchByCourseCode(collegeTree.root, queryObj.getCollege() + queryObj.getCode()).getCourse());
             }
+        else if (queryObj.getConvener() == null) {
+            results.add(collegeTree.searchByCourseCode(collegeTree.root, queryObj.getCollege() + queryObj.getCode()).getCourse());
+        }
+        else {
+            results.add(collegeTree.searchByCourseCode(collegeTree.root, queryObj.getCollege() + queryObj.getCode()).getCourse());
+        }
         return results;
     }
 
