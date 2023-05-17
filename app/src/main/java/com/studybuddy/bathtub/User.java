@@ -1,4 +1,4 @@
-package com.studybuddy;
+package com.studybuddy.bathtub;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,8 +1,5 @@
 package com.studybuddy.search;
 
-import java.util.Objects;
-import java.util.Scanner;
-
 public class SearchParser {
     Tokenizer tokenizer;
 
@@ -55,34 +52,37 @@ public class SearchParser {
                 query.setCollege(currentToken.getToken()); //set the college
                 tokenizer.next(); //move to the next token
                 return parseTerm(query); //parse the rest, (term)
+
             } else if (currentToken.getType() == Token.Type.COLLEGECODE) {
                 if (currentToken.getToken().split(" ").length==1) {
-                    query.setCollege(currentToken.getToken().split(" ")[0].substring(0,4));
-                    query.setCode(Integer.parseInt(currentToken.getToken().split(" ")[0].substring(4)));
+                    query.setCollege(currentToken.getToken().split(" ")[0].trim().substring(0,4));
+                    query.setCode(Integer.parseInt(currentToken.getToken().split(" ")[0].trim().substring(4)));
                 }
                 else {
-                    query.setCollege(currentToken.getToken().split(" ")[0]); //set the college
-                    query.setCode(Integer.parseInt(currentToken.getToken().split(" ")[1])); //set the code
+                    query.setCollege(currentToken.getToken().split(" ")[0].trim()); //set the college
+                    query.setCode(Integer.parseInt(currentToken.getToken().split(" ")[1].trim())); //set the code
 
                 }
                 tokenizer.next(); //move to the next token
                 return parseTerm(query);
-            } else {
-                return null;
-//                throw new IllegalArgumentException("Expected COLLEGE, found: " + tokenizer.current().getToken());
             }
         }
-
-        throw new IllegalArgumentException("You entered a null token: " + tokenizer.current());
+        return null;
+//        throw new IllegalArgumentException("You entered a null token: " + tokenizer.current());
     }
     private Query parseTerm(Query query) {
 
         if (tokenizer.hasNext()) {
             Token currentToken = tokenizer.current();
             if (currentToken.getType() == Token.Type.CODE && query.getCode() == 0) {
-                query.setCode(Integer.parseInt(currentToken.getToken()));
-                tokenizer.next();
-                return parseTerm(query);
+                if(query.getCode() == 0) {
+                    query.setCode(Integer.parseInt(currentToken.getToken()));
+                    tokenizer.next();
+                    return parseTerm(query);
+                }
+                else {
+                    return query;
+                }
 
             } else if (currentToken.getType() == Token.Type.COURSE) {
                 query.setCourse(currentToken.getToken());
@@ -90,7 +90,7 @@ public class SearchParser {
                 return parseTerm(query);
 
             } else if (currentToken.getType() == Token.Type.CONVENER) {
-                query.setConvener(currentToken.getToken().split(" ")[1]);
+                query.setConvener(currentToken.getToken().split("=")[1].trim());
                 tokenizer.next();
                 return parseTerm(query);
 

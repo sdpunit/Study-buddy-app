@@ -29,6 +29,7 @@ public class Tokenizer {
         if (tokenizer.hasMoreTokens()) {
             String delta = tokenizer.nextToken().trim().toLowerCase();
 
+
             if (isValidInteger(delta)) {
                 currentToken = new Token(delta, Token.Type.CODE);
             }
@@ -41,12 +42,18 @@ public class Tokenizer {
             else if(collegeList.contains(delta)) {
                 currentToken = new Token(delta, Token.Type.COLLEGE);
             }
-            else if(delta.contains("convener") ) {
+            else if(delta.contains("convener=") ) {
                 currentToken = new Token(delta, Token.Type.CONVENER);
             }
             else if(isLetters(delta)) {
                 currentToken = new Token(delta, Token.Type.COURSE);
             }
+            else if (delta.contains("(") || delta.contains(")")) {
+                // ignore
+                next();
+//                throw new IllegalArgumentException("Expected CODE, COLLEGE, COLLEGECODE, CONVENER, or COURSE, found: " + delta);
+            }
+
         } else {
             currentToken = null;
         }

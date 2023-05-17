@@ -1,4 +1,4 @@
-package com.studybuddy;
+package com.studybuddy.bathtub;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import com.studybuddy.R;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -34,6 +35,8 @@ public class RegisterActivity extends AppCompatActivity {
         final Button registerButton2 = findViewById(R.id.btn_register);
         final ImageButton arrow = findViewById(R.id.arrow);
         RadioGroup radioGroup = findViewById(R.id.radio_group);
+        final EditText checkPassword = findViewById(R.id.et_repassword);
+        final EditText password = findViewById(R.id.et_password);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -48,11 +51,17 @@ public class RegisterActivity extends AppCompatActivity {
 
         registerButton2.setOnClickListener(v -> {
             String username = ((EditText) findViewById(R.id.et_username)).getText().toString();
-            String password = ((EditText) findViewById(R.id.et_password)).getText().toString();
+            String password1 = ((EditText) findViewById(R.id.et_password)).getText().toString();
+            String password2 = ((EditText) findViewById(R.id.et_repassword)).getText().toString();
             Integer uid = Integer.parseInt(((EditText) findViewById(R.id.et_uid)).getText().toString());
 
-            addUserToDatabase(uid, username, password);
-            user = new User(uid, username);
+            if (!password1.equals(password2)) {
+                checkPassword.setError("passwords do not match");}
+            else if (password1.length()<5) {
+                password.setError("passwords should be 6 characters or greater");}
+            else {
+                //addUserToDatabase(uid, username, password1);
+                user = new User(uid, username);
 
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
             intent.putExtra("user", user);
