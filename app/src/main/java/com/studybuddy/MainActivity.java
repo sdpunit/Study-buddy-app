@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         userTimeState = getIntent().getSerializableExtra("userTimeState", UserTimeState.class);
 
         // display the study minutes
-        displayStudyMinutes();
 
         Button btn_add_courses = (Button) findViewById(R.id.btn_add_courses);
         TextView txt_hello_user = findViewById(R.id.txt_hello_user);
@@ -77,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
                 // Get User object and use the values to update the UI
                 User updatedUser = dataSnapshot.getValue(User.class);
                 if (updatedUser != null) {
-                    /*user = updatedUser;
-                    updateCourseGrid(user.getCoursesEnrolled());*/
-                    updateCourseGrid(updatedUser.getCoursesEnrolled());
+                    user = updatedUser;
+                    updateCourseGrid(user.getCoursesEnrolled());
+                    displayStudyMinutes(user);
                 }
             }
 
@@ -178,12 +177,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void displayStudyMinutes() {
+    public void displayStudyMinutes(User user) {
         TextView studyMinutes = (TextView) findViewById(R.id.studyMinutes);
-        if(userTimeState != null) {
-            //studyMinutes.setText("You have studied for " + Math.round(userTimeState.getStudyMinutes()) + " minutes!");
+        if(user != null) {
             studyMinutes.setText("You have studied for " + Math.round(user.getStudyMinutes()) + " minutes!");
-            user.addStudyMinutes(user.getStudyMinutes());
         } else {
             studyMinutes.setText("No study time recorded.");
         }
