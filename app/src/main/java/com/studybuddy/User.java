@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * User class to store information for one user.
+ */
 public class User implements Serializable {
     private int uid;
     private String name;

@@ -26,6 +26,9 @@ public class SetTimeActivity extends AppCompatActivity {
         course = getIntent().getSerializableExtra("course", Course.class);
     }
 
+    /**
+     * This method is called when the user clicks the start button to start a countdown.
+     */
     public void clickStart(View view) {
         EditText studyTime = (EditText) findViewById(R.id.studyTimeText);
         String studyTimeString = studyTime.getText().toString();
@@ -46,6 +49,9 @@ public class SetTimeActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Check if the input string is an integer. This is used to handle invalid study time input.
+     */
     public boolean isInteger(String s) {
         try {
             Integer.parseInt(s);

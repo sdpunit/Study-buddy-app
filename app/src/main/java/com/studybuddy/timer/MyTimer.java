@@ -6,7 +6,7 @@ import android.os.Message;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 
-public class myTimer {
+public class MyTimer {
 
     private TimeUp studyActivityWhenTimeUp;
     private final int initialMinutes;
@@ -16,18 +16,21 @@ public class myTimer {
     private Handler handler;
 
     /**
-     * This interface is used to deal with time-up
+     * This interface is used to deal with time-up.
      */
     public interface TimeUp {
         void timeUp();
     }
 
-    public myTimer(int initialMinutes, TimeUp studyActivityWhenTimeUp) {
+    public MyTimer(int initialMinutes, TimeUp studyActivityWhenTimeUp) {
         this.initialMinutes = initialMinutes;
         this.remainingMinutes = initialMinutes;
         this.studyActivityWhenTimeUp = studyActivityWhenTimeUp;
     }
 
+    /**
+     * Start the timer.
+     */
     public void start(Handler handler) {
         this.handler = handler;
 
@@ -40,6 +43,9 @@ public class myTimer {
         timerThread.start();
     }
 
+    /**
+     * Count down and send message to handler so that the UI can be updated.
+     */
     public void countDown() {
         int totalSeconds = this.initialMinutes * 60;
 
@@ -71,9 +77,12 @@ public class myTimer {
         pauseLatch.countDown();
     }
 
+    // Get the whole time of the timer, which is used to record study time when time up.
     public int getInitialMinutes() {
         return this.initialMinutes;
     }
+    // Get the study time of this study session,
+    // which is used to record study time when the user manually stops.
     public double getStudyTime() {
         return (double) this.initialMinutes - this.remainingMinutes;
     }

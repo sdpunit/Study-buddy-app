@@ -234,6 +234,11 @@ public class SearchActivity extends AppCompatActivity {
 
     ///
 
+    /**
+     * Creates a list of courses of one college
+     * @param college college name such as comp
+     * @return list of courses
+     */
     public List<Course> getCollegeCourses(String college) throws JSONException {
         // reading json based on student type
         String path = "post_courses_data.json";
@@ -309,12 +314,11 @@ public class SearchActivity extends AppCompatActivity {
 //        });
 //    }
 
+    /**
+     * Creates a hashmap of college names and their respective trees.
+     */
     public HashMap<String, RBTree> getCollegeTreeMap () {
         HashMap<String, RBTree> collegeTreeMap = new HashMap<>();
-        String studentType = "postgrad";
-        if(user.getIsUndergrad()) {
-            studentType = "undergrad";
-        }
         Colleges colleges = new Colleges();
         for (String college:colleges.colleges) {
             try {

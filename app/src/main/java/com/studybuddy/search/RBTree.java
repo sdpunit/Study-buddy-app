@@ -15,7 +15,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * This class is a RB Tree to store course data.
+ *
+ * @author Yanghe Dong
+ */
 public class RBTree {
     public Node root;
 
@@ -170,7 +174,7 @@ public class RBTree {
     }
 
     /**
-     * Search for a course by course code
+     * Search for a course by course code (e.g. COMP2100)
      *
      * @param root the root of the tree
      * @param courseCode the code of the course
@@ -246,13 +250,16 @@ public class RBTree {
         return nodes;
     }
 
+    /**
+     * This class represents a node in the RB tree.
+     */
     public static class Node {
 
-        public boolean isRed; // Node colour
-        private Course course; // Node value
-        public Node parent; // Parent node
+        public boolean isRed;
+        private Course course;
+        public Node parent;
         public Node left;
-        public Node right; // Children nodes
+        public Node right;
 
         public Node(Course course) {
             this.course = course;
@@ -266,7 +273,7 @@ public class RBTree {
             this.right.parent = this;
         }
 
-        // Leaf node
+        // Leaf node constructor
         public Node() {
             this.course = null;
             this.isRed = false;
@@ -292,6 +299,7 @@ public class RBTree {
         }
 
         // Return a list of all leaves this node leads to
+        // This method is from previous exam
         public List<RBTree.Node> childrenLeaves() {
             List<RBTree.Node> leaves = new ArrayList<>();
 
@@ -305,9 +313,9 @@ public class RBTree {
         }
 
         // Return the number of black nodes between this node and root (inclusive)
+        // This method is from previous exam
         public int blackParentCount() {
             return this.parent == null ? 1 : ((this.isRed ? 0 : 1) + this.parent.blackParentCount());
         }
     }
-
 }

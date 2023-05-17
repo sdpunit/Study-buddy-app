@@ -208,6 +208,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sends notifications to the user based on different cases.
+     */
     public void sendNotification() {
         // notificationTypes
         List<String> notificationTypes = new ArrayList<>();
