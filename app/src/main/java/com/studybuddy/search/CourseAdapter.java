@@ -32,7 +32,11 @@ public class CourseAdapter extends ArrayAdapter<Course> {
 
         tv.setText(course.getCourseName()); // course adapter breaks here even though the method called acts on the query not the course
         tv2.setText(course.getCourseCode());
-        tv3.setText(course.getConvener());
+        if(course.getConvener() == null){
+            tv3.setText("TBD");
+        } else{
+            tv3.setText(course.getConvener());
+        }
 //        iv.setImageResource(R.drawable.ic_launcher_foreground);
 
 

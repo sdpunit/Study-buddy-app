@@ -148,19 +148,28 @@ public class SearchActivity extends AppCompatActivity {
         SearchParser parser = new SearchParser(tokenizer); // parse tokens
         Query queryObj = parser.parseQuery(); // get query object
 
-        boolean college = queryObj.getCollege()!=null;
-        boolean code = queryObj.getCode()!=0;
-        boolean course = queryObj.getCourse()!=null;
-        boolean convener = queryObj.getConvener()!=null;
+        RBTree collegeTree = null;
 
 
         if(queryObj == null){
             Toaster.showToast(getApplicationContext(), "Invalid search query");
             return results;
         }
-        RBTree collegeTree = collegeTreeMap.get(queryObj.getCollege());
+
+        try {
+            collegeTree = collegeTreeMap.get(queryObj.getCollege());
+        } catch (NullPointerException e) {
+            Toaster.showToast(getApplicationContext(), "Invalid search query");
+            return results;
+        }
+
         RBTree.Node found = collegeTree.searchByCourseCode(collegeTree.root,queryObj.getCollege() + queryObj.getCode());
 
+
+        boolean college = queryObj.getCollege()!=null;
+        boolean code = queryObj.getCode()!=0;
+        boolean course = queryObj.getCourse()!=null;
+        boolean convener = queryObj.getConvener()!=null;
 
 
         if (college) {
