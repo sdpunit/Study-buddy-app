@@ -32,6 +32,9 @@ public class LoginActivity extends AppCompatActivity {
     private JSONArray jsonArray;
     private int currentIndex = 0;
     boolean validUser;
+    EditText et_username;
+    EditText et_password;
+
 
     public static final String CHANNEL_ID = "StudyBuddy";
 
@@ -46,13 +49,17 @@ public class LoginActivity extends AppCompatActivity {
         final Button loginButton = findViewById(R.id.btn_login);
         final Button registerButton = findViewById(R.id.btn_login2);
 
+        et_username = findViewById(R.id.et_username);
+        et_password = findViewById(R.id.et_password);
+
         validUser = false;
 
         // what happens when the LOGIN button is pressed
         loginButton.setOnClickListener(v -> {
             // sets email and password to the information entered by the user
-            String username = ((EditText) findViewById(R.id.et_username)).getText().toString();
-            String password = ((EditText) findViewById(R.id.et_password)).getText().toString();
+            String username = et_username.getText().toString();
+            String password = et_password.getText().toString();
+
 
             //checks user details against the database (for now loginDetails.csv)
             authenticateUser(username,password);
@@ -81,6 +88,15 @@ public class LoginActivity extends AppCompatActivity {
         // Initialize Handler to schedule data upload
         handler = new Handler();
         uploadDataPeriodically();
+    }
+    // The Edit texts are cleared everytime we come back to this activity
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Clear your EditText fields
+        et_username.setText("");
+        et_password.setText("");
     }
 
     // checks that the information entered by the user matches an instance in the database (loginDetails.csv)

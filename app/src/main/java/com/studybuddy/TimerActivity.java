@@ -14,8 +14,12 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.studybuddy.timer.UserTimeState;
 import com.studybuddy.timer.myTimer;
 import com.studybuddy.timer.studyState;
@@ -98,15 +102,25 @@ public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
             if (!user.getCoursesStudied().contains(course)) {
                 user.addCourseStudied(course);
             }
-            //user.addCourseTime(course, timer.getStudyTime());
+            user.addCourseTime(course, timer.getStudyTime());
             timer = null;
 
-            Intent intent = new Intent(TimerActivity.this, MainActivity.class);
-            intent.putExtra("userTimeState", userTimeState);
-            intent.putExtra("user", user);
-            intent.putExtra("courseStudiedBefore", courseStudiedBefore);
-            startActivity(intent);
-            finish();
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("users");
+            myRef.child(String.valueOf(user.getUid())).setValue(user, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                    if (databaseError != null) {
+                        Toast.makeText(TimerActivity.this, "Data could not be updated", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = new Intent(TimerActivity.this, MainActivity.class);
+                        intent.putExtra("userTimeState", userTimeState);
+                        intent.putExtra("user", user);
+                        intent.putExtra("courseStudiedBefore", courseStudiedBefore);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+            });
         });
         builder.setNegativeButton("No", (dialog, which) -> {
             dialog.dismiss();
@@ -134,14 +148,24 @@ public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
                 if (!user.getCoursesStudied().contains(course)) {
                     user.addCourseStudied(course);
                 }
-                //user.addCourseTime(course, (double)timer.getInitialMinutes());
+                user.addCourseTime(course, (double)timer.getInitialMinutes());
                 timer = null;
 
-                Intent intent = new Intent(TimerActivity.this, MainActivity.class);
-                intent.putExtra("userTimeState", userTimeState);
-                intent.putExtra("user", user);
-                startActivity(intent);
-                finish();
+                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("users");
+                myRef.child(String.valueOf(user.getUid())).setValue(user, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                        if (databaseError != null) {
+                            Toast.makeText(TimerActivity.this, "Data could not be updated", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Intent intent = new Intent(TimerActivity.this, MainActivity.class);
+                            intent.putExtra("userTimeState", userTimeState);
+                            intent.putExtra("user", user);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                });
             });
             AlertDialog dialog = builder.create();
             dialog.show();
