@@ -94,10 +94,10 @@ public class SearchActivity extends AppCompatActivity {
         // search for widgets
         SearchView searchView = findViewById(R.id.SearchInput);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            ArrayList<Course> results = new ArrayList<>();
             @Override
             public boolean onQueryTextSubmit(String input){
                 // call search function
-                ArrayList<Course> results = new ArrayList<Course>();
                     results = search(courseTree, input.toLowerCase());
                     CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
                     searchListView.setAdapter(adapter);
@@ -107,7 +107,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String input){
                 // call search function)
-                ArrayList<Course> results = new ArrayList<Course>();
+
                 if(input.contains("(") && input.contains(")") && input.indexOf("(") < input.indexOf(")")){
                     String s = subStringBetween(input, "(", ")");
 //                    if(s == null || s.isEmpty()){

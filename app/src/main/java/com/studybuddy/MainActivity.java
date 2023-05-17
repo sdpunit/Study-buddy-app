@@ -116,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void updateCourseGrid(ArrayList<Course> courses) {
+        // ignores if the user has no courses
+        if(courses == null) {
+            return;
+        }
         // Get the GridLayout from the layout
         GridLayout gridCourses = findViewById(R.id.grid_courses);
 
