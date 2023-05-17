@@ -89,12 +89,4 @@ public class Course implements Serializable {
                 ", convener='" + convener +
                 '}';
     }
-
-    // create hashmap to store course code with key access from convener and course name
-
-    HashMap<String, String> courseConveners = new HashMap<>();
-
-    public void addCourseConvener(String courseCode, String convener) {
-        courseConveners.put(courseCode, convener);
-    }
 }

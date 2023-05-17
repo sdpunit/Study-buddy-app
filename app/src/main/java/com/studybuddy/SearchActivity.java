@@ -97,8 +97,8 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String input){
                 // call search function
-                ArrayList<Course> results = new ArrayList<Course>();
-                    results = search(courseTree, input.toLowerCase());
+                List<Course> results;
+                    results = search(input.toLowerCase());
                     CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
                     searchListView.setAdapter(adapter);
 
@@ -129,9 +129,9 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    private ArrayList search(RBTree tree, String input){
+    private List<Course> search(String input){
         // search for course
-        ArrayList results = new ArrayList(); //new array list
+        List<Course> results = new ArrayList<>(); //new array list
         Tokenizer tokenizer = new Tokenizer(input); // tokenize input
         SearchParser parser = new SearchParser(tokenizer); // parse tokens
         Query queryObj = parser.parseQuery(); // get query object
