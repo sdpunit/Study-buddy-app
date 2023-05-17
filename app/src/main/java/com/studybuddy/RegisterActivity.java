@@ -13,8 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -49,10 +54,10 @@ public class RegisterActivity extends AppCompatActivity {
             addUserToDatabase(uid, username, password);
             user = new User(uid, username);
 
-            finish();
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
+            finish();
         });
 
         // what happens when the arrow is clicked
@@ -67,12 +72,12 @@ public class RegisterActivity extends AppCompatActivity {
     private void addUserToDatabase(int uid, String username, String password) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference usersRef = database.getReference("users");
-        String userId = usersRef.push().getKey();
+        //String userId = usersRef.push().getKey();
 
         User user = new User(uid, username, password, isUndergrad);
 
         // Write the user to the database
-        usersRef.child(userId).setValue(user)
+        usersRef.child(String.valueOf(uid)).setValue(user)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

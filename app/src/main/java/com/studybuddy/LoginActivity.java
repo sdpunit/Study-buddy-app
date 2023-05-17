@@ -26,6 +26,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
     private Handler handler;
@@ -34,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     boolean validUser;
     EditText et_username;
     EditText et_password;
+    ArrayList<User> leaderboard;
+    DatabaseReference leaderboardRef = FirebaseDatabase.getInstance().getReference("leaderboard");
 
 
     public static final String CHANNEL_ID = "StudyBuddy";
@@ -42,6 +46,23 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //leaderboardRef.child("0").setValue(new User(1,"dummy","1", true, 1));
+
+        leaderboard = new ArrayList<>();
+        // put all the users in the leaderboard into the local leaderboard list
+        leaderboardRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                    User user = userSnapshot.getValue(User.class);
+                    leaderboard.add(user);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
 
         // execute this as soon as the app is opened
         createNotificationChannel();
@@ -71,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         // what happens when the REGISTER button is pressed
         registerButton.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            intent.putExtra("leaderboard", leaderboard);
             startActivity(intent);
         });
         // read the current index from the firebase
@@ -97,9 +119,11 @@ public class LoginActivity extends AppCompatActivity {
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-        // Initialize Handler to schedule data upload
+
         handler = new Handler();
-        uploadDataPeriodically();
+
+        // data stream and update leaderboard in the meantime
+        uploadDataPeriodically(leaderboard);
     }
     // The Edit texts are cleared everytime we come back to this activity
     @Override
@@ -129,6 +153,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.putExtra("user", user);
+                        intent.putExtra("leaderboard", leaderboard);
                         startActivity(intent);
 
                         break;
@@ -167,7 +192,7 @@ public class LoginActivity extends AppCompatActivity {
         notificationManager.createNotificationChannel(channel);
     }
 
-    private void uploadDataPeriodically() {
+    private void uploadDataPeriodically(List<User> leaderboard) {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -175,24 +200,37 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = jsonArray.getJSONObject(currentIndex);
 
-                        // Extract the required values from the JSON object
                         int uid = jsonObject.getInt("uid");
                         String name = jsonObject.getString("name");
                         String password = jsonObject.getString("password");
                         boolean isUndergrad = jsonObject.getBoolean("isUndergrad");
                         int studyMinutes = jsonObject.getInt("studyMinutes");
 
-                        // Create an instance of your object and set its properties
                         User user = new User(uid,name,password,isUndergrad,studyMinutes);
 
                         DatabaseReference userref = FirebaseDatabase.getInstance().getReference("users");
-                        // Store the object under the generated key in the "users" node
-                        userref.child(String.valueOf(user.getUid())).setValue(user);
+                        String key = userref.push().getKey();
+                        userref.child(key).setValue(user);
 
                         currentIndex++;
                         // Save the updated current index to firebase
                         DatabaseReference indexRef = FirebaseDatabase.getInstance().getReference("currentIndex");
                         indexRef.setValue(currentIndex);
+
+                        // about leaderboard
+                        // if there are less than 5 users in the leaderboard, add this new user
+                        if (leaderboard.size() < 5 && user.getStudyMinutes() > 0) {
+                            addUserToLeaderboardFirebase(user, leaderboard);
+                        }
+                        else {
+                            // compare the new user's study minutes with the user with the lowest study minutes
+                            double lowestStudyMinutes = leaderboard.get(leaderboard.size() - 1).getStudyMinutes();
+                            if (user.getStudyMinutes() > lowestStudyMinutes) {
+                                // remove the user with the lowest study minutes
+                                leaderboard.remove(4);
+                                addUserToLeaderboardFirebase(user, leaderboard);
+                            }
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -202,6 +240,16 @@ public class LoginActivity extends AppCompatActivity {
                 handler.postDelayed(this, 10000);
             }
         }, 10000); // Initial delay of 10 seconds
+    }
+
+    public void addUserToLeaderboardFirebase(User user, List<User> leaderboard) {
+        // add the new user
+        leaderboard.add(user);
+        // sort the leaderboard in descending order
+        leaderboard.sort((u1, u2) -> Double.compare(u2.getStudyMinutes(), u1.getStudyMinutes()));
+        // update the leaderboard in firebase
+        leaderboardRef = FirebaseDatabase.getInstance().getReference("leaderboard");
+        leaderboardRef.setValue(leaderboard);
     }
 }
 

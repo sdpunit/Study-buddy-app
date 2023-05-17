@@ -1,5 +1,6 @@
 package com.studybuddy;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -17,12 +18,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.studybuddy.timer.UserTimeState;
 import com.studybuddy.timer.MyTimer;
 import com.studybuddy.timer.studyState;
+
+import java.util.ArrayList;
 
 public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
     private UserTimeState userTimeState;
@@ -33,6 +38,9 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
 
     private int courseStudiedBefore;
     private int studyNumberBefore;
+
+    private ArrayList<User> leaderboard;
+    private DatabaseReference leaderboardRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +121,10 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
             user.addCourseTime(course, timer.getStudyTime());
             timer = null;
 
+            // leaderboard
+            leaderboardRef = FirebaseDatabase.getInstance().getReference("leaderboard");
+            leaderboard = getLeaderboard();
+
             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("users");
             myRef.child(String.valueOf(user.getUid())).setValue(user, new DatabaseReference.CompletionListener() {
                 @Override
@@ -125,6 +137,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
                         intent.putExtra("user", user);
                         intent.putExtra("courseStudiedBefore", courseStudiedBefore);
                         intent.putExtra("studyNumberBefore", studyNumberBefore);
+                        intent.putExtra("leaderboard", leaderboard);
                         startActivity(intent);
                         finish();
                     }
@@ -160,6 +173,10 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
                 user.addCourseTime(course, (double)timer.getInitialMinutes());
                 timer = null;
 
+                // leaderboard thing
+                leaderboardRef = FirebaseDatabase.getInstance().getReference("leaderboard");
+                leaderboard = getLeaderboard();
+
                 DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("users");
                 myRef.child(String.valueOf(user.getUid())).setValue(user, new DatabaseReference.CompletionListener() {
                     @Override
@@ -172,6 +189,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
                             intent.putExtra("user", user);
                             intent.putExtra("courseStudiedBefore", courseStudiedBefore);
                             intent.putExtra("studyNumberBefore", studyNumberBefore);
+                            intent.putExtra("leaderboard", leaderboard);
                             startActivity(intent);
                             finish();
                         }
@@ -185,5 +203,27 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
             messageView.setGravity(Gravity.CENTER);
             messageView.setTextSize(18);
         });
+    }
+
+    /**
+     * Get the leaderboard from firebase.
+     * @return the leaderboard as a list of users
+     * @auther: Yanghe Dong
+     */
+    public ArrayList<User> getLeaderboard() {
+        ArrayList<User> leaderboard = new ArrayList<>();
+        leaderboardRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    User user = userSnapshot.getValue(User.class);
+                    leaderboard.add(user);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        return leaderboard;
     }
 }

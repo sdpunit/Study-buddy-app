@@ -165,6 +165,9 @@ public class User implements Serializable {
     public String getPassword() {
         return password;
     }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 
     @Override
@@ -174,6 +177,18 @@ public class User implements Serializable {
             return this.getUid() == user.uid;
         }
         return false;
+    }
+
+    public boolean isUndergrad() {
+        return isUndergrad;
+    }
+
+    public void setUndergrad(boolean undergrad) {
+        isUndergrad = undergrad;
+    }
+
+    public void setCourseTime(Map<String, Double> courseTime) {
+        this.courseTime = courseTime;
     }
 
     @Override

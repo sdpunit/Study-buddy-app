@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Course class to store information for one course
@@ -16,7 +17,7 @@ public class Course implements Serializable {
     private String courseName;
     private String convener;
     private String studentType;
-    private ArrayList<String> assessment;
+    private List<String> assessment;
 
     // Empty constructer for firebase needed
     public Course() {
@@ -68,11 +69,11 @@ public class Course implements Serializable {
         this.studentType = studentType;
     }
 
-    public void setAssessment(ArrayList<String> assessment) {
+    public void setAssessment(List<String> assessment) {
         this.assessment = assessment;
     }
 
-    public ArrayList<String> getAssessment() { return assessment; }
+    public List<String> getAssessment() { return assessment; }
 
     @Override
     public boolean equals(Object obj) {

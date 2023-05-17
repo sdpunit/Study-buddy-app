@@ -20,7 +20,7 @@ public class StudyNumberNotification implements StudyNotification {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, LoginActivity.CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("Good Job!")
-                .setContentText("You have completed " + user.getStudyNumber() + " study sessions!");
+                .setContentText("You have completed " + user.getStudyNumber() + " study sessions! Keep up the good work!");
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         try {
             notificationManager.notify(0, builder.build());

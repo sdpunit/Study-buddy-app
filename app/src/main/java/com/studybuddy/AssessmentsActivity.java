@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.studybuddy.timer.UserTimeState;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AssessmentsActivity extends AppCompatActivity {
     private Course course;
@@ -33,7 +34,7 @@ public class AssessmentsActivity extends AppCompatActivity {
         txt_courseName.setText(course.getCourseName());
         txt_courseType.setText(course.getConvener());
 
-        ArrayList<String> assessments = course.getAssessment();
+        List<String> assessments = course.getAssessment();
         if (assessments !=null && !assessments.isEmpty()){
             StringBuilder stringBuilder = new StringBuilder();
             for (String assessment : assessments){

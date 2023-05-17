@@ -19,8 +19,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
 
         user = getIntent().getSerializableExtra("user", User.class);
         userTimeState = getIntent().getSerializableExtra("userTimeState", UserTimeState.class);
+
+        // get the leaderboard from the timer activity
+        ArrayList<User> leaderboard = getIntent().getSerializableExtra("leaderboard", ArrayList.class);
+        // The only case that it isn't null is when the user comes from the timer activity
+        // And this is also when we want to update the leaderboard
+        if (leaderboard != null) {
+            checkAndUpdateLeaderboardFirebase(leaderboard);
+        }
+
 
         // display the study minutes
 
@@ -83,24 +90,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Go to SearchActivity if clicked
-        btn_add_courses.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-                intent.putExtra("user", user);
-                startActivity(intent);
-            }
+        btn_add_courses.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
         });
-        //Using this button for testing at the moment
-        btn_graphical_data.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                ArrayList<Course> myCoursesCopy = new ArrayList<>(myCourses);
-//                for (Course course:myCoursesCopy){
-//                    user.addCoursesEnrolled(course);
-//                }
-//                userRef.setValue(user);
-            }
+        // go to the leaderboard
+        btn_graphical_data.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, LeaderboardActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
         });
 
         // check cases and send notifications
@@ -214,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Sends notifications to the user based on different cases.
+     * @auther: Yanghe Dong
      */
     public void sendNotification() {
         // notificationTypes
@@ -240,5 +240,52 @@ public class MainActivity extends AppCompatActivity {
             StudyNotification notification = notificationFactory.createNotification(notificationType);
             notification.notifyUser(MainActivity.this, user);
         }
+    }
+
+    /**
+     * Update the leaderboard in Firebase.
+     * @auther: Yanghe Dong
+     */
+    public void checkAndUpdateLeaderboardFirebase(ArrayList<User> leaderboard) {
+        // if this user is already in the leaderboard, update the study minutes
+        for (User u : leaderboard) {
+            if (u.equals(user)) {
+                if (u.getStudyMinutes() < user.getStudyMinutes()) {
+                    u.setStudyMinutes(user.getStudyMinutes());
+                    leaderboard.sort((u1, u2) -> Double.compare(u2.getStudyMinutes(), u1.getStudyMinutes()));
+                    DatabaseReference leaderboardRef = FirebaseDatabase.getInstance().getReference("leaderboard");
+                    leaderboardRef.setValue(leaderboard);
+                }
+                // if the study time doesn't change
+                return;
+            }
+        }
+        // if this user is not in the leaderboard and there are less than 5, add it
+        if (leaderboard.size() < 5) {
+            addUserToLeaderboardFirebase(leaderboard);
+        }
+        // if this user is not in the leaderboard, check if the user's study minutes is greater than the last user's study minutes
+        else {
+            double lowestStudyMinutes = leaderboard.get(leaderboard.size() - 1).getStudyMinutes();
+            if (user.getStudyMinutes() > lowestStudyMinutes) {
+                // remove the user with the lowest study minutes
+                leaderboard.remove(4);
+                addUserToLeaderboardFirebase(leaderboard);
+            }
+        }
+    }
+
+    /**
+     * Helper method for checkAndUpdateLeaderboardFirebase
+     * @auther: Yanghe Dong
+     */
+    public void addUserToLeaderboardFirebase(ArrayList<User> leaderboard) {
+        // add the new user
+        leaderboard.add(user);
+        // the leaderboard is always sorted in descending order
+        leaderboard.sort((u1, u2) -> Double.compare(u2.getStudyMinutes(), u1.getStudyMinutes()));
+        // update the leaderboard in the firebase
+        DatabaseReference leaderboardRef = FirebaseDatabase.getInstance().getReference("leaderboard");
+        leaderboardRef.setValue(leaderboard);
     }
 }
