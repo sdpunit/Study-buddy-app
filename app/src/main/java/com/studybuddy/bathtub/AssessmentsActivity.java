@@ -1,13 +1,13 @@
-package com.studybuddy;
+package com.studybuddy.bathtub;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
+import com.studybuddy.R;
 import com.studybuddy.timer.UserTimeState;
 
 import java.util.ArrayList;

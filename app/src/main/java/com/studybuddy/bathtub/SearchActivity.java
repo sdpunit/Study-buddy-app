@@ -1,10 +1,9 @@
-package com.studybuddy;
+package com.studybuddy.bathtub;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -12,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.studybuddy.R;
 import com.studybuddy.search.Colleges;
 import com.studybuddy.search.CourseAdapter;
 import com.studybuddy.search.Query;
@@ -148,6 +148,7 @@ public class SearchActivity extends AppCompatActivity {
         Query queryObj = parser.parseQuery(); // get query object
 
         if(queryObj == null){
+            Toaster.showToast(getApplicationContext(), "Invalid search query");
             return results;
         }
 

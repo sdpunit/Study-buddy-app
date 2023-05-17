@@ -1,6 +1,5 @@
-package com.studybuddy;
+package com.studybuddy.bathtub;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -19,13 +18,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.studybuddy.R;
 import com.studybuddy.notification.NotificationFactory;
 import com.studybuddy.notification.StudyNotification;
 import com.studybuddy.timer.UserTimeState;

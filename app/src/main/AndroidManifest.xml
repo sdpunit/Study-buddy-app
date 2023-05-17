@@ -15,28 +15,26 @@
         android:theme="@style/Theme.StudyBuddy"
         tools:targetApi="31" >
         <activity
-            android:name=".TimerActivity"
+            android:name=".bathtub.TimerActivity"
             android:exported="false" />
         <activity
-            android:name=".SetTimeActivity"
+            android:name=".bathtub.SetTimeActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchActivity"
+            android:name=".bathtub.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".AssessmentsActivity"
+            android:name=".bathtub.AssessmentsActivity"
             android:exported="false" />
+
         <activity
-            android:name=".lana_timer_notused.Timer"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".bathtub.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".bathtub.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".bathtub.LoginActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

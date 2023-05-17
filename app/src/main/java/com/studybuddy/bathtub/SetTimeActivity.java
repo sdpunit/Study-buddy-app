@@ -1,4 +1,4 @@
-package com.studybuddy;
+package com.studybuddy.bathtub;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.studybuddy.R;
 import com.studybuddy.timer.UserTimeState;
 
 public class SetTimeActivity extends AppCompatActivity {
