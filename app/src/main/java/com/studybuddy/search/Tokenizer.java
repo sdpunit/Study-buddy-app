@@ -42,7 +42,7 @@ public class Tokenizer {
             else if(collegeList.contains(delta)) {
                 currentToken = new Token(delta, Token.Type.COLLEGE);
             }
-            else if(delta.contains("convener") ) {
+            else if(delta.contains("convener=") ) {
                 currentToken = new Token(delta, Token.Type.CONVENER);
             }
             else if(isLetters(delta)) {

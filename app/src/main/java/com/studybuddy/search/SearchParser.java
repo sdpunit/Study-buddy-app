@@ -90,7 +90,7 @@ public class SearchParser {
                 return parseTerm(query);
 
             } else if (currentToken.getType() == Token.Type.CONVENER) {
-                query.setConvener(currentToken.getToken().split(" ")[1]);
+                query.setConvener(currentToken.getToken().split("=") [1]);
                 tokenizer.next();
                 return parseTerm(query);
 

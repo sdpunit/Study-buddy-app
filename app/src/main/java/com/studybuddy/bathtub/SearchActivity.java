@@ -105,6 +105,7 @@ public class SearchActivity extends AppCompatActivity {
                 // call search function
                 courseList.clear();
                 results = search(courseTree, input.toLowerCase());
+                courseList.clear();
                 courseList.addAll(results);
                 listAdapter.notifyDataSetChanged();
                 searchListView.setAdapter(listAdapter);
@@ -184,9 +185,11 @@ public class SearchActivity extends AppCompatActivity {
                     }
                     return results;
                 }
-                else {  // dosent work rn
+                else {
                     for(Course c : courseList){
-                        if (c.getCourseName().toLowerCase().contains(input)) {
+                        String s = c.getConvener().toLowerCase();
+                        boolean b = c.getConvener().toLowerCase().contains(input.split("=")[1]); // very specific, need to edit to cathc incorrect input
+                        if (c.getConvener().toLowerCase().contains(input.split("=")[1])) {
                             results.add(c);
                         }
                     }
