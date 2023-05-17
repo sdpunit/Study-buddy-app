@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -36,6 +37,10 @@ public class SearchActivity extends AppCompatActivity {
     public static ArrayList<Course> courseList = new ArrayList<Course>();
 
     public static ArrayList<Course> addedList = new ArrayList<Course>();
+
+    private CourseAdapter listAdapter;
+
+    private CourseAdapter addedAdapter;
 
     private ListView searchListView;
 
@@ -86,10 +91,10 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    public static String subStringBetween(String input, String to, String from)
-    {
+    public static String subStringBetween(String input, String to, String from) {
         return input.substring(input.indexOf(to)+1, input.lastIndexOf(from));
     }
+
     private void searchWidgets(){
         // search for widgets
         SearchView searchView = findViewById(R.id.SearchInput);
@@ -98,21 +103,25 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String input){
                 // call search function
+                courseList.clear();
                 results = search(courseTree, input.toLowerCase());
-                CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
-                searchListView.setAdapter(adapter);
+                courseList.addAll(results);
+                listAdapter.notifyDataSetChanged();
+                searchListView.setAdapter(listAdapter);
 
                 return false;
             }
             @Override
             public boolean onQueryTextChange(String input){
                 // call search function)
-//                if(input.isEmpty()){
-//                    results.clear();
-//                    CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
-//                    searchListView.setAdapter(adapter);
-//                }
+                if(input.isEmpty()){
+                    courseList.clear();
+                    courseList.addAll(getCourses());
+                    listAdapter.notifyDataSetChanged();
+                    searchListView.setAdapter(listAdapter);
+                }
                 results.clear(); // has to reset results so that the live update functionality works
+
                 if(input.contains("(") && input.contains(")") && input.indexOf("(") < input.indexOf(")")){
                     String s = subStringBetween(input, "(", ")"); // checks for string inbetween parenthesis
                     String[] strs =s.toLowerCase().split(" ");
@@ -120,9 +129,9 @@ public class SearchActivity extends AppCompatActivity {
                         for (String str : strs) {
                             if (course.getCourseName().toLowerCase().contains(str)) {
                                 results.add(course);
-                                CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
-                                searchListView.setAdapter(adapter);
                             }
+                            CourseAdapter adapter = new CourseAdapter(getApplicationContext(), 0, results);
+                            searchListView.setAdapter(adapter);
                         }
                     }
                 }
@@ -185,17 +194,16 @@ public class SearchActivity extends AppCompatActivity {
 
     private void setupData() throws JSONException, IOException {
         courseList = getCourses();
-
     }
 
     private void setupList(){
         searchListView = findViewById(R.id.SearchList);
-        CourseAdapter adaptor = new CourseAdapter(getApplicationContext(), 0, courseList);
-        searchListView.setAdapter(adaptor);
+        listAdapter = new CourseAdapter(getApplicationContext(), 0, courseList);
+        searchListView.setAdapter(listAdapter);
 
         addedListView = findViewById(R.id.AddedList);
-        CourseAdapter adaptor2 = new CourseAdapter(getApplicationContext(), 0, addedList);
-        addedListView.setAdapter(adaptor2);
+        addedAdapter = new CourseAdapter(getApplicationContext(), 0, addedList);
+        addedListView.setAdapter(addedAdapter);
     }
 
     private void setupOnClickListener()
@@ -206,8 +214,8 @@ public class SearchActivity extends AppCompatActivity {
             if(!addedList.contains(selectCourse)) {
                 addedList.add(selectCourse);
             }
-            CourseAdapter adaptor = new CourseAdapter(getApplicationContext(), 0, addedList);
-            addedListView.setAdapter(adaptor);
+            addedAdapter.notifyDataSetChanged();
+            addedListView.setAdapter(addedAdapter);
         });
 
         addedListView.setOnItemClickListener((adapterView, view, position, l) -> {
@@ -216,8 +224,8 @@ public class SearchActivity extends AppCompatActivity {
             if (addedList.contains(selectCourse)){
                 addedList.remove(selectCourse);
             }
-            CourseAdapter adaptor = new CourseAdapter(getApplicationContext(), 0, addedList);
-            addedListView.setAdapter(adaptor);
+            addedAdapter.notifyDataSetChanged();
+            addedListView.setAdapter(addedAdapter);
         });
     }
 
