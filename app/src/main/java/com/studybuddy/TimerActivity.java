@@ -32,6 +32,7 @@ public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
     private TextView timeTextView;
 
     private int courseStudiedBefore;
+    private int studyNumberBefore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
         userTimeState = getIntent().getSerializableExtra("userTimeState", UserTimeState.class);
         course = getIntent().getSerializableExtra("course", Course.class);
         courseStudiedBefore = user.getCoursesStudied().size();
+        studyNumberBefore = user.getStudyNumber();
 
         VideoView videoView = (VideoView) findViewById(R.id.videoView);
         Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.background);
@@ -116,6 +118,7 @@ public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
                         intent.putExtra("userTimeState", userTimeState);
                         intent.putExtra("user", user);
                         intent.putExtra("courseStudiedBefore", courseStudiedBefore);
+                        intent.putExtra("studyNumberBefore", studyNumberBefore);
                         startActivity(intent);
                         finish();
                     }
@@ -161,6 +164,8 @@ public class TimerActivity extends AppCompatActivity implements myTimer.TimeUp {
                             Intent intent = new Intent(TimerActivity.this, MainActivity.class);
                             intent.putExtra("userTimeState", userTimeState);
                             intent.putExtra("user", user);
+                            intent.putExtra("courseStudiedBefore", courseStudiedBefore);
+                            intent.putExtra("studyNumberBefore", studyNumberBefore);
                             startActivity(intent);
                             finish();
                         }
