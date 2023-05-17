@@ -142,17 +142,19 @@ public class SearchActivity extends AppCompatActivity {
 
     private ArrayList search(RBTree tree, String input){
         // search for course
-        ArrayList results = new ArrayList(); //new array list
+        ArrayList<Course> results = new ArrayList(); //new array list
         Tokenizer tokenizer = new Tokenizer(input); // tokenize input
         SearchParser parser = new SearchParser(tokenizer); // parse tokens
         Query queryObj = parser.parseQuery(); // get query object
+
 
         if(queryObj == null){
             Toaster.showToast(getApplicationContext(), "Invalid search query");
             return results;
         }
-
         RBTree collegeTree = collegeTreeMap.get(queryObj.getCollege());
+        RBTree.Node found = collegeTree.searchByCourseCode(collegeTree.root,queryObj.getCollege() + queryObj.getCode());
+
 
         boolean college = queryObj.getCollege()!=null;
         boolean code = queryObj.getCode()!=0;
@@ -162,7 +164,11 @@ public class SearchActivity extends AppCompatActivity {
 
         if (college) {
             if (code) {
-                results.add(collegeTree.searchByCourseCode(collegeTree.root,queryObj.getCollege() + queryObj.getCode()).getCourse());
+                if (found == null) {
+                    Toaster.showToast(getApplicationContext(), "Course not found");
+                    return results;
+                }
+                results.add(found.getCourse());
                 return results;
             }
             else if (course || convener) {

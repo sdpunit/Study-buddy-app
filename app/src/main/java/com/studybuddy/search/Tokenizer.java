@@ -29,6 +29,7 @@ public class Tokenizer {
         if (tokenizer.hasMoreTokens()) {
             String delta = tokenizer.nextToken().trim().toLowerCase();
 
+
             if (isValidInteger(delta)) {
                 currentToken = new Token(delta, Token.Type.CODE);
             }
@@ -47,6 +48,12 @@ public class Tokenizer {
             else if(isLetters(delta)) {
                 currentToken = new Token(delta, Token.Type.COURSE);
             }
+            else if (delta.contains("(") || delta.contains(")")) {
+                // ignore
+                next();
+//                throw new IllegalArgumentException("Expected CODE, COLLEGE, COLLEGECODE, CONVENER, or COURSE, found: " + delta);
+            }
+
         } else {
             currentToken = null;
         }
