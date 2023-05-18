@@ -247,6 +247,9 @@ public class SearchActivity extends AppCompatActivity {
     {
         searchListView.setOnItemClickListener((adapterView, view, position, l) -> {
             Course selectCourse = (Course) (searchListView.getItemAtPosition(position));
+            if(addedList.size()==0){
+                Toaster.showToast(getApplicationContext(), "Click on the course again to remove it from the list");
+            }
 
             if(!addedList.contains(selectCourse)) {
                 addedList.add(selectCourse);
