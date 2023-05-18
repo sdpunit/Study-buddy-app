@@ -18,7 +18,7 @@
         android:background="#E8E8E8"
         android:backgroundTint="#C4F3F3F3"
         android:iconifiedByDefault="false"
-        android:queryHint="College | Code | Course Name | Convener="
+        android:queryHint="College,Code,Course Name,Convener="
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
