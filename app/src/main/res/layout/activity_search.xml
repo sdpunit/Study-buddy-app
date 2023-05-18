@@ -82,7 +82,7 @@
         android:id="@+id/btn_addCourses"
         android:layout_width="190dp"
         android:layout_height="51dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         android:text="Add Courses"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
