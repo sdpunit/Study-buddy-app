@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.studybuddy.bathtub.User;
+
 import java.util.List;
 
 public class UserListAdapter extends ArrayAdapter<User> {

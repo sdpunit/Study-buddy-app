@@ -63,11 +63,11 @@ public class RegisterActivity extends AppCompatActivity {
                 //addUserToDatabase(uid, username, password1);
                 user = new User(uid, username);
 
-            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-            intent.putExtra("user", user);
-            startActivity(intent);
-            finish();
-        });
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+                finish();
+            }});
 
         // what happens when the arrow is clicked
         arrow.setOnClickListener(v -> {

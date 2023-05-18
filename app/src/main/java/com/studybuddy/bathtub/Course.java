@@ -2,6 +2,7 @@ package com.studybuddy.bathtub;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Course class to store information for one course
