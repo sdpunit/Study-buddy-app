@@ -5,7 +5,7 @@ import android.widget.Toast;
 
 /**
  * To display a toast message.
- * @author Lana (u7103031) 
+ * @author Steven (u7108792)
  */
 public class Toaster {
     static Toast toast = null;

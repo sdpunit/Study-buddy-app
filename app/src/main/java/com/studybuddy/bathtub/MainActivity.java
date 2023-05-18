@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         // get the leaderboard from the timer activity
         ArrayList<User> leaderboard = getIntent().getSerializableExtra("leaderboard", ArrayList.class);
+
         // The only case that it isn't null is when the user comes from the timer activity
         // And this is also when we want to update the leaderboard
         if (leaderboard != null) {
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         Button btn_add_courses = (Button) findViewById(R.id.btn_add_courses);
         TextView txt_hello_user = findViewById(R.id.txt_hello_user);
         Button btn_graphical_data = findViewById(R.id.btn_graphical_data);
-        GridLayout grid_courses = findViewById(R.id.grid_courses);
+
 
         //Sets the text to Hello, user.
         if (user != null) {
@@ -70,10 +71,13 @@ public class MainActivity extends AppCompatActivity {
             txt_hello_user.setText("Hi, guest");
         }
 
+        // Creates an active listener of firebase reference, so whenever
+        // the user information changes, the main activity will be updated
         userRef = FirebaseDatabase.getInstance().getReference("users").child(String.valueOf(user.getUid()));
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 // Get User object and use the values to update the UI
                 User updatedUser = dataSnapshot.getValue(User.class);
                 if (updatedUser != null) {
@@ -95,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("user", user);
             startActivity(intent);
         });
-        // go to the leaderboard
+        // Go to the leaderboard
         btn_graphical_data.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, LeaderboardActivity.class);
             intent.putExtra("user", user);
@@ -106,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         sendNotification();
     }
 
+    // Used to create the options menu on top right
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -113,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // Adds the items/buttons in the options menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -133,8 +139,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
+    /**
+     * This method updates the main screen, by creating image buttons for
+     * all the courses that the user has enrolled
+     * @author Punit (u7432723)
+     */
     private void updateCourseGrid(User user) {
 
         // Get the GridLayout from the layout
@@ -144,11 +153,10 @@ public class MainActivity extends AppCompatActivity {
         }
         GridLayout gridCourses = findViewById(R.id.grid_courses);
         gridCourses.removeAllViews();
-        // Create a random number generator
+        // Create a random number generator for the image
         Random random = new Random();
 
         for (Course course : courses) {
-            // Linear layout for adding course button and name vertically
             LinearLayout courseLayout = new LinearLayout(this);
             courseLayout.setOrientation(LinearLayout.VERTICAL);
 
@@ -198,10 +206,13 @@ public class MainActivity extends AppCompatActivity {
             courseLayout.addView(txt_courseName);
             courseLayout.addView(txt_timeStudied);
             gridCourses.addView(courseLayout);
-
         }
     }
 
+    /**
+     * Displays the total number of minutes the user has studies till now
+     * @author Punit (u7432723)
+     */
     public void displayStudyMinutes(User user) {
         TextView studyMinutes = (TextView) findViewById(R.id.studyMinutes);
         if(user != null) {
