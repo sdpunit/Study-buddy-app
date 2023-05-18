@@ -58,12 +58,9 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
         Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.background);
 
         videoView.setVideoURI(video);
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mp.setLooping(true);
-                videoView.start();
-            }
+        videoView.setOnPreparedListener(mp -> {
+            mp.setLooping(true);
+            videoView.start();
         });
 
         timeTextView = (TextView) findViewById(R.id.timeTextView);
@@ -76,7 +73,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
             }
         };
         userTimeState.startStudy();
-        timer = new MyTimer(minutes, this);
+        timer = MyTimer.getInstance(minutes, this);
         timer.start(handler);
     }
 
