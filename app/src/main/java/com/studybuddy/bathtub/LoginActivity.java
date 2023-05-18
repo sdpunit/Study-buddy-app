@@ -30,10 +30,14 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The first activity that the user sees when they open the app, which allows them to login or register.
+ * @auther Lana,Punit
+ */
 public class LoginActivity extends AppCompatActivity {
     private Handler handler;
     private JSONArray jsonArray;
-    private int currentIndex;
+    private int currentIndex; // used to keep track of new dummy users
     boolean validUser;
     EditText et_username;
     EditText et_password;
@@ -48,7 +52,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        leaderboardRef.child("0").setValue(new User(1,"dummy","1", true, 1));
+        // if there the leaderboard is cleared, uncomment this line to add a dummy user
+        //leaderboardRef.child("0").setValue(new User(1,"dummy","1", true, 1));
 
         leaderboard = new ArrayList<>();
         // put all the users in the leaderboard into the local leaderboard list
@@ -65,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // execute this as soon as the app is opened
+        // execute this to create a notification channel as soon as the app runs
         createNotificationChannel();
 
         final Button loginButton = findViewById(R.id.btn_login);
@@ -82,8 +87,7 @@ public class LoginActivity extends AppCompatActivity {
             String username = et_username.getText().toString();
             String password = et_password.getText().toString();
 
-
-            //checks user details against the database (for now loginDetails.csv)
+            //checks user details against the database
             authenticateUser(username,password);
 
             //resets boolean
@@ -96,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
             intent.putExtra("leaderboard", leaderboard);
             startActivity(intent);
         });
+
         // read the current index from the firebase
         DatabaseReference currentIndexRef = FirebaseDatabase.getInstance().getReference("currentIndex");
         currentIndexRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -108,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
         }});
-
+        // read the user data from the json file
         try {
             InputStream inputStream = getAssets().open("user_data.json");
             int size = inputStream.available();
@@ -120,9 +125,7 @@ public class LoginActivity extends AppCompatActivity {
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-
         handler = new Handler();
-
         // data stream and update leaderboard in the meantime
         uploadDataPeriodically(leaderboard);
     }
@@ -160,7 +163,6 @@ public class LoginActivity extends AppCompatActivity {
                         break;
                     }
                 }
-
                 // Show login message after checking all users
                 showLoginMessage(username);
             }
@@ -180,6 +182,10 @@ public class LoginActivity extends AppCompatActivity {
         Toaster.showToast(getApplicationContext(), text);
     }
 
+    /**
+     * Create a notification channel
+     * @auther Yanghe
+     */
     private void createNotificationChannel() {
         CharSequence name = getString(R.string.channel_name);
         String description = getString(R.string.channel_description);
@@ -190,6 +196,13 @@ public class LoginActivity extends AppCompatActivity {
         notificationManager.createNotificationChannel(channel);
     }
 
+    /**
+     * Data stream simulation
+     * Read a user from the json file and upload it to the firebase every 15 seconds
+     * Check if it can be added to the leaderboard in the meantime
+     * @param leaderboard the leaderboard to be updated
+     * @auther Ahmed, Yanghe
+     */
     private void uploadDataPeriodically(List<User> leaderboard) {
         handler.postDelayed(new Runnable() {
             @Override
@@ -209,7 +222,7 @@ public class LoginActivity extends AppCompatActivity {
                         DatabaseReference userref = FirebaseDatabase.getInstance().getReference("users");
                         String key = userref.push().getKey();
                         userref.child(key).setValue(user);
-
+                        // increment the current index
                         currentIndex++;
                         // Save the updated current index to firebase
                         DatabaseReference indexRef = FirebaseDatabase.getInstance().getReference("currentIndex");
@@ -233,13 +246,18 @@ public class LoginActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-
-                // Schedule the next data upload after 15 seconds
+                // upload the next user after 15 seconds
                 handler.postDelayed(this, 15000);
             }
-        }, 20000); // Initial delay of 20 seconds
+        }, 20000); // initial delay of 20 seconds
     }
 
+    /**
+     * Add a user to the leaderboard in firebase.
+     * @param user the user to be added
+     * @param leaderboard the leaderboard to be updated
+     * @auther Ahmed, Yanghe
+     */
     public void addUserToLeaderboardFirebase(User user, List<User> leaderboard) {
         // add the new user
         leaderboard.add(user);

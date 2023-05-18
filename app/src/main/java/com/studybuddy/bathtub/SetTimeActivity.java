@@ -11,10 +11,13 @@ import android.widget.Toast;
 import com.studybuddy.R;
 import com.studybuddy.timer.UserTimeState;
 
+/**
+ * Set the time of study here.
+ * @auther Yanghe
+ */
 public class SetTimeActivity extends AppCompatActivity {
     private UserTimeState userTimeState;
     private User user;
-
     private Course course;
 
     @Override
@@ -27,9 +30,7 @@ public class SetTimeActivity extends AppCompatActivity {
         course = getIntent().getSerializableExtra("course", Course.class);
     }
 
-    /**
-     * This method is called when the user clicks the start button to start a countdown.
-     */
+    // This method is called when the user clicks the start button to start a countdown.
     public void clickStart(View view) {
         EditText studyTime = (EditText) findViewById(R.id.studyTimeText);
         String studyTimeString = studyTime.getText().toString();
@@ -50,9 +51,7 @@ public class SetTimeActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Check if the input string is an integer. This is used to handle invalid study time input.
-     */
+    // Check if the input string is an integer. This is used to handle invalid study time input.
     public boolean isInteger(String s) {
         try {
             Integer.parseInt(s);

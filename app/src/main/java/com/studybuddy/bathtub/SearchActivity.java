@@ -32,6 +32,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class is the activity for the search page.
+ * @auther Steven, Lana
+ */
 public class SearchActivity extends AppCompatActivity {
 
     public static ArrayList<Course> courseList = new ArrayList<Course>();
@@ -47,8 +51,6 @@ public class SearchActivity extends AppCompatActivity {
     private ListView addedListView;
 
     private Button addCourseButton;
-
-    public RBTree courseTree = new RBTree();
 
     private User user;
 
@@ -67,9 +69,7 @@ public class SearchActivity extends AppCompatActivity {
 
         try {
             setupData();
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (JSONException | IOException e) {
             throw new RuntimeException(e);
         }
         setupList();
@@ -101,18 +101,6 @@ public class SearchActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() { // "math (" fails
             ArrayList<Course> results = new ArrayList<Course>();
             @Override
-            public boolean onQueryTextSubmit(String input){
-                if(!input.contains("(") && !input.contains(")") ) {
-                    // call search function
-                    results = search(input.toLowerCase());
-                    courseList.clear();
-                    courseList.addAll(results);
-                }
-                listAdapter.notifyDataSetChanged();
-                searchListView.setAdapter(listAdapter);
-                return false;
-            }
-            @Override
             public boolean onQueryTextChange(String input){
                 // call search function)
                 if(input.isEmpty()){
@@ -135,6 +123,18 @@ public class SearchActivity extends AppCompatActivity {
                             searchListView.setAdapter(adapter);
                         }
                     }
+                }
+                return false;
+            }
+            @Override
+            public boolean onQueryTextSubmit(String input){
+                if(!input.contains("(") && !input.contains(")") ) {
+                    // call search function
+                    results = search(input.toLowerCase());
+                    courseList.clear();
+                    courseList.addAll(results);
+                    listAdapter.notifyDataSetChanged();
+                    searchListView.setAdapter(listAdapter);
                 }
                 return false;
             }
@@ -170,17 +170,17 @@ public class SearchActivity extends AppCompatActivity {
 
         try {
             collegeTree = collegeTreeMap.get(queryObj.getCollege());
-            if (collegeTree == null) {
-                Toaster.showToast(getApplicationContext(), "Invalid search query");
-                return results;
-            }
+//            if (collegeTree == null) {
+//                Toaster.showToast(getApplicationContext(), "Invalid search query");
+//                return results;
+//            }
         } catch (NullPointerException e) {
             Toaster.showToast(getApplicationContext(), "Invalid search query");
             return results;
         }
 
         // searches for course code, will return null if a course or code is not present
-        RBTree.Node found = collegeTree.searchByCourseCode(collegeTree.root,queryObj.getCollege() + queryObj.getCode());
+
         // boolean indicating what parameters are included in the query object
         boolean college = queryObj.getCollege()!=null;
         boolean code = queryObj.getCode()!=0;
@@ -189,6 +189,7 @@ public class SearchActivity extends AppCompatActivity {
 
         if (college) {
             if (code) { //if college && code returns found
+                RBTree.Node found = collegeTree.searchByCourseCode(collegeTree.root,queryObj.getCollege() + queryObj.getCode());
                 if (found != null) {
                     results.add(found.getCourse());
                 } else {
@@ -199,12 +200,18 @@ public class SearchActivity extends AppCompatActivity {
                 for (RBTree.Node n :collegeTree.inOrderTraverse()) {
                     courseList.add(n.getCourse());
                 }
-                if (course) { //if college && course, iterates though course list to find query
+                if (course && convener) { //if college && course, iterates though course list to find query
                     for(Course c : courseList){
-                        if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) && !results.contains(c)) {
+                        if (c.getConvener()!=null && c.getCourseName().toLowerCase().contains(queryObj.getCourse()) && c.getConvener().toLowerCase().contains(queryObj.getConvener()) && !results.contains(c)) {
                             results.add(c);
                         }
                     }
+                }
+                else if (course) {
+                    for(Course c : courseList){
+                        if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) && !results.contains(c)) {
+                            results.add(c);
+                        }}
                 }
                 else { //if college && convener, iterates though course list to find query
                     for(Course c : courseList){
@@ -219,6 +226,33 @@ public class SearchActivity extends AppCompatActivity {
                 collegeTree.inOrderTraverse().forEach((n) -> {
                     results.add(n.getCourse());
                 });
+            }
+        }
+        else if (code) { // if just code
+            for(Course c : courseList){
+                if (!results.contains(c) && c.getCourseCode().contains(""+queryObj.getCode())) {
+                    results.add(c);
+                }
+            }
+
+        }
+        else if (course) {
+            if (convener) { // if course && convener
+                for(Course c : courseList){
+                    if (c.getConvener()!=null
+                            && c.getConvener().toLowerCase().contains(input.split("=")[1].trim())
+                            && c.getCourseName().toLowerCase().contains(queryObj.getCourse())
+                            && !results.contains(c)) {
+                        results.add(c);
+                    }
+                }
+            }
+            else { //if just course
+                for(Course c : courseList){
+                    if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) && !results.contains(c)) {
+                        results.add(c);
+                    }
+                }
             }
         }
         return results;
@@ -247,6 +281,9 @@ public class SearchActivity extends AppCompatActivity {
     {
         searchListView.setOnItemClickListener((adapterView, view, position, l) -> {
             Course selectCourse = (Course) (searchListView.getItemAtPosition(position));
+            if(addedList.size()==0){
+                Toaster.showToast(getApplicationContext(), "Click on the course again to remove it from the list");
+            }
 
             if(!addedList.contains(selectCourse)) {
                 addedList.add(selectCourse);
@@ -258,9 +295,7 @@ public class SearchActivity extends AppCompatActivity {
         addedListView.setOnItemClickListener((adapterView, view, position, l) -> {
             Course selectCourse = (Course) (addedListView.getItemAtPosition(position));
 
-            if (addedList.contains(selectCourse)){
-                addedList.remove(selectCourse);
-            }
+            addedList.remove(selectCourse);
             addedAdapter.notifyDataSetChanged();
             addedListView.setAdapter(addedAdapter);
         });
@@ -307,16 +342,17 @@ public class SearchActivity extends AppCompatActivity {
                     assessment.add(assessmentArray.getString(j));
                 }
                 //sets convener
-                String convener = "";
+                StringBuilder convener = new StringBuilder();
                 JSONArray convenerArray = courseJson.getJSONArray("convener");
                 for (int j = 0; j < convenerArray.length(); j++) {
-                    convener+=(convenerArray.getString(j))+", ";
-                    if (j==convenerArray.length()-1) {convener+=(convenerArray.getString(j));}
+                    convener.append(convenerArray.getString(j)).append(", ");
+                    if (j==convenerArray.length()-1) {
+                        convener.append(convenerArray.getString(j));}
                 }
                 if (convener.length() == 0) {
-                    convener+=("No convener");
+                    convener.append("No convener");
                 }
-                Course newCourse = new Course(courseCode, courseName, studentTypeOfCourse, assessment, convener);
+                Course newCourse = new Course(courseCode, courseName, studentTypeOfCourse, assessment, convener.toString());
                 courses.add(newCourse);
             }
             return courses;
@@ -343,6 +379,7 @@ public class SearchActivity extends AppCompatActivity {
 
     /**
      * Creates a hashmap of college names and their respective trees.
+     * @auther Yanghe
      */
     public HashMap<String, RBTree> getCollegeTreeMap () {
         HashMap<String, RBTree> collegeTreeMap = new HashMap<>();

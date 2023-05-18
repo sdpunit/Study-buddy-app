@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class is a test class for RB Tree.
- * @author Yanghe Dong
+ * This is a test class for RB Tree.
+ * @author Yanghe
  */
 public class RBTreeTest {
     private final Course[] courses = {new Course("COMP2300"), new Course("COMP3600"),
