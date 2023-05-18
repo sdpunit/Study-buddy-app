@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,9 +14,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,7 +53,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
         courseStudiedBefore = user.getCoursesStudied().size();
         studyNumberBefore = user.getStudyNumber();
 
-        VideoView videoView = (VideoView) findViewById(R.id.videoView);
+        VideoView videoView = findViewById(R.id.videoView);
         Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.background);
 
         videoView.setVideoURI(video);
@@ -65,7 +62,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
             videoView.start();
         });
 
-        timeTextView = (TextView) findViewById(R.id.timeTextView);
+        timeTextView = findViewById(R.id.timeTextView);
         int minutes = getIntent().getIntExtra("minutes", 0);
 
         Handler handler = new Handler(Looper.getMainLooper()) {
@@ -103,7 +100,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
      * @author Yanghe (u7533843), Punit (u7432723)
      */
     public void clickStop(View view) {
-        Button pauseOrResumeButton = (Button) findViewById(R.id.pauseOrResumeButton);
+        Button pauseOrResumeButton = findViewById(R.id.pauseOrResumeButton);
         this.clickPauseOrResume(pauseOrResumeButton);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -198,7 +195,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
             AlertDialog dialog = builder.create();
             dialog.show();
             // center the message
-            TextView messageView = (TextView) dialog.findViewById(android.R.id.message);
+            TextView messageView = dialog.findViewById(android.R.id.message);
             messageView.setGravity(Gravity.CENTER);
             messageView.setTextSize(18);
         });

@@ -6,8 +6,8 @@ package com.studybuddy.timer;
  * @author Yanghe (u7533843)
  */
 public interface State{
-    public void startStudy();
-    public void pause();
-    public void resume();
-    public void stopStudy();
+    void startStudy();
+    void pause();
+    void resume();
+    void stopStudy();
 }

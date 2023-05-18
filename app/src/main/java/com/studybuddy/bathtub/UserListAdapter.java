@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.studybuddy.R;
-import com.studybuddy.bathtub.User;
 
 import java.util.List;
 

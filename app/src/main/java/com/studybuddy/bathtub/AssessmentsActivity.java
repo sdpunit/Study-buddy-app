@@ -3,10 +3,9 @@ package com.studybuddy.bathtub;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,7 +14,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.studybuddy.R;
 import com.studybuddy.timer.UserTimeState;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +24,7 @@ public class AssessmentsActivity extends AppCompatActivity {
     private Course course;
     private User user;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +52,7 @@ public class AssessmentsActivity extends AppCompatActivity {
             }
             txt_assessments.setText(stringBuilder);
         } else {
-            txt_assessments.setText("No assessments information available yet, please contact your convenor.");
+            txt_assessments.setText("No assessments information available yet, please contact your convener.");
         }
     }
     public void clickStartStudy(View view) {

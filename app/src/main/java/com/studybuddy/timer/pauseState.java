@@ -19,12 +19,10 @@ public class pauseState implements State, Serializable {
 
     @Override
     public void startStudy() {
-
     }
 
     @Override
     public void pause() {
-
     }
 
     @Override

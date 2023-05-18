@@ -15,7 +15,7 @@ public class Course implements Serializable {
     private String studentType;
     private List<String> assessment;
 
-    // Empty constructer for firebase needed
+    // Empty constructor for firebase needed
     public Course() {
     }
 
@@ -60,12 +60,11 @@ public class Course implements Serializable {
     public void setConvener(String convener) {
         this.convener = convener;
     }
-    public String getStudentType() {
-        return studentType;
-    }
+
     public void setStudentType(String studentType) {
         this.studentType = studentType;
     }
+
     public List<String> getAssessment() { return assessment; }
 
     public void setAssessment(List<String> assessment) {
