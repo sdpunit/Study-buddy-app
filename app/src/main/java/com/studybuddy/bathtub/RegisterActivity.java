@@ -24,7 +24,7 @@ import com.studybuddy.R;
 
 /**
  * Register Page where the user can register for a new account.
- * @author Punit (u7432723)
+ * @author Punit (u7432723), Lana (u7103031), Ahmed (u7490701)
  */
 public class RegisterActivity extends AppCompatActivity {
 
@@ -98,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /**
-     * Adds the user to the database, setting other user attributes as null by defult
+     * Adds the user to the database, setting other user attributes as null by default
      * @param uid of the user
      * @param username
      * @param password

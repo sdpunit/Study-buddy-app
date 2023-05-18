@@ -14,7 +14,6 @@ public class Query {
      * This method constructs an empty query object.
      * @author Steven (u7108792)
      */
-
     public Query() {
         this.college = null;
         this.code = 0;
@@ -26,7 +25,6 @@ public class Query {
      * This method constructs a query with predefined values.
      * @author Steven (u7108792)
      */
-
     public Query(String college, int code, String course, String convener) {
         this.college = college;
         this.code = code;

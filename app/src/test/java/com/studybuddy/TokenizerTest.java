@@ -19,6 +19,10 @@ public class TokenizerTest {
     private static final String errorToken = "wrong token";
     private static final String errorType = "wrong token type";
 
+    /**
+     * Tests if Tokenizer creates code tokens
+     * @author Lana (u7103031)
+     */
     @Test(timeout=1000)
     public void testTokenizeCode() {
         String s = "2100";
@@ -32,6 +36,10 @@ public class TokenizerTest {
         assertEquals(errorToken, s, tokenizer.current().getToken());
     }
 
+    /**
+     * Tests if Tokenizer creates college tokens
+     * @author Lana (u7103031)
+     */
     @Test(timeout=1000)
     public void testTokenizeCollege() {
         Token.Type t = COLLEGE;
@@ -47,6 +55,10 @@ public class TokenizerTest {
         assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
     }
 
+    /**
+     * Tests if Tokenizer creates course-code tokens
+     * @author Lana (u7103031)
+     */
     @Test(timeout=1000)
     public void testTokenizeCollegeCode() {
         Token.Type t = COLLEGECODE;
@@ -72,6 +84,10 @@ public class TokenizerTest {
         assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
     }
 
+    /**
+     * Tests if Tokenizer creates course tokens
+     * @author Lana (u7103031)
+     */
     @Test(timeout=1000)
     public void testTokenizeCourse() {
         Token.Type t = COURSE;
@@ -87,6 +103,10 @@ public class TokenizerTest {
         assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
     }
 
+    /**
+     * Tests if Tokenizer creates convener tokens
+     * @author Lana (u7103031)
+     */
     @Test(timeout=1000)
     public void testTokenizeConvener() {
         Token.Type t = CONVENER;
@@ -107,6 +127,10 @@ public class TokenizerTest {
         assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
     }
 
+    /**
+     * Tests if Tokenizer creates tokens for mixed input
+     * @author Lana (u7103031)
+     */
     @Test(timeout=1000)
     public void testTokenizeMixed() {
         String s = "2100, Software Design Methodologies, COMP";
@@ -132,6 +156,10 @@ public class TokenizerTest {
         assertEquals(errorToken, "convener= bernando", tokenizer.current().getToken());
     }
 
+    /**
+     * Tests if Tokenizer creates null tokens invalid input
+     * @author Lana (u7103031)
+     */
     @Test(timeout=1000)
     public void testNullToken() {
         tokenizer = new Tokenizer("COMP 2I00");

@@ -65,10 +65,6 @@ public class User implements Serializable {
         return uid;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
-    }
-
     public String getName() {
         return name;
     }
@@ -81,28 +77,9 @@ public class User implements Serializable {
         return isUndergrad;
     }
 
-    public void setIsUndergrad(boolean isUndergrad) {
-        this.isUndergrad = isUndergrad;
-    }
 
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isUndergrad() {
-        return isUndergrad;
-    }
-
-    public void setUndergrad(boolean undergrad) {
-        isUndergrad = undergrad;
-    }
-
-    public void setCourseTime(Map<String, Double> courseTime) {
-        this.courseTime = courseTime;
     }
 
     public ArrayList<Course> getCoursesStudied() {
@@ -113,18 +90,8 @@ public class User implements Serializable {
         this.coursesStudied.add(course);
     }
 
-    public void setCoursesStudied(ArrayList<Course> coursesStudied) {
-        this.coursesStudied = coursesStudied;
-        addCoursesTime(coursesStudied);
-    }
-
     public ArrayList<Course> getCoursesEnrolled() {
         return coursesEnrolled;
-    }
-
-    public void addCoursesEnrolled(Course course) {
-        this.coursesEnrolled.add(course);
-        this.courseTime.put(course.getCourseCode(), 0.0);
     }
 
     public void setCoursesEnrolled(ArrayList<Course> coursesEnrolled) {

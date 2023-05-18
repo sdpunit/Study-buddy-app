@@ -15,7 +15,7 @@ public class Course implements Serializable {
     private String studentType;
     private List<String> assessment;
 
-    // Empty constructer for firebase needed
+    // Empty constructor for firebase needed
     public Course() {
     }
 

@@ -12,6 +12,7 @@ import com.studybuddy.bathtub.User;
 /**
  * This class is to create a notification when the user has studied two more hours.
  * @author Yanghe (u7533843)
+ * @feature [Interact-Noti]
  */
 public class StudyTimeNotification implements StudyNotification {
     @Override

@@ -6,6 +6,7 @@ import com.studybuddy.bathtub.User;
 /**
  * This interface is for sending notifications.
  * @author Yanghe (u7533843)
+ * @feature [Interact-Noti]
  */
 public interface StudyNotification {
     void notifyUser(Context context, User user);

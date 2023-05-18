@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * checks that the information entered by the user matches an instance in the firebase
      * @author Punit (u7432723)
-     * @feature User Authentication
+     * @feature Login User Authentication
      */
     private void authenticateUser(String username, String password) {
         // Get a reference to the database

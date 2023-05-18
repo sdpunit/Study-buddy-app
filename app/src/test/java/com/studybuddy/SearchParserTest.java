@@ -11,10 +11,18 @@ import org.junit.Test;
 
 public class SearchParserTest {
 
+    /**
+     * A method to test equality of two query objects
+     * @author Lana (u7103031)
+     */
     public String makeString(Query q) {
         return q.getCollege()+","+q.getCode()+","+q.getCourse()+","+q.getConvener();
     }
 
+    /**
+     * Tests if Query works for code tokens
+     * @author Lana (u7103031)
+     */
     @Test(timeout=1000)
     public void testQueryCode() {
         Tokenizer tk = new Tokenizer("COMP,2100");
@@ -30,6 +38,10 @@ public class SearchParserTest {
         assertEquals(makeString(expected),makeString(actual));
     }
 
+    /**
+     * Tests if Query works for course tokens
+     * @author Lana (u7103031)
+     */
     @Test(timeout=1000)
     public void testQueryCourse() {
         Tokenizer tk=new Tokenizer("COMP 2100, Software Design Methodologies");
@@ -39,6 +51,10 @@ public class SearchParserTest {
         assertEquals(makeString(expected),makeString(actual));
     }
 
+    /**
+     * Tests if Query works for convener tokens
+     * @author Lana (u7103031)
+     */
     @Test(timeout=1000)
     public void testQueryConvener() {
         Tokenizer tk =new Tokenizer("COMP 2100, Software Design Methodologies,convener= bernando");
@@ -66,6 +82,10 @@ public class SearchParserTest {
         assertEquals(makeString(expected),makeString(actual));
     }
 
+    /**
+     * Tests if Query works throws exceptions for invalid queries
+     * @author Lana (u7103031)
+     */
     @Test(timeout=1000)
     public void testIllegalArgumentException() {
 
@@ -74,12 +94,6 @@ public class SearchParserTest {
             SearchParser sp = new SearchParser(tk);
             sp.parseQuery();
         });
-
-//        assertThrows(IllegalArgumentException.class, () -> {
-//            Tokenizer tk=new Tokenizer("DCBA");
-//            SearchParser sp = new SearchParser(tk);
-//            sp.parseQuery();
-//        });
 
         assertThrows(IllegalArgumentException.class, () -> {
             Tokenizer tk=new Tokenizer("ABCD 1234");
