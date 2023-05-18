@@ -53,23 +53,39 @@ public class RegisterActivity extends AppCompatActivity {
             String username = ((EditText) findViewById(R.id.et_username)).getText().toString();
             String password1 = ((EditText) findViewById(R.id.et_password)).getText().toString();
             String password2 = ((EditText) findViewById(R.id.et_repassword)).getText().toString();
-            Integer uid = Integer.parseInt(((EditText) findViewById(R.id.et_uid)).getText().toString());
+            String uidString = ((EditText) findViewById(R.id.et_uid)).getText().toString();
 
-            if (!password1.equals(password2)) {
-                checkPassword.setError("passwords do not match");}
-            else if (password1.length()<5) {
-                password.setError("passwords should be 6 characters or greater");}
+            // Check if any text box is left blank
+            if (username.isEmpty()) {
+                Toaster.showToast(RegisterActivity.this,"Please fill out username");
+            } else if (password1.isEmpty()) {
+                Toaster.showToast(RegisterActivity.this,"Please fill out password");
+            } else if (password2.isEmpty()) {
+                Toaster.showToast(RegisterActivity.this,"Please fill out re-enter password");
+            } else if (uidString.isEmpty()) {
+                Toaster.showToast(RegisterActivity.this,"Please fill out UID");
+            } else if (radioGroup.getCheckedRadioButtonId() == -1) {
+                Toaster.showToast(RegisterActivity.this,"Please select student type");
+            }
             else {
-                addUserToDatabase(uid, username, password1);
-                user = new User(uid, username);
+                // All text boxes are filled, proceed with registration
+                Integer uid = Integer.parseInt(uidString);
+                if (!password1.equals(password2)) {
+                    checkPassword.setError("passwords do not match");
+                } else if (password1.length() < 5) {
+                    password.setError("passwords should be 6 characters or greater");
+                } else {
+                    addUserToDatabase(uid, username, password1);
+                    user = new User(uid, username);
 
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                intent.putExtra("user", user);
-                startActivity(intent);
-                finish();
+                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
-
+        
         // what happens when the arrow is clicked
         arrow.setOnClickListener(v -> {
             finish();
@@ -101,4 +117,8 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
     }
+    private void showToast(String message) {
+        Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
+    }
+
 }
