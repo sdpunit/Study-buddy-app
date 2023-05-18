@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Study state is the state when the user is studying. He can only pause or stop studying in this state.
- * @author Yanghe
+ * @author Yanghe (u7533843)
  */
 public class studyState implements State, Serializable {
     private UserTimeState userTimeState;

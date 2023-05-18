@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * This class is used to store the state of a user during a study session.
- * @author Punit
+ * @author Punit (u7432723)
  */
 public class UserTimeState implements Serializable {
     private State pauseState;

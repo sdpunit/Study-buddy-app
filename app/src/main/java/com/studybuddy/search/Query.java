@@ -2,7 +2,7 @@ package com.studybuddy.search;
 
 /**
  * This class represents a search query.
- * @Author Steven (u7108792)
+ * @author Steven (u7108792)
  */
 public class Query {
     private String college;
@@ -13,8 +13,7 @@ public class Query {
 
     /**
      * This method constructs an empty query object.
-     * @return the empty search query
-     * @Author Steven (u7108792)
+     * @author Steven (u7108792)
      */
 
     public Query() {
@@ -27,8 +26,7 @@ public class Query {
 
     /**
      * This method constructs a query with predefined values.
-     * @return the term of the course
-     * @Author Steven (u7108792)
+     * @author Steven (u7108792)
      */
 
     public Query(String college, int code, String course, String convener, String term) {

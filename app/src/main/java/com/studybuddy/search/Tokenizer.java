@@ -17,12 +17,16 @@ public class Tokenizer {
     /**
      * Check whether tokenizer still has tokens left
      * @return type: boolean
+     * @author Lana (u7103031)
      */
     public boolean hasNext() {
         return currentToken != null;
     }
 
-    //Tokenizer constructor
+    /**Tokenizer constructor
+     * @param text the text to be tokenized
+     * @author Steven (u7108792)
+     */
     public Tokenizer(String text) {
         if (text == null || text.isEmpty()) {
             throw new IllegalArgumentException("Text cannot be null");
@@ -33,7 +37,7 @@ public class Tokenizer {
 
     /**
      * Creates tokens
-     * @author Steven and Lana (u7103031) 
+     * @author Steven (u7108792) and Lana (u7103031)
      */
     public void next() {
         Colleges collegeList = new Colleges();
@@ -69,7 +73,7 @@ public class Tokenizer {
      * Extracts numbers from a string
      * @param input input string
      * @return a string of numerical values
-     * @author Steven
+     * @author Steven (u7108792)
      */
     private String getIntegerString(String input){
         String s = "";
@@ -103,7 +107,7 @@ public class Tokenizer {
      * Determines if a string is a number
      * @param input input string
      * @return boolean
-     * @author Steven
+     * @author Steven (u7108792)
      */
     private boolean isValidInteger(String input) {
         char[] ch = input.toCharArray();

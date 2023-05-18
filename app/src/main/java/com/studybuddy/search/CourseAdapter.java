@@ -24,7 +24,7 @@ public class CourseAdapter extends ArrayAdapter<Course> {
      * @param convertView the view of the course cell
      * @param parent the parent view
      * @return the view of the course cell
-     * @Author Steven (u7108792)
+     * @author Steven (u7108792)
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

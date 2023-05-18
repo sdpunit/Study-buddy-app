@@ -21,7 +21,8 @@ import android.widget.ListView;
 
 /**
  * This activity displays the leaderboard containing the top 5 users with the most study time.
- * @author Ahmed
+ * @author Ahmed (u7490701)
+ * @feature [Data-Graphical], [FB-Syn]
  */
 public class LeaderboardActivity extends AppCompatActivity {
     private User user;
