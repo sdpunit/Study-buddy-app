@@ -15,7 +15,7 @@
         android:theme="@style/Theme.StudyBuddy"
          >
         <activity
-            android:name=".LeaderboardActivity"
+            android:name=".bathtub.LeaderboardActivity"
             android:label="@string/title_activity_leaderboard"
             android:exported="false" />
         <activity
