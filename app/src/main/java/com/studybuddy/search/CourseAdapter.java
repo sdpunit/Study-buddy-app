@@ -1,5 +1,6 @@
 package com.studybuddy.search;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ public class CourseAdapter extends ArrayAdapter<Course> {
      * @return the view of the course cell
      * @author Steven (u7108792)
      */
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Course course = getItem(position);
@@ -33,9 +35,9 @@ public class CourseAdapter extends ArrayAdapter<Course> {
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.course_cell, parent, false);
         }
-        TextView tv = (TextView) convertView.findViewById(R.id.CellName);
-        TextView tv2 = (TextView) convertView.findViewById(R.id.CellCode);
-        TextView tv3 = (TextView) convertView.findViewById(R.id.CellConvener);
+        TextView tv = convertView.findViewById(R.id.CellName);
+        TextView tv2 = convertView.findViewById(R.id.CellCode);
+        TextView tv3 = convertView.findViewById(R.id.CellConvener);
 
         tv.setText(course.getCourseName());
         tv2.setText(course.getCourseCode());

@@ -5,14 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -147,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * checks that the information entered by the user matches an instance in the firebase
      * @author Punit (u7432723)
-     * @feature User Authentication
+     * @feature Login User Authentication
      */
     private void authenticateUser(String username, String password) {
         // Get a reference to the database

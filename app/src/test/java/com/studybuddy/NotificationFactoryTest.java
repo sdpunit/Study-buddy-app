@@ -10,7 +10,10 @@ import com.studybuddy.notification.StudyTimeNotification;
 import org.junit.Test;
 
 public class NotificationFactoryTest {
-
+    /**
+     * Tests if notification factory is producing the correct notification types
+     * @author Lana (u7103031)
+     */
     @Test(timeout=1000)
     public void notificationFactoryTest() {
         NotificationFactory nf = new NotificationFactory();

@@ -35,7 +35,7 @@ import java.util.Random;
 /**
  * The main activity of the app. All the other activities end up here.
  * @author Punit (u7432723), Yanghe (u7533843)
- * @feature [Data-Graphical]
+ * @feature [Data-Graphical] [Firebase Data Visualisation]
  */
 public class MainActivity extends AppCompatActivity {
     private User user;
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             checkAndUpdateLeaderboardFirebase(leaderboard);
         }
 
-        Button btn_add_courses = (Button) findViewById(R.id.btn_add_courses);
+        Button btn_add_courses = findViewById(R.id.btn_add_courses);
         TextView txt_hello_user = findViewById(R.id.txt_hello_user);
         Button btn_graphical_data = findViewById(R.id.btn_graphical_data);
 
@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Displays the total number of minutes the user has studies till now
+     * Displays the total number of minutes the user has studied utill now
      * @author Punit (u7432723)
      */
     public void displayStudyMinutes(User user) {
