@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             checkAndUpdateLeaderboardFirebase(leaderboard);
         }
 
-        Button btn_add_courses = (Button) findViewById(R.id.btn_add_courses);
+        Button btn_add_courses = findViewById(R.id.btn_add_courses);
         TextView txt_hello_user = findViewById(R.id.txt_hello_user);
         Button btn_graphical_data = findViewById(R.id.btn_graphical_data);
 

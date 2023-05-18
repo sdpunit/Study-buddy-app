@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import com.studybuddy.R;
 import com.studybuddy.timer.UserTimeState;
 
@@ -32,7 +30,7 @@ public class SetTimeActivity extends AppCompatActivity {
 
     // This method is called when the user clicks the start button to start a countdown.
     public void clickStart(View view) {
-        EditText studyTime = (EditText) findViewById(R.id.studyTimeText);
+        EditText studyTime = findViewById(R.id.studyTimeText);
         String studyTimeString = studyTime.getText().toString();
         // deal with invalid input
         if (!isInteger(studyTimeString)) {

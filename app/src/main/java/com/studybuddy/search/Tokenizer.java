@@ -1,9 +1,4 @@
 package com.studybuddy.search;
-
-import static java.lang.Character.isUpperCase;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Tokenizer {
