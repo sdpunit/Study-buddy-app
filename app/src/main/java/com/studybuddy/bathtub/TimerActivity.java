@@ -131,7 +131,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                     if (databaseError != null) {
-                        Toast.makeText(TimerActivity.this, "Data could not be updated", Toast.LENGTH_SHORT).show();
+                        Toaster.showToast(TimerActivity.this, "Data could not be updated");
                     } else {
                         Intent intent = new Intent(TimerActivity.this, MainActivity.class);
                         intent.putExtra("userTimeState", userTimeState);
@@ -183,7 +183,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
                     @Override
                     public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                         if (databaseError != null) {
-                            Toast.makeText(TimerActivity.this, "Data could not be updated", Toast.LENGTH_SHORT).show();
+                            Toaster.showToast(TimerActivity.this, "Data could not be updated");
                         } else {
                             Intent intent = new Intent(TimerActivity.this, MainActivity.class);
                             intent.putExtra("userTimeState", userTimeState);
