@@ -85,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-        
+
         // what happens when the arrow is clicked
         arrow.setOnClickListener(v -> {
             finish();
@@ -117,8 +117,4 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
     }
-    private void showToast(String message) {
-        Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
-    }
-
 }
