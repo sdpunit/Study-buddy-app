@@ -8,7 +8,7 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * This class is the timer used in the timer activity.
- * @author Yanghe
+ * @author Yanghe (u7533843)
  */
 public class MyTimer {
     private static MyTimer instance;

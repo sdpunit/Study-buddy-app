@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * This class is used to display the user's name and study minutes in the leaderboard.
- * @author Ahmed
+ * @author Ahmed (u7490701)
  */
 public class UserListAdapter extends ArrayAdapter<User> {
     private Context context;

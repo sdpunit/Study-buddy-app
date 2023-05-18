@@ -13,7 +13,7 @@ import com.studybuddy.timer.UserTimeState;
 
 /**
  * Set the time of study here.
- * @author Yanghe
+ * @author Yanghe (u7533843)
  */
 public class SetTimeActivity extends AppCompatActivity {
     private UserTimeState userTimeState;

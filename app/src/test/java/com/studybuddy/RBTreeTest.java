@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * This is a test class for RB Tree.
- * @author Yanghe
+ * @author Yanghe (u7533843)
  */
 public class RBTreeTest {
     private final Course[] courses = {new Course("COMP2300"), new Course("COMP3600"),

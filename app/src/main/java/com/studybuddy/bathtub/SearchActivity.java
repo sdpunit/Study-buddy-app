@@ -32,8 +32,9 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * @feature This class is the activity for the search page.
- * @author Steven (u7108792), Lana (u7103031) 
+ * This class is the activity for the search page.
+ * @author Steven (u7108792), Lana (u7103031)
+ * @feature Search, [Search-Filter], [Interact-Follow]
  */
 public class SearchActivity extends AppCompatActivity {
 
@@ -309,7 +310,7 @@ public class SearchActivity extends AppCompatActivity {
      * Creates a list of courses of one college
      * @param college college name such as comp
      * @return list of courses
-     * @author Yanghe, Lana (u7103031) and Steven (u7108792)
+     * @author Yanghe (u7533843), Lana (u7103031) and Steven (u7108792)
      */
     public List<Course> getCollegeCourses(String college) throws JSONException {
         // reading json based on student type
@@ -382,7 +383,7 @@ public class SearchActivity extends AppCompatActivity {
 
     /**
      * Creates a hashmap of college names and their respective trees.
-     * @author Yanghe
+     * @author Yanghe (u7533843)
      */
     public HashMap<String, RBTree> getCollegeTreeMap () {
         HashMap<String, RBTree> collegeTreeMap = new HashMap<>();

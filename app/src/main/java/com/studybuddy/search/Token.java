@@ -2,6 +2,7 @@ package com.studybuddy.search;
 
 /**
  * This class represents a token in the search query.
+ * @author Steven (u7108792) and Lana (u7103031)
  */
 public class Token {
 

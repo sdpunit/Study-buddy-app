@@ -12,7 +12,7 @@ import com.studybuddy.bathtub.User;
 /**
  * This class is to create a notification when the user has studied two more times.
  * A process including start study and stop study is considered as study once.
- * @author Yanghe
+ * @author Yanghe (u7533843)
  */
 public class StudyNumberNotification implements StudyNotification {
     @Override
