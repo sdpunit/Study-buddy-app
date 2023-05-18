@@ -127,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         handler = new Handler();
         // data stream and update leaderboard in the meantime
-        //uploadDataPeriodically(leaderboard);
+        uploadDataPeriodically(leaderboard);
     }
     /**
      * The Edit texts are cleared everytime we come back to this activity
