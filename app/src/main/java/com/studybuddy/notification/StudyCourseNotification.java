@@ -16,6 +16,13 @@ import com.studybuddy.bathtub.User;
  */
 public class StudyCourseNotification implements StudyNotification {
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true; // The objects are the same reference
+        }
+        return obj != null && getClass() == obj.getClass(); // The objects are considered equal
+    }
+    @Override
     public void notifyUser(Context context, User user) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, LoginActivity.CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
