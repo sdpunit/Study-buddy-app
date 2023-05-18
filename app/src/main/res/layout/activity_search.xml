@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_image1"
-    tools:context=".bathtub.SearchActivity">
+    android:background="@drawable/background_image10"
+    tools:context=".bathtub.SearchActivity"
+    app:actionViewClass="android.support.v7.widget.SearchView">
 
     <SearchView
         android:id="@+id/SearchInput"
@@ -13,26 +14,15 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
+        android:layout_marginTop="12dp"
         android:background="#E8E8E8"
         android:backgroundTint="#C4F3F3F3"
         android:iconifiedByDefault="false"
-        android:queryHint="College, Code, Course Name, Convener"
+        android:queryHint="College,Code,Course Name,Convener="
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></SearchView>
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/SearchInput"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        android:ems="10"-->
-    <!--        android:inputType="textPersonName"-->
-    <!--        android:text="Name"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <ListView
         android:id="@+id/SearchList"
@@ -88,5 +78,5 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AddedList" />
-    <!--        app:layout_constraintTop_toBottomOf="@+id/SearchInput" -->
+
 </androidx.constraintlayout.widget.ConstraintLayout>
