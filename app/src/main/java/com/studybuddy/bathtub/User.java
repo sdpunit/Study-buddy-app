@@ -129,15 +129,6 @@ public class User implements Serializable {
         this.studyMinutes += studyMinutes;
     }
 
-
-//    public User(int uid, String name, String password) {
-//        this.uid = uid;
-//        this.name = name;
-//        this.password = password;
-//        this.isUndergrad = false;
-//        this.courseTime = new HashMap<>();
-//    }
-
     public int getUid() {
         return uid;
     }

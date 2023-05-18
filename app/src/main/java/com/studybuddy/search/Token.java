@@ -19,6 +19,4 @@ public class Token {
         return type;
     }
 
-
-    // create new hashmap to store the token and its type
 }

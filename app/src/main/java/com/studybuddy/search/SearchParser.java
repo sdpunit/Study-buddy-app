@@ -3,19 +3,11 @@ package com.studybuddy.search;
 public class SearchParser {
     Tokenizer tokenizer;
 
-
-//    public SearchParser(List<String> tokens) {
-//        this.tokens = tokens;
-//        this.index = 0;
-//    }
-
     public SearchParser(Tokenizer tokenizer) {
         this.tokenizer = tokenizer;
     }
 
-
-
-    //flowing the grammar:
+    //following the grammar:
     /*
     college: COMP, code: 1110, name: Structured Programming, convener: Patrik Haslum"
 
@@ -37,39 +29,35 @@ public class SearchParser {
      */
 
 
-    // validates the input and returns the parsed expression.
-    // @return Query object as a result of parsing the input.
+    /**
+     * validates the input and returns the parsed expression.
+     * @return Query object as a result of parsing the input.
+     * @author Steven and Lana
+     */
     public Query parseQuery() {
         Query query = new Query();
         Token currentToken = tokenizer.current(); //get the current token
-//        if(currentToken.getType() == Token.Type.CODE){
-//            query.setCode(Integer.parseInt(currentToken.getToken())); //set the code
-//            return query;
-//        }
-//        else
         if (tokenizer.hasNext() && (currentToken != null)) { //if there is a next token
             if (currentToken.getType() == Token.Type.COLLEGE) { //if the current token is a college, first token must be a college
                 query.setCollege(currentToken.getToken()); //set the college
                 tokenizer.next(); //move to the next token
-                return parseTerm(query); //parse the rest, (term)
 
             } else if (currentToken.getType() == Token.Type.COLLEGECODE) {
-                if (currentToken.getToken().split(" ").length==1) {
-                    query.setCollege(currentToken.getToken().split(" ")[0].trim().substring(0,4));
-                    query.setCode(Integer.parseInt(currentToken.getToken().split(" ")[0].trim().substring(4)));
+                if (currentToken.getToken().split(" ").length==1) { //if COLLLEGECODE is separated by a space
+                    query.setCollege(currentToken.getToken().trim().substring(0,4)); //set the college
+                    query.setCode(Integer.parseInt(currentToken.getToken().trim().substring(4))); //set the code
                 }
-                else {
+                else { // if no space
                     query.setCollege(currentToken.getToken().split(" ")[0].trim()); //set the college
                     query.setCode(Integer.parseInt(currentToken.getToken().split(" ")[1].trim())); //set the code
-
                 }
                 tokenizer.next(); //move to the next token
-                return parseTerm(query);
             }
+            return parseTerm(query); //parse the rest, (term)
         }
-        //return null;
         throw new IllegalArgumentException("You entered a null token: " + tokenizer.current());
     }
+
     private Query parseTerm(Query query) {
 
         if (tokenizer.hasNext()) {
@@ -95,91 +83,10 @@ public class SearchParser {
                 return parseTerm(query);
 
             } else {
-//                return query;
                 throw new IllegalArgumentException("Expected CODE, COURSE, or CONVENER got: " + tokenizer.current().getToken());
             }
         }
         return query;
     }
 
-
 }
-
-
-
-//    public Subject parseSubject() throws IllegalProductionException {
-//       if(tokenizer.hasNext()) {
-//
-//       }
-//       else {
-//           throw new IllegalArgumentException("Expected SUBJECT all caps, found: " + tokenizer.getCurrent().getToken());
-//       }
-//       return new Subject(tokenizer.getCurrent().getToken());
-//    }
-//
-//    public String parseCode() {
-//        String code = tokens.get(index);
-//        index++;
-//        return code;
-
-
-
-
-
-
-
-
-////    public SearchQuery parse() {
-////        SearchQuery query = new SearchQuery();
-////
-////        query.addTerm(parseTerm());
-////
-////        while (index < tokens.size()) {
-////            String operator = parseOperator();
-////            String term = parseTerm();
-////            query.addTerm(term, operator);
-////        }
-////
-////        return query;
-////    }
-//    public String parse(List<String> tokens) {
-//        List<String> query = new ArrayList<String>();
-//
-//        query.add(parseTerm());
-//        while (index < tokens.size()) {
-//            String operator = parseOperator();
-//            String term = parseTerm();
-//            query.add(term);
-//            query.add(operator);
-//        }
-//
-//        return query.toString();
-//    }
-//
-//    private String parseOperator() {
-//        if (index >= tokens.size()) {
-//            throw new IllegalArgumentException("Expected operator, found end of input");
-//        }
-//
-//        String operator = tokens.get(index++);
-//
-//        if (!operator.equals("AND") && !operator.equals("OR")) {
-//            throw new IllegalArgumentException("Expected operator, found " + operator);
-//        }
-//
-//        return operator;
-//    }
-//
-//    private String parseTerm() {
-//        if (index >= tokens.size()) {
-//            throw new IllegalArgumentException("Expected term, found end of input");
-//        }
-//
-//        String term = tokens.get(index++);
-//
-//        if (!term.matches("[a-zA-Z]+")) {
-//            throw new IllegalArgumentException("Expected term, found " + term);
-//        }
-//
-//        return term;
-//    }
