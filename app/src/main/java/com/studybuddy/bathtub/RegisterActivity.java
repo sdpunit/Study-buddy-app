@@ -64,16 +64,17 @@ public class RegisterActivity extends AppCompatActivity {
                 Toaster.showToast(RegisterActivity.this,"Please fill out re-enter password");
             } else if (uidString.isEmpty()) {
                 Toaster.showToast(RegisterActivity.this,"Please fill out UID");
+            } else if (uidString.length() != 7) {
+                    Toaster.showToast(RegisterActivity.this,"UID must be 7 digits");
             } else if (radioGroup.getCheckedRadioButtonId() == -1) {
                 Toaster.showToast(RegisterActivity.this,"Please select student type");
-            }
-            else {
+            } else {
                 // All text boxes are filled, proceed with registration
                 Integer uid = Integer.parseInt(uidString);
                 if (!password1.equals(password2)) {
-                    checkPassword.setError("passwords do not match");
+                    checkPassword.setError("Passwords do not match");
                 } else if (password1.length() < 5) {
-                    password.setError("passwords should be 6 characters or greater");
+                    password.setError("Passwords should be 6 characters or greater");
                 } else {
                     addUserToDatabase(uid, username, password1);
                     user = new User(uid, username);
