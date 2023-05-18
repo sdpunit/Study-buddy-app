@@ -30,16 +30,18 @@ import com.studybuddy.timer.studyState;
 
 import java.util.ArrayList;
 
+/**
+ * Users study in this activity.
+ * @auther Yanghe, Punit
+ */
 public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
     private UserTimeState userTimeState;
     private User user;
     private MyTimer timer;
     private Course course;
     private TextView timeTextView;
-
     private int courseStudiedBefore;
     private int studyNumberBefore;
-
     private ArrayList<User> leaderboard;
     private DatabaseReference leaderboardRef;
 
@@ -79,6 +81,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
 
     /**
      * This method is called when the user clicks pause or resume button.
+     * @auther Yanghe
      */
     public void clickPauseOrResume(View view) {
         Button pauseOrResumeButton = (Button) view;
@@ -97,6 +100,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
 
     /**
      * This method is called when the user clicks stop button.
+     * @auther Yanghe, Punit
      */
     public void clickStop(View view) {
         Button pauseOrResumeButton = (Button) findViewById(R.id.pauseOrResumeButton);
@@ -106,12 +110,9 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
         builder.setTitle("Confirmation");
         builder.setMessage("Are you sure you want to stop?");
         builder.setPositiveButton("Yes", (dialog, which) -> {
+            // update user information
             userTimeState.stopStudy();
-
-            //userTimeState.addStudyMinutes(timer.getStudyTime());
-
             user.addStudyMinutes(timer.getStudyTime());
-
             user.setStudyNumber(user.getStudyNumber() + 1);
             if (!user.getCoursesStudied().contains(course)) {
                 user.addCourseStudied(course);
@@ -122,7 +123,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
             // leaderboard
             leaderboardRef = FirebaseDatabase.getInstance().getReference("leaderboard");
             leaderboard = getLeaderboard();
-
+            // update leaderboard
             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("users");
             myRef.child(String.valueOf(user.getUid())).setValue(user, new DatabaseReference.CompletionListener() {
                 @Override
@@ -152,6 +153,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
 
     /**
      * This method is called when time up.
+     * @auther: Yanghe Punit
      */
     @Override
     public void timeUp() {
@@ -161,8 +163,8 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
             builder.setMessage("Have a Rest !");
             builder.setNeutralButton("OK", (dialog, which) -> {
                 dialog.dismiss();
+                // update user information
                 userTimeState.stopStudy();
-
                 user.addStudyMinutes(timer.getInitialMinutes());
                 user.setStudyNumber(user.getStudyNumber() + 1);
                 if (!user.getCoursesStudied().contains(course)) {
@@ -170,11 +172,10 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
                 }
                 user.addCourseTime(course, (double)timer.getInitialMinutes());
                 timer = null;
-
-                // leaderboard thing
+                // leaderboard
                 leaderboardRef = FirebaseDatabase.getInstance().getReference("leaderboard");
                 leaderboard = getLeaderboard();
-
+                // update the firebase
                 DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("users");
                 myRef.child(String.valueOf(user.getUid())).setValue(user, new DatabaseReference.CompletionListener() {
                     @Override
@@ -206,7 +207,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
     /**
      * Get the leaderboard from firebase.
      * @return the leaderboard as a list of users
-     * @auther: Yanghe Dong
+     * @auther: Yanghe
      */
     public ArrayList<User> getLeaderboard() {
         ArrayList<User> leaderboard = new ArrayList<>();

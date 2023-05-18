@@ -33,10 +33,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The main activity of the app. All the other activities end up here.
+ * @auther Punit
+ */
 public class MainActivity extends AppCompatActivity {
     private User user;
     private UserTimeState userTimeState;
-    DatabaseReference userRef;
+    private DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +58,10 @@ public class MainActivity extends AppCompatActivity {
             checkAndUpdateLeaderboardFirebase(leaderboard);
         }
 
-
-        // display the study minutes
-
         Button btn_add_courses = (Button) findViewById(R.id.btn_add_courses);
         TextView txt_hello_user = findViewById(R.id.txt_hello_user);
         Button btn_graphical_data = findViewById(R.id.btn_graphical_data);
         GridLayout grid_courses = findViewById(R.id.grid_courses);
-
 
         //Sets the text to Hello, user.
         if (user != null) {
@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             txt_hello_user.setText("Hi, guest");
         }
-
 
         userRef = FirebaseDatabase.getInstance().getReference("users").child(String.valueOf(user.getUid()));
         userRef.addValueEventListener(new ValueEventListener() {
@@ -213,8 +212,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Sends notifications to the user based on different cases.
-     * @auther: Yanghe Dong
+     * Send notifications to the user based on different cases.
+     * @auther Yanghe
      */
     public void sendNotification() {
         // notificationTypes
@@ -245,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Update the leaderboard in Firebase.
-     * @auther: Yanghe Dong
+     * @auther Yanghe
      */
     public void checkAndUpdateLeaderboardFirebase(ArrayList<User> leaderboard) {
         // if this user is already in the leaderboard, update the study minutes
@@ -278,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Helper method for checkAndUpdateLeaderboardFirebase
-     * @auther: Yanghe Dong
+     * @auther Yanghe
      */
     public void addUserToLeaderboardFirebase(ArrayList<User> leaderboard) {
         // add the new user

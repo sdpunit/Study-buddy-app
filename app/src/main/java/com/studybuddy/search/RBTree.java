@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * This class is a RB Tree to store course data.
- *
- * @author Yanghe Dong
+ * @author Yanghe
  */
 public class RBTree {
     public Node root;
@@ -19,7 +18,6 @@ public class RBTree {
 
     /**
      * Insert a new course into the tree
-     *
      * @param course the new course to be inserted
      */
     public void insert(Course course) {
@@ -63,7 +61,6 @@ public class RBTree {
 
     /**
      * Reconstruct the tree after insertion so that it satisfies the properties of a red-black tree
-     *
      * @param node the inserted node
      */
     private void reconstructTree(Node node) {
@@ -164,7 +161,6 @@ public class RBTree {
 
     /**
      * Search for a course by course code (e.g. COMP2100)
-     *
      * @param root the root of the tree
      * @param courseCode the code of the course
      * @return the node containing the course with the given code

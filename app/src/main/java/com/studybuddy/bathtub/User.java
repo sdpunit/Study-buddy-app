@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * User class to store information for one user.
+ * @auther Punit
  */
 public class User implements Serializable {
     private int uid;
@@ -22,10 +23,10 @@ public class User implements Serializable {
     private ArrayList<Course> coursesStudied = new ArrayList<>();
     private Map<String, Double> courseTime;
     private double studyMinutes = 0.0;
-    private int studyNumber = 0;
+    private int studyNumber = 0; // how many times the user has studied
 
     // Need an empty constructor for firebase
-    public User(){
+    public User() {
         this.courseTime = new HashMap<>();
     }
 
@@ -44,7 +45,7 @@ public class User implements Serializable {
         this.courseTime = new HashMap<>();
     }
 
-    public User(int uid, String name, String password,boolean isUndergrad,double studyMinutes) {
+    public User(int uid, String name, String password, boolean isUndergrad, double studyMinutes) {
         this.uid = uid;
         this.name = name;
         this.password = password;
@@ -58,75 +59,6 @@ public class User implements Serializable {
         this.isUndergrad = isUndergrad;
         this.coursesStudied = courses;
         addCoursesTime(courses);
-    }
-
-    public ArrayList<Course> getCoursesStudied() {
-        return coursesStudied;
-    }
-
-    public void addCourseStudied(Course course) {
-        this.coursesStudied.add(course);
-    }
-
-    public void setCoursesStudied(ArrayList<Course> coursesStudied) {
-        this.coursesStudied = coursesStudied;
-        addCoursesTime(coursesStudied);
-    }
-
-    public ArrayList<Course> getCoursesEnrolled() {
-        return coursesEnrolled;
-    }
-    public void addCoursesEnrolled(Course course) {
-        this.coursesEnrolled.add(course);
-        this.courseTime.put(course.getCourseCode(), 0.0);
-    }
-    public void setCoursesEnrolled(ArrayList<Course> coursesEnrolled) {
-        this.coursesEnrolled = coursesEnrolled;
-        for (Course course : coursesEnrolled){
-            this.courseTime.putIfAbsent(course.getCourseCode(), 0.0);
-        }
-    }
-
-    public int getStudyNumber() {
-        return studyNumber;
-    }
-    public void setStudyNumber(int studyNumber) {
-        this.studyNumber = studyNumber;
-    }
-
-    public Map<String, Double> getCourseTime() {
-        return courseTime;
-    }
-
-    public void addCoursesTime(ArrayList<Course> courses){
-        for(Course course:courses){
-            this.courseTime.put(course.getCourseCode(), 0.0);
-        }
-    }
-
-    // may be used later
-    public void deleteCourse(Course course){
-        this.courseTime.remove(course);
-    }
-
-    // add additional minutes to a course
-    public void addCourseTime(Course course, Double additionalMinutes){
-        Double currentMinutes = courseTime.get(course.getCourseCode());
-        if (currentMinutes == null) {
-            currentMinutes = 0.0;
-        }
-        this.courseTime.put(course.getCourseCode(), currentMinutes + additionalMinutes);
-    }
-
-    public double getStudyMinutes() {
-        return studyMinutes;
-    }
-
-    public void setStudyMinutes(double studyMinutes) {
-        this.studyMinutes = studyMinutes;
-    }
-    public void addStudyMinutes(double studyMinutes) {
-        this.studyMinutes += studyMinutes;
     }
 
     public int getUid() {
@@ -156,18 +88,9 @@ public class User implements Serializable {
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
-    }
-
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof User) {
-            User user = (User) obj;
-            return this.getUid() == user.uid;
-        }
-        return false;
     }
 
     public boolean isUndergrad() {
@@ -182,6 +105,82 @@ public class User implements Serializable {
         this.courseTime = courseTime;
     }
 
+    public ArrayList<Course> getCoursesStudied() {
+        return coursesStudied;
+    }
+
+    public void addCourseStudied(Course course) {
+        this.coursesStudied.add(course);
+    }
+
+    public void setCoursesStudied(ArrayList<Course> coursesStudied) {
+        this.coursesStudied = coursesStudied;
+        addCoursesTime(coursesStudied);
+    }
+
+    public ArrayList<Course> getCoursesEnrolled() {
+        return coursesEnrolled;
+    }
+
+    public void addCoursesEnrolled(Course course) {
+        this.coursesEnrolled.add(course);
+        this.courseTime.put(course.getCourseCode(), 0.0);
+    }
+
+    public void setCoursesEnrolled(ArrayList<Course> coursesEnrolled) {
+        this.coursesEnrolled = coursesEnrolled;
+        for (Course course : coursesEnrolled) {
+            this.courseTime.putIfAbsent(course.getCourseCode(), 0.0);
+        }
+    }
+
+    public int getStudyNumber() {
+        return studyNumber;
+    }
+
+    public void setStudyNumber(int studyNumber) {
+        this.studyNumber = studyNumber;
+    }
+
+    public Map<String, Double> getCourseTime() {
+        return courseTime;
+    }
+
+    public void addCoursesTime(ArrayList<Course> courses) {
+        for (Course course : courses) {
+            this.courseTime.put(course.getCourseCode(), 0.0);
+        }
+    }
+
+    // add additional minutes to a course
+    public void addCourseTime(Course course, Double additionalMinutes) {
+        Double currentMinutes = courseTime.get(course.getCourseCode());
+        if (currentMinutes == null) {
+            currentMinutes = 0.0;
+        }
+        this.courseTime.put(course.getCourseCode(), currentMinutes + additionalMinutes);
+    }
+
+    public double getStudyMinutes() {
+        return studyMinutes;
+    }
+
+    public void setStudyMinutes(double studyMinutes) {
+        this.studyMinutes = studyMinutes;
+    }
+
+    public void addStudyMinutes(double studyMinutes) {
+        this.studyMinutes += studyMinutes;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof User) {
+            User user = (User) obj;
+            return this.getUid() == user.uid;
+        }
+        return false;
+    }
     @Override
     public String toString() {
         return this.getName() + " (" + this.getUid() + ")";

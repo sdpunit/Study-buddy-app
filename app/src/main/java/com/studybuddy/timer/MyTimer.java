@@ -6,6 +6,10 @@ import android.os.Message;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * This class is the timer used in the timer activity.
+ * @auther Yanghe
+ */
 public class MyTimer {
     private static MyTimer instance;
 
@@ -87,14 +91,18 @@ public class MyTimer {
         pauseLatch.countDown();
     }
 
-    // Get the whole time of the timer, which is used to record study time when time up.
+    /**
+     * Get the whole time of the timer, which is used to record study time when time up.
+     */
     public int getInitialMinutes() {
         return this.initialMinutes;
     }
-    // Get the study time of this study session,
-    // which is used to record study time when the user manually stops.
+
+    /**
+     * Get the study time of this study session,
+     * which is used to record study time when the user manually stops.
+     */
     public double getStudyTime() {
         return (double) this.initialMinutes - this.remainingMinutes;
     }
-
 }

@@ -22,6 +22,10 @@ import java.util.List;
 
 import android.widget.ListView;
 
+/**
+ * This activity displays the leaderboard containing the top 5 users with the most study time.
+ * @auther Ahmed
+ */
 public class LeaderboardActivity extends AppCompatActivity {
     private User user;
     private ArrayList<User> leaderboard;

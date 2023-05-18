@@ -14,6 +14,10 @@ import com.studybuddy.bathtub.User;
 
 import java.util.List;
 
+/**
+ * This class is used to display the user's name and study minutes in the leaderboard.
+ * @auther Ahmed
+ */
 public class UserListAdapter extends ArrayAdapter<User> {
     private Context context;
     private int resource;
@@ -31,16 +35,11 @@ public class UserListAdapter extends ArrayAdapter<User> {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(resource, parent, false);
         }
-
-        // Get the current User object
         User user = getItem(position);
-
-        // Populate the views in the list item with the user's data
         TextView nameTextView = convertView.findViewById(R.id.nameTextView);
         TextView studyMinutesTextView = convertView.findViewById(R.id.studyMinutesTextView);
         nameTextView.setText(user.getName());
         studyMinutesTextView.setText(String.valueOf(Math.round(user.getStudyMinutes())));
-
         return convertView;
     }
 }

@@ -11,7 +11,7 @@ import com.studybuddy.R;
 import com.studybuddy.bathtub.User;
 /**
  * This class is to create a notification when the user has studied two more hours.
- * @author Yanghe Dong
+ * @author Yanghe
  */
 public class StudyTimeNotification implements StudyNotification {
 

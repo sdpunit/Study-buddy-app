@@ -32,6 +32,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class is the activity for the search page.
+ * @auther Steven, Lana
+ */
 public class SearchActivity extends AppCompatActivity {
 
     public static ArrayList<Course> courseList = new ArrayList<Course>();
@@ -47,8 +51,6 @@ public class SearchActivity extends AppCompatActivity {
     private ListView addedListView;
 
     private Button addCourseButton;
-
-    public RBTree courseTree = new RBTree();
 
     private User user;
 
@@ -67,9 +69,7 @@ public class SearchActivity extends AppCompatActivity {
 
         try {
             setupData();
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (JSONException | IOException e) {
             throw new RuntimeException(e);
         }
         setupList();
@@ -256,9 +256,7 @@ public class SearchActivity extends AppCompatActivity {
         addedListView.setOnItemClickListener((adapterView, view, position, l) -> {
             Course selectCourse = (Course) (addedListView.getItemAtPosition(position));
 
-            if (addedList.contains(selectCourse)){
-                addedList.remove(selectCourse);
-            }
+            addedList.remove(selectCourse);
             addedAdapter.notifyDataSetChanged();
             addedListView.setAdapter(addedAdapter);
         });
@@ -305,16 +303,17 @@ public class SearchActivity extends AppCompatActivity {
                     assessment.add(assessmentArray.getString(j));
                 }
                 //sets convener
-                String convener = "";
+                StringBuilder convener = new StringBuilder();
                 JSONArray convenerArray = courseJson.getJSONArray("convener");
                 for (int j = 0; j < convenerArray.length(); j++) {
-                    convener+=(convenerArray.getString(j))+", ";
-                    if (j==convenerArray.length()-1) {convener+=(convenerArray.getString(j));}
+                    convener.append(convenerArray.getString(j)).append(", ");
+                    if (j==convenerArray.length()-1) {
+                        convener.append(convenerArray.getString(j));}
                 }
                 if (convener.length() == 0) {
-                    convener+=("No convener");
+                    convener.append("No convener");
                 }
-                Course newCourse = new Course(courseCode, courseName, studentTypeOfCourse, assessment, convener);
+                Course newCourse = new Course(courseCode, courseName, studentTypeOfCourse, assessment, convener.toString());
                 courses.add(newCourse);
             }
             return courses;
@@ -341,6 +340,7 @@ public class SearchActivity extends AppCompatActivity {
 
     /**
      * Creates a hashmap of college names and their respective trees.
+     * @auther Yanghe
      */
     public HashMap<String, RBTree> getCollegeTreeMap () {
         HashMap<String, RBTree> collegeTreeMap = new HashMap<>();

@@ -3,6 +3,10 @@ package com.studybuddy.bathtub;
 import android.content.Context;
 import android.widget.Toast;
 
+/**
+ * To display a toast message.
+ * @auther Lana
+ */
 public class Toaster {
     static Toast toast = null;
     public static void showToast(Context mContext, String message){
