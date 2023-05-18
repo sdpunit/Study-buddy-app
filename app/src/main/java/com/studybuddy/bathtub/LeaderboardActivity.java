@@ -18,6 +18,7 @@ import com.studybuddy.R;
 import java.util.ArrayList;
 
 import android.widget.ListView;
+import android.widget.TextView;
 
 /**
  * This activity displays the leaderboard containing the top 5 users with the most study time.
@@ -35,6 +36,8 @@ public class LeaderboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard);
         user = getIntent().getSerializableExtra("user", User.class);
+        TextView userTimeTextView = findViewById(R.id.userTimeTextView);
+        userTimeTextView.setText("My study time is: " + Math.round(user.getStudyMinutes()) + " minutes!");
 
         ListView leaderboardListView = findViewById(R.id.leaderboardListView);
 
