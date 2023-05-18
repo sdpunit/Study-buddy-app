@@ -200,12 +200,18 @@ public class SearchActivity extends AppCompatActivity {
                 for (RBTree.Node n :collegeTree.inOrderTraverse()) {
                     courseList.add(n.getCourse());
                 }
-                if (course) { //if college && course, iterates though course list to find query
+                if (course && convener) { //if college && course, iterates though course list to find query
                     for(Course c : courseList){
-                        if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) && !results.contains(c)) {
+                        if (c.getConvener()!=null && c.getCourseName().toLowerCase().contains(queryObj.getCourse()) && c.getConvener().toLowerCase().contains(queryObj.getConvener()) && !results.contains(c)) {
                             results.add(c);
                         }
                     }
+                }
+                else if (course) {
+                    for(Course c : courseList){
+                        if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) && !results.contains(c)) {
+                            results.add(c);
+                        }}
                 }
                 else { //if college && convener, iterates though course list to find query
                     for(Course c : courseList){
