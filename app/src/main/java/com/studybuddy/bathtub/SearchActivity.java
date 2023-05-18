@@ -2,6 +2,9 @@ package com.studybuddy.bathtub;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -28,13 +31,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
 /**
  * This class is the activity for the search page.
  * @author Steven (u7108792), Lana (u7103031)
- * @feature Search, [Search-Filter], [Interact-Follow]
+ * @feature Search, [Search-Filter], [Search-Invalid], [Interact-Follow]
  */
 public class SearchActivity extends AppCompatActivity {
 
@@ -81,6 +85,62 @@ public class SearchActivity extends AppCompatActivity {
             intent.putExtra("user", user);
             startActivity(intent);
         });
+    }
+
+    /**
+     * This method adds menu context bar to activity to be used as filterable.
+     * @param menu the menu
+     * @return true if the menu is created, false otherwise
+     * @author Steven (u7108792)
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.filter_menu, menu);
+        return true;
+    }
+
+    /**
+     * This method delegates take for each menu item.
+     * @param item the menu item
+     * @return true if the menu item is selected, false otherwise
+     * @author Steven (u7108792)
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.available_courses:
+                courseList.addAll(getAvailableCourses());
+                listAdapter.notifyDataSetChanged();
+                searchListView.setAdapter(listAdapter);
+                return true;
+
+
+            case R.id.all_courses:
+                courseList.clear();
+                courseList.addAll(getCourses());
+                listAdapter.notifyDataSetChanged();
+                searchListView.setAdapter(listAdapter);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
+     * This method changes the data for the search page based on filter.
+     * @author Steven (u7108792)
+     */
+    private ArrayList<Course> getAvailableCourses() {
+        ArrayList<Course> availableCourses = new ArrayList<>();
+        for (Course course : courseList) {
+            if (course.getConvener() != null) {
+                availableCourses.add(course);
+            }
+        }
+        courseList.clear();
+        return availableCourses;
     }
 
     public static String subStringBetween(String input, String to, String from) {
