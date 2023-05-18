@@ -209,31 +209,31 @@ public class SearchActivity extends AppCompatActivity {
                 });
             }
         }
-        if (code) {
-
-        }
-        if (course) {
-            if (convener) {
-                for(Course c : courseList){
-                    if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) || c.getConvener().toLowerCase().contains(queryObj.getConvener()) ) {
-                        results.add(c);
-                    }
-                }
-                return results;
-            }
-            for(Course c : courseList){
-                if (c.getCourseName().toLowerCase().contains(queryObj.getCourse())) {
-                    results.add(c);
-                }
-            }
-        }
-        if (convener) {
-            for(Course c : courseList){
-                if (c.getCourseName().toLowerCase().contains(queryObj.getConvener())) {
-                    results.add(c);
-                }
-            }
-        }
+//        if (code) {
+//
+//        }
+//        if (course) {
+//            if (convener) {
+//                for(Course c : courseList){
+//                    if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) || c.getConvener().toLowerCase().contains(queryObj.getConvener()) ) {
+//                        results.add(c);
+//                    }
+//                }
+//                return results;
+//            }
+//            for(Course c : courseList){
+//                if (c.getCourseName().toLowerCase().contains(queryObj.getCourse())) {
+//                    results.add(c);
+//                }
+//            }
+//        }
+//        if (convener) {
+//            for(Course c : courseList){
+//                if (c.getCourseName().toLowerCase().contains(queryObj.getConvener())) {
+//                    results.add(c);
+//                }
+//            }
+//        }
         return results;
     }
 
@@ -322,16 +322,17 @@ public class SearchActivity extends AppCompatActivity {
                     assessment.add(assessmentArray.getString(j));
                 }
 
-                ArrayList<String> convener = new ArrayList<>();
+                String convener = "";
                 JSONArray convenerArray = courseJson.getJSONArray("convener");
                 for (int j = 0; j < convenerArray.length(); j++) {
-                    convener.add(convenerArray.getString(j));
+                    convener+=(convenerArray.getString(j))+", ";
+                    if (j==convenerArray.length()-1) {convener+=(convenerArray.getString(j));}
                 }
-                if (convener.size() == 0) {
-                    convener.add("No convener");
+                if (convener.length() == 0) {
+                    convener+=("No convener");
                 }
                 // convener things need to be modified
-                Course newCourse = new Course(courseCode, courseName, studentTypeOfCourse, assessment, convener.get(0));
+                Course newCourse = new Course(courseCode, courseName, studentTypeOfCourse, assessment, convener);
 
                 courses.add(newCourse);
             }
@@ -400,6 +401,7 @@ public class SearchActivity extends AppCompatActivity {
             // initialising parameters to create a new Course
             Course c = new Course();
             ArrayList assessments = new ArrayList<String>();
+            String conveners = "";
 
             while ((line = reader.readLine()) != null) {
                 if (line.contains("\"course_code\":")) {
@@ -429,6 +431,7 @@ public class SearchActivity extends AppCompatActivity {
                 else if (line.contains("\"assessment\":")) {
                     ass=true;
                 }
+
                 else if(line.contains("\"convener\": []")) {
                     c.setConvener(null);
                     if (c.getCourseCode()!=null) {
@@ -436,14 +439,23 @@ public class SearchActivity extends AppCompatActivity {
                     c = new Course();
                     conv=false;
                 }
-                else if(line.contains("\"convener\":") && !line.contains("]")) {
-                    conv=true;
+                else if (conv && line.contains("]")) {
+                    conv=false;
+                    c.setConvener(conveners);
+                    conveners = "";
+                    if (c.getCourseCode()!=null) {
+                        courses.add(c);}
+                    c = new Course();
                 }
                 else if (conv) {
-                    c.setConvener(line.split("\"")[1]);
-                    courses.add(c);
-                    c= new Course();
-                    conv=false;
+                    String[] s = line.split("\"");
+                    conveners+=(s[1]);
+                    if (line.contains(",")) {
+                        conveners+=", ";
+                    }
+                }
+                else if (line.contains("\"convener\":")) {
+                    conv=true;
                 }
             }
         } catch (IOException e) {
