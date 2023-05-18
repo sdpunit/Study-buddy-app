@@ -10,7 +10,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/logo"
-        android:label="@string/app_name"
+        android:label="Study Buddy"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyBuddy"
          >
@@ -43,9 +43,9 @@
             android:name=".bathtub.RegisterActivity"
             android:label="@string/title_activity_register"
             android:exported="false" />
+
         <activity
             android:name=".bathtub.LoginActivity"
-            android:label="@string/title_activity_login"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
