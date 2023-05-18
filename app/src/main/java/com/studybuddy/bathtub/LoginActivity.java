@@ -234,10 +234,10 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
 
-                // Schedule the next data upload after 10 seconds
-                handler.postDelayed(this, 30000);
+                // Schedule the next data upload after 15 seconds
+                handler.postDelayed(this, 15000);
             }
-        }, 10000); // Initial delay of 10 seconds
+        }, 20000); // Initial delay of 20 seconds
     }
 
     public void addUserToLeaderboardFirebase(User user, List<User> leaderboard) {
