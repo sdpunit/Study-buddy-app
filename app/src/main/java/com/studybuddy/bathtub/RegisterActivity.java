@@ -73,9 +73,10 @@ public class RegisterActivity extends AppCompatActivity {
                 Integer uid = Integer.parseInt(uidString);
                 if (!password1.equals(password2)) {
                     checkPassword.setError("Passwords do not match");
-                } else if (password1.length() < 5) {
+                } if (password1.length() < 5) {
                     password.setError("Passwords should be 6 characters or greater");
-                } else {
+                }
+                else {
                     addUserToDatabase(uid, username, password1);
                     user = new User(uid, username);
 
