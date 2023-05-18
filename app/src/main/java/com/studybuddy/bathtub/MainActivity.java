@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
     public void displayStudyMinutes(User user) {
         TextView studyMinutes = (TextView) findViewById(R.id.studyMinutes);
         if(user != null) {
-            studyMinutes.setText("You have studied for " + Math.round(user.getStudyMinutes()) + " minutes!");
+            studyMinutes.setText("I have studied for " + Math.round(user.getStudyMinutes()) + " minutes!");
         } else {
             studyMinutes.setText("No study time recorded.");
         }
