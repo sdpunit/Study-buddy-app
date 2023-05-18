@@ -1,13 +1,17 @@
 package com.studybuddy.bathtub;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.studybuddy.R;
 import com.studybuddy.timer.UserTimeState;
 
@@ -58,6 +62,26 @@ public class AssessmentsActivity extends AppCompatActivity {
         finish();
     }
     public void clickResetTime(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(AssessmentsActivity.this);
+        builder.setTitle("Reset Time");
+        builder.setMessage("Are you sure you want to reset the time for this course?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Continue with reset
+                        // Set the course time to 0
+                        user.getCourseTime().put(course.getCourseCode(), 0.0);
 
+                        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(String.valueOf(user.getUid()));
+                        // Update the user data on Firebase
+                        userRef.setValue(user);
+
+                        Intent intent = new Intent(AssessmentsActivity.this, MainActivity.class);
+                        intent.putExtra("user", user);
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .show();
     }
 }
