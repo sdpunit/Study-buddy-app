@@ -170,17 +170,17 @@ public class SearchActivity extends AppCompatActivity {
 
         try {
             collegeTree = collegeTreeMap.get(queryObj.getCollege());
-            if (collegeTree == null) {
-                Toaster.showToast(getApplicationContext(), "Invalid search query");
-                return results;
-            }
+//            if (collegeTree == null) {
+//                Toaster.showToast(getApplicationContext(), "Invalid search query");
+//                return results;
+//            }
         } catch (NullPointerException e) {
             Toaster.showToast(getApplicationContext(), "Invalid search query");
             return results;
         }
 
         // searches for course code, will return null if a course or code is not present
-        RBTree.Node found = collegeTree.searchByCourseCode(collegeTree.root,queryObj.getCollege() + queryObj.getCode());
+
         // boolean indicating what parameters are included in the query object
         boolean college = queryObj.getCollege()!=null;
         boolean code = queryObj.getCode()!=0;
@@ -189,6 +189,7 @@ public class SearchActivity extends AppCompatActivity {
 
         if (college) {
             if (code) { //if college && code returns found
+                RBTree.Node found = collegeTree.searchByCourseCode(collegeTree.root,queryObj.getCollege() + queryObj.getCode());
                 if (found != null) {
                     results.add(found.getCourse());
                 } else {
@@ -219,6 +220,33 @@ public class SearchActivity extends AppCompatActivity {
                 collegeTree.inOrderTraverse().forEach((n) -> {
                     results.add(n.getCourse());
                 });
+            }
+        }
+        else if (code) { // if just code
+            for(Course c : courseList){
+                if (!results.contains(c) && c.getCourseCode().contains(""+queryObj.getCode())) {
+                    results.add(c);
+                }
+            }
+
+        }
+        else if (course) {
+            if (convener) { // if course && convener
+                for(Course c : courseList){
+                    if (c.getConvener()!=null
+                            && c.getConvener().toLowerCase().contains(input.split("=")[1].trim())
+                            && c.getCourseName().toLowerCase().contains(queryObj.getCourse())
+                            && !results.contains(c)) {
+                        results.add(c);
+                    }
+                }
+            }
+            else { //if just course
+                for(Course c : courseList){
+                    if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) && !results.contains(c)) {
+                        results.add(c);
+                    }
+                }
             }
         }
         return results;
