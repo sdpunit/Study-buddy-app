@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
         handler = new Handler();
 
         // data stream and update leaderboard in the meantime
-        uploadDataPeriodically(leaderboard);
+        //uploadDataPeriodically(leaderboard);
     }
     // The Edit texts are cleared everytime we come back to this activity
     @Override
@@ -174,13 +174,10 @@ public class LoginActivity extends AppCompatActivity {
 
     // message to be displayed after a user attempts login
     private void showLoginMessage(String username) {
-        Context context = getApplicationContext();
         String text;
         if (validUser) {text = "Welcome "+username;}
         else {text = "Incorrect login details";}
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        Toaster.showToast(getApplicationContext(), text);
     }
 
     private void createNotificationChannel() {

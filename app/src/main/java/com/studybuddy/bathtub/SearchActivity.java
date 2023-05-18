@@ -103,13 +103,11 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String input){
                 // call search function
-                courseList.clear();
-                results = search(courseTree, input.toLowerCase());
+                results = search(input.toLowerCase());
                 courseList.clear();
                 courseList.addAll(results);
                 listAdapter.notifyDataSetChanged();
                 searchListView.setAdapter(listAdapter);
-
                 return false;
             }
             @Override
@@ -141,25 +139,32 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    private ArrayList search(RBTree tree, String input){
-        // search for course
-        ArrayList<Course> results = new ArrayList(); //new array list
-        Tokenizer tokenizer = null; // tokenize input
+    /**
+     * Searches through course trees to find the input
+     * @param input course to search for
+     * @return list of courses that match the input
+     * @author Steven and Lana
+     */
+    private ArrayList search(String input){
+        // initialises parameters
+        ArrayList<Course> results = new ArrayList();
+        Tokenizer tokenizer = null;
         Query queryObj = null;
         RBTree collegeTree = null;
 
+        // tokenize and create query object
         try {
             tokenizer = new Tokenizer(input); // tokenize input
             SearchParser parser = new SearchParser(tokenizer); // parse tokens
             queryObj = parser.parseQuery(); // get query object
         }
+        // catch errors
         catch (IllegalArgumentException e) {
             Toaster.showToast(getApplicationContext(), "Invalid token");
         }
         catch (Exception e) {
             Toaster.showToast(getApplicationContext(), "Invalid search query");
         }
-
 
         try {
             collegeTree = collegeTreeMap.get(queryObj.getCollege());
@@ -168,84 +173,56 @@ public class SearchActivity extends AppCompatActivity {
             return results;
         }
 
+        // searches for course code, will return null if a course or code is not present
         RBTree.Node found = collegeTree.searchByCourseCode(collegeTree.root,queryObj.getCollege() + queryObj.getCode());
-
-
+        // boolean indicating what parameters are included in the query object
         boolean college = queryObj.getCollege()!=null;
         boolean code = queryObj.getCode()!=0;
         boolean course = queryObj.getCourse()!=null;
         boolean convener = queryObj.getConvener()!=null;
 
-
         if (college) {
-            if (code) { //works
+            if (code) { //if college && code returns found
                 if (found != null) {
                     results.add(found.getCourse());
-                    return results;
                 } else {
                     Toaster.showToast(getApplicationContext(), "Course not found" + " college= " + queryObj.getCollege() + " code= " +queryObj.getCode());
-                    return results;
                 }
             }
             else if (course || convener) {
                 for (RBTree.Node n :collegeTree.inOrderTraverse()) {
                     courseList.add(n.getCourse());
                 }
-                if (course) { //works
+                if (course) { //if college && course, iterates though course list to find query
                     for(Course c : courseList){
                         if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) && !results.contains(c)) {
                             results.add(c);
                         }
                     }
-                    return results;
                 }
-                else { // works
+                else { //if college && convener, iterates though course list to find query
                     for(Course c : courseList){
                         if (c.getConvener().toLowerCase().contains(input.split("=")[1].trim())) {
                             results.add(c);
                         }
                     }
-                    return results;
-                }
-            }
-            else {
-                collegeTree.inOrderTraverse().forEach((n) -> {
-                    results.add(n.getCourse());
-                });
-            }
-        }
-        if (code) {
-
-        }
-        if (course) {
-            if (convener) {
-                for(Course c : courseList){
-                    if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) || c.getConvener().toLowerCase().contains(queryObj.getConvener()) ) {
-                        results.add(c);
-                    }
                 }
                 return results;
             }
-            for(Course c : courseList){
-                if (c.getCourseName().toLowerCase().contains(queryObj.getCourse())) {
-                    results.add(c);
-                }
-            }
-        }
-        if (convener) {
-            for(Course c : courseList){
-                if (c.getCourseName().toLowerCase().contains(queryObj.getConvener())) {
-                    results.add(c);
-                }
+            else { //if college preforms inOrderTraversal of a course tree
+                collegeTree.inOrderTraverse().forEach((n) -> {
+                    results.add(n.getCourse());
+                });
             }
         }
         return results;
     }
 
 
-
-
-
+    /**
+     * Sets up data for initial array adapter
+     * @author Steven
+     */
     private void setupData() throws JSONException, IOException {
         courseList = getCourses();
     }
@@ -284,16 +261,11 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-    ///
-
     /**
      * Creates a list of courses of one college
      * @param college college name such as comp
      * @return list of courses
+     * @author Yanghe, Lana and Steven
      */
     public List<Course> getCollegeCourses(String college) throws JSONException {
         // reading json based on student type
@@ -316,17 +288,19 @@ public class SearchActivity extends AppCompatActivity {
 
             for (int i = 0; i < collegeArray.length(); i++) {
                 JSONObject courseJson = collegeArray.getJSONObject(i);
-
+                //sets code
                 String courseCode = courseJson.getString("course_code");
+                //sets name
                 String courseName = courseJson.getString("course_name");
+                //sets student type
                 String studentTypeOfCourse = courseJson.getString("student_type");
-
+                //sets assessment
                 ArrayList<String> assessment = new ArrayList<>();
                 JSONArray assessmentArray = courseJson.getJSONArray("assessment");
                 for (int j = 0; j < assessmentArray.length(); j++) {
                     assessment.add(assessmentArray.getString(j));
                 }
-
+                //sets convener
                 String convener = "";
                 JSONArray convenerArray = courseJson.getJSONArray("convener");
                 for (int j = 0; j < convenerArray.length(); j++) {
@@ -336,9 +310,7 @@ public class SearchActivity extends AppCompatActivity {
                 if (convener.length() == 0) {
                     convener+=("No convener");
                 }
-                // convener things need to be modified
                 Course newCourse = new Course(courseCode, courseName, studentTypeOfCourse, assessment, convener);
-
                 courses.add(newCourse);
             }
             return courses;
@@ -348,14 +320,12 @@ public class SearchActivity extends AppCompatActivity {
         return courses;
     }
 
-    public RBTree createTree() {
-        RBTree tree = new RBTree();
-        for (Course course:getCourses()) {
-            tree.insert(course);
-        }
-        return tree;
-    }
-
+    /**
+     * Creates a course tree for a specified course
+     * @param course college name such as comp
+     * @return list of courses
+     * @author Lana and Steven
+     */
     public RBTree createCourseTree(String course) throws JSONException, IOException {
         RBTree tree = new RBTree();
         for (Course c:getCollegeCourses(course)) {
@@ -364,12 +334,6 @@ public class SearchActivity extends AppCompatActivity {
         return tree;
     }
 
-//    private void setupOnKeyListener()
-//    {
-//        searchList.setOnKeyListener((view, i, keyEvent) -> {
-//            return false;
-//        });
-//    }
 
     /**
      * Creates a hashmap of college names and their respective trees.
@@ -387,10 +351,11 @@ public class SearchActivity extends AppCompatActivity {
         return collegeTreeMap;
     }
 
-
-
-
-
+    /**
+     * Creates a list of courses based on the Users student type
+     * @return list of courses
+     * @author Lana
+     */
     public ArrayList<Course> getCourses() {
         // reading json based on student type
         String path = "post_courses_data.json";
@@ -409,18 +374,22 @@ public class SearchActivity extends AppCompatActivity {
             String conveners = "";
 
             while ((line = reader.readLine()) != null) {
+                //setting code
                 if (line.contains("\"course_code\":")) {
                     String s = line.substring(22,30);
                     c.setCourseCode(s);
                 }
+                //setting name
                 else if (line.contains("\"course_name\":")) {
                     String s = line.substring(22).split("\"")[0];
                     c.setCourseName(s);
                 }
+                //setting student type
                 else if (line.contains("\"student_type\":")) {
                     String s = line.substring(23).split("\"")[0];
                     c.setStudentType(s);
                 }
+                //setting assessment
                 else if(line.contains("\"assessment\": []")) {
                     c.setAssessment(null);
                 }
@@ -436,7 +405,7 @@ public class SearchActivity extends AppCompatActivity {
                 else if (line.contains("\"assessment\":")) {
                     ass=true;
                 }
-
+                //setting convener
                 else if(line.contains("\"convener\": []")) {
                     c.setConvener(null);
                     if (c.getCourseCode()!=null) {
@@ -468,10 +437,6 @@ public class SearchActivity extends AppCompatActivity {
         }
         return courses;
     }
-
-
-
-
 
 }
 

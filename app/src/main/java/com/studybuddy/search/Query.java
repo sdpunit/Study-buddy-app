@@ -1,17 +1,10 @@
 package com.studybuddy.search;
 
-import java.util.HashMap;
-
 public class Query {
-
     private String college;
-
     private int code;
-
     private String course;
-
     private String convener;
-
     private String term;
 
     public Query() {
@@ -22,18 +15,6 @@ public class Query {
         this.term = null;
     }
 
-    /*
-     "course_code": "INTR2020",
-      "course_name": "(In)Stability on the Korean Peninsula",
-      "student_type": "Undergraduate",
-      "assessment": [
-        "1. Participation in Discussion - 10% (10) [LO null]",
-        "2. Research Project - 50% (50) [LO null]",
-        "3. Final Exam - 40% (40) [LO null]"
-      ],
-      "convener": []
-     */
-
     public Query(String college, int code, String course, String convener, String term) {
         this.college = college;
         this.code = code;
@@ -41,11 +22,6 @@ public class Query {
         this.convener = convener;
         this.term = term;
     }
-
-
-
-
-
 
     public String getCollege() {
         return college;
