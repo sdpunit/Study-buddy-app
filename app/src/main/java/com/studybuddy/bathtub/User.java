@@ -93,14 +93,6 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public boolean isUndergrad() {
-        return isUndergrad;
-    }
-
-    public void setUndergrad(boolean undergrad) {
-        isUndergrad = undergrad;
-    }
-
     public void setCourseTime(Map<String, Double> courseTime) {
         this.courseTime = courseTime;
     }
