@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Study Buddy</string>
 <!--    Strings related to activities-->
-    <string name="title_activity_main">Main</string>
+    <string name="title_activity_main">Home</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_register">Register</string>
     <string name="title_activity_leaderboard">Leaderboard</string>
-    <string name="title_activity_assessments">Assessments</string>
+    <string name="title_activity_assessments">Course Info</string>
     <string name="title_activity_timer">Timer</string>
     <string name="title_activity_set_time">Set Time</string>
     <string name="title_activity_search">Search</string>
