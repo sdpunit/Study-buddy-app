@@ -215,10 +215,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void displayStudyMinutes(User user) {
         TextView studyMinutes = (TextView) findViewById(R.id.studyMinutes);
-        if(user != null) {
-            studyMinutes.setText("I have studied for " + Math.round(user.getStudyMinutes()) + " minutes!");
-        } else {
+        if (user.getStudyMinutes() == 0){
             studyMinutes.setText("No study time recorded.");
+        } else if(user != null) {
+            studyMinutes.setText("I have studied for " + Math.round(user.getStudyMinutes()) + " minutes!");
         }
     }
 

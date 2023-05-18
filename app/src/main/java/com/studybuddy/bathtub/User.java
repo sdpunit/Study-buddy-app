@@ -61,6 +61,7 @@ public class User implements Serializable {
         addCoursesTime(courses);
     }
 
+    //getters and setters
     public int getUid() {
         return uid;
     }
