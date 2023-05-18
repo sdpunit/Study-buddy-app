@@ -28,20 +28,14 @@ public class CourseAdapter extends ArrayAdapter<Course> {
         TextView tv = (TextView) convertView.findViewById(R.id.CellName);
         TextView tv2 = (TextView) convertView.findViewById(R.id.CellCode);
         TextView tv3 = (TextView) convertView.findViewById(R.id.CellConvener);
-//        ImageView iv = (ImageView) convertView.findViewById(R.id.CellImage);
 
-        tv.setText(course.getCourseName()); // course adapter breaks here even though the method called acts on the query not the course
+        tv.setText(course.getCourseName());
         tv2.setText(course.getCourseCode());
         if(course.getConvener() == null){
             tv3.setText("TBD");
         } else{
             tv3.setText(course.getConvener());
         }
-//        iv.setImageResource(R.drawable.ic_launcher_foreground);
-
-
-
-
         return convertView;
     }
 }
