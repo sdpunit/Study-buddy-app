@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //leaderboardRef.child("0").setValue(new User(1,"dummy","1", true, 1));
+        leaderboardRef.child("0").setValue(new User(1,"dummy","1", true, 1));
 
         leaderboard = new ArrayList<>();
         // put all the users in the leaderboard into the local leaderboard list
@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
         handler = new Handler();
 
         // data stream and update leaderboard in the meantime
-        //uploadDataPeriodically(leaderboard);
+        uploadDataPeriodically(leaderboard);
     }
     // The Edit texts are cleared everytime we come back to this activity
     @Override
@@ -234,10 +234,10 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
 
-                // Schedule the next data upload after 10 seconds
-                handler.postDelayed(this, 10000);
+                // Schedule the next data upload after 15 seconds
+                handler.postDelayed(this, 15000);
             }
-        }, 10000); // Initial delay of 10 seconds
+        }, 20000); // Initial delay of 20 seconds
     }
 
     public void addUserToLeaderboardFirebase(User user, List<User> leaderboard) {

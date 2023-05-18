@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 
 public class MyTimer {
+    private static MyTimer instance;
 
     private TimeUp studyActivityWhenTimeUp;
     private final int initialMinutes;
@@ -22,7 +23,16 @@ public class MyTimer {
         void timeUp();
     }
 
-    public MyTimer(int initialMinutes, TimeUp studyActivityWhenTimeUp) {
+    /**
+     * Get the instance of MyTimer.
+     */
+    public static MyTimer getInstance(int initialMinutes, TimeUp studyActivityWhenTimeUp) {
+        if (instance == null) {
+            instance = new MyTimer(initialMinutes, studyActivityWhenTimeUp);
+        }
+        return instance;
+    }
+    private MyTimer(int initialMinutes, TimeUp studyActivityWhenTimeUp) {
         this.initialMinutes = initialMinutes;
         this.remainingMinutes = initialMinutes;
         this.studyActivityWhenTimeUp = studyActivityWhenTimeUp;

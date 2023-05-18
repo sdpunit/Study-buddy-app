@@ -168,6 +168,10 @@ public class SearchActivity extends AppCompatActivity {
 
         try {
             collegeTree = collegeTreeMap.get(queryObj.getCollege());
+            if (collegeTree == null) {
+                Toaster.showToast(getApplicationContext(), "Invalid search query");
+                return results;
+            }
         } catch (NullPointerException e) {
             Toaster.showToast(getApplicationContext(), "Invalid search query");
             return results;
