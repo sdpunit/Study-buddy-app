@@ -10,7 +10,7 @@ public class SearchParser {
     /**
      * validates the input and returns the parsed expression.
      * @return Query object as a result of parsing the input.
-     * @author Steven and Lana (u7103031) 
+     * @author Steven (u7108792) and Lana (u7103031)
      */
     public Query parseQuery() {
         Query query = new Query();
@@ -39,7 +39,7 @@ public class SearchParser {
     /**
      * validates the input and returns the continued term following the grammar requiremnts.
      * @return Query object as a result of parsing the input.
-     * @Author Steven (u7108792)
+     * @author Steven (u7108792)
      */
     private Query parseTerm(Query query) {
 
@@ -71,5 +71,4 @@ public class SearchParser {
         }
         return query;
     }
-
 }

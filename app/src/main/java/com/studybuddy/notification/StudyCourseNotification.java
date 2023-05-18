@@ -12,7 +12,7 @@ import com.studybuddy.bathtub.User;
 
 /**
  * This class is to create a notification when the user has studied two more new courses.
- * @author Yanghe
+ * @author Yanghe (u7533843)
  */
 public class StudyCourseNotification implements StudyNotification {
     @Override

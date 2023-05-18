@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Course class to store information for one course
- * @author Yanghe, Punit
+ * @author Yanghe (u7533843), Punit (u7432723)
  */
 public class Course implements Serializable {
     private String courseCode;  // key

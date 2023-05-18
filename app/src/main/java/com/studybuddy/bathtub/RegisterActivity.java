@@ -22,7 +22,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import com.studybuddy.R;
 
-
+/**
+ * Register Page where the user can register for a new account.
+ * @author Punit (u7432723)
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     private User user;
@@ -38,14 +41,11 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText checkPassword = findViewById(R.id.et_repassword);
         final EditText password = findViewById(R.id.et_password);
 
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if (i == R.id.radio_undergrad) {
-                    isUndergrad = true;
-                } else if (i == R.id.radio_postgrad) {
-                    isUndergrad = false;
-                }
+        radioGroup.setOnCheckedChangeListener((radioGroup1, i) -> {
+            if (i == R.id.radio_undergrad) {
+                isUndergrad = true;
+            } else if (i == R.id.radio_postgrad) {
+                isUndergrad = false;
             }
         });
 
@@ -100,22 +100,18 @@ public class RegisterActivity extends AppCompatActivity {
     private void addUserToDatabase(int uid, String username, String password) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference usersRef = database.getReference("users");
-        //String userId = usersRef.push().getKey();
 
         User user = new User(uid, username, password, isUndergrad);
 
         // Write the user to the database
         usersRef.child(String.valueOf(uid)).setValue(user)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            // User was successfully added to the database
-                            Toaster.showToast(RegisterActivity.this, "User registered successfully!");
-                        } else {
-                            // Something went wrong
-                            Toaster.showToast(RegisterActivity.this, "Failed to register user.");
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // User was successfully added to the database
+                        Toaster.showToast(RegisterActivity.this, "User registered successfully!");
+                    } else {
+                        // Something went wrong
+                        Toaster.showToast(RegisterActivity.this, "Failed to register user.");
                     }
                 });
     }

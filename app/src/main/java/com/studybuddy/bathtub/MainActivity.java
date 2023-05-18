@@ -34,7 +34,8 @@ import java.util.Random;
 
 /**
  * The main activity of the app. All the other activities end up here.
- * @author Punit
+ * @author Punit (u7432723), Yanghe (u7533843)
+ * @feature [Data-Graphical]
  */
 public class MainActivity extends AppCompatActivity {
     private User user;
@@ -212,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Send notifications to the user based on different cases.
-     * @author Yanghe
+     * @author Yanghe (u7533843)
      */
     public void sendNotification() {
         // notificationTypes
@@ -243,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Update the leaderboard in Firebase.
-     * @author Yanghe
+     * @author Yanghe (u7533843)
      */
     public void checkAndUpdateLeaderboardFirebase(ArrayList<User> leaderboard) {
         // if this user is already in the leaderboard, update the study minutes
@@ -276,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Helper method for checkAndUpdateLeaderboardFirebase
-     * @author Yanghe
+     * @author Yanghe (u7533843)
      */
     public void addUserToLeaderboardFirebase(ArrayList<User> leaderboard) {
         // add the new user

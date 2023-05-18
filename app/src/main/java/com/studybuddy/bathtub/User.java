@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * User class to store information for one user.
- * @author Punit
+ * @author Punit (u7432723)
  */
 public class User implements Serializable {
     private int uid;

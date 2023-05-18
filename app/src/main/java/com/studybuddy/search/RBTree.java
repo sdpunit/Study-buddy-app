@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * This class is a RB Tree to store course data.
- * @author Yanghe
+ * @author Yanghe (u7533843)
+ * @feature Load data from JSON file
  */
 public class RBTree {
     public Node root;
