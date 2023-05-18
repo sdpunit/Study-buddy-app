@@ -409,9 +409,9 @@ public class SearchActivity extends AppCompatActivity {
                 StringBuilder convener = new StringBuilder();
                 JSONArray convenerArray = courseJson.getJSONArray("convener");
                 for (int j = 0; j < convenerArray.length(); j++) {
-                    convener.append(convenerArray.getString(j)).append(", ");
                     if (j==convenerArray.length()-1) {
                         convener.append(convenerArray.getString(j));}
+                    else {convener.append(convenerArray.getString(j)).append(", ");}
                 }
                 if (convener.length() == 0) {
                     convener.append("No convener");

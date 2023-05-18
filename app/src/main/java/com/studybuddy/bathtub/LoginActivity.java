@@ -131,7 +131,10 @@ public class LoginActivity extends AppCompatActivity {
         // data stream and update leaderboard in the meantime
         uploadDataPeriodically(leaderboard);
     }
-    // The Edit texts are cleared everytime we come back to this activity
+    /**
+     * The Edit texts are cleared everytime we come back to this activity
+     * @author Punit (u7432723)
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -141,7 +144,11 @@ public class LoginActivity extends AppCompatActivity {
         et_password.setText("");
     }
 
-    // checks that the information entered by the user matches an instance in the database (loginDetails.csv)
+    /**
+     * checks that the information entered by the user matches an instance in the firebase
+     * @author Punit (u7432723)
+     * @feature User Authentication
+     */
     private void authenticateUser(String username, String password) {
         // Get a reference to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
