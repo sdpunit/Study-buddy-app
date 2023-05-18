@@ -101,18 +101,6 @@ public class SearchActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() { // "math (" fails
             ArrayList<Course> results = new ArrayList<Course>();
             @Override
-            public boolean onQueryTextSubmit(String input){
-                if(!input.contains("(") && !input.contains(")") ) {
-                    // call search function
-                    results = search(input.toLowerCase());
-                    courseList.clear();
-                    courseList.addAll(results);
-                }
-                listAdapter.notifyDataSetChanged();
-                searchListView.setAdapter(listAdapter);
-                return false;
-            }
-            @Override
             public boolean onQueryTextChange(String input){
                 // call search function)
                 if(input.isEmpty()){
@@ -135,6 +123,18 @@ public class SearchActivity extends AppCompatActivity {
                             searchListView.setAdapter(adapter);
                         }
                     }
+                }
+                return false;
+            }
+            @Override
+            public boolean onQueryTextSubmit(String input){
+                if(!input.contains("(") && !input.contains(")") ) {
+                    // call search function
+                    results = search(input.toLowerCase());
+                    courseList.clear();
+                    courseList.addAll(results);
+                    listAdapter.notifyDataSetChanged();
+                    searchListView.setAdapter(listAdapter);
                 }
                 return false;
             }
@@ -281,6 +281,9 @@ public class SearchActivity extends AppCompatActivity {
     {
         searchListView.setOnItemClickListener((adapterView, view, position, l) -> {
             Course selectCourse = (Course) (searchListView.getItemAtPosition(position));
+            if(addedList.size()==0){
+                Toaster.showToast(getApplicationContext(), "Click on the course again to remove it from the list");
+            }
 
             if(!addedList.contains(selectCourse)) {
                 addedList.add(selectCourse);
