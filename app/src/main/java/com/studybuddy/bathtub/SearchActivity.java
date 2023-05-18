@@ -94,7 +94,7 @@ public class SearchActivity extends AppCompatActivity {
     private void searchWidgets(){
         // search for widgets
         SearchView searchView = findViewById(R.id.SearchInput);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() { // "math (" fails
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             ArrayList<Course> results = new ArrayList<>();
             @Override
             public boolean onQueryTextChange(String input){
@@ -108,7 +108,7 @@ public class SearchActivity extends AppCompatActivity {
                 results.clear(); // has to reset results so that the live update functionality works
 
                 if(input.contains("(") && input.contains(")") && input.indexOf("(") < input.indexOf(")")){
-                    String s = subStringBetween(input, "(", ")"); // checks for string inbetween parenthesis
+                    String s = subStringBetween(input, "(", ")"); // checks for string in between parenthesis
                     String[] strs =s.toLowerCase().split(" ");
                     for(Course course : courseList){
                         for (String str : strs) {
@@ -182,7 +182,7 @@ public class SearchActivity extends AppCompatActivity {
         boolean convener = queryObj.getConvener()!=null;
 
         if (college) {
-            if (code) { //if college && code returns found
+            if (code) { //if college && code, searches through college tree
                 assert collegeTree != null;
                 RBTree.Node found = collegeTree.searchByCourseCode(collegeTree.root,queryObj.getCollege() + queryObj.getCode());
                 if (found != null) {
@@ -196,14 +196,14 @@ public class SearchActivity extends AppCompatActivity {
                 for (RBTree.Node n :collegeTree.inOrderTraverse()) {
                     courseList.add(n.getCourse());
                 }
-                if (course && convener) { //if college && course, iterates though course list to find query
+                if (course && convener) { //if college && course && convener, iterates though course list to find query
                     for(Course c : courseList){
                         if (c.getConvener()!=null && c.getCourseName().toLowerCase().contains(queryObj.getCourse()) && c.getConvener().toLowerCase().contains(queryObj.getConvener()) && !results.contains(c)) {
                             results.add(c);
                         }
                     }
                 }
-                else if (course) {
+                else if (course) { //if college && course, iterates though course list to find query
                     for(Course c : courseList){
                         if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) && !results.contains(c)) {
                             results.add(c);
@@ -223,7 +223,7 @@ public class SearchActivity extends AppCompatActivity {
                 collegeTree.inOrderTraverse().forEach((n) -> results.add(n.getCourse()));
             }
         }
-        else if (code) { // if just code
+        else if (code) { // if just code , iterates though course list to find query
             for(Course c : courseList){
                 if (!results.contains(c) && c.getCourseCode().contains(""+queryObj.getCode())) {
                     results.add(c);
@@ -232,7 +232,7 @@ public class SearchActivity extends AppCompatActivity {
 
         }
         else if (course) {
-            if (convener) { // if course && convener
+            if (convener) { // if course && convener, iterates though course list to find query
                 for(Course c : courseList){
                     if (c.getConvener()!=null
                             && c.getConvener().toLowerCase().contains(input.split("=")[1].trim())
@@ -242,7 +242,7 @@ public class SearchActivity extends AppCompatActivity {
                     }
                 }
             }
-            else { //if just course
+            else { //if just course, iterates though course list to find query
                 for(Course c : courseList){
                     if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) && !results.contains(c)) {
                         results.add(c);
