@@ -14,6 +14,13 @@ import com.studybuddy.bathtub.User;
  * @author Yanghe
  */
 public class StudyTimeNotification implements StudyNotification {
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true; // The objects are the same reference
+        }
+        return obj != null && getClass() == obj.getClass(); // The objects are considered equal
+    }
 
     @Override
     public void notifyUser(Context context, User user) {
