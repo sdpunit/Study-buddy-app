@@ -60,14 +60,15 @@ public class RegisterActivity extends AppCompatActivity {
             else if (password1.length()<5) {
                 password.setError("passwords should be 6 characters or greater");}
             else {
-                //addUserToDatabase(uid, username, password1);
+                addUserToDatabase(uid, username, password1);
                 user = new User(uid, username);
 
                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
                 finish();
-            }});
+            }
+        });
 
         // what happens when the arrow is clicked
         arrow.setOnClickListener(v -> {
