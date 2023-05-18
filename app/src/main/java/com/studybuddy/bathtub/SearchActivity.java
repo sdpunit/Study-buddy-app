@@ -63,9 +63,6 @@ public class SearchActivity extends AppCompatActivity {
 
         user = getIntent().getSerializableExtra("user", User.class);
 
-        if(collegeTreeMap == null){
-            collegeTreeMap = getCollegeTreeMap();
-        }
 
         try {
             setupData();
@@ -95,6 +92,13 @@ public class SearchActivity extends AppCompatActivity {
         return input.substring(input.indexOf(to)+1, input.lastIndexOf(from));
     }
 
+    /**
+     * Gets the course trees from the JSON file
+     * @return HashMap of course trees with college names as keys
+     * @throws JSONException
+     * @throws IOException
+     * Author: Steven
+     */
     private void searchWidgets(){
         // search for widgets
         SearchView searchView = findViewById(R.id.SearchInput);
@@ -170,10 +174,7 @@ public class SearchActivity extends AppCompatActivity {
 
         try {
             collegeTree = collegeTreeMap.get(queryObj.getCollege());
-//            if (collegeTree == null) {
-//                Toaster.showToast(getApplicationContext(), "Invalid search query");
-//                return results;
-//            }
+
         } catch (NullPointerException e) {
             Toaster.showToast(getApplicationContext(), "Invalid search query");
             return results;
@@ -265,8 +266,17 @@ public class SearchActivity extends AppCompatActivity {
      */
     private void setupData() throws JSONException, IOException {
         courseList = getCourses();
+        if(collegeTreeMap == null){
+            collegeTreeMap = getCollegeTreeMap();
+        }
     }
 
+
+    /**
+     * Sets up both list views for the search and added courses
+     * Sets up the adapters for both list views
+     * @author Steven
+     */
     private void setupList(){
         searchListView = findViewById(R.id.SearchList);
         listAdapter = new CourseAdapter(getApplicationContext(), 0, courseList);

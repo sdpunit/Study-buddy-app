@@ -41,16 +41,6 @@ public class TokenizerTest {
         assertEquals(errorType, t, tokenizer.current().getType());
         assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
 
-        s = "college= COMP";
-        tokenizer = new Tokenizer(s);
-        assertEquals(errorType, t, tokenizer.current().getType());
-        assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
-
-        s = "college= biOL";
-        tokenizer = new Tokenizer(s);
-        assertEquals(errorType, t, tokenizer.current().getType());
-        assertEquals(errorToken, s.toLowerCase(), tokenizer.current().getToken());
-
         s = "cRim";
         tokenizer = new Tokenizer(s);
         assertEquals(errorType, t, tokenizer.current().getType());

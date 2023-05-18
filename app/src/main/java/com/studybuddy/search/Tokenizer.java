@@ -45,9 +45,6 @@ public class Tokenizer {
             else if(collegeList.contains(getCollegeString(delta)) && isValidInteger(getIntegerString(delta))) { //COLLEGECODE
                 currentToken = new Token(delta, Token.Type.COLLEGECODE);
             }
-//            else if(delta.contains("college=") && collegeList.contains(delta.split(" ")[1])) { //COLLEGE
-//                currentToken = new Token(delta, Token.Type.COLLEGE);
-//            }
             else if(collegeList.contains(delta)) {
                 currentToken = new Token(delta, Token.Type.COLLEGE);
             }
