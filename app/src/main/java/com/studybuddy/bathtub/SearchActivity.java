@@ -88,11 +88,9 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     /**
-     * Adds menu context bar to activity to be used as filterable.
-     * delegates take for each menu item.
+     * This method adds menu context bar to activity to be used as filterable.
      * @param menu the menu
      * @return true if the menu is created, false otherwise
-     * @return true if the menu item is selected, false otherwise
      * @author Steven (u7108792)
      */
     @Override
@@ -102,6 +100,12 @@ public class SearchActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * This method delegates take for each menu item.
+     * @param item the menu item
+     * @return true if the menu item is selected, false otherwise
+     * @author Steven (u7108792)
+     */
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
