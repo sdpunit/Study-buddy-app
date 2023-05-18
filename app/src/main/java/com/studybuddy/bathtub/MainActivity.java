@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 txt_timeStudied.setText("Not started");
             } else {
 
-                txt_timeStudied.setText("Studied "+ timeStudied + " minutes");
+                txt_timeStudied.setText("Studied "+ Math.round(timeStudied)+ " minutes");
             }
 
             courseLayout.addView(courseButton);
