@@ -7,32 +7,10 @@ public class SearchParser {
         this.tokenizer = tokenizer;
     }
 
-    //following the grammar:
-    /*
-    college: COMP, code: 1110, name: Structured Programming, convener: Patrik Haslum"
-
-        <exp>       ::= "college:" <college> | "college:" <college> "," <term>
-        <term>      ::= <factor> | <factor> "," <factor> | <factor> "," <factor> "," <factor>
-        <factor>    ::= <code> | <name> | <convener>
-        <code>      ::= "code:" four-digit Integer
-        <name>      ::= "name:" String
-        <convener>  ::= "convener:" String
-        <college>   ::= "COMP" | "MATH" | "PHYS" | "STATS" | ...
-
-        There must be a 'college:' first. Otherwise, it should throw an exception saying that the
-        user should specify the college first. If there are no other things in the query, it returns
-        all the results in that tree. If a 'code:' is also provided, search for the exact node of
-        the code. If 'college' and 'name' are provided, use that dictionary. if 'college' and
-        'convener' are provided, use another dictionary. If 'code', 'name' and 'college' all exist
-        or two of them exist, they will be processed separately, which means it search for the code
-        and the name and the convener and returns all the not duplicate results.
-     */
-
-
     /**
      * validates the input and returns the parsed expression.
      * @return Query object as a result of parsing the input.
-     * @author Steven and Lana
+     * @author Steven and Lana (u7103031) 
      */
     public Query parseQuery() {
         Query query = new Query();
@@ -58,6 +36,11 @@ public class SearchParser {
         throw new IllegalArgumentException("You entered a null token: " + tokenizer.current());
     }
 
+    /**
+     * validates the input and returns the continued term following the grammar requiremnts.
+     * @return Query object as a result of parsing the input.
+     * @Author Steven (u7108792)
+     */
     private Query parseTerm(Query query) {
 
         if (tokenizer.hasNext()) {

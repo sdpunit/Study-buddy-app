@@ -1,5 +1,8 @@
 package com.studybuddy.search;
 
+/**
+ * This class represents a token in the search query.
+ */
 public class Token {
 
     public enum Type {COLLEGE, CODE, COURSE, CONVENER, COLLEGECODE}

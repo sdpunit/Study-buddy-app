@@ -18,7 +18,7 @@
 | UID        |      Name       |                                                           Role |
 |:-----------|:---------------:|---------------------------------------------------------------:|
 | [u7490701] | [Ahmed Qaisar]  |                                                     [Firebase] |
-| [u7103031] |  [Lana Fraser]  |                                             [Login and Report] |
+| [u7103031] |  [Lana (u7103031)  Fraser]  |                                             [Login and Report] |
 | [u7432723] | [Punit Deshwal] | [Database Structures, UI Themes, Firebase, Initialising Users] |
 | [u7108792] |  [Quoc Nguyen]  |                                 [Search, Tokenizer and Parser] |
 | [u7533843] |  [Yanghe Dong]  |     [Tree Structure, Timer, Notifications, Creating User Data] |
@@ -33,7 +33,7 @@
 *Slide Preparation: N/A*
 <br><br>
 
-*u7103031, Lana, I contribute 20% of the code. Here are my contributions:*
+*u7103031, Lana (u7103031) , I contribute 20% of the code. Here are my contributions:*
 * Login.java: onCreate(), authenticateUser(), showLoginMessage()   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/LoginActivity.java
 * loginDetails.csv   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/assets/loginDetails.csv
 * activity_login.xml   https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/activity_login.xml

@@ -6,7 +6,7 @@ The following is a report template to help your team successfully provide all th
 
 * *Try to summarise and list the `bullet points` of your project as many as possible rather than give long, tedious paragraphs that mix up everything together.*
 
-* *Try to create `diagrams` instead of text descriptions, which are more straightforward and explanatory.*
+* *Try to create `diagrams` instead of text descriptions, which are more straightforward and expLana (u7103031) tory.*
 
 * *Try to make your report `well structured`, which is easier for the reviewers to capture the necessary information.*
 

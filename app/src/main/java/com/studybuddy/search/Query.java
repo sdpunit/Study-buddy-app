@@ -1,11 +1,21 @@
 package com.studybuddy.search;
 
+/**
+ * This class represents a search query.
+ * @Author Steven (u7108792)
+ */
 public class Query {
     private String college;
     private int code;
     private String course;
     private String convener;
     private String term;
+
+    /**
+     * This method constructs an empty query object.
+     * @return the empty search query
+     * @Author Steven (u7108792)
+     */
 
     public Query() {
         this.college = null;
@@ -14,6 +24,12 @@ public class Query {
         this.convener = null;
         this.term = null;
     }
+
+    /**
+     * This method constructs a query with predefined values.
+     * @return the term of the course
+     * @Author Steven (u7108792)
+     */
 
     public Query(String college, int code, String course, String convener, String term) {
         this.college = college;

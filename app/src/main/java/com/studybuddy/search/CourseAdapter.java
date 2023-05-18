@@ -18,6 +18,14 @@ public class CourseAdapter extends ArrayAdapter<Course> {
         super(context, resource, coursesList);
     }
 
+    /**
+     * This method is to set the view of the course cell.
+     * @param position the position of the course in the list
+     * @param convertView the view of the course cell
+     * @param parent the parent view
+     * @return the view of the course cell
+     * @Author Steven (u7108792)
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Course course = getItem(position);

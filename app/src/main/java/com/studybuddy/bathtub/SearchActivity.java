@@ -2,7 +2,6 @@ package com.studybuddy.bathtub;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -34,13 +33,13 @@ import java.util.List;
 
 /**
  * This class is the activity for the search page.
- * @author Steven, Lana
+ * @author Steven (u7108792), Lana (u7103031) 
  */
 public class SearchActivity extends AppCompatActivity {
 
-    public static ArrayList<Course> courseList = new ArrayList<Course>();
+    public static ArrayList<Course> courseList = new ArrayList<>();
 
-    public static ArrayList<Course> addedList = new ArrayList<Course>();
+    public static ArrayList<Course> addedList = new ArrayList<>();
 
     private CourseAdapter listAdapter;
 
@@ -49,8 +48,6 @@ public class SearchActivity extends AppCompatActivity {
     private ListView searchListView;
 
     private ListView addedListView;
-
-    private Button addCourseButton;
 
     private User user;
 
@@ -73,18 +70,15 @@ public class SearchActivity extends AppCompatActivity {
         setupOnClickListener();
         searchWidgets();
 
-        addCourseButton = findViewById(R.id.btn_addCourses);
+        Button addCourseButton = findViewById(R.id.btn_addCourses);
 
-        addCourseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                user.setCoursesEnrolled(addedList);
-                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(String.valueOf(user.getUid()));
-                userRef.setValue(user);
-                Intent intent = new Intent(SearchActivity.this, MainActivity.class);
-                intent.putExtra("user", user);
-                startActivity(intent);
-            }
+        addCourseButton.setOnClickListener(view -> {
+            user.setCoursesEnrolled(addedList);
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(String.valueOf(user.getUid()));
+            userRef.setValue(user);
+            Intent intent = new Intent(SearchActivity.this, MainActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
         });
     }
 
@@ -93,17 +87,14 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     /**
-     * Gets the course trees from the JSON file
-     * @return HashMap of course trees with college names as keys
-     * @throws JSONException
-     * @throws IOException
-     * @author Steven
+     * search for courses on text change or submit
+     * @author Steven (u7108792)
      */
     private void searchWidgets(){
         // search for widgets
         SearchView searchView = findViewById(R.id.SearchInput);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() { // "math (" fails
-            ArrayList<Course> results = new ArrayList<Course>();
+            ArrayList<Course> results = new ArrayList<>();
             @Override
             public boolean onQueryTextChange(String input){
                 // call search function)
@@ -149,14 +140,14 @@ public class SearchActivity extends AppCompatActivity {
      * Searches through course trees to find the input
      * @param input course to search for
      * @return list of courses that match the input
-     * @author Steven and Lana
+     * @author Steven (u7108792) and Lana (u7103031) 
      */
-    private ArrayList search(String input){
+    private ArrayList<Course> search(String input){
         // initialises parameters
-        ArrayList<Course> results = new ArrayList();
-        Tokenizer tokenizer = null;
+        ArrayList<Course> results = new ArrayList<>();
+        Tokenizer tokenizer;
         Query queryObj = null;
-        RBTree collegeTree = null;
+        RBTree collegeTree;
 
         // tokenize and create query object
         try {
@@ -173,6 +164,7 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         try {
+            assert queryObj != null;
             collegeTree = collegeTreeMap.get(queryObj.getCollege());
 
         } catch (NullPointerException e) {
@@ -190,6 +182,7 @@ public class SearchActivity extends AppCompatActivity {
 
         if (college) {
             if (code) { //if college && code returns found
+                assert collegeTree != null;
                 RBTree.Node found = collegeTree.searchByCourseCode(collegeTree.root,queryObj.getCollege() + queryObj.getCode());
                 if (found != null) {
                     results.add(found.getCourse());
@@ -198,6 +191,7 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
             else if (course || convener) {
+                assert collegeTree != null;
                 for (RBTree.Node n :collegeTree.inOrderTraverse()) {
                     courseList.add(n.getCourse());
                 }
@@ -224,9 +218,8 @@ public class SearchActivity extends AppCompatActivity {
                 return results;
             }
             else { //if college preforms inOrderTraversal of a course tree
-                collegeTree.inOrderTraverse().forEach((n) -> {
-                    results.add(n.getCourse());
-                });
+                assert collegeTree != null;
+                collegeTree.inOrderTraverse().forEach((n) -> results.add(n.getCourse()));
             }
         }
         else if (code) { // if just code
@@ -262,7 +255,7 @@ public class SearchActivity extends AppCompatActivity {
 
     /**
      * Sets up data for initial array adapter
-     * @author Steven
+     * @author Steven (u7108792)
      */
     private void setupData() throws JSONException, IOException {
         courseList = getCourses();
@@ -275,7 +268,7 @@ public class SearchActivity extends AppCompatActivity {
     /**
      * Sets up both list views for the search and added courses
      * Sets up the adapters for both list views
-     * @author Steven
+     * @author Steven (u7108792)
      */
     private void setupList(){
         searchListView = findViewById(R.id.SearchList);
@@ -316,7 +309,7 @@ public class SearchActivity extends AppCompatActivity {
      * Creates a list of courses of one college
      * @param college college name such as comp
      * @return list of courses
-     * @author Yanghe, Lana and Steven
+     * @author Yanghe, Lana (u7103031) and Steven (u7108792)
      */
     public List<Course> getCollegeCourses(String college) throws JSONException {
         // reading json based on student type
@@ -333,7 +326,7 @@ public class SearchActivity extends AppCompatActivity {
             inputStream.close();
 
             // Convert the contents to a string
-            String jsonString = new String(buffer, "UTF-8");
+            String jsonString = new String(buffer, StandardCharsets.UTF_8);
             JSONObject jsonObject = new JSONObject(jsonString);
             JSONArray collegeArray = jsonObject.getJSONArray(college.toUpperCase());
 
@@ -376,7 +369,7 @@ public class SearchActivity extends AppCompatActivity {
      * Creates a course tree for a specified course
      * @param course college name such as comp
      * @return list of courses
-     * @author Lana and Steven
+     * @author Lana (u7103031) and Steven (u7108792) 
      */
     public RBTree createCourseTree(String course) throws JSONException, IOException {
         RBTree tree = new RBTree();
@@ -407,7 +400,7 @@ public class SearchActivity extends AppCompatActivity {
     /**
      * Creates a list of courses based on the Users student type
      * @return list of courses
-     * @author Lana
+     * @author Lana (u7103031) 
      */
     public ArrayList<Course> getCourses() {
         // reading json based on student type
@@ -416,15 +409,15 @@ public class SearchActivity extends AppCompatActivity {
             path = "under_courses_data.json";
         }
         //initialises a list of Courses
-        ArrayList courses = new ArrayList<Course>();
+        ArrayList<Course> courses = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open(path), StandardCharsets.UTF_8))) {
             String line;
             boolean ass = false; // boolean to indicate if we are searching for assessments
             boolean conv = false;  // boolean to indicate if we are searching for conveners
             // initialising parameters to create a new Course
             Course c = new Course();
-            ArrayList assessments = new ArrayList<String>();
-            String conveners = "";
+            ArrayList<String> assessments = new ArrayList<>();
+            StringBuilder conveners = new StringBuilder();
 
             while ((line = reader.readLine()) != null) {
                 //setting code
@@ -468,17 +461,17 @@ public class SearchActivity extends AppCompatActivity {
                 }
                 else if (conv && line.contains("]")) {
                     conv=false;
-                    c.setConvener(conveners);
-                    conveners = "";
+                    c.setConvener(conveners.toString());
+                    conveners = new StringBuilder();
                     if (c.getCourseCode()!=null) {
                         courses.add(c);}
                     c = new Course();
                 }
                 else if (conv) {
                     String[] s = line.split("\"");
-                    conveners+=(s[1]);
+                    conveners.append(s[1]);
                     if (line.contains(",")) {
-                        conveners+=", ";
+                        conveners.append(", ");
                     }
                 }
                 else if (line.contains("\"convener\":")) {

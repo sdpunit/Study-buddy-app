@@ -3,7 +3,7 @@
 ## Team Meeting [1] - Week [7] - [19/04/23] (1:30pm-2:10pm)
 **Absent: none**
 <br>
-**Scribe: Lana & Punit**
+**Scribe: Lana (u7103031)  & Punit**
 
 ## Agreed Procedure
 Meetings: Weekly based on our availability

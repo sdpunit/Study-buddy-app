@@ -18,7 +18,7 @@ Meeting tomorrow (27 Apr) to continue where we left.
 ## Meeting Minutes
 - Discussing specific general features:
 Everyone agrees to the implementation of 6 general features with the goal of implementing 1 easy, 
-3 medium and 2 Hard tasks. Lana and myself discussed about implementing the following features after
+3 medium and 2 Hard tasks. Lana (u7103031)  and myself discussed about implementing the following features after
 cross-checking the ones mentioned by Yanghe:
 1. [UI-Layout] - UI must have portrait and landscape layout variants and support of different screen sizes (easy) 
 2. [Data-Graphical] - Graphical report for your course and assessments. (medium)

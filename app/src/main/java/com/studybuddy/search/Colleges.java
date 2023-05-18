@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 /**
  * A list of all college codes
- * @author Lana
+ * @author Lana (u7103031) 
  */
 public class Colleges {
     public ArrayList<String> colleges = new ArrayList<>(

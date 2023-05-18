@@ -32,7 +32,7 @@ import java.util.List;
 
 /**
  * The first activity that the user sees when they open the app, which allows them to login or register.
- * @author Lana,Punit
+ * @author Lana (u7103031) ,Punit
  */
 public class LoginActivity extends AppCompatActivity {
     private Handler handler;

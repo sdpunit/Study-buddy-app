@@ -33,7 +33,7 @@ public class Tokenizer {
 
     /**
      * Creates tokens
-     * @author Steven and Lana
+     * @author Steven and Lana (u7103031) 
      */
     public void next() {
         Colleges collegeList = new Colleges();
@@ -86,7 +86,7 @@ public class Tokenizer {
      * Extracts characters from a string
      * @param input input string
      * @return a string containg only letters
-     * @author Lana
+     * @author Lana (u7103031) 
      */
     private String getCollegeString(String input){
         String s = "";
@@ -130,7 +130,7 @@ public class Tokenizer {
      * Extracts numbers from a string
      * @param input input string
      * @return a string contagion letters and spaces
-     * @author Lana
+     * @author Lana (u7103031) 
      */
     public boolean isLetters(String input) {
         char[] chars = input.toCharArray();
