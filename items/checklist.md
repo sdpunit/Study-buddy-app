@@ -4,8 +4,8 @@ The following markdown document is a checklist of items you **should** complete 
 ## Git & Project Access
 - [x] **GitLab**: Commits (as shown in the Git commit history) using your own account. Failing to do this may result in zero marks.
 - [x] **GitLab**: Have the relevant marking tutors as 'maintainers' for your repository.
-- [ ] The markers will be able to login to your **App** via the APK using either of the 2 sets of accounts in the assignment specification.
-- [ ] If **Firebase** has been used, you have added the Marker's email to your Firebase project, and included the link to your Firebase project in your report.
+- [x] The markers will be able to login to your **App** via the APK using either of the 2 sets of accounts in the assignment specification.
+- [x] If **Firebase** has been used, you have added the Marker's email to your Firebase project, and included the link to your Firebase project in your report.
 
 ## Documents (all non-android files) located in a folder named `items`
 - [ ] A conflict resolution protocol is documented and well-defined.
