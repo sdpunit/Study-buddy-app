@@ -16,28 +16,36 @@
          >
         <activity
             android:name=".LeaderboardActivity"
+            android:label="@string/title_activity_leaderboard"
             android:exported="false" />
         <activity
             android:name=".bathtub.TimerActivity"
+            android:label="@string/title_activity_timer"
             android:exported="false" />
         <activity
             android:name=".bathtub.SetTimeActivity"
+            android:label="@string/title_activity_set_time"
             android:exported="false" />
         <activity
             android:name=".bathtub.SearchActivity"
+            android:label="@string/title_activity_search"
             android:exported="false" />
         <activity
             android:name=".bathtub.AssessmentsActivity"
+            android:label="@string/title_activity_assessments"
             android:exported="false" />
 
         <activity
             android:name=".bathtub.MainActivity"
+            android:label="@string/title_activity_main"
             android:exported="true" />
         <activity
             android:name=".bathtub.RegisterActivity"
+            android:label="@string/title_activity_register"
             android:exported="false" />
         <activity
             android:name=".bathtub.LoginActivity"
+            android:label="@string/title_activity_login"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

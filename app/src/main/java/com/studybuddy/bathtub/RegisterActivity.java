@@ -93,10 +93,10 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             // User was successfully added to the database
-                            Toast.makeText(RegisterActivity.this, "User registered successfully!", Toast.LENGTH_SHORT).show();
+                            Toaster.showToast(RegisterActivity.this, "User registered successfully!");
                         } else {
                             // Something went wrong
-                            Toast.makeText(RegisterActivity.this, "Failed to register user.", Toast.LENGTH_SHORT).show();
+                            Toaster.showToast(RegisterActivity.this, "Failed to register user.");
                         }
                     }
                 });

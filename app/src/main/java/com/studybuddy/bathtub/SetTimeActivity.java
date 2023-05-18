@@ -35,7 +35,7 @@ public class SetTimeActivity extends AppCompatActivity {
         String studyTimeString = studyTime.getText().toString();
         // deal with invalid input
         if (!isInteger(studyTimeString)) {
-            Toast.makeText(getApplicationContext(), "Please enter a valid integer minute", Toast.LENGTH_SHORT).show();
+            Toaster.showToast(getApplicationContext(), "Please enter a valid integer minute");
         }
         else {
             int minutes = Integer.parseInt(studyTimeString);
