@@ -97,6 +97,13 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Adds the user to the database, setting other user attributes as null by defult
+     * @param uid of the user
+     * @param username
+     * @param password
+     * @author Punit (u7432723)
+     */
     private void addUserToDatabase(int uid, String username, String password) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference usersRef = database.getReference("users");
