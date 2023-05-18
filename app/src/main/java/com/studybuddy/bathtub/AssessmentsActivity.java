@@ -54,7 +54,7 @@ public class AssessmentsActivity extends AppCompatActivity {
     }
     public void clickStartStudy(View view) {
         Intent intent = new Intent(AssessmentsActivity.this, SetTimeActivity.class);
-        UserTimeState userTimeState = new UserTimeState(user.getStudyMinutes());
+        UserTimeState userTimeState = new UserTimeState();
         intent.putExtra("userTimeState", userTimeState);
         intent.putExtra("user", user);
         intent.putExtra("course", course);

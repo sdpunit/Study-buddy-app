@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 /**
  * Users study in this activity.
- * @auther Yanghe, Punit
+ * @author Yanghe, Punit
  */
 public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
     private UserTimeState userTimeState;
@@ -81,7 +81,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
 
     /**
      * This method is called when the user clicks pause or resume button.
-     * @auther Yanghe
+     * @author Yanghe
      */
     public void clickPauseOrResume(View view) {
         Button pauseOrResumeButton = (Button) view;
@@ -100,7 +100,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
 
     /**
      * This method is called when the user clicks stop button.
-     * @auther Yanghe, Punit
+     * @author Yanghe, Punit
      */
     public void clickStop(View view) {
         Button pauseOrResumeButton = (Button) findViewById(R.id.pauseOrResumeButton);
@@ -153,7 +153,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
 
     /**
      * This method is called when time up.
-     * @auther: Yanghe Punit
+     * @author Yanghe Punit
      */
     @Override
     public void timeUp() {
@@ -207,7 +207,7 @@ public class TimerActivity extends AppCompatActivity implements MyTimer.TimeUp {
     /**
      * Get the leaderboard from firebase.
      * @return the leaderboard as a list of users
-     * @auther: Yanghe
+     * @author Yanghe
      */
     public ArrayList<User> getLeaderboard() {
         ArrayList<User> leaderboard = new ArrayList<>();

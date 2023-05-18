@@ -2,13 +2,11 @@ package com.studybuddy.search;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
+/**
+ * A list of all college codes
+ * @author Lana
+ */
 public class Colleges {
-
-    /**
-     * A list of all college codes
-     * @author Lana
-     */
     public ArrayList<String> colleges = new ArrayList<>(
             Arrays.asList(
                     "meas",

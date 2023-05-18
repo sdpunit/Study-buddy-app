@@ -6,14 +6,15 @@ import java.io.Serializable;
 
 /**
  * Pause state is the state when the user pauses the timer. He can only resume or stop studying in this state.
+ * @author Yanghe
  */
 public class pauseState implements State, Serializable {
-    private UserTimeState user;
+    private UserTimeState userTimeState;
 
     private Context context;
 
-    public pauseState(UserTimeState user){
-        this.user = user;
+    public pauseState(UserTimeState userTimeState){
+        this.userTimeState = userTimeState;
     }
 
     @Override
@@ -28,13 +29,13 @@ public class pauseState implements State, Serializable {
 
     @Override
     public void resume() {
-        this.user.setState(this.user.getStudyState());
+        this.userTimeState.setState(this.userTimeState.getStudyState());
     }
 
     @Override
     public void stopStudy() {
-        this.user.setState(new idleState(this.user));
-        this.user.setPauseState(null);
-        this.user.setStudyState(null);
+        this.userTimeState.setState(new idleState(this.userTimeState));
+        this.userTimeState.setPauseState(null);
+        this.userTimeState.setStudyState(null);
     }
 }

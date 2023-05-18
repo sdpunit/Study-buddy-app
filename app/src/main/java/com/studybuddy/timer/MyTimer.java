@@ -8,7 +8,7 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * This class is the timer used in the timer activity.
- * @auther Yanghe
+ * @author Yanghe
  */
 public class MyTimer {
     private static MyTimer instance;
@@ -20,16 +20,11 @@ public class MyTimer {
 
     private Handler handler;
 
-    /**
-     * This interface is used to deal with time-up.
-     */
+    // This interface is used to deal with time-up.
     public interface TimeUp {
         void timeUp();
     }
-
-    /**
-     * Get the instance of MyTimer.
-     */
+    // Get the instance of MyTimer.
     public static MyTimer getInstance(int initialMinutes, TimeUp studyActivityWhenTimeUp) {
         if (instance == null) {
             instance = new MyTimer(initialMinutes, studyActivityWhenTimeUp);
@@ -42,9 +37,7 @@ public class MyTimer {
         this.studyActivityWhenTimeUp = studyActivityWhenTimeUp;
     }
 
-    /**
-     * Start the timer.
-     */
+    // Start the timer
     public void start(Handler handler) {
         this.handler = handler;
 
@@ -57,9 +50,7 @@ public class MyTimer {
         timerThread.start();
     }
 
-    /**
-     * Count down and send message to handler so that the UI can be updated.
-     */
+    // Count down and send message to handler so that the UI can be updated
     public void countDown() {
         int totalSeconds = this.initialMinutes * 60;
 
@@ -91,17 +82,12 @@ public class MyTimer {
         pauseLatch.countDown();
     }
 
-    /**
-     * Get the whole time of the timer, which is used to record study time when time up.
-     */
+    // Get the whole time of the timer, which is used to record study time when time up
     public int getInitialMinutes() {
         return this.initialMinutes;
     }
 
-    /**
-     * Get the study time of this study session,
-     * which is used to record study time when the user manually stops.
-     */
+    // Get the study time of this study session, which is used to record study time when the user manually stops.
     public double getStudyTime() {
         return (double) this.initialMinutes - this.remainingMinutes;
     }
