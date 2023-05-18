@@ -50,8 +50,8 @@ public class Tokenizer {
             }
             else if (delta.contains("(") || delta.contains(")")) {
                 // ignore
-                next();
-//                throw new IllegalArgumentException("Expected CODE, COLLEGE, COLLEGECODE, CONVENER, or COURSE, found: " + delta);
+                //next();
+                 throw new IllegalArgumentException("Expected CODE, COLLEGE, COLLEGECODE, CONVENER, or COURSE, found: " + delta);
             }
 
         } else {

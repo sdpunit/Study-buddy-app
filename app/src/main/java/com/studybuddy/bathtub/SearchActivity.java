@@ -144,17 +144,22 @@ public class SearchActivity extends AppCompatActivity {
     private ArrayList search(RBTree tree, String input){
         // search for course
         ArrayList<Course> results = new ArrayList(); //new array list
-        Tokenizer tokenizer = new Tokenizer(input); // tokenize input
-        SearchParser parser = new SearchParser(tokenizer); // parse tokens
-        Query queryObj = parser.parseQuery(); // get query object
-
+        Tokenizer tokenizer = null; // tokenize input
+        Query queryObj = null;
         RBTree collegeTree = null;
 
-
-        if(queryObj == null){
-            Toaster.showToast(getApplicationContext(), "Invalid search query");
-            return results;
+        try {
+            tokenizer = new Tokenizer(input); // tokenize input
+            SearchParser parser = new SearchParser(tokenizer); // parse tokens
+            queryObj = parser.parseQuery(); // get query object
         }
+        catch (IllegalArgumentException e) {
+            Toaster.showToast(getApplicationContext(), "Invalid token");
+        }
+        catch (Exception e) {
+            Toaster.showToast(getApplicationContext(), "Invalid search query");
+        }
+
 
         try {
             collegeTree = collegeTreeMap.get(queryObj.getCollege());
@@ -209,31 +214,31 @@ public class SearchActivity extends AppCompatActivity {
                 });
             }
         }
-//        if (code) {
-//
-//        }
-//        if (course) {
-//            if (convener) {
-//                for(Course c : courseList){
-//                    if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) || c.getConvener().toLowerCase().contains(queryObj.getConvener()) ) {
-//                        results.add(c);
-//                    }
-//                }
-//                return results;
-//            }
-//            for(Course c : courseList){
-//                if (c.getCourseName().toLowerCase().contains(queryObj.getCourse())) {
-//                    results.add(c);
-//                }
-//            }
-//        }
-//        if (convener) {
-//            for(Course c : courseList){
-//                if (c.getCourseName().toLowerCase().contains(queryObj.getConvener())) {
-//                    results.add(c);
-//                }
-//            }
-//        }
+        if (code) {
+
+        }
+        if (course) {
+            if (convener) {
+                for(Course c : courseList){
+                    if (c.getCourseName().toLowerCase().contains(queryObj.getCourse()) || c.getConvener().toLowerCase().contains(queryObj.getConvener()) ) {
+                        results.add(c);
+                    }
+                }
+                return results;
+            }
+            for(Course c : courseList){
+                if (c.getCourseName().toLowerCase().contains(queryObj.getCourse())) {
+                    results.add(c);
+                }
+            }
+        }
+        if (convener) {
+            for(Course c : courseList){
+                if (c.getCourseName().toLowerCase().contains(queryObj.getConvener())) {
+                    results.add(c);
+                }
+            }
+        }
         return results;
     }
 

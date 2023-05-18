@@ -67,8 +67,8 @@ public class SearchParser {
                 return parseTerm(query);
             }
         }
-        return null;
-//        throw new IllegalArgumentException("You entered a null token: " + tokenizer.current());
+        //return null;
+        throw new IllegalArgumentException("You entered a null token: " + tokenizer.current());
     }
     private Query parseTerm(Query query) {
 
@@ -95,8 +95,8 @@ public class SearchParser {
                 return parseTerm(query);
 
             } else {
-                return query;
-//                throw new IllegalArgumentException("Expected CODE, COURSE, or CONVENER got: " + tokenizer.current().getToken());
+//                return query;
+                throw new IllegalArgumentException("Expected CODE, COURSE, or CONVENER got: " + tokenizer.current().getToken());
             }
         }
         return query;
