@@ -198,8 +198,13 @@ public class MainActivity extends AppCompatActivity {
             if (timeStudied == null || timeStudied == 0.0) {
                 txt_timeStudied.setText("Not started");
             } else {
-
-                txt_timeStudied.setText("Studied "+ Math.round(timeStudied)+ " minutes");
+                int minutes = (int) Math.round(timeStudied);
+                if (minutes <= 1) {
+                    txt_timeStudied.setText("Studied "+ Math.round(timeStudied)+ " minute");
+                }
+                else {
+                    txt_timeStudied.setText("Studied "+ Math.round(timeStudied)+ " minutes");
+                }
             }
 
             courseLayout.addView(courseButton);
@@ -218,7 +223,13 @@ public class MainActivity extends AppCompatActivity {
         if (user.getStudyMinutes() == 0){
             studyMinutes.setText("No study time recorded.");
         } else if(user != null) {
-            studyMinutes.setText("I have studied for " + Math.round(user.getStudyMinutes()) + " minutes!");
+            int minutes = (int) Math.round(user.getStudyMinutes());
+            if (minutes <= 1) {
+                studyMinutes.setText("I have studied for " + Math.round(user.getStudyMinutes()) + " minute!");
+            }
+            else {
+                studyMinutes.setText("I have studied for " + Math.round(user.getStudyMinutes()) + " minutes!");
+            }
         }
     }
 
