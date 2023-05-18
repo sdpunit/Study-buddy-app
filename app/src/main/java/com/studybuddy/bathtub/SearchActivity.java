@@ -102,10 +102,12 @@ public class SearchActivity extends AppCompatActivity {
             ArrayList<Course> results = new ArrayList<Course>();
             @Override
             public boolean onQueryTextSubmit(String input){
-                // call search function
-                results = search(input.toLowerCase());
-                courseList.clear();
-                courseList.addAll(results);
+                if(!input.contains("(") && !input.contains(")") ) {
+                    // call search function
+                    results = search(input.toLowerCase());
+                    courseList.clear();
+                    courseList.addAll(results);
+                }
                 listAdapter.notifyDataSetChanged();
                 searchListView.setAdapter(listAdapter);
                 return false;
