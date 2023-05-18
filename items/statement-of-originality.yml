@@ -61,8 +61,8 @@ assets:
 
 # for each member, sign by inputting your name and uid here (remove any empty "name+uid" entries)
 members:
-  - name:
-    uid:
+  - name: Ahmed Qaisar
+    uid: u7490701
   - name:
     uid:
   - name:
