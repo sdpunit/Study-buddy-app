@@ -1,16 +1,12 @@
 package com.studybuddy;
 
-import static com.studybuddy.search.Token.Type.CODE;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import com.studybuddy.search.Query;
 import com.studybuddy.search.SearchParser;
 import com.studybuddy.search.Tokenizer;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class SearchParserTest {
@@ -23,13 +19,13 @@ public class SearchParserTest {
     public void testQueryCode() {
         Tokenizer tk = new Tokenizer("COMP,2100");
         SearchParser sp = new SearchParser(tk);
-        Query expected = new Query("comp",2100,null,null,null);
+        Query expected = new Query("comp",2100,null,null);
         Query actual = sp.parseQuery();
         assertEquals(makeString(expected),makeString(actual));
 
         tk=new Tokenizer("COMP 2100");
         sp = new SearchParser(tk);
-        expected = new Query("comp",2100,null,null,null);
+        expected = new Query("comp",2100,null,null);
         actual = sp.parseQuery();
         assertEquals(makeString(expected),makeString(actual));
     }
@@ -38,7 +34,7 @@ public class SearchParserTest {
     public void testQueryCourse() {
         Tokenizer tk=new Tokenizer("COMP 2100, Software Design Methodologies");
         SearchParser sp = new SearchParser(tk);
-        Query expected = new Query("comp",2100,"software design methodologies",null,null);
+        Query expected = new Query("comp",2100,"software design methodologies",null);
         Query actual = sp.parseQuery();
         assertEquals(makeString(expected),makeString(actual));
     }
@@ -47,25 +43,25 @@ public class SearchParserTest {
     public void testQueryConvener() {
         Tokenizer tk =new Tokenizer("COMP 2100, Software Design Methodologies,convener= bernando");
         SearchParser sp = new SearchParser(tk);
-        Query expected = new Query("comp",2100,"software design methodologies","bernando",null);
+        Query expected = new Query("comp",2100,"software design methodologies","bernando");
         Query actual = sp.parseQuery();
         assertEquals(makeString(expected),makeString(actual));
 
         tk=new Tokenizer("COMP 2100, convener= bernando");
         sp = new SearchParser(tk);
-        expected = new Query("comp",2100,null,"bernando",null);
+        expected = new Query("comp",2100,null,"bernando");
         actual = sp.parseQuery();
         assertEquals(makeString(expected),makeString(actual));
 
         tk=new Tokenizer("COMP, 2100, Software Design Methodologies,convener= bernando");
         sp = new SearchParser(tk);
-        expected = new Query("comp",2100,"software design methodologies","bernando",null);
+        expected = new Query("comp",2100,"software design methodologies","bernando");
         actual = sp.parseQuery();
         assertEquals(makeString(expected),makeString(actual));
 
         tk=new Tokenizer("COMP, Software Design Methodologies,convener= bernando");
         sp = new SearchParser(tk);
-        expected = new Query("comp",0,"software design methodologies","bernando",null);
+        expected = new Query("comp",0,"software design methodologies","bernando");
         actual = sp.parseQuery();
         assertEquals(makeString(expected),makeString(actual));
     }

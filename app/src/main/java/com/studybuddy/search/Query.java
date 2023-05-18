@@ -9,11 +9,9 @@ public class Query {
     private int code;
     private String course;
     private String convener;
-    private String term;
 
     /**
      * This method constructs an empty query object.
-     * @return the empty search query
      * @Author Steven (u7108792)
      */
 
@@ -22,21 +20,18 @@ public class Query {
         this.code = 0;
         this.course = null;
         this.convener = null;
-        this.term = null;
     }
 
     /**
      * This method constructs a query with predefined values.
-     * @return the term of the course
      * @Author Steven (u7108792)
      */
 
-    public Query(String college, int code, String course, String convener, String term) {
+    public Query(String college, int code, String course, String convener) {
         this.college = college;
         this.code = code;
         this.course = course;
         this.convener = convener;
-        this.term = term;
     }
 
     public String getCollege() {
