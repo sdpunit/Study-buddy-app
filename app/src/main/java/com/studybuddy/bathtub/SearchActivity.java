@@ -34,7 +34,7 @@ import java.util.List;
 
 /**
  * This class is the activity for the search page.
- * @auther Steven, Lana
+ * @author Steven, Lana
  */
 public class SearchActivity extends AppCompatActivity {
 
@@ -97,7 +97,7 @@ public class SearchActivity extends AppCompatActivity {
      * @return HashMap of course trees with college names as keys
      * @throws JSONException
      * @throws IOException
-     * Author: Steven
+     * @author Steven
      */
     private void searchWidgets(){
         // search for widgets
@@ -389,7 +389,7 @@ public class SearchActivity extends AppCompatActivity {
 
     /**
      * Creates a hashmap of college names and their respective trees.
-     * @auther Yanghe
+     * @author Yanghe
      */
     public HashMap<String, RBTree> getCollegeTreeMap () {
         HashMap<String, RBTree> collegeTreeMap = new HashMap<>();

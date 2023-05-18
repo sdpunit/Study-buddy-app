@@ -5,28 +5,18 @@ import com.studybuddy.timer.idleState;
 
 import java.io.Serializable;
 
+/**
+ * This class is used to store the state of a user during a study session.
+ * @author Punit
+ */
 public class UserTimeState implements Serializable {
     private State pauseState;
     private State studyState;
     private State state;
 
-    //private double studyMinutes = 0.0;
-
-
-    public UserTimeState(double studyMinutes) {
-        //this.studyMinutes = studyMinutes;
+    public UserTimeState() {
         this.state = new idleState(this);
     }
-    /*public double getStudyMinutes() {
-        return studyMinutes;
-    }
-
-    public void setStudyMinutes(double studyMinutes) {
-        this.studyMinutes = studyMinutes;
-    }
-    public void addStudyMinutes(double studyMinutes) {
-        this.studyMinutes += studyMinutes;
-    }*/
     public State getPauseState() {
         return pauseState;
     }

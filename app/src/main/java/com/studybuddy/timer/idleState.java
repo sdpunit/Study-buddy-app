@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Idle state is the initial state of the user. He can only start studying in this state.
+ * @author Yanghe
  */
 public class idleState implements State, Serializable {
     private UserTimeState userTimeState;

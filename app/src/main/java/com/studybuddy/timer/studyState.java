@@ -4,12 +4,13 @@ import java.io.Serializable;
 
 /**
  * Study state is the state when the user is studying. He can only pause or stop studying in this state.
+ * @author Yanghe
  */
 public class studyState implements State, Serializable {
-    private UserTimeState user;
+    private UserTimeState userTimeState;
 
-    public studyState(UserTimeState user){
-        this.user = user;
+    public studyState(UserTimeState userTimeState){
+        this.userTimeState = userTimeState;
     }
 
     @Override
@@ -18,8 +19,8 @@ public class studyState implements State, Serializable {
 
     @Override
     public void pause() {
-        this.user.setPauseState(new pauseState(this.user));
-        this.user.setState(this.user.getPauseState());
+        this.userTimeState.setPauseState(new pauseState(this.userTimeState));
+        this.userTimeState.setState(this.userTimeState.getPauseState());
     }
 
     @Override
@@ -28,8 +29,8 @@ public class studyState implements State, Serializable {
 
     @Override
     public void stopStudy() {
-        this.user.setState(new idleState(this.user));
-        this.user.setPauseState(null);
-        this.user.setStudyState(null);
+        this.userTimeState.setState(new idleState(this.userTimeState));
+        this.userTimeState.setPauseState(null);
+        this.userTimeState.setStudyState(null);
     }
 }

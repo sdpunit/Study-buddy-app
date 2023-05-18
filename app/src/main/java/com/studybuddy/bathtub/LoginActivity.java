@@ -32,7 +32,7 @@ import java.util.List;
 
 /**
  * The first activity that the user sees when they open the app, which allows them to login or register.
- * @auther Lana,Punit
+ * @author Lana,Punit
  */
 public class LoginActivity extends AppCompatActivity {
     private Handler handler;
@@ -184,7 +184,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Create a notification channel
-     * @auther Yanghe
+     * @author Yanghe
      */
     private void createNotificationChannel() {
         CharSequence name = getString(R.string.channel_name);
@@ -201,7 +201,7 @@ public class LoginActivity extends AppCompatActivity {
      * Read a user from the json file and upload it to the firebase every 15 seconds
      * Check if it can be added to the leaderboard in the meantime
      * @param leaderboard the leaderboard to be updated
-     * @auther Ahmed, Yanghe
+     * @author Ahmed, Yanghe
      */
     private void uploadDataPeriodically(List<User> leaderboard) {
         handler.postDelayed(new Runnable() {
@@ -256,7 +256,7 @@ public class LoginActivity extends AppCompatActivity {
      * Add a user to the leaderboard in firebase.
      * @param user the user to be added
      * @param leaderboard the leaderboard to be updated
-     * @auther Ahmed, Yanghe
+     * @author Ahmed, Yanghe
      */
     public void addUserToLeaderboardFirebase(User user, List<User> leaderboard) {
         // add the new user
