@@ -302,54 +302,6 @@ or cancel the study session if desired.
    * *Reasons:*
 
      * This tree is self-balancing, meaning that our data will be organised and structured even after multiple insertions
-
-     * Has an O(log n) time intricacy for searching
-
-     * We don't need to access the item by index for this feature
-
-2. *Map*
-
-   * *Objective:* A map is used to link the course and the amount of time studied.
-
-   * *Locations:* User.java
-
-   * *Reasons:*
-
-     * Allows for quick data retrieval
-
-     * Flexible key pairing which directly links two attributes to each other
-
-     * The nature of this data structure mean there will be no duplicate keys
-
-     * Maps are scalable and can handle large amounts of data
-
-3. *Set*
-
-   * *Objective:* A set is used to store a list of courses that a user is enrolled in
-
-   * *Locations:* User.java
-
-   * *Reasons:*
-
-     * Eliminates duplicate elements
-
-     * Searching operation takes O(logN) time complexity
-
-     * Is dynamic and will not overflow, compared to other similar structures such as an array.
-
-
-
-**Data Structures**
-
-1. *RedBlack Tree*
-
-   * *Objective:* It is used for storing Courses with the course code as a key which can then be found using the Search feature.
-
-   * *Locations:* RBTree.java, SearchActivity.java
-
-   * *Reasons:*
-
-     * This tree is self-balancing, meaning that our data will be organised and structured even after multiple insertions
      
      * Searching operation takes O(log n) time complexity
 
