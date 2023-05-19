@@ -280,10 +280,6 @@ the user is able to search for courses in a consistent but also flexible manner.
 
 Our team did not attempt the surprise feature.
 
-**Other**
-
-*[TODO What other design decisions have you made which you feel are relevant? Feel free to separate these into their own subheadings.]*
-
 ## Summary of Known Errors and Bugs
 
 1. *Bug 1:* Timer Video
@@ -307,7 +303,7 @@ Our team did not attempt the surprise feature.
 3. *Bug 3:* Search Crash
    * *Description:* On some invalid search inputs the app crashes
    * *Location:* SearchActivity.java, seaarch(), Lines: 247, 269
-   * *Steps to reproduce:* Try the prompt 'duck1234', 'math 101'
+   * *Steps to reproduce:* Try the prompt 'duck1234' or 'math 101'
    * *Expected result:* The app should throw a toast describing the error
    * *Actual result:* The app crashes
    * *Cause of problem:* the line assert collegeTree!=null causes the app to crash, and omitting convener!=null in line 269 causes a NullAssertionError
