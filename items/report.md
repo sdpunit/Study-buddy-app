@@ -72,35 +72,21 @@
 <br><br>
 
 *u7432723, Punit, I contribute 20% of the code. Here are my contributions:*
-* Came up with the idea of this app, influenced by the discussions I had with my friend (Julia Than Hlaing) of having a course specific 
-focus app with beautiful design. My major contribution revolve around integrating various activites togethor, making design changes and editing
-the xml files. I was also responsible for the integration of firebase with our app. So that all the information for a particular user is retained
-in the firebase.
-* AssessmentsActivity.java : Entire activity
-  * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/AssessmentsActivity.java
-* Course.java : Methods and changing attributes for firebase
-  * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/Course.java
-* Login.java: Edited the methods created by Lana to support firebase
-  * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/LoginActivity.java#L150-182
-  * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/LoginActivity.java#L133-143
-* MainActivity.java: Activity set up by myself
-  * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/MainActivity.java#L40-235
-* Register.java : Firebase implementation
-  * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/MainActivity.java#L40-235
-* SearchActivity.java : Firebase integration
-  * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/SearchActivity.java#L78-88
-* TimerActivity.java : Firebase integration
-  * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/TimerActivity.java#L176-191
-* User.java : Edited the class to make sure user and its attributes can be uploaded to the firebase
-  * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/User.java#L12-179
-* UserTimeState.java : Separated this class from User class for cleaner implementation
-  * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/UserTimeState.java#L1-55
-* Designing layouts, creating the xmls files
+* AssessmentsActivity.java
+* Login.java: authenticateUser()
+* MainActivity.java:
+* Register.java
+* StudyActivity.java: onCreate()
+* User.java
+* UserTimeState.java
+* activity_main.xml
+* item_course.xml
+* activity_assessments.xml
 
 *UI Design: Proposed and designed the UI for the Main class. Created a new colour theme for the app.
 Developed many of the conceptual ideas for the designs of each UI screen and how they interact together*
 
-*Report Writing: Writing the report of my contribution and making changes to highlight the portion of the code that I worked on.*
+*Report Writing: N/A*
 
 *Slide Preparation: N/A*
 <br><br>
