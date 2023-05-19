@@ -129,10 +129,9 @@
 
 *Slide Preparation: N/A*
 
-
 ## Conflict Resolution Protocol
 
-* All disputes in contributions and team issues will follow the Conflict Resolution Plan. 
+All disputes in contributions and team issues will follow the Conflict Resolution Plan. 
   furthermore, all team members will be expected to follow the Code of Conduct. More info can 
   be found here: https://www.anu.edu.au/students/program-administration/program-management/student-code-of-conduct
 
@@ -143,12 +142,12 @@ Conflict Resolution Plan:
 4. Explore how they goal can be reached and develop final agreement
 
 Conflict Management Strategies:
-1. **Avoidance** don't try to avoid the conflict.
-2. **communication** talk to your peers about the conflict so that the necessary protocols can be
+1. Avoidance: don't try to avoid the conflict.
+2. Communication: talk to your peers about the conflict so that the necessary protocols can be
    taken.
-3. **Accessibility** make the protocols easy to follow but effective in resolution.
-4. **Fairness** make sure that the protocols are fair to all parties involved.
-5. **Team Engagement** make sure that all team members are engaged in the resolution process.
+3. Accessibility: make the protocols easy to follow but effective in resolution.
+4. Fairness: make sure that the protocols are fair to all parties involved.
+5. Team Engagement: make sure that all team members are engaged in the resolution process.
 
 Additional Info:
 * If a member fails to meet the initial plan and/or deadlines, the team will have a group 
@@ -174,7 +173,7 @@ Additional Info:
 
 StudyBuddy is a productivity and educational app that allows its users to keep track of the time that they have spent studying for each subject that they are enrolled in. There is a leaderboard in the app which displays the top 5 Users in the app, letting the User see how the are preforming comparatively and motivate them to study. This app includes a login interface, the ability to search for and enroll in courses, a timer functionality, and a graphics summary / leaderboard page.
 
-**Application Use Cases and or Examples**
+**Application Use Cases**
 
 *Targets Users: Students*
 
@@ -184,25 +183,37 @@ StudyBuddy is a productivity and educational app that allows its users to keep t
 * A user can view a summary of their total time studied.
 * A user can view a leaderboard of the top 5 users in the app.
 
-**Use Case Diagram**
-![UseCaseDiagram](./images/use_case_diagram.png) <br>
+**Use Case Diagram** <br>
+<img src="./images/use_case_diagram.png" width="500"/> <br>
 
 See below for a visual breakdown of each key part of our app.
 <br>
-<br> **Login and Register Interface** <br>
+<br> **Login and Register** <br>
+Once the app is launched, the user is presented with the login interface. If the user does not have an account, they can
+click the register button to be taken to the register interface. The register interface will require that the users UID is
+exactly 7 letters long, and that the password and confirm password fields are the same. the user will also have to select their
+student type (undergrad or postgrad), as this will determine what classes they may choose. The login and user interface will both
+display toasts is the user tries to login or register without filling all of the fields. Upon successful registration, the user
+will be taken to the home page but will be required to login each subsequent use. At the login screen the user will be taken to 
+the home page if their details match those stored in the Firebase.
+<br> 
 <img src="./images/login_empty.png" width="200"/>
 <img src="./images/register_blank.png" width="200"/>
 
-<br><br> **Home Interface** <br>
+<br><br> **Home** <br>
+This is the main hub of the app, where the user can choose to go to either the search activity, the timer activity, assessment activity, 
+or the leaderboard activity. After a user adds sources, they will be displayed on this page, and after they have studied a course,
+their total study time will be displayed. 
+<br>
 <img src="./images/main_empty.png" width="200"/>
 <img src="./images/main_courses_no_time.png" width="200"/>
 <img src="./images/main_with_time.png" width="200"/>
 
-<br><br> **Search Interface** <br>
+<br><br> **Search** <br>
 <img src="./images/search_initial.png" width="200"/>
 <img src="./images/search_added.png" width="200"/>
 
-<br><br> **Assessment View Interface** <br>
+<br><br> **Assessment View** <br>
 <img src="./images/course_info.png" width="200"/>
 
 <br><br> **Timer Interface** <br>
