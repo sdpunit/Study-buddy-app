@@ -34,21 +34,23 @@
 <br><br>
 
 *u7103031, Lana, I contribute 20% of the code. Here are my contributions:*
-* Login.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/bathtub/LoginActivity.java
-    * onCreate()
-    * authenticateUser()
-    * showLoginMessage()
-* Register.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/bathtub/RegisterActivity.java
-    * onCreate()
+* LoginActivity.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/bathtub/LoginActivity.java
+  * onCreate(), Lines: 75-101
+  * showLoginMessage(), whole method
+* RegisterActivity.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/bathtub/RegisterActivity.java
+  * onCreate(), Lines: 41-45, 63-66, 72-75, 83-87
 * SearchActivity.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/bathtub/SearchActivity.java
-    * search()
-    * createCourseTree()
-    * getCourses()
+  * search(), whole method
+  * createCourseTree(), whole method
+  * getCourses(), whole method
 * Colleges.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/search/Colleges.java
+  * whole class
 * SearchParser.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/search/SearchParser.java
-    * parseQuery()
+  * parseQuery(), Lines:23-30
 * activity_login.xml https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/res/layout/activity_login.xml
+  * whole class
 * activity_register.xml https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/res/layout/activity_register.xml
+  * whole class
 
 *UI Design: Proposed and designed the UI for the Login and Register class*
 
@@ -141,6 +143,7 @@
 ## Application Description
 
 StudyBuddy is a productivity and educational app that allows its users to keep track of the time that they have spent studying for each subject that they are enrolled in. There is a leaderboard in the app which displays the top 5 Users in the app, letting the User see how the are preforming comparatively and motivate them to study. This app includes a login interface, the ability to search for and enroll in courses, a timer functionality, and a graphics summary / leaderboard page.
+TODO: ADD SCREENSHOTS 
 
 **Application Use Cases and or Examples**
 
@@ -265,26 +268,26 @@ Production Rules:
 
 Example Queries:
 
-* *"COMP, 1110, Structured Programming, convener= Patrik Haslum"* (complete search)
-* *"COMP1110* (search by code)
-* *"COMP"* (filter by college)
-* *"COMP, 1110"* (search by college and code)
-* *Structured Programming"* (search by course name)
-* *"COMP, Structured Programming"* (search by college and course name)
-* *"(Structured Programing)"* (dynamic course name search, retains filters)
-* *"COMP, (Structured Programing)"* (dynamic course name search with college filter)
+* "COMP, 1110, Structured Programming, convener= Patrik Haslum" (complete search)
+* "COMP1110 (search by code)
+* "COMP" (filter by college)
+* "COMP, 1110" (search by college and code)
+* "Structured Programming" (search by course name)
+* "COMP, Structured Programming" (search by college and course name)
+* "(Structured Programing)" (dynamic course name search, retains filters)
+* "COMP, (Structured Programing)" (dynamic course name search with college filter)
 
 
-*The grammar classifies the convener, name and code of the course as factors, and allows these to be separated by commas. The college a course belongs to is classified as an exp, and can optionally be appended by a series of factors seperated by commas. This grammar design is flexible as it allows for the user to search simply by the college, or with more detail by adding the code, name, and/or convener in any order. Our grammar contains code, name, convener, and college as these are the most relevant keywords associated with a course.*
+This grammar classifies the convener, name and code of the course as factors, and allows these to be separated by commas. The college a course belongs to is classified as an exp, and can optionally be appended by a series of factors seperated by commas. This grammar design is flexible as it allows for the user to search simply by the college, or with more detail by adding the code, name, and/or convener in any order. Our grammar contains code, name, convener, and college as these are the most relevant keywords associated with a course.
 
 **Tokenizer and Parsers**
 
-*[We utilise tokenizers and parsers in our Search implementation. Once a user searches a term, this String is tokenized into `COLLEGE`, `CODE`, `COLLEGECODE` `COURSE`, and `CONVENER` tokens. These tokens are then parsed to determine if they follow the structure of the grammar that we have defined for our app. If the search terms follows the correct grammar, these tokens will be converted to Strings and passed into a Query object, to complete the search process. 
-By using tokenizer and parsers, we are able to ensure that the search terms are valid, and that the search process is completed correctly. This standardizes the search process, and ensures that the user is able to search for courses in a consistent manner.]*
+We utilise tokenizers and parsers in our Search implementation. Once a user searches a term, this String is tokenized into `COLLEGE`, `CODE`, `COLLEGECODE` `COURSE`, and `CONVENER` tokens. These tokens are then parsed to determine if they follow the structure of the grammar that we have defined for our app. If the search terms follows the correct grammar, these tokens will be converted to Strings and passed into a Query object, to complete the search process. 
+By using tokenizer and parsers, we are able to ensure that the search terms are valid, and that the search process is completed correctly. This standardizes the search process, and ensures that the user is able to search for courses in a consistent manner.
 
 **Surprise Item**
 
-*[Our team did not attempt the surprise feature.]*
+Our team did not attempt the surprise feature.
 
 **Other**
 
@@ -295,6 +298,7 @@ By using tokenizer and parsers, we are able to ensure that the search terms are 
 1. *Bug 1:*
 
 - Once the user starts the timer the background is green for a while, while the background gif is loading. 
+- There can be a slight delay when transitioning from the login activity to the main activity, and from the main activity to the search activity
 
 *List all the known errors and bugs here. If we find bugs/errors that your team does not know of, it shows that your testing is not thorough.*
 
@@ -335,6 +339,7 @@ By using tokenizer and parsers, we are able to ensure that the search terms are 
 - *Types of tests created: ...*
 
 *Please provide some screenshots of your testing summary, showing the achieved testing coverage. Feel free to provide further details on your tests.*
+ADD DIAGRAMS OUTLINE BRANCH COMPLETE ECT...
 
 ## Implemented Features
 
