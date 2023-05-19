@@ -41,6 +41,11 @@ assets:
   url: https://medium.com/muhamadjalaludin/how-to-create-user-interface-login-register-with-android-studio-34da847b05b2
   licence: fair use
 
+assets:
+  - comment: Activity background. Along with this one, all other images are taken from pinterest
+  url: https://www.pinterest.fr/pin/244249979782900415/
+  licence: free
+
 
 ### Questions (answer before final submission):
 1. You (as a group) completed this work (tick the most appropriate option): 
@@ -64,8 +69,8 @@ members:
     uid: u7490701
   - name: Lana Fraser
     uid: u7103031
-  - name:
-    uid:
+  - name: Punit Deshwal
+    uid: u7432723
   - name:
     uid:
   - name:
