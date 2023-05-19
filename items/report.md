@@ -281,9 +281,11 @@ the timer interface, or my click the 'reset time' button to reset the time that 
 Here the user can set a timer for the amount of time in minutes that they would like to study for. The time will then
 countdown and a popup will display once the study session is completed. The user can pause and resume the timer,
 or cancel the study session if desired.<br>
-<img src="./images/set_time.png" width="200"/>
-    <img src="./images/timer.png" width="200"/>
-    <img src="./images/study_complete.png" width="200"/>
+<p align="center">
+  <img src="./images/set_time.png" width="200" />
+  <img src="./images/timer.png" width="200" />
+  <img src="./images/study_complete.png" width="200" />
+</p>
 <br><br>
 
 
@@ -461,7 +463,8 @@ Our team did not attempt the surprise feature.
 
 - *Number of test cases:* 6
 
-- *Code coverage:*
+- *Code coverage:* 100% class coverage, 95% method coverage (except toString() method), 94% line coverage
+<img src="./images/tree_coverage.png"/> <br>
 
 - *Types of tests created:* JUnit tests
     * testEmptyTree
@@ -472,7 +475,6 @@ Our team did not attempt the surprise feature.
     * testSearchNonExist
     * testSearchByCourseCode
 
-<img src="./images/tree_coverage.png"/> <br>
 **NotificationFactoryTest**
 
 - *Number of test cases:* 1
