@@ -37,10 +37,9 @@ code:
 # add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external assets)
 assets:
-  # NOTE: "Bliss" is just here as an example, you SHOULD REMOVE IT
-  - comment: "_Bliss_ by Charles O'Rear"
-    url: https://en.wikipedia.org/wiki/Bliss_(image)
-    licence: fair use
+  - comment: "res/drawable/ic_arrow_right.xml", "res/drawable/ic_arrow_left.xml"
+  url: https://medium.com/muhamadjalaludin/how-to-create-user-interface-login-register-with-android-studio-34da847b05b2
+  licence: fair use
 
 
 ### Questions (answer before final submission):
@@ -63,8 +62,8 @@ assets:
 members:
   - name: Ahmed Qaisar
     uid: u7490701
-  - name:
-    uid:
+  - name: Lana Fraser
+    uid: u7103031
   - name:
     uid:
   - name:
