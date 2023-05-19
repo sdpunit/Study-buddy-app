@@ -479,7 +479,7 @@ Our team did not attempt the surprise feature.
 - *Number of test cases:* 6
 
 - *Code coverage:* 100% class coverage, 95% method coverage (except toString() method) and 94% line coverage
-<img src="./images/study_complete.png" width="200"/><br>
+<img src="./images/tree_coverage.png"/><br>
 
 - *Types of tests created:* JUnit tests
     * testEmptyTree
