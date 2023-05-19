@@ -425,10 +425,9 @@ Our team did not attempt the surprise feature.
    * Class: SearchActivity.java, SearchParser.java, Tokenizer.java, Token.java
    * If a search produces an error in the search method, or while being converted into a token or query, the search will result in nothing.
    <br>
-8. [Search-Filter] Sort and/or filter a list of items returned from a search, with the help of suitable UI components. For instance, when searching for assignments, include checkboxes for users to select the target course(s); include drop-down field for the selection of sorting methods, etc. (easy)
+8. [Search-Filter] Sort and/or filter a list of items returned from a search, with the help of suitable UI components. For instance, when searching for assignments, include checkboxes for users to select the target course(s); include drop-down field for the selection of sorting methods, etc (easy)
    * Class: SearchActivity.java
-   * The user may use an options menu to filter the course into those that are available an unavailable, which is determined by whether the course has a convener or not. 
-   <br><br>
+   * The user may use an options menu to filter the course into those that are available an unavailable, which is determined by whether the course has a convener or not. <br><br>
 
 ## Summary of Individual Contributions
 
@@ -524,6 +523,7 @@ Developed many of the conceptual ideas for the designs of each UI screen and how
 * course_cell.xml
 
 *UI Design: Proposed and designed the UI for the SearchActivity class.*
+
 *Code Design: Proposed and implemented the tokenizer and parser for the search feature. Created grammar
 for tokenizer and parser, in conjunction with Logic for searching*
 
@@ -586,7 +586,7 @@ I collected course data from our university website and made a RB tree structure
 
 *Code Design: Proposed and implemented a RB tree structure for storing course data. Proposed and implemented a singleton design pattern to create the timer. Proposed and implemented a state design pattern for the timer functionality. Proposed and implemented a factory design pattern to send different kinds of notifications.*
 
-*UI Design:* Proposed and designed the UI of SetTimeActivity and TimerActivity.
+*UI Design: Proposed and designed the UI of SetTimeActivity and TimerActivity.*
 
 *Report Writing: Writing the report of my contribution and content related to my work and also some other general features*
 
