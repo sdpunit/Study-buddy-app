@@ -425,7 +425,7 @@ Our team did not attempt the surprise feature.
    * Class: SearchActivity.java, SearchParser.java, Tokenizer.java, Token.java
    * If a search produces an error in the search method, or while being converted into a token or query, the search will result in nothing.
    <br>
-8. [Search-Filter] Sort and/or filter a list of items returned from a search, with the help of suitable UI components. For instance, when searching for assignments, include checkboxes for users to select the target course(s); include drop-down field for the selection of sorting methods, etc (easy)
+8. [Search-Filter] Sort and/or filter a list of items returned from a search, with the help of suitable UI components. For instance, when searching for assignments, include checkboxes for users to select the target course(s); include drop-down field for the selection of sorting methods, etc (easy)<br>
    * Class: SearchActivity.java
    * The user may use an options menu to filter the course into those that are available an unavailable, which is determined by whether the course has a convener or not. <br><br>
 
