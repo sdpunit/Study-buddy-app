@@ -304,14 +304,14 @@ Our team did not attempt the surprise feature.
    * *Cause of problem:* Incorrect constraints.
    * *Solutions:* Reset constraints.
 
-2. *Bug 2:* Search Crash
+3. *Bug 3:* Search Crash
    * *Description:* On some invalid search inputs the app crashes
-   * *Location:* SearchActivity.java
-   * *Steps to reproduce:* Try the prompt 'xxx'
+   * *Location:* SearchActivity.java, seaarch(), Lines: 247, 269
+   * *Steps to reproduce:* Try the prompt 'duck1234', 'math 101'
    * *Expected result:* The app should throw a toast describing the error
    * *Actual result:* The app crashes
-   * *Cause of problem:* xxx
-   * *Solutions:* xxx
+   * *Cause of problem:* the line assert collegeTree!=null causes the app to crash, and omitting convener!=null in line 269 causes a NullAssertionError
+   * *Solutions:* delete these two lines
 
 
 ## Testing Summary
