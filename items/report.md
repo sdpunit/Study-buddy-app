@@ -17,7 +17,7 @@
 
 | UID        |           Name           |                                                           Role |
 |:-----------|:------------------------:|---------------------------------------------------------------:|
-| [u7490701] |      [Ahmed Qaisar]      |                                      [Firebase,Data-Graphical] |
+| [u7490701] |      [Ahmed Qaisar]      |                                     [Firebase, Data-Graphical] |
 | [u7103031] |      [Lana Fraser]       |                                     [Login, Search and Report] |
 | [u7432723] |     [Punit Deshwal]      | [Database Structures, UI Themes, Firebase, Initialising Users] |
 | [u7108792] |      [Quoc Nguyen]       |                                 [Search, Tokenizer and Parser] |
@@ -33,11 +33,11 @@
 *Slide Preparation: N/A*
 <br><br>
 
-*u7103031, Lana (u7103031) , I contribute 20% of the code. Here are my contributions:*
+*u7103031, Lana, I contribute 20% of the code. Here are my contributions:*
 * Login.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/bathtub/LoginActivity.java
-  * onCreate()
-  * authenticateUser()
-  * showLoginMessage() 
+    * onCreate()
+    * authenticateUser()
+    * showLoginMessage()
 * Register.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/bathtub/RegisterActivity.java
     * onCreate()
 * SearchActivity.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/bathtub/SearchActivity.java
@@ -137,18 +137,19 @@
 
 ## Application Description
 
-*StudyBuddy is a productivity and educational app that allows its users to keep track of the time that they have spent studying for each subject that they are enrolled in. There is a leaderboard in the app which displays the top 5 Users in the app, letting the User see how the are preforming comparatively and motivate them to study. This app includes a login interface, the ability to search for and enroll in courses, a timer functionality, and a graphics summary / leaderboard page.*
+StudyBuddy is a productivity and educational app that allows its users to keep track of the time that they have spent studying for each subject that they are enrolled in. There is a leaderboard in the app which displays the top 5 Users in the app, letting the User see how the are preforming comparatively and motivate them to study. This app includes a login interface, the ability to search for and enroll in courses, a timer functionality, and a graphics summary / leaderboard page.
 
 **Application Use Cases and or Examples**
 
 *Targets Users: Students*
 
-* *Users can register an account and login to the app.*
-* *Users can search for and enroll in courses. The app will provide a brief overview of the course, its convener and its assessments.*
-* *Once enrolled users can select one of their courses and set a timer for amount the time they would like to study*
-* *A user can view a summary of their total time studied.*
-* *A user can view a leaderboard of the top 5 users in the app.*
+* Users can register an account and login to the app.
+* Users can search for and enroll in courses. The app will provide a brief overview of the course, its convener and its assessments.
+* Once enrolled users can select one of their courses and set a timer for amount the time they would like to study
+* A user can view a summary of their total time studied.
+* A user can view a leaderboard of the top 5 users in the app.
 
+**Use Case Diagram**
 ![UseCaseDiagram](./images/use_case_diagram.png) <br>
 
 
@@ -161,89 +162,89 @@
 
 1. *RedBlack Tree*
 
-   * *Objective: It is used for storing Courses with the course code as a key which can then be found using the Search feature.*
+   * *Objective:* It is used for storing Courses with the course code as a key which can then be found using the Search feature.
 
-   * *Locations: RBTree.java, SearchActivity.java*
+   * *Locations:* RBTree.java, SearchActivity.java
 
    * *Reasons:*
 
-     * *This tree is self-balancing, meaning that our data will be organised and structured even after multiple insertions*
+     * This tree is self-balancing, meaning that our data will be organised and structured even after multiple insertions
      
-     * *Has an O(log n) time intricacy for searching*
+     * Has an O(log n) time intricacy for searching
 
-     * *We don't need to access the item by index for this feature*
+     * We don't need to access the item by index for this feature
 
 2. *Map*
 
-   * *Objective: A map is used to link the course and the amount of time studied.*
+   * *Objective:* A map is used to link the course and the amount of time studied.
 
-   * *Locations: User.java*
+   * *Locations:* User.java
 
    * *Reasons:*
 
-     * *Allows for quick data retrieval*
+     * Allows for quick data retrieval
      
-     * *Flexible key pairing which directly links two attributes to each other*
+     * Flexible key pairing which directly links two attributes to each other
 
-     * *The nature of this data structure mean there will be no duplicate keys*
+     * The nature of this data structure mean there will be no duplicate keys
      
-     * *Maps are scalable and can handle large amounts of data*
+     * Maps are scalable and can handle large amounts of data
 
 3. *Set*
 
-   * *Objective: A set is used to store a list of courses that a user is enrolled in*
+   * *Objective:* A set is used to store a list of courses that a user is enrolled in
 
-   * *Locations: User.java*
+   * *Locations:* User.java
 
    * *Reasons:*
 
-     * *Eliminates duplicate elements*
+     * Eliminates duplicate elements
 
-     * *Searching operation takes O(logN) time complexity*
+     * Searching operation takes O(logN) time complexity
 
-     * *Is dynamic and will not overflow, compared to other similar structures such as an array.*
+     * Is dynamic and will not overflow, compared to other similar structures such as an array.
 
 **Design Patterns**
 
 1. *State Design Pattern*
 
-   * *Objective: This design pattern uses the startStudy, pause, resume, and stopStudy states to keep track of the current state of the timer implemented in the myTimer class.*
+   * *Objective:* This design pattern uses the startStudy, pause, resume, and stopStudy states to keep track of the current state of the timer implemented in the myTimer class.
 
-   * *Locations: State.java, StudyActivity.java, idleState.java, pauseState.java, studyState.java, UserTimeState.java*
+   * *Locations:* State.java, StudyActivity.java, idleState.java, pauseState.java, studyState.java, UserTimeState.java
 
    * *Reasons:*
 
-     * *This will affect the functionality of the pause, resume and stop buttons according to the current state*
+     * This will affect the functionality of the pause, resume and stop buttons according to the current state
      
-     * *The design is flexible enough to add or remove states if needed*
+     * The design is flexible enough to add or remove states if needed
 
 2. *Factory Design Pattern*
 
-   * *Objective: The Factory design pattern provides an interface for creating new notification objects in a superclass, and allows for these superclasses to alter the type of object that will be created. This will allow us to notify users after certain actions have been completed.*
+   * *Objective:* The Factory design pattern provides an interface for creating new notification objects in a superclass, and allows for these superclasses to alter the type of object that will be created. This will allow us to notify users after certain actions have been completed.
 
-   * *Locations: StudyCourseNotification.java, StudyNotification.java, StudyNumberNotification.java, StudyTimeNotification.java, NotificationFactory.java*
+   * *Locations:* StudyCourseNotification.java, StudyNotification.java, StudyNumberNotification.java, StudyTimeNotification.java, NotificationFactory.java
 
    * *Reasons:*
 
-     * *Factory design pattern is flexible and extendable and allows us to add and remove classes without making major changes to the app.*
+     * Factory design pattern is flexible and extendable and allows us to add and remove classes without making major changes to the app.
      
-     * *The design is flexible enough to add or remove new notifications or observers if needed.*
+     * The design is flexible enough to add or remove new notifications or observers if needed.
 
-     * *Uses loose coupling and eliminates hard binding.*
+     * Uses loose coupling and eliminates hard binding.
 
 3. *Singleton Design Pattern*
 
-   * *Objective: The singleton design pattern is used in the MyTimer class to ...*
+   * *Objective:* The singleton design pattern is used in the MyTimer class to ...
 
-   * *Locations: MyTimer.java*
+   * *Locations:* MyTimer.java
 
    * *Reasons:*
 
-     * *The singleton class provides a global access point to get the instance of the class and prevents other objects from instantiating their own copies of the Singleton object, ensuring that all objects access the single instance.*
+     * The singleton class provides a global access point to get the instance of the class and prevents other objects from instantiating their own copies of the Singleton object, ensuring that all objects access the single instance.*
      
-     * *Saves space in memory as only one timer object is ever being created*
+     * Saves space in memory as only one timer object is ever being created*
      
-     * *Lazy initialisation ensure the object is only created and initialised when it is needed*
+     * Lazy initialisation ensure the object is only created and initialised when it is needed
 
 
 **Grammar(s)**
