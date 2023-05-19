@@ -38,7 +38,7 @@
 * activity_leaderboard.xml
 * list_item_user.xml
 
-*UI Design: Designed the UI for the leaderboard*
+*UI Design:* Designed the UI for the leaderboard
 
 *Report Writing: N/A*
 
@@ -178,7 +178,7 @@ for tokenizer and parser, in conjunction with Logic for searching*
 
 *Code Design: Proposed and implemented a RB tree structure for storing course data. Proposed and implemented a singleton design pattern to create the timer. Proposed and implemented a state design pattern for the timer functionality. Proposed and implemented a factory design pattern to send different kinds of notifications.*
 
-*UI Design: Proposed and designed the UI of SetTimeActivity and TimerActivity.*
+*UI Design:* Proposed and designed the UI of SetTimeActivity and TimerActivity.
 
 *Report Writing: N/A*
 
@@ -278,9 +278,8 @@ The results list will initially contain all undergraduate courses or all postgra
 that are stored in post_courses_data.json or under_courses_data.json respectively,
 depending on the users student type. The user can search by the grammars we have defined below, and
 can be any combination of course, code, course name, or convener. The user can also filter the results
-by 'available' and 'unavailable'. Once a user has chosen their courses the can click the 'add courses' button
-and they will be taken back to the home page. The courses that they have added will now be displayed on the home page.
-<br>
+by 'availiable' and 'unavailable'. Once a user has chosen their courses the can click the 'add courses' button
+and they will be taken back to the home page. The courses that they have added will now be displayed on the home page.<br>
 <img src="./images/search_initial.png" width="200"/>
 <img src="./images/search_added.png" width="200"/>
 
@@ -288,15 +287,13 @@ and they will be taken back to the home page. The courses that they have added w
 On the homepage, the user can click on a course to be taken to the assessment view. Here, the user can
  see the name of the course that they have added, as well as its conveners, and assessments.
 From here, the user may start studying by clicking the 'Start Study' button, which will take them to
-the timer interface, or my click the 'reset time' button to reset the time that they have studied for this course.
-<br>
+the timer interface, or my click the 'reset time' button to reset the time that they have studied for this course.<br>
 <img src="./images/course_info.png" width="200"/>
 
 <br><br> **Timer Interface** <br>
 Here the user can set a timer for the amount of time in minutes that they would like to study for. The time will then
 countdown and a popup will display once the study session is completed. The user can pause and resume the timer,
-or cancel the study session if desired.
-<br>
+or cancel the study session if desired.<br>
 <img src="./images/set_time.png" width="200"/>
 <img src="./images/timer.png" width="200"/>
 <img src="./images/study_complete.png" width="200"/>
@@ -350,9 +347,7 @@ or cancel the study session if desired.
 
      * Eliminates duplicate elements
 
-     * Searching operation takes O(log n) time complexity
-
-     * Is dynamic and will not overflow, compared to other similar structures such as an array.
+     * Is dynamic and will not overflow, compared to other similar structures such as an array
 
 
 
@@ -360,7 +355,7 @@ or cancel the study session if desired.
 
 1. *State Design Pattern*
 
-   * *Objective:* This design pattern controls the user's behaviour based on his state. Users have three types of states: idle, study and pause, which are related to the study event in TimerActivity.java
+   * *Objective:* This design pattern controls the user's behaviour based on his state. Users have three types of states: idle, study and pause, which are related to the study event in TimerActivity.java.
 
    * *Locations:* State.java, TimerActivity.java, idleState.java, pauseState.java, studyState.java, UserTimeState.java
 
@@ -413,7 +408,7 @@ Production Rules:
 Example Queries:
 
 * "COMP, 1110, Structured Programming, convener= Patrik Haslum" (complete search)
-* "COMP1110 (search by code)
+* "COMP1110" (search by code)
 * "COMP" (filter by college)
 * "COMP, 1110" (search by college and code)
 * "Structured Programming" (search by course name)
@@ -480,6 +475,11 @@ Our team did not attempt the surprise feature.
 **RBTreeTest**
 
 - *Number of test cases:* 6
+
+- *Code coverage:* 100% class coverage, 95% method coverage (except toString() method) and 94% line coverage
+<img src="./images/tree_coverage.png"/><br>
+
+- *Types of tests created:* JUnit tests
     * testEmptyTree
     * testSimpleInsertWithoutReconstruction
     * testDuplicateInsert
@@ -487,10 +487,6 @@ Our team did not attempt the surprise feature.
     * testComplexInsert
     * testSearchNonExist
     * testSearchByCourseCode
-
-- *Code coverage:*
-
-- *Types of tests created:* JUnit tests
 
 **NotificationFactoryTest**
 
