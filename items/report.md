@@ -588,7 +588,7 @@ I collected course data from our university website and made a RB tree structure
 
 *UI Design:* Proposed and designed the UI of SetTimeActivity and TimerActivity.
 
-*Report Writing: Writing the report of my contribution and content related to my work and also some other general features
+*Report Writing: Writing the report of my contribution and content related to my work and also some other general features*
 
 *Slide Preparation: N/A*
 
