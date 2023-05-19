@@ -558,18 +558,16 @@ Feature Category: User Activity <br>
       <br>
 2. [Interact-Noti]. The ability to send notifications based on different types of interactions. A notification must be sent only after a predetermined number of interactions are set. (medium)
    * Classes: NotificationFactory.java, StudyNotification.java, StudyCourseNotification.java, StudyNumberNotification.java, StudyTimeNotification.java
-   * A user will be notified if they have studied more than two courses, completed two or more study sessions, or if they have studied for longer than an hour. 
+   * A user will be notified when they have studied two more unique courses, completed two more study sessions, and when they have studied for two more hours. 
 <br><br>
 
 Feature Category: Firebase Integration <br>
 3. [FB-Persist] Use Firebase to persist all data used in your app. (medium)
-   * Class A: methods A, B, C, lines of code: whole file
-      <br>
+   * Class A: methods A, B, C, lines of code: whole file <br>
 4. [FB-Syn] Using Firebase or another remote database to store user information and having the app
 updated as the remote database is updated without restarting the application. (hard)
-   * Class A: methods A, B, C, lines of code: whole file
-      <br><br>
-
+   * Class A: methods A, B, C, lines of code: whole file<br><br>
+      
 Feature Category: Greater Data Usage, Handling and Sophistication <br>
 5. [Data-Graphical] Graphical report viewer. Provide users with the ability to see a report of interactions with your app in a graphical manner. (medium)
    * Class A: methods A, B, C, lines of code: whole file
