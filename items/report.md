@@ -174,7 +174,6 @@ Conflict Management strategies:
 ## Application Description
 
 StudyBuddy is a productivity and educational app that allows its users to keep track of the time that they have spent studying for each subject that they are enrolled in. There is a leaderboard in the app which displays the top 5 Users in the app, letting the User see how the are preforming comparatively and motivate them to study. This app includes a login interface, the ability to search for and enroll in courses, a timer functionality, and a graphics summary / leaderboard page.
-TODO: ADD SCREENSHOTS 
 
 **Application Use Cases and or Examples**
 
@@ -188,6 +187,30 @@ TODO: ADD SCREENSHOTS
 
 **Use Case Diagram**
 ![UseCaseDiagram](./images/use_case_diagram.png) <br>
+
+See below for a visual breakdown of each key part of our app.
+<br>
+<br> **Login and Register Interface** <br>
+<img src="./images/login_empty.png" width="200"/>
+<img src="./images/register_blank.png" width="200"/>
+
+<br><br> **Home Interface** <br>
+<img src="./images/main_empty.png" width="200"/>
+<img src="./images/main_courses_no_time.png" width="200"/>
+<img src="./images/main_with_time.png" width="200"/>
+
+<br><br> **Search Interface** <br>
+<img src="./images/search_initial.png" width="200"/>
+<img src="./images/search_added.png" width="200"/>
+
+<br><br> **Assessment View Interface** <br>
+<img src="./images/course_info.png" width="200"/>
+
+<br><br> **Timer Interface** <br>
+<img src="./images/set_time.png" width="200"/>
+<img src="./images/timer.png" width="200"/>
+<img src="./images/study_complete.png" width="200"/>
+<br><br>
 
 
 ## Application UML
