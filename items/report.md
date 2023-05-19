@@ -21,7 +21,7 @@
 | [u7103031] |      [Lana Fraser]       |                                     [Login, Search and Report] |
 | [u7432723] |     [Punit Deshwal]      | [Database Structures, UI Themes, Firebase, Initialising Users] |
 | [u7108792] |      [Quoc Nguyen]       |                                 [Search, Tokenizer and Parser] |
-| [u7533843] |      [Yanghe Dong]       |     [Tree Structure, Timer, Notifications, Creating User Data] |
+| [u7533843] |      [Yanghe Dong]       |       [Tree, Timer, Notifications, Creating Data, Leaderboard] |
 
 ## Summary of Individual Contributions
 
@@ -162,11 +162,12 @@ for tokenizer and parser, in conjunction with Logic for searching*
 * ic_resume.xml: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/drawable/ic_resume.xml
 * ic_stop.xml: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/drawable/ic_stop.xml
 
-*Code Design: Proposed and implemented a RB tree structure for storing course data. Proposed and implemented a singleton design pattern to create the timer. Proposed and implemented a state design pattern for the timer functionality. Proposed and implemented a factory design patter to send different kinds of notifications.*
+*Code Design: Proposed and implemented a RB tree structure for storing course data. Proposed and implemented a singleton design pattern to create the timer. Proposed and implemented a state design pattern for the timer functionality. Proposed and implemented a factory design pattern to send different kinds of notifications.*
 
 *UI Design: Proposed and designed the UI of SetTimeActivity and TimerActivity.*
 
 *Report Writing: N/A*
+
 *Slide Preparation: N/A*
 
 
@@ -336,45 +337,93 @@ or cancel the study session if desired.
 
      * Is dynamic and will not overflow, compared to other similar structures such as an array.
 
+
+
+**Data Structures**
+
+1. *RedBlack Tree*
+
+   * *Objective:* It is used for storing Courses with the course code as a key which can then be found using the Search feature.
+
+   * *Locations:* RBTree.java, SearchActivity.java
+
+   * *Reasons:*
+
+     * This tree is self-balancing, meaning that our data will be organised and structured even after multiple insertions
+     
+     * Searching operation takes O(log n) time complexity
+
+     * We don't need to access the item by index for this feature
+
+2. *Map*
+
+   * *Objective:* A map is used to link the course and the amount of time studied.
+
+   * *Locations:* User.java
+
+   * *Reasons:*
+
+     * Allows for quick data retrieval
+     
+     * Flexible key pairing which directly links two attributes to each other
+
+     * The nature of this data structure mean there will be no duplicate keys
+     
+     * Maps are scalable and can handle large amounts of data
+
+3. *Set*
+
+   * *Objective:* A set is used to store a list of courses that a user is enrolled in
+
+   * *Locations:* User.java
+
+   * *Reasons:*
+
+     * Eliminates duplicate elements
+
+     * Searching operation takes O(log n) time complexity
+
+     * Is dynamic and will not overflow, compared to other similar structures such as an array.
+
+
+
 **Design Patterns**
 
 1. *State Design Pattern*
 
-   * *Objective:* This design pattern uses the startStudy, pause, resume, and stopStudy states to keep track of the current state of the timer implemented in the myTimer class.
+   * *Objective:* This design pattern controls the user's behaviour based on his state. Users have three types of states: idle, study and pause, which are related to the study event in TimerActivity.java
 
-   * *Locations:* State.java, StudyActivity.java, idleState.java, pauseState.java, studyState.java, UserTimeState.java
+   * *Locations:* State.java, TimerActivity.java, idleState.java, pauseState.java, studyState.java, UserTimeState.java
 
    * *Reasons:*
 
-     * This will affect the functionality of the pause, resume and stop buttons according to the current state
-
-     * The design is flexible enough to add or remove states if needed
+     * The functionality of the pause, resume and stop buttons depends on the current state
+     
+     * The design is flexible enough to add or remove behaviours if needed
 
 2. *Factory Design Pattern*
 
-   * *Objective:* The Factory design pattern provides an interface for creating new notification objects in a superclass, and allows for these superclasses to alter the type of object that will be created. This will allow us to notify users after certain actions have been completed.
+   * *Objective:* The Factory design pattern provides a factory for creating new notification objects. This allows the App to notify users after certain actions have been completed.
 
    * *Locations:* StudyCourseNotification.java, StudyNotification.java, StudyNumberNotification.java, StudyTimeNotification.java, NotificationFactory.java
 
    * *Reasons:*
 
-     * Factory design pattern is flexible and extendable and allows us to add and remove classes without making major changes to the app.
+     * Factory design pattern is flexible and extendable and allows us to add or remove new tpyes of notifications if needed without making major changes to the App
 
-     * The design is flexible enough to add or remove new notifications or observers if needed.
-
-     * Uses loose coupling and eliminates hard binding.
+     * Uses loose coupling and eliminates hard binding
 
 3. *Singleton Design Pattern*
 
-   * *Objective:* The singleton design pattern is used in the MyTimer class to ...
+   * *Objective:* The singleton design pattern is used in the MyTimer class to create an instance of timer.
 
    * *Locations:* MyTimer.java
 
    * *Reasons:*
 
-     * The singleton class provides a global access point to get the instance of the class and prevents other objects from instantiating their own copies of the Singleton object, ensuring that all objects access the single instance.*
+     * The singleton class provides a global access point to get the instance of the class and prevents other objects from instantiating their own copies of the Singleton object, ensuring that all objects access the single instance.
      
-     * Saves space in memory as only one timer object is ever being created*
+     * Saves space in memory as only one timer object is ever being created
      
      * Lazy initialisation ensure the object is only created and initialised when it is needed
 
