@@ -534,6 +534,7 @@ for tokenizer and parser, in conjunction with Logic for searching*
 <br><br>
 
 *u7533843, Yanghe, I contribute 20% of the code. Here are my contributions:*
+I collected course data from our university website and made a RB tree structure. I created notifications, and implemented the timer and the leaderboard which can automatically update.
 * Login.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/LoginActivity.java
 * onCreate(), Lines: 54-73, 103-114
 * createNotificationChannel(), whole method
@@ -587,7 +588,7 @@ for tokenizer and parser, in conjunction with Logic for searching*
 
 *UI Design:* Proposed and designed the UI of SetTimeActivity and TimerActivity.
 
-*Report Writing: N/A*
+*Report Writing: Writing the report of my contribution and content related to my work and also some other general features
 
 *Slide Preparation: N/A*
 
