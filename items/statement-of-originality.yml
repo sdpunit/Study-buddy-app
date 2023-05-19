@@ -49,7 +49,7 @@ assets:
 
 ### Questions (answer before final submission):
 1. You (as a group) completed this work (tick the most appropriate option): 
-  - [ ] by yourself (as a group) without the help of others; 
+  - [x] by yourself (as a group) without the help of others; 
   - [ ] with Gen AI tools (e.g., ChatGPT, Co-Pilot).
 
 2. If not completed by yourself only, how did the use of Gen AI tools (and which ones), contribute to completing this assignment? 
@@ -73,5 +73,5 @@ members:
     uid: u7432723
   - name: Yanghe Dong
     uid: u7533843
-  - name:
-    uid:
+  - name: Ahmed Qaisar
+    uid: u7490701
