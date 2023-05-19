@@ -136,8 +136,21 @@
   furthermore, all team members will be expected to follow the Code of Conduct. More info can 
   be found here: https://www.anu.edu.au/students/program-administration/program-management/student-code-of-conduct
 
-additional info:
+Conflict Resolution Plan:
+1. Clarify the source of the problem. Have an open discussion to single out the issue
+2. Identify barriers outside of the conflict which may impede it's resolution
+3. Discuss ways to resolve the conflict by establishing a common goal
+4. Explore how they goal can be reached and develop final agreement
 
+Conflict Management Strategies:
+1. **Avoidance** don't try to avoid the conflict.
+2. **communication** talk to your peers about the conflict so that the necessary protocols can be
+   taken.
+3. **Accessibility** make the protocols easy to follow but effective in resolution.
+4. **Fairness** make sure that the protocols are fair to all parties involved.
+5. **Team Engagement** make sure that all team members are engaged in the resolution process.
+
+Additional Info:
 * If a member fails to meet the initial plan and/or deadlines, the team will have a group 
   discussion and discuss with the member what exactly they are struggling with and what form of 
   support they need.
@@ -145,7 +158,7 @@ additional info:
   help to address the main issues with the task. If needed, the tasks may be redistributed.
 * If a member gets sick, their tasks will be distributed to each remaining team member evenly. 
   Once the sick member able to work again, they will continue and finish the tasks that they were 
-  working on previously if the task arent already finished, and be assigned new tasks if the 
+  working on previously if the task aren't already finished, and be assigned new tasks if the 
   amount of work they have completed falls significantly short of others negatively impacting 
   both themselves and the group.
 * If a member is going through any personal issues, the members of the group must be understanding 
@@ -153,20 +166,6 @@ additional info:
   This will be discussed in a team meeting and a consensus must be met between all group members 
   to ensure that the solution is fair.
 * Any other issue not mentioned above will be resolved by a last resort numerical vote.
-
- Conflict Resolution Plan:
-1. **Clarify the source of the problem. Have an open discussion to single out the issue**
-2. **Identify barriers outside of the conflict which may impede it's resolution**
-3. **Discuss ways to resolve the conflict by establishing a common goal**
-4. **Explore how they goal can be reached and develop final agreement**
-
-Conflict Management strategies:
-1. **Avoidance** don't try to avoid the conflict.
-2. **communication** talk to your peers about the conflict so that the necessary protocols can be 
-   taken.
-3. **Accessibility** make the protocols easy to follow but effective in resolution.
-4. **Fairness** make sure that the protocols are fair to all parties involved.
-5. **Team Engagement** make sure that all team members are engaged in the resolution process.
 
 
 
@@ -366,6 +365,8 @@ Our team did not attempt the surprise feature.
 
 - Once the user starts the timer the background is green for a while, while the background gif is loading. 
 - There can be a slight delay when transitioning from the login activity to the main activity, and from the main activity to the search activity
+- The add courses button is not constrained properly and does not show properly on some phones. We tested our app on the Pixel 6. 
+- If you clear a courses time in assessments activity, the users total time remains the same. This is not necessarily a bug, depending on if the user wishes to retain his total time or change it. However, we did not account for those two option. 
 
 *List all the known errors and bugs here. If we find bugs/errors that your team does not know of, it shows that your testing is not thorough.*
 
