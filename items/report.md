@@ -27,16 +27,16 @@
 
 *u7490701, Ahmed, I contribute 20% of the code. Here are my contributions:*
 * Firebase   https://console.firebase.google.com/u/0/project/comp2100-group-assignmen-e7d8d/overview
-* LoginActivity.java
-* Register.java
-* LeaderboardActivity.java
-* User.java
-* user_data.json
-* colors.xml
-* leaderboard.jpg
-* teko.tff
-* activity_leaderboard.xml
-* list_item_user.xml
+* LoginActivity.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/LoginActivity.java
+* Register.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/RegisterActivity.java
+* LeaderboardActivity.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/LeaderboardActivity.java
+* User.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/User.java
+* user_data.json https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/assets/user_data.json
+* colors.xml https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/values/colors.xml
+* leaderboard.jpg https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/drawable/leaderboard.jpg
+* teko.tff https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/font/teko.ttf
+* activity_leaderboard.xml https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/activity_leaderboard.xml
+* list_item_user.xml https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/list_item_user.xml
 
 *UI Design: Designed the UI for the leaderboard*
 
