@@ -73,7 +73,7 @@
 
 *u7432723, Punit, I contribute 20% of the code. Here are my contributions:*
 * Came up with the idea of this app, influenced by the discussions I had with my friend (Julia Than Hlaing) of having a course specific
-  focus app with beautiful design. My major contribution revolve around integrating various activites togethor, making design changes and editing
+  focus app with beautiful design. My major contribution revolve around integrating various activities together, making design changes and editing
   the xml files. I was also responsible for the integration of firebase with our app. So that all the information for a particular user is retained
   in the firebase.
 * AssessmentsActivity.java : Entire activity
@@ -278,8 +278,9 @@ The results list will initially contain all undergraduate courses or all postgra
 that are stored in post_courses_data.json or under_courses_data.json respectively,
 depending on the users student type. The user can search by the grammars we have defined below, and
 can be any combination of course, code, course name, or convener. The user can also filter the results
-by 'availiable' and 'unavailable'. Once a user has chosen their courses the can click the 'add courses' button
+by 'available' and 'unavailable'. Once a user has chosen their courses the can click the 'add courses' button
 and they will be taken back to the home page. The courses that they have added will now be displayed on the home page.
+<br>
 <img src="./images/search_initial.png" width="200"/>
 <img src="./images/search_added.png" width="200"/>
 
@@ -288,12 +289,14 @@ On the homepage, the user can click on a course to be taken to the assessment vi
  see the name of the course that they have added, as well as its conveners, and assessments.
 From here, the user may start studying by clicking the 'Start Study' button, which will take them to
 the timer interface, or my click the 'reset time' button to reset the time that they have studied for this course.
+<br>
 <img src="./images/course_info.png" width="200"/>
 
 <br><br> **Timer Interface** <br>
 Here the user can set a timer for the amount of time in minutes that they would like to study for. The time will then
 countdown and a popup will display once the study session is completed. The user can pause and resume the timer,
 or cancel the study session if desired.
+<br>
 <img src="./images/set_time.png" width="200"/>
 <img src="./images/timer.png" width="200"/>
 <img src="./images/study_complete.png" width="200"/>
@@ -474,15 +477,9 @@ Our team did not attempt the surprise feature.
 
 ## Testing Summary
 
-*[What features have you tested? What is your testing coverage?]*
-
 **RBTreeTest**
 
 - *Number of test cases:* 6
-
-- *Code coverage:*
-
-- *Types of tests created:* JUnit tests
     * testEmptyTree
     * testSimpleInsertWithoutReconstruction
     * testDuplicateInsert
@@ -491,34 +488,36 @@ Our team did not attempt the surprise feature.
     * testSearchNonExist
     * testSearchByCourseCode
 
+- *Code coverage:*
+
+- *Types of tests created:* JUnit tests
+
 **NotificationFactoryTest**
 
 - *Number of test cases:* 1
+    * notificationFactoryTest
 
-- *Code coverage:* 100% - Branch complete
+- *Code coverage:* 100% class coverage, 100% method coverage and 100% line coverage
+<<br> <img src="./images/notification_test.png"/> <br>
 
 - *Types of tests created:* JUnit tests
-    * notificationFactoryTest
 
 **SearchParserTest**
 
 - *Number of test cases:* 4
-
-- *Code coverage:* 90% - Branch complete
-
-- *Types of tests created:* JUnit tests
     * testQueryCode
     * testQueryCourse
     * testQueryConvener
     * testIllegalArgumentException
 
+- *Code coverage:* 100% class coverage, 100% method coverage and 85% line coverage
+<br> <img src="./images/tokenizer_test.png"/> <br>
+
+- *Types of tests created:* JUnit tests
+
 **TokenizerTest**
 
 - *Number of test cases:* 7
-
-- *Code coverage:* 90% - Branch complete
-
-- *Types of tests created:* JUnit tests
     * testTokenizeCode
     * testTokenizeCollege
     * testTokenizeCollegeCode
@@ -527,8 +526,11 @@ Our team did not attempt the surprise feature.
     * testTokenizeMixed
     * testNullToken
 
-*Please provide some screenshots of your testing summary, showing the achieved testing coverage. Feel free to provide further details on your tests.*
-ADD DIAGRAMS OUTLINE BRANCH COMPLETE ECT...
+- *Code coverage:* 100% class coverage, 88% method coverage and 88% line coverage
+<br> <img src="./images/tokenizer_test.png"/> <br>
+
+- *Types of tests created:* JUnit tests
+
 
 ## Implemented Features
 
