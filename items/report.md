@@ -34,10 +34,21 @@
 <br><br>
 
 *u7103031, Lana (u7103031) , I contribute 20% of the code. Here are my contributions:*
-* Login.java: onCreate(), authenticateUser(), showLoginMessage()   
-* loginDetails.csv   
-* activity_login.xml   
-* activity_register.xml   
+* Login.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/bathtub/LoginActivity.java
+  * onCreate()
+  * authenticateUser()
+  * showLoginMessage() 
+* Register.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/bathtub/RegisterActivity.java
+    * onCreate()
+* SearchActivity.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/bathtub/SearchActivity.java
+    * search()
+    * createCourseTree()
+    * getCourses()
+* Colleges.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/search/Colleges.java
+* SearchParser.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/search/SearchParser.java
+    * parseQuery()
+* activity_login.xml https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/res/layout/activity_login.xml
+* activity_register.xml https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/res/layout/activity_register.xml
 
 *UI Design: Proposed and designed the UI for the Login and Register class*
 
@@ -119,7 +130,12 @@
 
 ## Conflict Resolution Protocol
 
-*Disputes in contributions will be resolved by a team meeting and voting.*
+* Disputes in contributions will be resolved by a team meeting and voting.
+* If a member fails to meet the initial plan and/or deadlines, the team will have a group discussion and discuss with the member what exactly they are struggling with and what form of support they need. If deemed useful, another member will be assigned to work collaboratively with said member and help to address the main issues with the task. If needed, the tasks may be redistributed  between the group.
+* If the group has issues, we will have a team meeting and voting to resolve the issue.
+* If a member gets sick, their tasks will be distributed to each remaining team member evenly. Once the sick member able to work again, they will continue and finish the tasks that they were working on previously and be assigned new tasks if needed.
+* If a member is going through any personal issues, the members of the group will be understanding and try to assist the group member with any tasks they need help with or reduce their workload. This will be discussed in a team meeting and a consensus must be met between all group members to ensure that the solution is fair.
+* Any other issue not mentioned above will be resolved by a team meeting and voting.
 
 
 ## Application Description
@@ -339,7 +355,7 @@ By using tokenizer and parsers, we are able to ensure that the search terms are 
     * Classes: SearchActivity.java, SearchParser.java, Tokenizer.java, Token.java, RBTree.java
     * A user is able to search for a course by using keywords related to the subject, code, course, and/or convener.
       <br>
-<br><br>
+<br>
 
 ### General Features
 Feature Category: User Activity <br>
@@ -350,7 +366,7 @@ Feature Category: User Activity <br>
 2. [Interact-Noti]. The ability to send notifications based on different types of interactions. A notification must be sent only after a predetermined number of interactions are set. (medium)
    * Classes: NotificationFactory.java, StudyNotification.java, StudyCourseNotification.java, StudyNumberNotification.java, StudyTimeNotification.java
    * A user will be notified if they have studied more than two courses, completed two or more study sessions, or if they have studied for longer than an hour. 
-<br>
+<br><br>
 
 Feature Category: Firebase Integration <br>
 3. [FB-Persist] Use Firebase to persist all data used in your app. (medium)
@@ -359,13 +375,13 @@ Feature Category: Firebase Integration <br>
 4. [FB-Syn] Using Firebase or another remote database to store user information and having the app
 updated as the remote database is updated without restarting the application. (hard)
    * Class A: methods A, B, C, lines of code: whole file
-      <br>
+      <br><br>
 
 Feature Category: Greater Data Usage, Handling and Sophistication <br>
 5. [Data-Graphical] Graphical report viewer. Provide users with the ability to see a report of interactions with your app in a graphical manner. (medium)
    * Class A: methods A, B, C, lines of code: whole file
    * Users can view a leaderboard of the top 5 users of the app, and their ranking. It also displays the users own study minutes.
-      <br>
+      <br><br>
 
 Feature Category: Search-related Features <br>
 6. [Search-Invalid] Search functionality can handle partially valid and invalid search queries. (medium)
@@ -376,7 +392,7 @@ Feature Category: Search-related Features <br>
    the target course(s); include drop-down field for the selection of sorting methods, etc. (easy)
     * SearchActivity.java
     * The user may use an options menu to filter the course into those that are available an unavailable, which is determined by whether the course has a convener or not. 
-      <br>
+      <br><br>
 
 
 ## Team Meetings
