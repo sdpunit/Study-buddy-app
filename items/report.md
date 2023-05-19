@@ -38,7 +38,7 @@
 * activity_leaderboard.xml https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/activity_leaderboard.xml
 * list_item_user.xml https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/list_item_user.xml
 
-*UI Design: Designed the UI for the leaderboard*
+*UI Design:* Designed the UI for the leaderboard
 
 *Report Writing:*
 
@@ -162,7 +162,7 @@ Developed many of the conceptual ideas for the designs of each UI screen and how
 * ic_resume.xml: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/drawable/ic_resume.xml
 * ic_stop.xml: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/drawable/ic_stop.xml
 
-*Code Design: Proposed and implemented a RB tree structure for storing course data. Proposed and implemented a singleton design pattern to create the timer. Proposed and implemented a state design pattern for the timer functionality. Proposed and implemented a factory design pattern to send different kinds of notifications.*
+*Code Design:* Proposed and implemented a RB tree structure for storing course data. Proposed and implemented a singleton design pattern to create the timer. Proposed and implemented a state design pattern for the timer functionality. Proposed and implemented a factory design pattern to send different kinds of notifications.
 
 *UI Design:* Proposed and designed the UI of SetTimeActivity and TimerActivity.
 
@@ -274,13 +274,13 @@ and they will be taken back to the home page. The courses that they have added w
 On the homepage, the user can click on a course to be taken to the assessment view. Here, the user can
  see the name of the course that they have added, as well as its conveners, and assessments.
 From here, the user may start studying by clicking the 'Start Study' button, which will take them to
-the timer interface, or my click the 'reset time' button to reset the time that they have studied for this course.
+the timer interface, or my click the 'reset time' button to reset the time that they have studied for this course.<br>
 <img src="./images/course_info.png" width="200"/>
 
 <br><br> **Timer Interface** <br>
 Here the user can set a timer for the amount of time in minutes that they would like to study for. The time will then
 countdown and a popup will display once the study session is completed. The user can pause and resume the timer,
-or cancel the study session if desired.
+or cancel the study session if desired.<br>
 <img src="./images/set_time.png" width="200"/>
 <img src="./images/timer.png" width="200"/>
 <img src="./images/study_complete.png" width="200"/>
@@ -333,8 +333,6 @@ or cancel the study session if desired.
    * *Reasons:*
 
      * Eliminates duplicate elements
-
-     * Searching operation takes O(log n) time complexity
 
      * Is dynamic and will not overflow, compared to other similar structures such as an array.
 
@@ -397,7 +395,7 @@ Production Rules:
 Example Queries:
 
 * "COMP, 1110, Structured Programming, convener= Patrik Haslum" (complete search)
-* "COMP1110 (search by code)
+* "COMP1110" (search by code)
 * "COMP" (filter by college)
 * "COMP, 1110" (search by college and code)
 * "Structured Programming" (search by course name)
