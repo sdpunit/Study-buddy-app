@@ -361,8 +361,22 @@ Our team did not attempt the surprise feature.
 
 ## Summary of Known Errors and Bugs
 
-1. *Bug 1:*
+1. *Bug 1:* 
 
+   * *Description:* 
+
+   * *Location:* 
+
+   * *Steps to reproduce:*
+
+   * *Expected result:*
+
+   * *Actual result:*
+
+   * *Cause of problem:*
+
+   * *Solutions:*
+   
 - Once the user starts the timer the background is green for a while, while the background gif is loading. 
 - There can be a slight delay when transitioning from the login activity to the main activity, and from the main activity to the search activity
 - The add courses button is not constrained properly and does not show properly on some phones. We tested our app on the Pixel 6. 
@@ -374,37 +388,56 @@ Our team did not attempt the surprise feature.
 
 *[What features have you tested? What is your testing coverage?]*
 
-*RBTreeTest*
+**RBTreeTest**
 
-- *Number of test cases: ...*
+- *Number of test cases:* 6
 
-- *Code coverage: ...*
+- *Code coverage:*
 
-- *Types of tests created: ...*
+- *Types of tests created:* JUnit tests
+    * testEmptyTree
+    * testSimpleInsertWithoutReconstruction
+    * testDuplicateInsert
+    * testMediumInsert
+    * testComplexInsert
+    * testSearchNonExist
+    * testSearchByCourseCode
 
-*NotificationFactoryTest*
+**NotificationFactoryTest**
 
-- *Number of test cases: ...*
+- *Number of test cases:* 1
 
-- *Code coverage: ...*
+- *Code coverage:* 100% - Branch complete
 
-- *Types of tests created: ...*
+- *Types of tests created:* JUnit tests
+    * notificationFactoryTest
 
-*SearchParserTest*
+**SearchParserTest**
 
-- *Number of test cases: ...*
+- *Number of test cases:* 4
 
-- *Code coverage: ...*
+- *Code coverage:* 90% - Branch complete
 
-- *Types of tests created: ...*
+- *Types of tests created:* JUnit tests
+    * testQueryCode
+    * testQueryCourse
+    * testQueryConvener
+    * testIllegalArgumentException
 
-*TokenizerTest*
+**TokenizerTest**
 
-- *Number of test cases: ...*
+- *Number of test cases:* 7
 
-- *Code coverage: ...*
+- *Code coverage:* 90% - Branch complete
 
-- *Types of tests created: ...*
+- *Types of tests created:* JUnit tests
+    * testTokenizeCode
+    * testTokenizeCollege
+    * testTokenizeCollegeCode
+    * testTokenizeCourse
+    * testTokenizeConvener
+    * testTokenizeMixed
+    * testNullToken
 
 *Please provide some screenshots of your testing summary, showing the achieved testing coverage. Feel free to provide further details on your tests.*
 ADD DIAGRAMS OUTLINE BRANCH COMPLETE ECT...
