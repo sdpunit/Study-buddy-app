@@ -475,11 +475,6 @@ Our team did not attempt the surprise feature.
 **RBTreeTest**
 
 - *Number of test cases:* 6
-
-- *Code coverage:* 100% class coverage, 95% method coverage (except toString() method) and 94% line coverage
-<img src="./images/tree_coverage.png"/><br>
-
-- *Types of tests created:* JUnit tests
     * testEmptyTree
     * testSimpleInsertWithoutReconstruction
     * testDuplicateInsert
@@ -487,6 +482,11 @@ Our team did not attempt the surprise feature.
     * testComplexInsert
     * testSearchNonExist
     * testSearchByCourseCode
+
+- *Code coverage:* 100% class coverage, 95% method coverage (except toString() method) and 94% line coverage
+<img src="./images/tree_coverage.png"/><br>
+
+- *Types of tests created:* JUnit tests
 
 **NotificationFactoryTest**
 
@@ -551,7 +551,7 @@ Our team did not attempt the surprise feature.
 <br>
 
 ### General Features
-Feature Category: User Activity <br>
+**Feature Category: User Activity** <br>
 1. [Interact Follow]. The ability to ‘follow’ a course or any specific items. There must be a section specifically dedicated to 'things' followed. (medium)
    * Classes: activity_assessments.xml, activity_main.xml, AssessmentsActivity.java 
    * A user can search for a course and follow it, to add this course to their main screen.
@@ -561,25 +561,34 @@ Feature Category: User Activity <br>
    * A user will be notified when they have studied two more unique courses, completed two more study sessions, and when they have studied for two more hours. 
 <br><br>
 
-Feature Category: Firebase Integration <br>
-3. [FB-Persist] Use Firebase to persist all data used in your app. (medium)
-   * Class A: methods A, B, C, lines of code: whole file <br>
-4. [FB-Syn] Using Firebase or another remote database to store user information and having the app
+**Feature Category:** Firebase Integration <br>
+3. [FB-Auth] Use Firebase to implement User Authentication/Authorisation. (easy)
+   * Class: Login.java <br>
+   * Users can register and log in using Firebase Authentication.
+      <br>
+4. [FB-Persist] Use Firebase to persist all data used in your app. (medium)
+   * Class: LoginActivity.java onCreate() <br>
+5. [FB-Syn] Using Firebase or another remote database to store user information and having the app
 updated as the remote database is updated without restarting the application. (hard)
-   * Class A: methods A, B, C, lines of code: whole file<br><br>
+   * Class: LoginActivity.java onCreate() <br><br>
       
-Feature Category: Greater Data Usage, Handling and Sophistication <br>
-5. [Data-Graphical] Graphical report viewer. Provide users with the ability to see a report of interactions with your app in a graphical manner. (medium)
+**Feature Category: Greater Data Usage, Handling and Sophistication** <br>
+6. [Data-Formats] Read data instances from multiple local files in at least 2 different formats (JSON,
+XML or Bespoken). (easy)
+   * Class: user_data.JSON, Login.java OnCreate(), under_courses_data.JSoON, post_courses_data.JSON, SearchActivity.java getCollegeCourses(), getCourses()
+   * User information will be uploaded to Firebase once the app has launched by reading a local JSON file contain.
+      <br>
+7. [Data-Graphical] Graphical report viewer. Provide users with the ability to see a report of interactions with your app in a graphical manner. (medium)
    * Class A: methods A, B, C, lines of code: whole file
    * Users can view a leaderboard of the top 5 users of the app, and their ranking. It also displays the users own study minutes.
       <br><br>
 
-Feature Category: Search-related Features <br>
-6. [Search-Invalid] Search functionality can handle partially valid and invalid search queries. (medium)
+**Feature Category:** Search-related Features <br>
+8. [Search-Invalid] Search functionality can handle partially valid and invalid search queries. (medium)
    * SearchActivity.java, SearchParser.java, Tokenizer.java, Token.java
    * If a search produces an error in the search method, or while being converted into a token or query, the search will result in nothing.
      <br>
-7. [Search-Filter] Sort and/or filter a list of items returned from a search, with the help of suitable UI components. For instance, when searching for assignments, include checkboxes for users to select
+9. [Search-Filter] Sort and/or filter a list of items returned from a search, with the help of suitable UI components. For instance, when searching for assignments, include checkboxes for users to select
    the target course(s); include drop-down field for the selection of sorting methods, etc. (easy)
     * SearchActivity.java
     * The user may use an options menu to filter the course into those that are available an unavailable, which is determined by whether the course has a convener or not. 
