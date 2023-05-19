@@ -27,6 +27,18 @@
 
 *u7490701, Ahmed, I contribute 20% of the code. Here are my contributions:*
 * Firebase   https://console.firebase.google.com/u/0/project/comp2100-group-assignmen-e7d8d/overview
+* LoginActivity.java
+* Register.java
+* LeaderboardActivity.java
+* User.java
+* user_data.json
+* colors.xml
+* leaderboard.jpg
+* teko.tff
+* activity_leaderboard.xml
+* list_item_user.xml
+
+*UI Design: Designed the UI for the leaderboard*
 
 *Report Writing: N/A*
 
