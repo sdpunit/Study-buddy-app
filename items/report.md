@@ -130,9 +130,11 @@
 
 *Targets Users: Students*
 
-* *Users can search and enroll in courses. The app will provide a brief overview of the course and its assessments.*
-* *Once enrolled users can select one of their courses and set a timer for the time they would like to study*
+* *Users can register an account and login to the app.*
+* *Users can search for and enroll in courses. The app will provide a brief overview of the course, its convener and its assessments.*
+* *Once enrolled users can select one of their courses and set a timer for amount the time they would like to study*
 * *A user can view a summary of their total time studied.*
+* *A user can view a leaderboard of the top 5 users in the app.*
 
 ![UseCaseDiagram](./images/use_case_diagram.png) <br>
 
@@ -148,7 +150,7 @@
 
    * *Objective: It is used for storing Courses with the course code as a key which can then be found using the Search feature.*
 
-   * *Locations: RBTree.java*
+   * *Locations: RBTree.java, SearchActivity.java*
 
    * *Reasons:*
 
@@ -186,7 +188,7 @@
 
      * *Searching operation takes O(logN) time complexity*
 
-     * *Is dynamic and will not overflow, compared to other similar stat structure such as an array.*
+     * *Is dynamic and will not overflow, compared to other similar structures such as an array.*
 
 **Design Patterns**
 
@@ -194,7 +196,7 @@
 
    * *Objective: This design pattern uses the startStudy, pause, resume, and stopStudy states to keep track of the current state of the timer implemented in the myTimer class.*
 
-   * *Locations: State.java, StudyActivity.java*
+   * *Locations: State.java, StudyActivity.java, idleState.java, pauseState.java, studyState.java, UserTimeState.java*
 
    * *Reasons:*
 
@@ -204,7 +206,7 @@
 
 2. *Factory Design Pattern*
 
-   * *Objective: The Factory design pattern provides an interface for creating new notification objects in a superclass, and allows for these superclasses to alter the type of object that will be created. This will allow us to notify users after certain actions have been done by a user or their friends.*
+   * *Objective: The Factory design pattern provides an interface for creating new notification objects in a superclass, and allows for these superclasses to alter the type of object that will be created. This will allow us to notify users after certain actions have been completed.*
 
    * *Locations: StudyCourseNotification.java, StudyNotification.java, StudyNumberNotification.java, StudyTimeNotification.java, NotificationFactory.java*
 
@@ -218,15 +220,17 @@
 
 3. *Singleton Design Pattern*
 
-   * *Objective: The *
+   * *Objective: The singleton design pattern is used in the MyTimer class to ...*
 
-   * *Locations:*
+   * *Locations: MyTimer.java*
 
    * *Reasons:*
 
-     * **
+     * *The singleton class provides a global access point to get the instance of the class and prevents other objects from instantiating their own copies of the Singleton object, ensuring that all objects access the single instance.*
      
-     * **
+     * *Saves space in memory as only one timer object is ever being created*
+     
+     * *Lazy initialisation ensure the object is only created and initialised when it is needed*
 
 
 **Grammar(s)**
@@ -254,16 +258,16 @@ Example Queries:
 * *"COMP, (Structured Programing)"* (dynamic course name search with college filter)
 
 
-*The grammar classifies the convener, name and code of the course as factors, and allows these to be separated by commas. The college a course belongs to is classified as an exp, and must be prepended by the string 'college:', and optionally appended by a series of factors seperated by commas. This grammar design is flexible as it allows for the user to search simply by the college, or with more detail by adding the code, name, and/or convener in any order. Our grammar contains code, name, convener, and college as these are the most relevant keywords associated with a course.*
+*The grammar classifies the convener, name and code of the course as factors, and allows these to be separated by commas. The college a course belongs to is classified as an exp, and can optionally be appended by a series of factors seperated by commas. This grammar design is flexible as it allows for the user to search simply by the college, or with more detail by adding the code, name, and/or convener in any order. Our grammar contains code, name, convener, and college as these are the most relevant keywords associated with a course.*
 
 **Tokenizer and Parsers**
 
-*[We utilise tokenizers and parsers in our Search implementation. Once a user searches a term, this String is tokenized into `COLLEGE`, `CODE`, `COURSE`, and `CONVENER` tokens. These tokens are then parsed to determine if they follow the structure of the grammar that we have defined for our app. If the search terms follows the correct grammar, these tokens will be converted to Strings and passed into a Query object, to complete the search process. 
+*[We utilise tokenizers and parsers in our Search implementation. Once a user searches a term, this String is tokenized into `COLLEGE`, `CODE`, `COLLEGECODE` `COURSE`, and `CONVENER` tokens. These tokens are then parsed to determine if they follow the structure of the grammar that we have defined for our app. If the search terms follows the correct grammar, these tokens will be converted to Strings and passed into a Query object, to complete the search process. 
 By using tokenizer and parsers, we are able to ensure that the search terms are valid, and that the search process is completed correctly. This standardizes the search process, and ensures that the user is able to search for courses in a consistent manner.]*
 
 **Surprise Item**
 
-*[TODO If you implement the surprise item, explain how your solution addresses the surprise task. What decisions do your team make in addressing the problem?]*
+*[Our team did not attempt the surprise feature.]*
 
 **Other**
 
@@ -273,7 +277,7 @@ By using tokenizer and parsers, we are able to ensure that the search terms are 
 
 1. *Bug 1:*
 
-- TODO
+- Once the user starts the timer the background is green for a while, while the background gif is loading. 
 
 *List all the known errors and bugs here. If we find bugs/errors that your team does not know of, it shows that your testing is not thorough.*
 
@@ -281,7 +285,31 @@ By using tokenizer and parsers, we are able to ensure that the search terms are 
 
 *[What features have you tested? What is your testing coverage?]*
 
-*Here is an example:TODO*
+*RBTreeTest*
+
+- *Number of test cases: ...*
+
+- *Code coverage: ...*
+
+- *Types of tests created: ...*
+
+*NotificationFactoryTest*
+
+- *Number of test cases: ...*
+
+- *Code coverage: ...*
+
+- *Types of tests created: ...*
+
+*SearchParserTest*
+
+- *Number of test cases: ...*
+
+- *Code coverage: ...*
+
+- *Types of tests created: ...*
+
+*TokenizerTest*
 
 - *Number of test cases: ...*
 
@@ -295,13 +323,12 @@ By using tokenizer and parsers, we are able to ensure that the search terms are 
 
 ### Basic App
 1. [Login]. Users must be able to log in (easy)
-    * Class: Login.java
+    * Class: Login.java, Register.java
     * Users are able to register, which will add them as a user to Firebase. Users that are contained in Firebase will be able to log in using their username and password, which will be validated by the app before authenticating the user. 
       <br>
 2. [Data Instances]. There must be 2500 data instances on Firebase (easy)
-    * Class: xx.java, methods Z, Y, Lines of code: xx
-    * User information will be uploaded to Firebase once the app has launched.
-    * not fully implemented 
+    * Class: user_data.JSON, Login.java OnCreate()
+    * User information will be uploaded to Firebase once the app has launched by reading a local JSON file contain.
       <br>
 3. [Firebase Data Visualization]. The user must be able to load data/information from Firebase and visualise it (medium)
     * Class: xx.java, methods Z, Y, Lines of code: xx
@@ -309,18 +336,16 @@ By using tokenizer and parsers, we are able to ensure that the search terms are 
     * not fully implemented 
       <br>
 4. [Search]. Users must be able to search for information on the app. (medium)
-    * Classes: SearchActivity.java, SearchParser.java, SearchActivity.java, Tokenizer.java, Token.java
+    * Classes: SearchActivity.java, SearchParser.java, Tokenizer.java, Token.java, RBTree.java
     * A user is able to search for a course by using keywords related to the subject, code, course, and/or convener.
-    * not fully implemented 
       <br>
 <br><br>
 
 ### General Features
 Feature Category: User Activity <br>
 1. [Interact Follow]. The ability to ‘follow’ a course or any specific items. There must be a section specifically dedicated to 'things' followed. (medium)
-   * Classes: activity_assessments.xml, activity_main.xml
+   * Classes: activity_assessments.xml, activity_main.xml, AssessmentsActivity.java 
    * A user can search for a course and follow it, to add this course to their main screen.
-   * unimplemented
       <br>
 2. [Interact-Noti]. The ability to send notifications based on different types of interactions. A notification must be sent only after a predetermined number of interactions are set. (medium)
    * Classes: NotificationFactory.java, StudyNotification.java, StudyCourseNotification.java, StudyNumberNotification.java, StudyTimeNotification.java
@@ -330,18 +355,27 @@ Feature Category: User Activity <br>
 Feature Category: Firebase Integration <br>
 3. [FB-Persist] Use Firebase to persist all data used in your app. (medium)
    * Class A: methods A, B, C, lines of code: whole file
-   * unimplemented
       <br>
 4. [FB-Syn] Using Firebase or another remote database to store user information and having the app
 updated as the remote database is updated without restarting the application. (hard)
    * Class A: methods A, B, C, lines of code: whole file
-   * unimplemented
       <br>
 
 Feature Category: Greater Data Usage, Handling and Sophistication <br>
 5. [Data-Graphical] Graphical report viewer. Provide users with the ability to see a report of interactions with your app in a graphical manner. (medium)
    * Class A: methods A, B, C, lines of code: whole file
-   * unimplemented
+   * Users can view a leaderboard of the top 5 users of the app, and their ranking. It also displays the users own study minutes.
+      <br>
+
+Feature Category: Search-related Features <br>
+6. [Search-Invalid] Search functionality can handle partially valid and invalid search queries. (medium)
+   * SearchActivity.java, SearchParser.java, Tokenizer.java, Token.java
+   * If a search produces an error in the search method, or while being converted into a token or query, the search will result in nothing.
+     <br>
+7. [Search-Filter] Sort and/or filter a list of items returned from a search, with the help of suitable UI components. For instance, when searching for assignments, include checkboxes for users to select
+   the target course(s); include drop-down field for the selection of sorting methods, etc. (easy)
+    * SearchActivity.java
+    * The user may use an options menu to filter the course into those that are available an unavailable, which is determined by whether the course has a convener or not. 
       <br>
 
 
