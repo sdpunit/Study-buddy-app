@@ -98,36 +98,63 @@
 *Slide Preparation: N/A*
 <br><br>
 
-*u7432723, Yanghe, I contribute 20% of the code. Here are my contributions:*
-* Course   
-* idleState.java   
-* Login.java: createNotificationChannel()   
-* MainActivity.java: sendNotification()  
-* myTimer.java  
-* NotificationFactory.java  
-* pauseState.java   
-* RBTree.java   
-* SetTimeActivity.java  
-* State.java   
-* StudyActivity.java: onCreate(), clickPauseOrResume(), clickStop(), timeUp() 
-* StudyCourseNotification.java 
-* StudyNotification.java   
-* StudyNumberNotification.java   
-* studyState.java   
-* StudyTimeNotification   
-* User.java   
-* post_courses_data.json   
-* under_courses_data.json   
-* activity_set_time.xml   
-* activity_study.xml   
+*u7533843, Yanghe, I contribute 20% of the code. Here are my contributions:*
+* Login.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/LoginActivity.java 
+* onCreate(), Lines: 54-73, 103-114
+* createNotificationChannel(), whole method
+* uploadDataPeriodically(), Lines: 234-252
+* addUserToLeaderboardFirebase(), whole method
+* MainActivity.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/MainActivity.java
+* onCreate(), Lines: 54-60, 110
+* sendNotification(), whole method
+* checkAndUpdateLeaderboardFirebase(), whole method
+* addUserToLeaderboardFirebase(), whole method
+* SearchActivity.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/SearchActivity.java
+* getCollegeCourses(), Lines: 383-408
+* getCollegeTreeMap(), whole method
+* SetTimeActivity.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/SetTimeActivity.java
+* whole class
+* TimerActivity.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/TimerActivity.java
+* onCreate(), Lines: 66-70
+* clickPauseOrResume(), whole method
+* clickStop(), Lines: 103-122, 143-148
+* timeUp(), Lines: 157-174, 195-200
+* getLeaderboard(), whole method
+* User.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/User.java
+* basic fields and methods in the initial version of this class
+* notification: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/tree/main/app/src/main/java/com/studybuddy/notification
+* all classes in this directory
+* RBTree.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/search/RBTree.java
+* whole class
+* MyTimer.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/MyTimer.java
+* whole class       
+* State.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/State.java
+* whole class
+* idleState.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/idleState.java
+* whole class       
+* studyState.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/studyState.java
+* whole class
+* pauseState.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/pauseState.java
+* whole class
+* RBTreeTest.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/test/java/com/studybuddy/RBTreeTest.java
+* whole class
+* LeaderboardActivity.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/LeaderboardActivity.java
+* onCreate(), Lines: 44-63
+* under_courses_data.json: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/assets/under_courses_data.json  
+* post_courses_data.json: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/assets/post_courses_data.json    
+* activity_set_time.xml: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/activity_set_time.xml
+* activity_study.xml: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/activity_study.xml
+* ic_pause.xml: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/drawable/ic_pause.xml
+* ic_resume.xml: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/drawable/ic_resume.xml
+* ic_stop.xml: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/drawable/ic_stop.xml
 
-*Code Design: Proposed and implemented a tree structure for storing our data. Proposed and implemented a state design pattern for the timer functionality.*
+*Code Design: Proposed and implemented a RB tree structure for storing course data. Proposed and implemented a singleton design pattern to create the timer. Proposed and implemented a state design pattern for the timer functionality. Proposed and implemented a factory design patter to send different kinds of notifications.*
 
-*UI Design: Proposed and designed the UI for the myTimer class.*
+*UI Design: Proposed and designed the UI of SetTimeActivity and TimerActivity.*
 
 *Report Writing: N/A*
+*Slide Preparation: N/A*  
 
-*Slide Preparation: N/A*
 
 ## Conflict Resolution Protocol
 
