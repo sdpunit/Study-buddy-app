@@ -100,37 +100,63 @@ for tokenizer and parser, in conjunction with Logic for searching*
 *Slide Preparation: N/A*
 <br><br>
 
-*u7432723, Yanghe, I contribute 20% of the code. Here are my contributions:*
-* Course
-* idleState.java
-* Login.java: createNotificationChannel()
-* MainActivity.java: sendNotification()
-* myTimer.java
-* NotificationFactory.java
-* pauseState.java
-* RBTree.java
-* SetTimeActivity.java
-* State.java
-* StudyActivity.java: onCreate(), clickPauseOrResume(), clickStop(), timeUp()
-* StudyCourseNotification.java
-* StudyNotification.java
-* StudyNumberNotification.java
-* studyState.java
-* StudyTimeNotification
-* User.java
-* post_courses_data.json
-* under_courses_data.json
-* activity_set_time.xml
-* activity_study.xml
+*u7533843, Yanghe, I contribute 20% of the code. Here are my contributions:*
+* Login.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/LoginActivity.java
+* onCreate(), Lines: 54-73, 103-114
+* createNotificationChannel(), whole method
+* uploadDataPeriodically(), Lines: 234-252
+* addUserToLeaderboardFirebase(), whole method
+* MainActivity.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/MainActivity.java
+* onCreate(), Lines: 54-60, 110
+* sendNotification(), whole method
+* checkAndUpdateLeaderboardFirebase(), whole method
+* addUserToLeaderboardFirebase(), whole method
+* SearchActivity.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/SearchActivity.java
+* getCollegeCourses(), Lines: 383-408
+* getCollegeTreeMap(), whole method
+* SetTimeActivity.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/SetTimeActivity.java
+* whole class
+* TimerActivity.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/TimerActivity.java
+* onCreate(), Lines: 66-70
+* clickPauseOrResume(), whole method
+* clickStop(), Lines: 103-122, 143-148
+* timeUp(), Lines: 157-174, 195-200
+* getLeaderboard(), whole method
+* User.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/User.java
+* basic fields and methods in the initial version of this class
+* notification: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/tree/main/app/src/main/java/com/studybuddy/notification
+* all classes in this directory
+* RBTree.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/search/RBTree.java
+* whole class
+* MyTimer.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/MyTimer.java
+* whole class
+* State.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/State.java
+* whole class
+* idleState.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/idleState.java
+* whole class
+* studyState.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/studyState.java
+* whole class
+* pauseState.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/pauseState.java
+* whole class
+* RBTreeTest.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/test/java/com/studybuddy/RBTreeTest.java
+* whole class
+* LeaderboardActivity.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/LeaderboardActivity.java
+* onCreate(), Lines: 44-63
+* under_courses_data.json: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/assets/under_courses_data.json
+* post_courses_data.json: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/assets/post_courses_data.json
+* activity_set_time.xml: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/activity_set_time.xml
+* activity_study.xml: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/activity_study.xml
+* ic_pause.xml: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/drawable/ic_pause.xml
+* ic_resume.xml: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/drawable/ic_resume.xml
+* ic_stop.xml: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/drawable/ic_stop.xml
 
-*Code Design: Proposed and implemented a tree structure for storing our data. Proposed and implemented
-a state design pattern for the timer functionality.*
+*Code Design: Proposed and implemented a RB tree structure for storing course data. Proposed and implemented a singleton design pattern to create the timer. Proposed and implemented a state design pattern for the timer functionality. Proposed and implemented a factory design patter to send different kinds of notifications.*
 
-*UI Design: Proposed and designed the UI for the myTimer class.*
+*UI Design: Proposed and designed the UI of SetTimeActivity and TimerActivity.*
 
 *Report Writing: N/A*
-
 *Slide Preparation: N/A*
+
 
 ## Conflict Resolution Protocol
 
@@ -335,9 +361,9 @@ or cancel the study session if desired.
    * *Reasons:*
 
      * The singleton class provides a global access point to get the instance of the class and prevents other objects from instantiating their own copies of the Singleton object, ensuring that all objects access the single instance.*
-
+     
      * Saves space in memory as only one timer object is ever being created*
-
+     
      * Lazy initialisation ensure the object is only created and initialised when it is needed
 
 
@@ -349,7 +375,7 @@ Production Rules:
         <term>          ::= <factor> | <factor> "," <factor> | <factor> "," <factor> "," <factor>
         <factor>        ::= <code> | <course name> | <convener>
         <code>          ::= four-digit Integer | <college code>
-        <college code>  ::=  <college> + four-digit Integer
+        <college code>  ::=  <college> + four-digit Integer 
         <course name>   ::= String | "(" <course name> ")"
         <convener>      ::= "convener=" String
         <college>       ::= "COMP" | "MATH" | "PHYS" | "STATS" | ...
@@ -396,11 +422,11 @@ Our team did not attempt the surprise feature.
 
 ## Summary of Known Errors and Bugs
 
-1. *Bug 1:*
+1. *Bug 1:* 
 
-   * *Description:*
+   * *Description:* 
 
-   * *Location:*
+   * *Location:* 
 
    * *Steps to reproduce:*
 
@@ -482,7 +508,7 @@ ADD DIAGRAMS OUTLINE BRANCH COMPLETE ECT...
 ### Basic App
 1. [Login]. Users must be able to log in (easy)
     * Class: Login.java, Register.java
-    * Users are able to register, which will add them as a user to Firebase. Users that are contained in Firebase will be able to log in using their username and password, which will be validated by the app before authenticating the user.
+    * Users are able to register, which will add them as a user to Firebase. Users that are contained in Firebase will be able to log in using their username and password, which will be validated by the app before authenticating the user. 
       <br>
 2. [Data Instances]. There must be 2500 data instances on Firebase (easy)
     * Class: user_data.JSON, Login.java OnCreate()
@@ -490,8 +516,8 @@ ADD DIAGRAMS OUTLINE BRANCH COMPLETE ECT...
       <br>
 3. [Firebase Data Visualization]. The user must be able to load data/information from Firebase and visualise it (medium)
     * Class: xx.java, methods Z, Y, Lines of code: xx
-    * A list of courses that a user is enrolled in, a list of friends, and a leaderboard ranking can be displayed using the user information stored on Firebase.
-    * not fully implemented
+    * A list of courses that a user is enrolled in, a list of friends, and a leaderboard ranking can be displayed using the user information stored on Firebase. 
+    * not fully implemented 
       <br>
 4. [Search]. Users must be able to search for information on the app. (medium)
     * Classes: SearchActivity.java, SearchParser.java, Tokenizer.java, Token.java, RBTree.java
@@ -502,12 +528,12 @@ ADD DIAGRAMS OUTLINE BRANCH COMPLETE ECT...
 ### General Features
 Feature Category: User Activity <br>
 1. [Interact Follow]. The ability to ‘follow’ a course or any specific items. There must be a section specifically dedicated to 'things' followed. (medium)
-   * Classes: activity_assessments.xml, activity_main.xml, AssessmentsActivity.java
+   * Classes: activity_assessments.xml, activity_main.xml, AssessmentsActivity.java 
    * A user can search for a course and follow it, to add this course to their main screen.
       <br>
 2. [Interact-Noti]. The ability to send notifications based on different types of interactions. A notification must be sent only after a predetermined number of interactions are set. (medium)
    * Classes: NotificationFactory.java, StudyNotification.java, StudyCourseNotification.java, StudyNumberNotification.java, StudyTimeNotification.java
-   * A user will be notified if they have studied more than two courses, completed two or more study sessions, or if they have studied for longer than an hour.
+   * A user will be notified if they have studied more than two courses, completed two or more study sessions, or if they have studied for longer than an hour. 
 <br><br>
 
 Feature Category: Firebase Integration <br>
@@ -533,7 +559,7 @@ Feature Category: Search-related Features <br>
 7. [Search-Filter] Sort and/or filter a list of items returned from a search, with the help of suitable UI components. For instance, when searching for assignments, include checkboxes for users to select
    the target course(s); include drop-down field for the selection of sorting methods, etc. (easy)
     * SearchActivity.java
-    * The user may use an options menu to filter the course into those that are available an unavailable, which is determined by whether the course has a convener or not.
+    * The user may use an options menu to filter the course into those that are available an unavailable, which is determined by whether the course has a convener or not. 
       <br><br>
 
 
