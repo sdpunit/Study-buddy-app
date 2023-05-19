@@ -71,11 +71,14 @@
 * SearchParser.java  
 * Token.java  
 * Tokenizer.java  
-* UserAdapter.java
+* CourseAdapter.java
 * activity_search.xml 
-* user_cell.xml  
+* Toaster.java
+* course_cell.xml
 
-*UI Design: Proposed and designed the UI for the SearchActivity class*
+*UI Design: Proposed and designed the UI for the SearchActivity class.*
+*Code Design: Proposed and implemented the tokenizer and parser for the search feature.  Created grammar for tokenizer and parser, in conjunction with Logic for searching*
+
 
 *Report Writing: N/A*
 
@@ -230,14 +233,26 @@
 
 Production Rules:
 
-        <exp>       ::= "college:" <college> | "college:" <college> "," <term>
-        <term>      ::= <factor> | <factor> "," <factor> | <factor> "," <factor> "," <factor>
-        <factor>    ::= <code> | <name> | <convener>
-        <code>      ::= "code:" four-digit Integer
-        <name>      ::= "name:" String
-        <convener>  ::= "convener:" String
-        <college>   ::= "COMP" | "MATH" | "PHYS" | "STATS" | ...
-*Example: "college: COMP, code: 1110, name: Structured Programming, convener: Patrik Haslum"*
+        <exp>           ::= <course name> | <code> | <college> | <college> "," <term>
+        <term>          ::= <factor> | <factor> "," <factor> | <factor> "," <factor> "," <factor>
+        <factor>        ::= <code> | <course name> | <convener>
+        <code>          ::= four-digit Integer | <college code>
+        <college code>  ::=  <college> + four-digit Integer 
+        <course name>   ::= String | "(" <course name> ")"
+        <convener>      ::= "convener=" String
+        <college>       ::= "COMP" | "MATH" | "PHYS" | "STATS" | ...
+
+Example Queries:
+
+* *"COMP, 1110, Structured Programming, convener= Patrik Haslum"* (complete search)
+* *"COMP1110* (search by code)
+* *"COMP"* (filter by college)
+* *"COMP, 1110"* (search by college and code)
+* *Structured Programming"* (search by course name)
+* *"COMP, Structured Programming"* (search by college and course name)
+* *"(Structured Programing)"* (dynamic course name search, retains filters)
+* *"COMP, (Structured Programing)"* (dynamic course name search with college filter)
+
 
 *The grammar classifies the convener, name and code of the course as factors, and allows these to be separated by commas. The college a course belongs to is classified as an exp, and must be prepended by the string 'college:', and optionally appended by a series of factors seperated by commas. This grammar design is flexible as it allows for the user to search simply by the college, or with more detail by adding the code, name, and/or convener in any order. Our grammar contains code, name, convener, and college as these are the most relevant keywords associated with a course.*
 
