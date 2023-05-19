@@ -281,9 +281,11 @@ the timer interface, or my click the 'reset time' button to reset the time that 
 Here the user can set a timer for the amount of time in minutes that they would like to study for. The time will then
 countdown and a popup will display once the study session is completed. The user can pause and resume the timer,
 or cancel the study session if desired.<br>
-<img src="./images/set_time.png" width="200"/>
-<img src="./images/timer.png" width="200"/>
-<img src="./images/study_complete.png" width="200"/>
+<div style="display: flex; justify-content: space-around; align-items: center;">
+    <img src="./images/set_time.png" width="200"/>
+    <img src="./images/timer.png" width="200"/>
+    <img src="./images/study_complete.png" width="200"/>
+</div>
 <br><br>
 
 
@@ -472,6 +474,7 @@ Our team did not attempt the surprise feature.
     * testSearchNonExist
     * testSearchByCourseCode
 
+<img src="./images/tree_coverage.png"/>
 **NotificationFactoryTest**
 
 - *Number of test cases:* 1
