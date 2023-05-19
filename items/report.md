@@ -404,6 +404,7 @@ Our team did not attempt the surprise feature.
    * Class: NotificationFactory.java, StudyNotification.java, StudyCourseNotification.java, StudyNumberNotification.java, StudyTimeNotification.java
    * A user will be notified when they have studied two more unique courses, completed two more study sessions, and when they have studied for two more hours. 
    <br><br>
+
 **Feature Category: Firebase Integration** <br>
 3. [FB-Auth] Use Firebase to implement User Authentication/Authorisation. (easy)
    * Class: LoginActivity.java
@@ -416,12 +417,14 @@ Our team did not attempt the surprise feature.
    * Class: LoginActivity.java, MainActivity.java, LeaderboardActivity.java
    * Firebase has a leaderboard node which contains the top 5 users with the most study time, and there is a leaderboard in the App to show their username and study time. This leaderboard can automatically update whenever the users or their study time change.
    <br><br>
+
 **Feature Category: Greater Data Usage, Handling and Sophistication** <br>
 6. [Data-Graphical] Graphical report viewer. Provide users with the ability to see a report of interactions with your app in a graphical manner. (medium)
    * Class: LeaderboardActivity.java, UserListAdapter.java, MainActivity.java
    * Users can see their study time in the home page and also view a leaderboard.
    <br><br>
-**Feature Category:** Search-related Features <br>
+
+**Feature Category: Search-related Features** <br>
 7. [Search-Invalid] Search functionality can handle partially valid and invalid search queries. (medium)
    * Class: SearchActivity.java, SearchParser.java, Tokenizer.java, Token.java
    * If a search produces an error in the search method, or while being converted into a token or query, the search will result in nothing.
