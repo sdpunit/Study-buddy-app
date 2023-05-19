@@ -40,7 +40,7 @@
 
 *UI Design: Designed the UI for the leaderboard*
 
-*Report Writing:*
+*Report Writing: N/A*
 
 *Slide Preparation: N/A*
 <br><br>
@@ -52,7 +52,7 @@
 * RegisterActivity.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/bathtub/RegisterActivity.java
   * onCreate(), Lines: 41-45, 63-66, 72-75, 83-87
 * SearchActivity.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/bathtub/SearchActivity.java
-  * search(), Lines 255-315
+  * search(), whole method
   * createCourseTree(), whole method
   * getCourses(), whole method
 * Colleges.java https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/java/com/studybuddy/search/Colleges.java
@@ -64,31 +64,45 @@
 * activity_register.xml https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/84340ce1bac212c6a7efc9e883084394362b2d3d/app/src/main/res/layout/activity_register.xml
   * whole class
 
-*UI Design:* Proposed and designed the UI for the Login and Register class
+*UI Design: Proposed and designed the UI for the Login and Register class*
 
-*Report Writing:* N/A
+*Report Writing: N/A*
 
-*Slide Preparation:* N/A
+*Slide Preparation: N/A*
 <br><br>
 
 *u7432723, Punit, I contribute 20% of the code. Here are my contributions:*
-* AssessmentsActivity.java
-* Login.java: authenticateUser()
-* MainActivity.java:
-* Register.java
-* StudyActivity.java: onCreate()
-* User.java
-* UserTimeState.java
-* activity_main.xml
-* item_course.xml
-* activity_assessments.xml
+* Came up with the idea of this app, influenced by the discussions I had with my friend (Julia Than Hlaing) of having a course specific
+  focus app with beautiful design. My major contribution revolve around integrating various activites togethor, making design changes and editing
+  the xml files. I was also responsible for the integration of firebase with our app. So that all the information for a particular user is retained
+  in the firebase.
+* AssessmentsActivity.java : Entire activity
+    * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/AssessmentsActivity.java
+* Course.java : Methods and changing attributes for firebase
+    * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/Course.java
+* Login.java: Edited the methods created by Lana to support firebase
+    * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/LoginActivity.java#L150-182
+    * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/LoginActivity.java#L133-143
+* MainActivity.java: Activity set up by myself
+    * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/MainActivity.java#L40-235
+* Register.java : Firebase implementation
+    * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/MainActivity.java#L40-235
+* SearchActivity.java : Firebase integration
+    * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/SearchActivity.java#L78-88
+* TimerActivity.java : Firebase integration
+    * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/TimerActivity.java#L176-191
+* User.java : Edited the class to make sure user and its attributes can be uploaded to the firebase
+    * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/User.java#L12-179
+* UserTimeState.java : Separated this class from User class for cleaner implementation
+    * https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/UserTimeState.java#L1-55
+* Designing layouts, creating the xmls files
 
-*UI Design:* Proposed and designed the UI for the Main class. Created a new colour theme for the app.
-Developed many of the conceptual ideas for the designs of each UI screen and how they interact together
+*UI Design: Proposed and designed the UI for the Main class. Created a new colour theme for the app.
+Developed many of the conceptual ideas for the designs of each UI screen and how they interact together*
 
-*Report Writing:* N/A
+*Report Writing: Writing the report of my contribution and making changes to highlight the portion of the code that I worked on.*
 
-*Slide Preparation:* N/A
+*Slide Preparation: N/A*
 <br><br>
 
 *u7108792, Quoc, I contribute 20% of the code. Here are my contributions:*
@@ -102,58 +116,58 @@ Developed many of the conceptual ideas for the designs of each UI screen and how
 * Toaster.java
 * course_cell.xml
 
-*UI Design:*  Proposed and designed the UI for the SearchActivity class.
-*Code Design:* Proposed and implemented the tokenizer and parser for the search feature. Created grammar
-               for tokenizer and parser, in conjunction with Logic for searching
+*UI Design: Proposed and designed the UI for the SearchActivity class.*
+*Code Design: Proposed and implemented the tokenizer and parser for the search feature. Created grammar
+for tokenizer and parser, in conjunction with Logic for searching*
 
 
-*Report Writing:*  N/A
+*Report Writing: N/A*
 
-*Slide Preparation:* N/A
+*Slide Preparation: N/A*
 <br><br>
 
 *u7533843, Yanghe, I contribute 20% of the code. Here are my contributions:*
 * Login.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/LoginActivity.java
-    * onCreate(), Lines: 54-73, 103-114
-    * createNotificationChannel(), whole method
-    * uploadDataPeriodically(), Lines: 234-252
-    * addUserToLeaderboardFirebase(), whole method
+* onCreate(), Lines: 54-73, 103-114
+* createNotificationChannel(), whole method
+* uploadDataPeriodically(), Lines: 234-252
+* addUserToLeaderboardFirebase(), whole method
 * MainActivity.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/MainActivity.java
-    * onCreate(), Lines: 54-60, 110
-    * sendNotification(), whole method
-    * checkAndUpdateLeaderboardFirebase(), whole method
-    * addUserToLeaderboardFirebase(), whole method
+* onCreate(), Lines: 54-60, 110
+* sendNotification(), whole method
+* checkAndUpdateLeaderboardFirebase(), whole method
+* addUserToLeaderboardFirebase(), whole method
 * SearchActivity.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/SearchActivity.java
-    * getCollegeCourses(), Lines: 383-408
-    * getCollegeTreeMap(), whole method
+* getCollegeCourses(), Lines: 383-408
+* getCollegeTreeMap(), whole method
 * SetTimeActivity.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/SetTimeActivity.java
-    * whole class
+* whole class
 * TimerActivity.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/TimerActivity.java
-    * onCreate(), Lines: 66-70
-    * clickPauseOrResume(), whole method
-    * clickStop(), Lines: 103-122, 143-148
-    * timeUp(), Lines: 157-174, 195-200
-    * getLeaderboard(), whole method
+* onCreate(), Lines: 66-70
+* clickPauseOrResume(), whole method
+* clickStop(), Lines: 103-122, 143-148
+* timeUp(), Lines: 157-174, 195-200
+* getLeaderboard(), whole method
 * User.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/User.java
-    * basic fields and methods in the initial version of this class
+* basic fields and methods in the initial version of this class
 * notification: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/tree/main/app/src/main/java/com/studybuddy/notification
-    * all classes in this directory
+* all classes in this directory
 * RBTree.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/search/RBTree.java
-    * whole class
+* whole class
 * MyTimer.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/MyTimer.java
-    * whole class
+* whole class
 * State.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/State.java
-    * whole class
+* whole class
 * idleState.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/idleState.java
-    * whole class
+* whole class
 * studyState.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/studyState.java
-    * whole class
+* whole class
 * pauseState.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/timer/pauseState.java
-    * whole class
+* whole class
 * RBTreeTest.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/test/java/com/studybuddy/RBTreeTest.java
-    * whole class
+* whole class
 * LeaderboardActivity.java: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/java/com/studybuddy/bathtub/LeaderboardActivity.java
-    * onCreate(), Lines: 44-63
+* onCreate(), Lines: 44-63
 * under_courses_data.json: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/assets/under_courses_data.json
 * post_courses_data.json: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/assets/post_courses_data.json
 * activity_set_time.xml: https://gitlab.cecs.anu.edu.au/u7103031/ga-23s1-comp2100-6442/-/blob/main/app/src/main/res/layout/activity_set_time.xml
@@ -164,7 +178,7 @@ Developed many of the conceptual ideas for the designs of each UI screen and how
 
 *Code Design: Proposed and implemented a RB tree structure for storing course data. Proposed and implemented a singleton design pattern to create the timer. Proposed and implemented a state design pattern for the timer functionality. Proposed and implemented a factory design pattern to send different kinds of notifications.*
 
-*UI Design:* Proposed and designed the UI of SetTimeActivity and TimerActivity.
+*UI Design: Proposed and designed the UI of SetTimeActivity and TimerActivity.*
 
 *Report Writing: N/A*
 
@@ -266,7 +280,6 @@ depending on the users student type. The user can search by the grammars we have
 can be any combination of course, code, course name, or convener. The user can also filter the results
 by 'availiable' and 'unavailable'. Once a user has chosen their courses the can click the 'add courses' button
 and they will be taken back to the home page. The courses that they have added will now be displayed on the home page.
-<br>
 <img src="./images/search_initial.png" width="200"/>
 <img src="./images/search_added.png" width="200"/>
 
@@ -303,7 +316,7 @@ or cancel the study session if desired.
    * *Reasons:*
 
      * This tree is self-balancing, meaning that our data will be organised and structured even after multiple insertions
-
+     
      * Searching operation takes O(log n) time complexity
 
      * We don't need to access the item by index for this feature
@@ -317,11 +330,11 @@ or cancel the study session if desired.
    * *Reasons:*
 
      * Allows for quick data retrieval
-
+     
      * Flexible key pairing which directly links two attributes to each other
 
      * The nature of this data structure mean there will be no duplicate keys
-
+     
      * Maps are scalable and can handle large amounts of data
 
 3. *Set*
@@ -351,7 +364,7 @@ or cancel the study session if desired.
    * *Reasons:*
 
      * The functionality of the pause, resume and stop buttons depends on the current state
-
+     
      * The design is flexible enough to add or remove behaviours if needed
 
 2. *Factory Design Pattern*
@@ -429,6 +442,10 @@ the user is able to search for courses in a consistent but also flexible manner.
 **Surprise Item**
 
 Our team did not attempt the surprise feature.
+
+**Other**
+
+*[TODO What other design decisions have you made which you feel are relevant? Feel free to separate these into their own subheadings.]*
 
 ## Summary of Known Errors and Bugs
 
@@ -511,6 +528,7 @@ Our team did not attempt the surprise feature.
     * testNullToken
 
 *Please provide some screenshots of your testing summary, showing the achieved testing coverage. Feel free to provide further details on your tests.*
+ADD DIAGRAMS OUTLINE BRANCH COMPLETE ECT...
 
 ## Implemented Features
 
