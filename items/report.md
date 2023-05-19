@@ -405,36 +405,32 @@ Our team did not attempt the surprise feature.
    * A user will be notified when they have studied two more unique courses, completed two more study sessions, and when they have studied for two more hours. 
 <br><br>
 
-**Feature Category:** Firebase Integration <br>
+**Feature Category: Firebase Integration** <br>
 3. [FB-Auth] Use Firebase to implement User Authentication/Authorisation. (easy)
-   * Class: Login.java <br>
-   * Users can register and log in using Firebase Authentication.
-      <br>
+   * Classes: LoginActivity.java
+   * All signed-up users are stored in the Firebase, and they are authenticated when logging in.<br>
+   
 4. [FB-Persist] Use Firebase to persist all data used in your app. (medium)
-   * Class: LoginActivity.java onCreate() <br>
-5. [FB-Syn] Using Firebase or another remote database to store user information and having the app
-updated as the remote database is updated without restarting the application. (hard)
-   * Class: LoginActivity.java onCreate() <br><br>
-      
+   * Classes: LoginActivity.java, RegisterActivity.java, MainActivity.java, LeaderboardActivity.java, TimerActivity.java, AssessmentsActivity.java
+   * The use of Firebase can be found all over classes. All signed-up users are stored in the Firebase as well as their attributes such as study time and courses they have enrolled in.<br>
+
+5. [FB-Syn] Using Firebase or another remote database to store user information and having the app updated as the remote database is updated without restarting the application. (hard)
+   * Classes: LoginActivity.java, MainActivity.java, LeaderboardActivity.java
+   * Firebase has a leaderboard node which contains the top 5 users with the most study time, and there is a leaderboard in the App to show their username and study time. This leaderboard can automatically update whenever the users or their study time change.<br><br>
+
 **Feature Category: Greater Data Usage, Handling and Sophistication** <br>
-6. [Data-Formats] Read data instances from multiple local files in at least 2 different formats (JSON,
-XML or Bespoken). (easy)
-   * Class: user_data.JSON, Login.java OnCreate(), under_courses_data.JSoON, post_courses_data.JSON, SearchActivity.java getCollegeCourses(), getCourses()
-   * User information will be uploaded to Firebase once the app has launched by reading a local JSON file contain.
-      <br>
-7. [Data-Graphical] Graphical report viewer. Provide users with the ability to see a report of interactions with your app in a graphical manner. (medium)
-   * Class A: methods A, B, C, lines of code: whole file
-   * Users can view a leaderboard of the top 5 users of the app, and their ranking. It also displays the users own study minutes.
-      <br><br>
+6. [Data-Graphical] Graphical report viewer. Provide users with the ability to see a report of interactions with your app in a graphical manner. (medium)
+   * Classes: LeaderboardActivity.java, UserListAdapter.java, MainActivity.java
+   * Users can see their study time in the home page and also view a leaderboard.
+   <br><br>
 
 **Feature Category:** Search-related Features <br>
-8. [Search-Invalid] Search functionality can handle partially valid and invalid search queries. (medium)
-   * SearchActivity.java, SearchParser.java, Tokenizer.java, Token.java
+7. [Search-Invalid] Search functionality can handle partially valid and invalid search queries. (medium)
+   * Classes: SearchActivity.java, SearchParser.java, Tokenizer.java, Token.java
    * If a search produces an error in the search method, or while being converted into a token or query, the search will result in nothing.
-     <br>
-9. [Search-Filter] Sort and/or filter a list of items returned from a search, with the help of suitable UI components. For instance, when searching for assignments, include checkboxes for users to select
-   the target course(s); include drop-down field for the selection of sorting methods, etc. (easy)
-    * SearchActivity.java
+   <br>
+8. [Search-Filter] Sort and/or filter a list of items returned from a search, with the help of suitable UI components. For instance, when searching for assignments, include checkboxes for users to select the target course(s); include drop-down field for the selection of sorting methods, etc. (easy)
+    * Classes: SearchActivity.java
     * The user may use an options menu to filter the course into those that are available an unavailable, which is determined by whether the course has a convener or not. 
       <br><br>
 
