@@ -130,12 +130,43 @@
 
 ## Conflict Resolution Protocol
 
-* Disputes in contributions will be resolved by a team meeting and voting.
-* If a member fails to meet the initial plan and/or deadlines, the team will have a group discussion and discuss with the member what exactly they are struggling with and what form of support they need. If deemed useful, another member will be assigned to work collaboratively with said member and help to address the main issues with the task. If needed, the tasks may be redistributed  between the group.
-* If the group has issues, we will have a team meeting and voting to resolve the issue.
-* If a member gets sick, their tasks will be distributed to each remaining team member evenly. Once the sick member able to work again, they will continue and finish the tasks that they were working on previously and be assigned new tasks if needed.
-* If a member is going through any personal issues, the members of the group will be understanding and try to assist the group member with any tasks they need help with or reduce their workload. This will be discussed in a team meeting and a consensus must be met between all group members to ensure that the solution is fair.
-* Any other issue not mentioned above will be resolved by a team meeting and voting.
+* All disputes in contributions and team issues will follow the Conflict Resolution Plan. 
+  furthermore, all team members will be expected to follow the Code of Conduct. More info can 
+  be found here: https://www.anu.edu.au/students/program-administration/program-management/student-code-of-conduct
+
+additional info:
+
+* If a member fails to meet the initial plan and/or deadlines, the team will have a group 
+  discussion and discuss with the member what exactly they are struggling with and what form of 
+  support they need.
+* If deemed useful, another member will be assigned to work collaboratively with said member and 
+  help to address the main issues with the task. If needed, the tasks may be redistributed.
+* If a member gets sick, their tasks will be distributed to each remaining team member evenly. 
+  Once the sick member able to work again, they will continue and finish the tasks that they were 
+  working on previously if the task arent already finished, and be assigned new tasks if the 
+  amount of work they have completed falls significantly short of others negatively impacting 
+  both themselves and the group.
+* If a member is going through any personal issues, the members of the group must be understanding 
+  and try to assist the group member with any tasks they need help with or reduce their workload.
+  This will be discussed in a team meeting and a consensus must be met between all group members 
+  to ensure that the solution is fair.
+* Any other issue not mentioned above will be resolved by a last resort numerical vote.
+
+ Conflict Resolution Plan:
+1. **Clarify the source of the problem. Have an open discussion to single out the issue**
+2. **Identify barriers outside of the conflict which may impede it's resolution**
+3. **Discuss ways to resolve the conflict by establishing a common goal**
+4. **Explore how they goal can be reached and develop final agreement**
+
+Conflict Management strategies:
+1. **Avoidance** don't try to avoid the conflict.
+2. **communication** talk to your peers about the conflict so that the necessary protocols can be 
+   taken.
+3. **Accessibility** make the protocols easy to follow but effective in resolution.
+4. **Fairness** make sure that the protocols are fair to all parties involved.
+5. **Team Engagement** make sure that all team members are engaged in the resolution process.
+
+
 
 
 ## Application Description
@@ -274,12 +305,25 @@ Example Queries:
 * *"COMP, (Structured Programing)"* (dynamic course name search with college filter)
 
 
-*The grammar classifies the convener, name and code of the course as factors, and allows these to be separated by commas. The college a course belongs to is classified as an exp, and can optionally be appended by a series of factors seperated by commas. This grammar design is flexible as it allows for the user to search simply by the college, or with more detail by adding the code, name, and/or convener in any order. Our grammar contains code, name, convener, and college as these are the most relevant keywords associated with a course.*
+*The grammar classifies the convener, name and code of the course as factors, and allows these to be
+separated by commas. The college a course belongs to is classified as an exp, and can optionally be 
+appended by a series of factors separated by commas. This grammar design is flexible as it allows for
+the user to search simply by the course name, college, or with more detail by adding the code, 
+and/or convener in any order. The only caveat to the flexible search method is that convener 
+searches must be appended after college as it searches based on the specific course tree.
+Our grammar contains code, name, convener, and college as these are the most relevant keywords associated with a course.*
 
 **Tokenizer and Parsers**
 
-*[We utilise tokenizers and parsers in our Search implementation. Once a user searches a term, this String is tokenized into `COLLEGE`, `CODE`, `COLLEGECODE` `COURSE`, and `CONVENER` tokens. These tokens are then parsed to determine if they follow the structure of the grammar that we have defined for our app. If the search terms follows the correct grammar, these tokens will be converted to Strings and passed into a Query object, to complete the search process. 
-By using tokenizer and parsers, we are able to ensure that the search terms are valid, and that the search process is completed correctly. This standardizes the search process, and ensures that the user is able to search for courses in a consistent manner.]*
+*[We utilise tokenizers and parsers in our Search implementation. Once a user searches a term, this 
+String is tokenized into `COLLEGE`, `CODE`, `COLLEGECODE` `COURSE`, and `CONVENER` tokens. These 
+tokens are then parsed to determine if they follow the structure of the grammar that we have defined
+for our app. If the search terms match the grammar, these tokens will be converted to 
+Strings and passed into a  Query object. This object can then be referenced to get all relevant 
+information required to complete the search process. 
+By using tokenizer and parsers, we are able to ensure that the search terms are valid, and that the
+search process is completed correctly. This standardizes the search process, and ensures that 
+the user is able to search for courses in a consistent but also flexible manner.]*
 
 **Surprise Item**
 
